@@ -230,7 +230,7 @@ $$
 
 ## Laplace Transformation
 
-For $f(t)$ that $\forall t \geq 0, \exist f(t)$, define **Laplace Transformation** as:
+For $f(t)$ that $\forall t \geq 0, \exists f(t)$, define **Laplace Transformation** as:
 $$
 F(s) = L(f)(s) = \int_0^{\infty} e^{-st} f(t) \mathrm{d} t
 $$

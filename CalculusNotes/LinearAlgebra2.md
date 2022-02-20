@@ -17,8 +17,8 @@
 1. $\forall u, v \in V, u+v \in V$
 2. $u + v = v + u$
 3. $(u+v)+w = u+(v+w)$
-4. $\exist \vec{0} \in V, \forall u \in V, u + \vec{0} = u$
-5. $\forall u \in V, \exist -u \in V, u + (-u) = 0, \forall v \neq -\vec{u} \in V, u + v \neq 0$
+4. $\exists \vec{0} \in V, \forall u \in V, u + \vec{0} = u$
+5. $\forall u \in V, \exists -u \in V, u + (-u) = 0, \forall v \neq -\vec{u} \in V, u + v \neq 0$
 6. $\forall c \in R, \forall \vec{u} \in V, c \vec{u} \in V$
 7. $c(\vec{u} + \vec{y}) = c \vec{u} + c \vec{v}$
 8. $(c + d) \vec{u} = c \vec{u} + d \vec{u}$
@@ -345,7 +345,7 @@ $$
 
 定义：对于 n 阶方阵 $A$，如果
 $$
-\exists \lambda \in R, \exists \vec{x} \in \R^n \text{ and } \vec{x} \neq \vec{0}, A \vec{x} = \lambda x
+\existss \lambda \in R, \existss \vec{x} \in \R^n \text{ and } \vec{x} \neq \vec{0}, A \vec{x} = \lambda x
 $$
 则称 $\lambda$ 为矩阵 $A$ 的特征值，$\vec{x}$ 为矩阵 $A$ 的特征向量。
 
@@ -367,7 +367,7 @@ $$
 $$
 之间线性相关，则由于 $\vec{v_1} \neq 0$
 $$
-\exists p < r - 1, \vec{v}_{p+1} = \sum_{i=1}^p c_i \vec{v_i}
+\existss p < r - 1, \vec{v}_{p+1} = \sum_{i=1}^p c_i \vec{v_i}
 $$
 
 而 $\{\vec{v}_1, \cdots, \vec{v}_p\}$ 线性无关。则：
@@ -768,7 +768,7 @@ $$
 如果 $W$ 是 $R^n$ 中的子空间
 
 $$
-\forall \vec{y} \in R^n, \exist \vec{\hat{y}} \in W, \exist \vec{z} \in W^{\bot}, \vec{y} = \vec{\hat{y}} + \vec{z}
+\forall \vec{y} \in R^n, \exists \vec{\hat{y}} \in W, \exists \vec{z} \in W^{\bot}, \vec{y} = \vec{\hat{y}} + \vec{z}
 $$
 
 #### 定理九和十：最佳逼近定理

@@ -108,14 +108,14 @@ Thus we transform complex function to real function.
 
 $$
 \lim_{z \rightarrow z_0}f(z)=l \\
-\forall \epsilon > 0,\exist \delta > 0,\text{ when } |z-z_0|<\delta, |f(z)-l| < \epsilon
+\forall \epsilon > 0,\exists \delta > 0,\text{ when } |z-z_0|<\delta, |f(z)-l| < \epsilon
 $$
 
 **Direction is irrelevant.**
 
 ### Continuity
 
-1. $\exist f(z_0)$
+1. $\exists f(z_0)$
 2. $\lim_{z\rightarrow z_o}f(z)=f(z_0)$
 
 ### Derivative
@@ -135,8 +135,8 @@ $$
 
 ### Analytic Function
 
-- Analyticity in Domain $\forall z \in D, \exists f, \exists f'$
-- Analyticity at Point $\forall z \in U(z_0, \delta), \exists f, \exists f'.$
+- Analyticity in Domain $\forall z \in D, \existss f, \existss f'$
+- Analyticity at Point $\forall z \in U(z_0, \delta), \existss f, \existss f'.$
 
 Entire Function: analytic in whole complex plane.
 
@@ -541,7 +541,7 @@ where $K$ is a circle of radius $\rho$ and center $z_0$.
 
 利用了[之前结论](#content_of_cauchy's_integral_thereom)和解析函数线积分路径无关的性质。
 $$
-\forall \varepsilon > 0, \exists \delta > 0,\forall z \in \{z \in C: \left|z - z_0\right| < \delta\}, \left|f(z) - f(z_0)\right| < \varepsilon \\
+\forall \varepsilon > 0, \existss \delta > 0,\forall z \in \{z \in C: \left|z - z_0\right| < \delta\}, \left|f(z) - f(z_0)\right| < \varepsilon \\
 $$
 
 choosing $\rho < \delta$:
@@ -668,7 +668,7 @@ Apply Cauchy's Inequality to it:
 $$
 \left|f^{(1)}(z_0)\right| \leq \frac{M}{r}
 $$
-$\forall \varepsilon > 0, \exist r > \frac{M}{\varepsilon},\forall z_0 \in C, \left|f^{(1)}(z_0)\right| < \varepsilon$
+$\forall \varepsilon > 0, \exists r > \frac{M}{\varepsilon},\forall z_0 \in C, \left|f^{(1)}(z_0)\right| < \varepsilon$
 
 Hence, $f'(z_0) = 0$.
 
@@ -724,7 +724,7 @@ if $s = \sum_{i = 1}^{\infty} z_i$ is convergence, $\lim_{n \rightarrow \infty} 
 
 Cauchy Principle
 
-$s = \sum_{i = 1}^{\infty} z_i$ is convergence $\iff$ $\forall \varepsilon > 0, \exist N \in \N \text{ and } p \in \N,  \forall n > N, \left|\sum_{i = 1}^{p} z_{n+i}\right| < \varepsilon$
+$s = \sum_{i = 1}^{\infty} z_i$ is convergence $\iff$ $\forall \varepsilon > 0, \exists N \in \N \text{ and } p \in \N,  \forall n > N, \left|\sum_{i = 1}^{p} z_{n+i}\right| < \varepsilon$
 
 两种收敛：
 
@@ -740,14 +740,14 @@ $s = \sum_{i = 1}^{\infty} z_i$ is convergence $\iff$ $\forall \varepsilon > 0, 
 $$
 z_n = q^n \ (|q| < 1) \\
 \sum_{m=1}^\infty q^n = \frac{q}{1-q} \ (|q| < 1) \\
-\exists N \in \N, \forall m > N, |\frac{z_{m+1}}{z_m}| \leq q < 1, \{z_m\} \text{ is absolutely convergent.}
+\existss N \in \N, \forall m > N, |\frac{z_{m+1}}{z_m}| \leq q < 1, \{z_m\} \text{ is absolutely convergent.}
 $$
 
 Ratio Test
 
 CONDITION:（注意其中 $q$ 的存在，**调和级数**）
 
-- $\exist N \in \N, \forall n > N$
+- $\exists N \in \N, \forall n > N$
 
 $$
 \left|\frac{z_{n+1}}{z_n}\right| \leq q < 1
@@ -768,7 +768,7 @@ $$
 
 Root Test
 $$
-\exists N \in \N, \forall m > N, \sqrt[m]{z_m} \leq q < 1, \{z_m\} \text{ is absolutely convergent.} \\
+\existss N \in \N, \forall m > N, \sqrt[m]{z_m} \leq q < 1, \{z_m\} \text{ is absolutely convergent.} \\
 L = \lim_{n \rightarrow \infty} \sqrt[n]{z_n}
 $$
 
@@ -1049,7 +1049,7 @@ $$
 
 #### Another Kind of Improper Integral
 
-$\int_A^B f(x) \mathrm{d}x$ that $\exist a \in [A, B], \lim_{x \rightarrow a} f(x) = \infty$
+$\int_A^B f(x) \mathrm{d}x$ that $\exists a \in [A, B], \lim_{x \rightarrow a} f(x) = \infty$
 
 By definition,
 $$

@@ -193,7 +193,7 @@ $$
 
 给定一个随机事件：
 $$
-\forall \omega \in \Omega, \exists X=X(\omega)
+\forall \omega \in \Omega, \existss X=X(\omega)
 $$
 ***X*** 为单值实值函数。定义为一维随机变量。
 
@@ -464,7 +464,7 @@ f(x,y) = f_X(x) \cdot f_Y(y)
 $$
 ==验证两个随机变量不独立：需要找一个点。==
 $$
-\exist x,y, f(x, y) \neq f_X(x) \cdot f_Y(y)
+\exists x,y, f(x, y) \neq f_X(x) \cdot f_Y(y)
 $$
 
 关于二维连续变量的正态分布：
@@ -736,7 +736,7 @@ $$
 
 - $\rho(X,Y) = \rho(Y,X)$
 - $\left|\rho(X,Y)\right| \leq 1$
-- $\left|\rho(X,Y)\right| = 1 \iff \exist k,c \in R, P(Y=kX+c) = 1$
+- $\left|\rho(X,Y)\right| = 1 \iff \exists k,c \in R, P(Y=kX+c) = 1$
 
 证明方法：将主元换成随机变量的中心化结果，在利用柯西不等式求解，顺便得到取等条件。
 $$
@@ -817,7 +817,7 @@ $$
 
 随机变量序列的极限：
 $$
-\exist c, \forall \varepsilon > 0 \\
+\exists c, \forall \varepsilon > 0 \\
 \lim_{n \rightarrow \infty} P(|X_n - c| < \varepsilon) = 1
 $$
 那么称随机变量序列 $\{ X_n \}$ 依概率收敛于 $c$.

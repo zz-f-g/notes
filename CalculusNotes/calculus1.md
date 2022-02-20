@@ -207,7 +207,7 @@ Definitions in the Applications of Derivatives
 
 极大（小）值：$x_0 \in (a,b)$ where $f(x)$ exists.
 $$
-\exist \delta > 0, \forall x \in \overset{o}{U}(x_0, \delta), f(x) <(>) f(x_0)
+\exists \delta > 0, \forall x \in \overset{o}{U}(x_0, \delta), f(x) <(>) f(x_0)
 $$
 极值与极值点。
 
@@ -224,7 +224,7 @@ $$
 ---
 
 $f(x)$ 在包含 $x_0$ 的开区间内可导且 $f'(x_0)>0$，判断：
-$\exist \delta > 0, f(x)$ 在 $U(x_0, \delta)$ 上单调递增。
+$\exists \delta > 0, f(x)$ 在 $U(x_0, \delta)$ 上单调递增。
 
 不一定：构造离谱函数:sob:
 $$
@@ -360,7 +360,7 @@ Continuous $f(x)$ on $[a,b]$, $a<c<d<b$.
 
 To prove:
 $$
-\forall \alpha, \beta \in \R^+, \exist \xi \in [a,b], f(\xi) (\alpha + \beta) = \alpha f(c) + \beta f(d)
+\forall \alpha, \beta \in \R^+, \exists \xi \in [a,b], f(\xi) (\alpha + \beta) = \alpha f(c) + \beta f(d)
 $$
 
 *Sol*:
@@ -374,7 +374,7 @@ $$
 根据介值定理：
 
 $$
-\forall y \in [m, M], \exist \xi \in [a, b], f(\xi) = y
+\forall y \in [m, M], \exists \xi \in [a, b], f(\xi) = y
 $$
 
 Q.E.D
@@ -392,7 +392,7 @@ Continuous $f(x)$ on (a,b), $\forall i \in \{1,2,3,\cdots,n\},x_i \in (a,b), t_i
 
 To prove:
 $$
-\exist \xi \in (a,b), f(\xi) = \sum_{i=1}^{n} t_i f(x_i)
+\exists \xi \in (a,b), f(\xi) = \sum_{i=1}^{n} t_i f(x_i)
 $$
 
 *Sol*:
@@ -406,7 +406,7 @@ $$
 根据介值定理：
 
 $$
-\forall y \in [m, M], \exist \xi \in [x', x''], f(\xi) = y
+\forall y \in [m, M], \exists \xi \in [x', x''], f(\xi) = y
 $$
 
 Q.E.D
@@ -603,7 +603,7 @@ Continuous $f(x)$ on [a,b] that $f(a) = f(b) = 0, f'(a) f'(b) > 0$.
 
 To prove:
 $$
-\exist \xi \in (a,b), f(\xi) = 0
+\exists \xi \in (a,b), f(\xi) = 0
 $$
 
 *Sol*:
@@ -612,10 +612,10 @@ $$
 $$
 \begin{aligned}
     &\lim_{x\rightarrow a} \frac{f(x)-f(a)}{x-a} = f'(a) > 0 \\
-    &\exist \delta_1>0, \forall x \in \overset{o}{U}(0,\delta_1), \frac{f(x)-f(a)}{x-a} > 0 \\
-    &\exist c \in (a,a+\delta_1), f(c) > f(a) = 0 \\
-    &\text{In a similar way, } \exist d \in (b-\delta_2, b), f(d) < f(b) = 0 \\
-    &\exist \xi \in (c,d), f(\xi) = 0
+    &\exists \delta_1>0, \forall x \in \overset{o}{U}(0,\delta_1), \frac{f(x)-f(a)}{x-a} > 0 \\
+    &\exists c \in (a,a+\delta_1), f(c) > f(a) = 0 \\
+    &\text{In a similar way, } \exists d \in (b-\delta_2, b), f(d) < f(b) = 0 \\
+    &\exists \xi \in (c,d), f(\xi) = 0
 \end{aligned}
 $$
 
@@ -657,7 +657,7 @@ Continuous on [0,1], derivable on (0,1) $f(x)$ that:
 
 To prove:
 $$
-\exist \text{ unique } \xi \in (0,1), f(\xi) = \xi
+\exists \text{ unique } \xi \in (0,1), f(\xi) = \xi
 $$
 
 一道 Rolle mean value theorem 的典例。
@@ -676,8 +676,8 @@ $$
 **Uniqueness**:
 $$
 \begin{aligned}
-    &\text{Suppose } \exist \xi_1, \xi_2 \in (0,1), \xi_1 < \xi_2, F(\xi_1) = F(\xi_2) = 0 \\
-    &\exist \eta \in (\xi_1, \xi_2), F'(\eta) = 0 \\
+    &\text{Suppose } \exists \xi_1, \xi_2 \in (0,1), \xi_1 < \xi_2, F(\xi_1) = F(\xi_2) = 0 \\
+    &\exists \eta \in (\xi_1, \xi_2), F'(\eta) = 0 \\
     &f'(\eta) = 1
 \end{aligned}
 $$
@@ -692,7 +692,7 @@ Q.E.D
 
 III
 
-$f(x), g(x)$ on [a,b] with their existing 2-order derivatives that $g''(x) \neq 0$.
+$f(x), g(x)$ on [a,b] with their existsing 2-order derivatives that $g''(x) \neq 0$.
 
 $$
 f(a) = f(b) = g(a) = g(b) = 0
@@ -700,7 +700,7 @@ $$
 To prove:
 
 - $\forall x \in (a,b), g(x) \neq 0$
-- $\exist \xi \in (a,b), \frac{f(\xi)}{g(\xi)} = \frac{f''(\xi)}{g''(\xi)}$
+- $\exists \xi \in (a,b), \frac{f(\xi)}{g(\xi)} = \frac{f''(\xi)}{g''(\xi)}$
 
 *Sol*:
 $$
@@ -728,7 +728,7 @@ $a \neq 0, f(x)$ is continuous on [a,b], derivable on (a,b).
 To prove:
 $$
 \begin{aligned}
-    \exist x_1, x_2, x_3 \in (a,b) \\
+    \exists x_1, x_2, x_3 \in (a,b) \\
     f'(x_1) &= (a+b) \frac{f'(x_2)}{2x_2} \\
     & = (a^2 + ab + b^2) \frac{f'(x_3)}{3x_3^2}
 \end{aligned}
@@ -751,9 +751,9 @@ $$
 Apply Cauchy mean value theorem:
 $$
 \begin{aligned}
-    \exist x_1 \in (a,b), &\frac{f(b)-f(a)}{b-a} = \frac{f'(x_1)}{1} \\
-    \exist x_2 \in (a,b), &\frac{f(b)-f(a)}{b^2-a^2} = \frac{f'(x_2)}{2x_2} \\
-    \exist x_3 \in (a,b), &\frac{f(b)-f(a)}{b^3-a^3} = \frac{f'(x_3)}{3x_3^2} \\
+    \exists x_1 \in (a,b), &\frac{f(b)-f(a)}{b-a} = \frac{f'(x_1)}{1} \\
+    \exists x_2 \in (a,b), &\frac{f(b)-f(a)}{b^2-a^2} = \frac{f'(x_2)}{2x_2} \\
+    \exists x_3 \in (a,b), &\frac{f(b)-f(a)}{b^3-a^3} = \frac{f'(x_3)}{3x_3^2} \\
     f(b) - f(a)
     &= (b - a) f'(x_1) \\
     &= (b^2 - a^2) \frac{f'(x_2)}{2x_2} \\
@@ -809,7 +809,7 @@ $f(x)$ on [a,b] has 2-order derivative, $f'(a) = f'(b) = 0$.
 
 To prove:
 $$
-\exist c \in (a,b), |f''(c)| \geq \frac{4}{(b-a)^2} |f(b) - f(a)|
+\exists c \in (a,b), |f''(c)| \geq \frac{4}{(b-a)^2} |f(b) - f(a)|
 $$
 
 *Sol*:
@@ -956,7 +956,100 @@ $x_0$ 不是极值点。
 
 XI
 
-To proof:
+To prove:
 $$
 \forall x \in (0,1), \sqrt{\frac{1-x}{1+x}} < \frac{\ln(1+x)}{\arcsin x}
+$$
+
+*Sol1*:
+
+It is to prove:
+$$
+\forall x \in (0,1), \frac{\sqrt{1-x^2}}{1+x} < \frac{\ln(1+x)}{\arcsin x}
+$$
+Suppose:
+$$
+\begin{aligned}
+    f(x) &= (1+x) \ln(1+x) - \sqrt{1-x^2} \arcsin x \\
+    f'(x) &= 1 + \ln(1+x) + \frac{x}{\sqrt{1-x^2}} \arcsin x - 1 \\
+    &= \ln (1+x) + \frac{x}{\sqrt{1-x^2}} \arcsin x \\
+    &>0 \\
+    f(x) &> f(0) = 0
+\end{aligned}
+$$
+Q.E.D
+
+*Sol2*:
+
+It is to prove:
+$$
+\forall x \in (0,1), \frac{\sqrt{1-x^2}}{1+x} < \frac{\ln(1+x)}{\arcsin x}
+$$
+Suppose:
+$$
+\begin{aligned}
+    f(x) &= \ln(1+x) \\
+    g(x) &= \arcsin x \\
+    \frac{\ln (1+x)}{\arcsin x} &= \frac{f(x)}{g(x)} \\
+    &= \frac{f(x) - f(0)}{g(x) - g(0)} \\
+    &= \frac{f'(\theta x)}{g'(\theta x)} & (\theta \in (0,1)) \\
+    &= \frac{\sqrt{1-(\theta x)^2}}{1+\theta x} \\
+    &> \frac{\sqrt{1-x^2}}{1+x}
+\end{aligned}
+$$
+
+***Attention***:
+总之就是要看到一个重要的变形，能够用上：
+$$
+(\arcsin x)' = \frac{1}{\sqrt{1-x^2}}
+$$
+
+---
+
+XII
+
+To prove:
+$$
+\forall a,b \in R^+, a^a b^b \geq \left(\frac{a+b}{2}\right)^{a+b}
+$$
+
+*Sol*:
+
+Suppose $x = b/a \in R+$
+
+It is to prove:
+$$
+\begin{aligned}
+    & a \ln a + b \ln b - (a + b) \ln \left(\frac{a+b}{2}\right) \geq 0 \\
+    & a \left(\ln a + x \ln a + x \ln x - ( 1+x) \ln a - (1+x) \ln \frac{1+x}{2} \right) \geq 0 \\
+    & x\ln x - (1+x) \ln (1+x) - (1+x) \ln 2 \geq 0
+\end{aligned}
+$$
+Suppose
+$$
+\begin{aligned}
+    f(x) & = x\ln x - (1+x) \ln (1+x) + (1+x) \ln 2 \\
+    f'(x) & = \ln x - \ln (1+x) + \ln 2 \\
+    & = \ln \frac{2x}{1 + x} \\
+    f''(x) & = \frac{1}{x(1+x)} > 0
+\end{aligned}
+$$
+$x = 1$ 为 $f(x)$ 的极小值点，也是最小值点。
+$$
+f(x) \geq f(1) = 0
+$$
+
+Q.E.D
+
+***Attention***:
+convert the multivariables problem to single variable problem.
+
+---
+
+XIII
+
+$f(x)$ has 2-order derivative on (a,b) that $f''(x) < 0$
+To prove:
+$$
+\forall \{x_n\} \in (a,b), f \left( \frac{x_1 + \cdots x_n}{n} \right) \geq \frac{1}{n} \left[ f(x_1) + \cdots + f(x_n) \right]
 $$
