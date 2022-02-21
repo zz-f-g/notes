@@ -1,0 +1,95 @@
+{
+  "main": {
+    "id": "1772018a47932862",
+    "type": "split",
+    "children": [
+      {
+        "id": "b2c4a4a1299b1df5",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "CalculusNotes/optimize.md",
+            "mode": "source",
+            "source": false
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "740c526904f2e69a",
+    "type": "split",
+    "children": [
+      {
+        "id": "1466f415975a53c0",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "e8967fc00d9f1db4",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "593f4ce8b712f73d",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "09127cedb66d75b8",
+    "type": "split",
+    "children": [
+      {
+        "id": "72811cf5b855c772",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "bd0e626a7be80da8",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "CalculusNotes/optimize.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "b2c4a4a1299b1df5",
+  "lastOpenFiles": [
+    "CalculusNotes/optimize.md",
+    "未命名.md"
+  ]
+}
