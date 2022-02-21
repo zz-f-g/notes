@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "CalculusNotes/optimize.md",
+            "file": "CalculusNotes/calculus1.md",
             "mode": "source",
             "source": false
           }
@@ -69,14 +69,24 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "CalculusNotes/optimize.md",
+                "file": "CalculusNotes/calculus1.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
                 "showSearch": false,
                 "searchQuery": "",
-                "backlinkCollapsed": false,
+                "backlinkCollapsed": true,
                 "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "1dad874a3fa01ce6",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "CalculusNotes/calculus1.md"
               }
             }
           }
@@ -89,8 +99,15 @@
   },
   "active": "b2c4a4a1299b1df5",
   "lastOpenFiles": [
-    "CalculusNotes/optimize.md",
-    "CalculusNotes/LinearAlgebra2.md",
-    "未命名.md"
+    "CalculusNotes/calculus1.md",
+    "CalculusNotes/calculus2.md",
+    "CalculusNotes/ComplexFunction.md",
+    "CalculusNotes/IntegralTransforms.md",
+    "CSNotes/python.md",
+    "CSNotes/LittleProject.md",
+    "CSNotes/README.md",
+    "CSNotes/C_Primer_Plus.md",
+    "CSNotes/python.assets/v2-a522ba0ab76425ac76efa924813d55e6_b.jpg",
+    "CalculusNotes/optimize.md"
   ]
 }

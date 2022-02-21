@@ -1049,7 +1049,98 @@ convert the multivariables problem to single variable problem.
 XIII
 
 $f(x)$ has 2-order derivative on (a,b) that $f''(x) < 0$
+
 To prove:
 $$
 \forall \{x_n\} \in (a,b), f \left( \frac{x_1 + \cdots x_n}{n} \right) \geq \frac{1}{n} \left[ f(x_1) + \cdots + f(x_n) \right]
 $$
+
+*Sol*:
+
+Suppose
+$$
+\begin{aligned}
+    \overline{x} =& \frac{x_1 + \cdots + x_n}{n}, e_i = x_i - \overline{x} \\
+    f(x_i) =& f(\overline{x} + e_i) = f(\overline{x}) + f'(\overline{x}) e_i + \frac{f''(\overline{x}+\theta_i e_i)}{2} e_i^2 \\
+    &\frac{1}{n} \left[ f(x_1) + \cdots + f(x_n) \right] \\
+    =& \frac{1}{n} \left[ n f(\overline{x}) + f'(\overline{x}) \sum_{i=1}^n e_i + \frac{1}{2} \sum_{i=1}^n f''(\overline{x} + \theta_i e_i) e_i^2 \right] \\
+    =& f(\overline{x}) + \sum_{i=1}^n \frac{f''(\overline{x} + \theta_i e_i)}{2n} e_i^2 \\
+    <& f(\overline{x})
+\end{aligned}
+$$
+
+***Attention***:
+使用 Taylor mean value theorem 来解题，一般都选取中间的点作为迭代的起始点。
+
+---
+
+XIV
+
+$$
+\lim_{x \rightarrow 0} \frac{1}{x^2} \left(1 - \cos x \cdot \sqrt{\cos 2x} \cdot \sqrt[3]{\cos 3x} \cdots \sqrt[n]{\cos nx}\right)
+$$
+
+*Sol*:
+
+$$
+\begin{aligned}
+    &\lim_{x \rightarrow 0} \frac{1}{x^2} \left(1 - \cos x \cdot \sqrt{\cos 2x} \cdot \sqrt[3]{\cos 3x} \cdots \sqrt[n]{\cos nx}\right) \\
+    =& - \lim_{x \rightarrow 0} \frac{(\cos x \cdot \sqrt{\cos 2x} \cdot \sqrt[3]{\cos 3x} \cdots \sqrt[n]{\cos nx})'}{2x}
+\end{aligned}
+$$
+Suppose $f(x) = \cos x \cdot \sqrt{\cos 2x} \cdot \sqrt[3]{\cos 3x} \cdots \sqrt[n]{\cos nx}$
+$$
+\begin{aligned}
+&f'(x) = f(x) \cdot \frac{d}{dx} \ln f(x) \\
+=& f(x) \cdot \frac{d}{dx} \left(\ln \cos x + \frac{\ln \cos 2x}{2} + \cdots + \frac{\ln \cos nx}{n}\right) \\
+=& - f(x) \cdot \left(\tan x + \tan 2x + \cdots + \tan nx \right) \\
+& - \lim_{x \rightarrow 0} \frac{(\cos x \cdot \sqrt{\cos 2x} \cdot \sqrt[3]{\cos 3x} \cdots \sqrt[n]{\cos nx})'}{2x} \\
+=& \lim_{x\rightarrow 0} \frac{f(x)}{2x} \left(\tan x + \tan 2x + \cdots + \tan nx \right) \\
+=& \frac{n(n+1)}{4}
+\end{aligned}
+$$
+
+***Attention***:
+当然这道题也可以通过小量运算技巧来直接算出答案。
+
+---
+
+$f(x)$ is continuous on $[0,1]$, derivable on $(0,1)$. $f(0) = 0, f(1) = 1$.
+
+To prove:
+$$
+\exists \xi_1, \xi_2 (\xi_1 \neq \xi_2) \in (0,1), f'(\xi_1) f'(\xi_2) = 1
+$$
+
+*Sol*:
+
+Suppose $x_0 \in (0,1)$:
+$$
+\begin{aligned}
+	&f(x_0) - f(0) = f'(\xi_1) x_0 & \xi_1 \in (0, x_0) \\
+	&f(1) - f(x_0) = f'(\xi_2) (1 - x_0) & \xi_2 \in (x_0, 1) \\
+	&f'(\xi_1)f'(\xi_2) = \frac{f(x_0)}{x_0} \cdot \frac{1 - f(x_0)}{1 - x_0}
+\end{aligned}
+$$
+
+Below to prove:
+$$
+\exists x_0 \in (0,1), f(x_0) = 1-x_0
+$$
+Suppose:
+$$
+\begin{aligned}
+	&g(x) = f(x) + x - 1 \\
+	&g(0) = f(0) - 1 = -1 < 0 \\
+	&g(1) = f(1) = 1 > 0 \\
+	&\exists x_0 \in (0,1), f(x_0) = 1-x_0 \\
+	&f'(\xi_1) f'(\xi_2) = \frac{1 - x_0}{x_0} \frac{1 - (1-x_0)}{1 - x_0} = 1
+\end{aligned}
+$$
+
+Q.E.D
+
+***Attention***:
+一个对称的问题，反正就是要构造特殊的分段点 $x_0$.
+
+---
