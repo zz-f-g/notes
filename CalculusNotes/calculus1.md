@@ -1105,6 +1105,8 @@ $$
 
 ---
 
+XV
+
 $f(x)$ is continuous on $[0,1]$, derivable on $(0,1)$. $f(0) = 0, f(1) = 1$.
 
 To prove:
@@ -1117,9 +1119,9 @@ $$
 Suppose $x_0 \in (0,1)$:
 $$
 \begin{aligned}
-	&f(x_0) - f(0) = f'(\xi_1) x_0 & \xi_1 \in (0, x_0) \\
-	&f(1) - f(x_0) = f'(\xi_2) (1 - x_0) & \xi_2 \in (x_0, 1) \\
-	&f'(\xi_1)f'(\xi_2) = \frac{f(x_0)}{x_0} \cdot \frac{1 - f(x_0)}{1 - x_0}
+    &f(x_0) - f(0) = f'(\xi_1) x_0 & \xi_1 \in (0, x_0) \\
+    &f(1) - f(x_0) = f'(\xi_2) (1 - x_0) & \xi_2 \in (x_0, 1) \\
+    &f'(\xi_1)f'(\xi_2) = \frac{f(x_0)}{x_0} \cdot \frac{1 - f(x_0)}{1 - x_0}
 \end{aligned}
 $$
 
@@ -1130,11 +1132,11 @@ $$
 Suppose:
 $$
 \begin{aligned}
-	&g(x) = f(x) + x - 1 \\
-	&g(0) = f(0) - 1 = -1 < 0 \\
-	&g(1) = f(1) = 1 > 0 \\
-	&\exists x_0 \in (0,1), f(x_0) = 1-x_0 \\
-	&f'(\xi_1) f'(\xi_2) = \frac{1 - x_0}{x_0} \frac{1 - (1-x_0)}{1 - x_0} = 1
+    &g(x) = f(x) + x - 1 \\
+    &g(0) = f(0) - 1 = -1 < 0 \\
+    &g(1) = f(1) = 1 > 0 \\
+    &\exists x_0 \in (0,1), f(x_0) = 1-x_0 \\
+    &f'(\xi_1) f'(\xi_2) = \frac{1 - x_0}{x_0} \frac{1 - (1-x_0)}{1 - x_0} = 1
 \end{aligned}
 $$
 
@@ -1144,3 +1146,16 @@ Q.E.D
 一个对称的问题，反正就是要构造特殊的分段点 $x_0$.
 
 ---
+
+XVI
+
+$f(x)$ is derivative on $[a,b]$ and that
+$$
+f'_+(a) > L > f'_-(b)
+$$
+To prove:
+$$
+\exists \xi \in (a,b), f'(\xi) = L
+$$
+
+*Sol*:

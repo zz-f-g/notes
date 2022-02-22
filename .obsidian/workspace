@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "CalculusNotes/calculus1.md",
+            "file": "CalculusNotes/SS.md",
             "mode": "source",
             "source": false
           }
@@ -69,7 +69,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "CalculusNotes/calculus1.md",
+                "file": "CalculusNotes/SS.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -86,7 +86,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CalculusNotes/calculus1.md"
+                "file": "CalculusNotes/SS.md"
               }
             }
           }
@@ -99,6 +99,7 @@
   },
   "active": "b2c4a4a1299b1df5",
   "lastOpenFiles": [
+    "CalculusNotes/SS.md",
     "CalculusNotes/calculus1.md",
     "CalculusNotes/calculus2.md",
     "CalculusNotes/ComplexFunction.md",
@@ -107,7 +108,6 @@
     "CSNotes/LittleProject.md",
     "CSNotes/README.md",
     "CSNotes/C_Primer_Plus.md",
-    "CSNotes/python.assets/v2-a522ba0ab76425ac76efa924813d55e6_b.jpg",
-    "CalculusNotes/optimize.md"
+    "CSNotes/python.assets/v2-a522ba0ab76425ac76efa924813d55e6_b.jpg"
   ]
 }
