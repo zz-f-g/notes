@@ -1,12 +1,99 @@
-# Calculus2: unlimited and limited integrals
+# Calculus2
+
+indefinite and definite integrals
+
+---
 
 ## Concepts
 
 ---
 
+### 不定积分
+
+---
+
+I
+
+一些不那么显然的积分表
+
+$$
+\begin{align*}
+\int \tan x dx &= - \ln |\cos x| + C\\
+\int \cot x dx &= \ln |\sin x| + C\\
+\int \sec x dx &= \int \frac{\sec x (\sec x + \tan x)}{\sec x + \tan x} dx\\
+&= \int \frac{\sec^{2}x dx + \sec x \tan x dx}{\sec x + \tan x}\\
+&= \ln |\sec x + \tan x| +C\\
+\int \csc x dx &= \int \frac{\csc x (\csc x + \cot x)}{\csc x + \cot x} dx\\
+&= \int \frac{\csc^{2}x dx + \cot x \csc x dx}{\csc x + \cot x}\\
+&= - \ln |\csc x + \cot x| + C
+\end{align*}
+$$
+
+---
+
+II
+
+Corresponding methods to integrate some kind of derivative funcs:
+
+1. Rational Fraction: Apart
+2. Rational Formula for Trigonometric Funcs: $u = \tan \frac{x}{2}$
+$$
+R(\sin x, \cos x) = R\left(\frac{2u}{1+u^{2}}, \frac{1-u^{2}}{1+u^{2}}\right), x = 2 \arctan u, dx = \frac{2}{1+u^{2}} du
+$$
+Of course, not all Rational Fraction is solved by just apart. For example:
+$$
+\begin{align*}
+    \int \frac{dx}{x(x^{10}+1)} &= \int \frac{x^{9}dx}{x^{10}(x^{10}+1)}\\
+    &= \frac{1}{10} \int \frac{dx^{10}}{x^{10}(x^{10}+1)}\\
+    &= \frac{1}{10} \ln \frac{x^{10}}{x^{10}+1} + C
+\end{align*}
+$$
+
+***Attention***:
+尽量不要涉及对数，因为 $\ln |x|$ 中绝对值的原因。
+
+---
+
+III
+
+原函数存在的条件
+
+充分不必要条件：导函数连续
+
+不必要的原因（反例）：
+$$
+\begin{align*}
+F(x) &= x^{2} \sin \frac{1}{x}\\
+f(x) &= F'(x) \\
+&= \begin{cases}
+2x \sin \frac{1}{x} - \cos \frac{1}{x} & (x \neq 0)\\
+0 & (x = 0)
+\end{cases}
+\end{align*}
+$$
+
+$x=0$ 是 $f(x)$ 的第二类间断点。但是 $f(x)$ 仍然存在原函数。
+
+---
+
+IV
+
+关于 $\int \frac{dx}{x} = \ln |x| + C$ 中的绝对值：
+
+$\ln x$ is antiderivative of $\frac{1}{x}$ on $(0, \infty)$.
+$\ln(-x)$ is antiderivative of $\frac{1}{x}$ on $(-\infty, 0)$.
+
+---
+
+
+
+---
+
 ## Exercise
 
-### 第一类换元法
+---
+
+### 不定积分
 
 ---
 
@@ -113,11 +200,3 @@ $$
 &= \frac{\sqrt{2}}{2} \sinh^{-1} (\sqrt{2} \sec x \tan x) + C
 \end{aligned}
 $$
-
-This is an end for this document. I write this in order to prevent the preview interface to be gone.
-
-Here I want to say something to my self:
-
-This is a notebook that seems to be foolish. As a matter of fact, before this foolish notebook, you were always doing something foolish and this is far from the first time. All this foolish things makes you a people different-or more narcissisticly, distinguishing.
-
-This world need more people with a foolish mind instead of smart or sharp ones. The former can't be gained until you devote matched vigor and time absorbed.

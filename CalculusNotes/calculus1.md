@@ -1,4 +1,6 @@
-# Calculus1: limit, derivative and mean value theorem
+# Calculus1
+
+limit, derivative and mean value theorem
 
 ## Concepts
 

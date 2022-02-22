@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "CalculusNotes/calculus1.md",
+            "file": "CalculusNotes/calculus2.md",
             "mode": "source",
             "source": false
           }
@@ -70,7 +70,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "CalculusNotes/calculus1.md",
+                "file": "CalculusNotes/calculus2.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -87,7 +87,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CalculusNotes/calculus1.md"
+                "file": "CalculusNotes/calculus2.md"
               }
             }
           },
@@ -109,10 +109,10 @@
   },
   "active": "b2c4a4a1299b1df5",
   "lastOpenFiles": [
+    "CalculusNotes/calculus2.md",
     "CalculusNotes/calculus1.md",
     "CalculusNotes/README.md",
     "CalculusNotes/SS.md",
-    "CalculusNotes/calculus2.md",
     "CalculusNotes/ComplexFunction.md",
     "CalculusNotes/IntegralTransforms.md",
     "CSNotes/python.md",
