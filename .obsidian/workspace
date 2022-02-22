@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "CalculusNotes/SS.md",
+            "file": "CalculusNotes/calculus1.md",
             "mode": "source",
             "source": false
           }
@@ -53,7 +53,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "09127cedb66d75b8",
@@ -69,7 +70,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "CalculusNotes/SS.md",
+                "file": "CalculusNotes/calculus1.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -86,11 +87,20 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CalculusNotes/SS.md"
+                "file": "CalculusNotes/calculus1.md"
               }
             }
+          },
+          {
+            "id": "1a00cd09d3b488e1",
+            "type": "leaf",
+            "state": {
+              "type": "advanced-tables-toolbar",
+              "state": {}
+            }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "horizontal",
@@ -99,15 +109,15 @@
   },
   "active": "b2c4a4a1299b1df5",
   "lastOpenFiles": [
-    "CalculusNotes/SS.md",
     "CalculusNotes/calculus1.md",
+    "CalculusNotes/README.md",
+    "CalculusNotes/SS.md",
     "CalculusNotes/calculus2.md",
     "CalculusNotes/ComplexFunction.md",
     "CalculusNotes/IntegralTransforms.md",
     "CSNotes/python.md",
     "CSNotes/LittleProject.md",
     "CSNotes/README.md",
-    "CSNotes/C_Primer_Plus.md",
-    "CSNotes/python.assets/v2-a522ba0ab76425ac76efa924813d55e6_b.jpg"
+    "CSNotes/C_Primer_Plus.md"
   ]
 }

@@ -360,7 +360,7 @@ Continuous $f(x)$ on $[a,b]$, $a<c<d<b$.
 
 To prove:
 $$
-\forall \alpha, \beta \in \R^+, \exists \xi \in [a,b], f(\xi) (\alpha + \beta) = \alpha f(c) + \beta f(d)
+\forall \alpha, \beta \in R^+, \exists \xi \in [a,b], f(\xi) (\alpha + \beta) = \alpha f(c) + \beta f(d)
 $$
 
 *Sol*:
@@ -670,7 +670,7 @@ $$
     &F(x) = f(x) - x \\
     &F(0) = f(0) > 0 \\
     &F(1) = f(1) - 1 < 0 \\
-    &\exist \xi \in (0,1), F(\xi) = 0
+    &\exists \xi \in (0,1), F(\xi) = 0
 \end{aligned}
 $$
 **Uniqueness**:
@@ -1159,3 +1159,104 @@ $$
 $$
 
 *Sol*:
+
+首先要归零
+$$
+\begin{aligned}
+    F(x) &= f(x) - Lx \\
+    F'_+(a) &= f'_+(a) - L > 0 \\
+    F'_-(b) &= f'_-(b) - L < 0 \\
+\end{aligned}
+$$
+根据导数的定义
+$$
+\lim_{x \rightarrow a+} \frac{F(x) - F(a)}{x - a} = F'_+(a) > 0
+$$
+Continuous $f(x)$ on $[a,b]$, so:
+$$
+\exists \delta > 0, \forall x \in (a, a+ \delta), F(x) > F(a)
+$$
+$F(a)$ 不是最大值，同理，$F(b)$ 也不是最大值。
+$$
+\exists \xi \in (a,b), \forall x \in [a,b] \text{ and } x \neq \xi, F(x) < F(\xi) \Rightarrow F'(\xi) = 0
+$$
+
+Q.E.D
+
+***Attention***:
+一般的题目都是用导函数解决原函数的问题，这个题目是用原函数解决导函数的问题。连续函数端点存在且有界，必然存在最大值。
+
+---
+
+XVII
+
+$f(x)$ is continuous on $[0,1]$, derivable on $(0,1)$ and $f(0) = 0$.
+$$
+\forall x \in (0,1), |f'(x)| \leq |f(x)|
+$$
+To prove:
+$$
+\forall x \in [0,1], f(x) = 0
+$$
+
+*Sol*:
+
+$$
+\begin{aligned}
+|f(x)| =& |f'(\xi_1)| x \\
+\leq & |f(\xi_1)| x \\
+\leq & |f(\xi_2)| x \xi_1 \\
+\leq & |f(\xi_3)| x \xi_1 \xi_2 \\
+\cdots \\
+\leq & |f(\xi_{n+1})| x \xi_1 \xi_2 \cdots \xi_n \\
+\leq & |f(\xi_{n+1})| \xi_1 \xi_2 \cdots \xi_n \\
+\leq & |f(\xi_{n+1})| \xi_1^n \\
+|f(x)| =& \lim_{n \rightarrow \infty} |f(x)| \\
+\leq & \lim_{n \rightarrow \infty} |f(\xi_{n+1})| \xi_1^n
+\end{aligned}
+$$
+
+$f(x)$ is continuous on $(0,1) \Rightarrow$ $|f(\xi_{n+1})|$ is bounded.
+$$
+\lim_{n \rightarrow \infty} |f(\xi_{n+1})| \xi_1^n = 0
+$$
+$$
+f(x) = 0
+$$
+Q.E.D
+
+***Attention***:
+开始做的时候是想通过反证法，如果 $|f(x)|$ 不为 0，$|f(\xi_{n+1})|$ 无穷大来表明在 0 处不连续。其实转过弯来就能得到更加优雅的证明方法。
+
+---
+
+XVIII
+
+$f(x)$ has 3-order continuous derivatives on $[0,1]$.
+$$
+f(0) = 1, f(2) = 2, f'(1) = 0
+$$
+To prove:
+$$
+\exists \xi \in (0,2), |f'''(\xi)| \geq 3
+$$
+
+*Sol*:
+
+Taylor Theorem!!!
+
+$$
+\begin{aligned}
+f(0) =& f(1) + f'(1) (-1) + \frac{f''(1)}{2} (-1)^2 + \frac{f'''(\xi_1)}{6} (-1)^3 & (\xi_1 \in (0,1)) \\
+f(2) =& f(1) + f'(1) (1) + \frac{f''(1)}{2} (1)^2 + \frac{f'''(\xi_2)}{6} (1)^3 & (\xi_2 \in (1,2)) \\
+f(2) - f(0) =& \frac{1}{6} \left(f'''(\xi_1) + f'''(\xi_2)\right) \\
+&f'''(\xi_1) + f'''(\xi_2) = 6
+\end{aligned}
+$$
+
+Q.E.D
+
+***Attention***:
+一般遇到高阶导数直接泰勒中值定理套中间的点就对了。
+
+---

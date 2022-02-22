@@ -2,7 +2,9 @@
 
 时域、频域、复频域、离散域。
 
-Z612
+答疑：
+
+Z622 Tue 11:45(12:15)~13:20
 
 ---
 
@@ -72,7 +74,12 @@ E --> system --> R
 
 ---
 
-MATLAB -- spsound
+MATLAB -- sound
+
+```matlab
+load chirp
+sound(y, Fs)
+```
 
 ---
 
@@ -102,7 +109,7 @@ $$
 ```mermaid
 graph LR;
 A[analog]
-S[sampled]
+S[sampling]
 D[digital]
 A --sample--> S --quantize--> D
 ```
