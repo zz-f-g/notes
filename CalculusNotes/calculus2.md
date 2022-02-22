@@ -85,7 +85,7 @@ $\ln(-x)$ is antiderivative of $\frac{1}{x}$ on $(-\infty, 0)$.
 
 ---
 
-
+### 定积分
 
 ---
 
@@ -160,6 +160,7 @@ $$
 
 IV
 
+<!--
 ?There are some questions in following process.
 $$
 \begin{aligned}
@@ -170,6 +171,7 @@ $$
 $$
 
 因为上面的被积函数中显含有 $x$，不可以直接讲上下限作为自变量进行链式求导。
+-->
 
 ---
 
@@ -189,14 +191,79 @@ $$
 \end{aligned}
 $$
 
+***Attention***:
+三角换元典型例题。
+
 ---
 
 VI
 
 $$
 \begin{aligned}
-\int \frac{\sec x \tan^2 x + \sec^3 x}{\sqrt{\sec^4 x + \tan^4 x}} \mathrm{d}x &= \int \frac{\tan x \mathrm{d} \sec x + \sec x \mathrm{d} \tan x}{\sqrt{(\sec^2 x - \tan^2 x)^2 + 2 \sec^2 x \tan^2 x}} \\
-&= \int \frac{\mathrm{d} \sec x \tan x}{\sqrt{1 + 2 (\sec x \tan x)^2}} \\
-&= \frac{\sqrt{2}}{2} \sinh^{-1} (\sqrt{2} \sec x \tan x) + C
+&\int \frac{\sec x \tan^2 x + \sec^3 x}{\sqrt{\sec^4 x + \tan^4 x}} \mathrm{d}x \\
+=& \int \frac{\tan x \mathrm{d} \sec x + \sec x \mathrm{d} \tan x}{\sqrt{(\sec^2 x - \tan^2 x)^2 + 2 \sec^2 x \tan^2 x}} \\
+=& \int \frac{\mathrm{d} \sec x \tan x}{\sqrt{1 + 2 (\sec x \tan x)^2}} \\
+=& \frac{\sqrt{2}}{2} \sinh^{-1} (\sqrt{2} \sec x \tan x) + C
 \end{aligned}
+$$
+
+***Attention***:
+可以通过这个著名的六边形来记忆三角函数之间的关系。
+
+```mermaid
+graph TD
+sinx --> tanx
+cosx --> 1
+sinx --> 1
+cosx --> cotx
+tanx --> secx
+1 --> secx
+1 --> cscx
+cotx --> cscx
+```
+
+---
+
+VII
+
+$$
+\begin{align*}
+    &\int \frac{\mathrm{d}x}{1 + \sin x}\\
+    =& \int \frac{1 - \sin x}{\cos^{2}x} \mathrm{x}\\
+    =& \int \sec^{2}x \mathrm{d}x - \int \tan x \sec x \mathrm{d} x\\
+    =& \tan x - \sec x + C
+\end{align*}
+$$
+
+$$
+\begin{align*}
+    &\int \frac{x^{2}+1}{x^{4}+1} \mathrm{d} x\\
+    =& \int \frac{1+ \frac{1}{x^{2}}}{x^{2}+ \frac{1}{x^{2}}} \mathrm{d}x\\
+    =& \int \frac{\mathrm{d}\left(x - \frac{1}{x}\right)}{\left(x- \frac{1}{x}\right)^{2} + 2}\\
+    =& \frac{\sqrt{2}}{2} \arctan \frac{\sqrt{2}}{2} \left(x - \frac{1}{x}\right) + C
+\end{align*}
+$$
+
+$$
+\begin{align*}
+    &\int \frac{1}{\sin^{2}x-2\cos^{2}x} \mathrm{d}x\\
+    =& \int \frac{1}{\tan^{2}x-2} \cdot \frac{\mathrm{d}x}{\cos^{2}x}\\
+    =& \frac{\sqrt{2}}{4} \ln \left| \frac{\tan x - \sqrt{2}}{\tan x + \sqrt{2}} \right| + C
+\end{align*}
+$$
+
+***Attention***:
+Some simple tricks but hard to get.
+
+---
+
+VIII
+
+$$
+\begin{align*}
+    &\int \frac{x^{2}+1}{x^{4}+1} \mathrm{d} x\\
+    =& \int \frac{1+ \frac{1}{x^{2}}}{x^{2}+ \frac{1}{x^{2}}} \mathrm{d}x\\
+    =& \int \frac{\mathrm{d}\left(x - \frac{1}{x}\right)}{\left(x- \frac{1}{x}\right)^{2} + 2}\\
+    =& \frac{\sqrt{2}}{2} \arctan \frac{\sqrt{2}}{2} \left(x - \frac{1}{x}\right) + C
+\end{align*}
 $$
