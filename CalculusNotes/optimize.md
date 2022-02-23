@@ -134,3 +134,107 @@ principle of derivative
 ### 5.6
 
 Taylor series
+
+---
+
+## 6 集合约束和无约束优化问题
+
+---
+
+### 6.1
+
+intoduction
+
+---
+
+$$
+\begin{align*}
+    &\text{minimize } f(x)\\
+    &\text{subject to } x \in \Omega
+\end{align*}
+$$
+从可行集合中找到使得目标函数最小的点。
+$$
+\begin{align*}
+    &f:\mathbb{R}^{n} \rightarrow \mathbb{R}, \text{domain:} \Omega \subset \mathbb{R}^{n}\\
+    &\exists \epsilon > 0, \forall x: 0 < \Vert x - x^{*} \Vert < \epsilon, f(x) > f(x^{*})
+\end{align*}
+$$
+
+- 局部极小点
+- 全局最小点
+
+---
+
+### 6.2
+
+局部极小点的条件
+
+---
+
+可行方向
+
+所有的可行方向构成了可行基在某一个点附近的逼近。
+
+方向导数
+
+$$
+\frac{\partial f}{\partial d}(x) = \lim_{\alpha \rightarrow 0} \frac{f(x+\alpha d)-f(x)}{\alpha}
+$$
+计算简化
+$$
+\begin{align*}
+    &\phi(\alpha) = f(x+\alpha d) \\
+    &\frac{\partial f}{\partial d}(x) = \lim_{\alpha \rightarrow 0} \frac{\phi(\alpha)-\phi(0)}{\alpha} \\
+    &= \phi'(0) = \nabla f(x)^{T} d = d^{T}\nabla f(x)
+\end{align*}
+$$
+
+---
+
+定理一：局部极小点的一阶必要条件
+
+这是**排除法**
+
+$$
+\frac{\partial f}{\partial d}(x^{*}) = d^{T} \nabla f(x^{*}) \geq 0
+$$
+
+如果 $x^{*}$ 在 $\Omega$ 内部，则：
+$$
+\nabla f(x^{*}) = 0
+$$
+
+---
+
+定理二：局部极小点的二阶必要条件
+
+前提：满足一阶必要条件
+$$
+\phi''(0) = d^{T} D^{2}f(x^{*}) d \geq 0
+$$
+黑塞矩阵半正定。
+
+---
+
+当然，满足两个条件也不一定就是极小值（必要性）。例如：
+
+- $x=0, f(x) = x^{3}$
+
+但是只要有一个必要条件不满足，就一定不是极小值点。例如：
+
+- $x = \begin{bmatrix}0 \\ 0\end{bmatrix}, f(x) = x_{1}^{2} - x_{2}^{2}$
+
+---
+
+定理三：局部极小点的二阶充分条件
+
+前提：内点
+
+$$
+\begin{align*}
+    &\nabla f(x^{*}) = 0\\
+    &F(x^{*}) = D^{2}f(x^{*}) > 0
+\end{align*}
+$$
+第二条条件指的是矩阵正定。
