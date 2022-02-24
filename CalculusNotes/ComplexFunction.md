@@ -4,33 +4,33 @@
 
 微信群
 
-| 上课内容                                                     |
-| ------------------------------------------------------------ |
-| 1. 复数，函数     1.1. 复数，复平面     1.2. 三角形式，乘方，方根 |
-| 1.3. 导数，解析函数     1.4. Cauchy-Riemann 方程，Laplace 方程 |
-| 1.5. 指数函数     1.6. 三角函数和双曲函数                    |
-| 1.7. 对数，幂函数                                            |
+| 上课内容                                                                                                                    |
+|:--------------------------------------------------------------------------------------------------------------------------- |
+| 1. 复数，函数     1.1. 复数，复平面     1.2. 三角形式，乘方，方根                                                           |
+| 1.3. 导数，解析函数     1.4. Cauchy-Riemann 方程，Laplace 方程                                                              |
+| 1.5. 指数函数     1.6. 三角函数和双曲函数                                                                                   |
+| 1.7. 对数，幂函数                                                                                                           |
 | 2. 复积分     2.1. 复平面上的线积分     2.2. Cauchy 积分定理     注意！由于 10 月 7 日为十一假期，该课程与 10 月 9 日对调。 |
-| 2.3. Cauchy 积分公式     2.4. 解析函数的导数                 |
-| 3. Taylor 级数，Laurent 级数     3.1. 序列，级数     3.2. 幂级数 |
-| 3.2. 幂级数（继续）     3.3. 幂级数的和函数                  |
-| 3.4. Taylor 级数，Macluarin 级数     3.5. Laurent 级数       |
-| 3.5. Laurent 级数（继续）     3.6. 奇点，零点，无穷远点      |
-| 3.7. 留数积分法     3.8. 实积分中的应用                      |
-| 3.8. 实积分中的应用（继续）     （时间允许的话）习题选讲     |
-| 4. 积分变换     4.1. Fourier 变换：Fourier 变换              |
-| Fourier 逆变换，Dirac delta                                  |
-| 离散革命 (The discrete revolution)                           |
-| 离散 Fourier 变换，快速 Fourier 变换                         |
-| 4.2. Laplace 变换                                            |
-| Laplace 变换（继续），Laplace 逆变换（浅谈）                 |
-| 4.3. 微分方程中的应用：常微分方程中的 Laplace 变换           |
-| 常微分方程中的 Laplace 变换 （继续）                         |
-| 偏微分方程中的 Fourier 变换                                  |
-| 时间遇到了频率（Time meets frequency）：浅谈信号时频分析     |
-| 总复习及答疑                                                 |
-| 总复习及答疑                                                 |
-| 期末考查                                                     |
+| 2.3. Cauchy 积分公式     2.4. 解析函数的导数                                                                                |
+| 3. Taylor 级数，Laurent 级数     3.1. 序列，级数     3.2. 幂级数                                                            |
+| 3.2. 幂级数（继续）     3.3. 幂级数的和函数                                                                                 |
+| 3.4. Taylor 级数，Macluarin 级数     3.5. Laurent 级数                                                                      |
+| 3.5. Laurent 级数（继续）     3.6. 奇点，零点，无穷远点                                                                     |
+| 3.7. 留数积分法     3.8. 实积分中的应用                                                                                     |
+| 3.8. 实积分中的应用（继续）     （时间允许的话）习题选讲                                                                    |
+| 4. 积分变换     4.1. Fourier 变换：Fourier 变换                                                                             |
+| Fourier 逆变换，Dirac delta                                                                                                 |
+| 离散革命 (The discrete revolution)                                                                                          |
+| 离散 Fourier 变换，快速 Fourier 变换                                                                                        |
+| 4.2. Laplace 变换                                                                                                           |
+| Laplace 变换（继续），Laplace 逆变换（浅谈）                                                                                |
+| 4.3. 微分方程中的应用：常微分方程中的 Laplace 变换                                                                          |
+| 常微分方程中的 Laplace 变换 （继续）                                                                                        |
+| 偏微分方程中的 Fourier 变换                                                                                                 |
+| 时间遇到了频率（Time meets frequency）：浅谈信号时频分析                                                                    |
+| 总复习及答疑                                                                                                                |
+| 总复习及答疑                                                                                                                |
+| 期末考查                                                                                                                    |
 
 ## Complex Numbers
 
@@ -135,8 +135,8 @@ $$
 
 ### Analytic Function
 
-- Analyticity in Domain $\forall z \in D, \existss f, \existss f'$
-- Analyticity at Point $\forall z \in U(z_0, \delta), \existss f, \existss f'.$
+- Analyticity in Domain $\forall z \in D, \exists f, \exists f'$
+- Analyticity at Point $\forall z \in U(z_0, \delta), \exists f, \exists f'.$
 
 Entire Function: analytic in whole complex plane.
 
@@ -541,7 +541,7 @@ where $K$ is a circle of radius $\rho$ and center $z_0$.
 
 利用了[之前结论](#content_of_cauchy's_integral_thereom)和解析函数线积分路径无关的性质。
 $$
-\forall \varepsilon > 0, \existss \delta > 0,\forall z \in \{z \in C: \left|z - z_0\right| < \delta\}, \left|f(z) - f(z_0)\right| < \varepsilon \\
+\forall \varepsilon > 0, \exists \delta > 0,\forall z \in \{z \in C: \left|z - z_0\right| < \delta\}, \left|f(z) - f(z_0)\right| < \varepsilon \\
 $$
 
 choosing $\rho < \delta$:
@@ -724,7 +724,7 @@ if $s = \sum_{i = 1}^{\infty} z_i$ is convergence, $\lim_{n \rightarrow \infty} 
 
 Cauchy Principle
 
-$s = \sum_{i = 1}^{\infty} z_i$ is convergence $\iff$ $\forall \varepsilon > 0, \exists N \in \N \text{ and } p \in \N,  \forall n > N, \left|\sum_{i = 1}^{p} z_{n+i}\right| < \varepsilon$
+$s = \sum_{i = 1}^{\infty} z_i$ is convergence $\iff$ $\forall \varepsilon > 0, \exists N \in N \text{ and } p \in N,  \forall n > N, \left|\sum_{i = 1}^{p} z_{n+i}\right| < \varepsilon$
 
 两种收敛：
 
@@ -740,14 +740,14 @@ $s = \sum_{i = 1}^{\infty} z_i$ is convergence $\iff$ $\forall \varepsilon > 0, 
 $$
 z_n = q^n \ (|q| < 1) \\
 \sum_{m=1}^\infty q^n = \frac{q}{1-q} \ (|q| < 1) \\
-\existss N \in \N, \forall m > N, |\frac{z_{m+1}}{z_m}| \leq q < 1, \{z_m\} \text{ is absolutely convergent.}
+\exists N \in N, \forall m > N, |\frac{z_{m+1}}{z_m}| \leq q < 1, \{z_m\} \text{ is absolutely convergent.}
 $$
 
 Ratio Test
 
 CONDITION:（注意其中 $q$ 的存在，**调和级数**）
 
-- $\exists N \in \N, \forall n > N$
+- $\exists N \in N, \forall n > N$
 
 $$
 \left|\frac{z_{n+1}}{z_n}\right| \leq q < 1
@@ -768,7 +768,7 @@ $$
 
 Root Test
 $$
-\existss N \in \N, \forall m > N, \sqrt[m]{z_m} \leq q < 1, \{z_m\} \text{ is absolutely convergent.} \\
+\exists N \in N, \forall m > N, \sqrt[m]{z_m} \leq q < 1, \{z_m\} \text{ is absolutely convergent.} \\
 L = \lim_{n \rightarrow \infty} \sqrt[n]{z_n}
 $$
 
@@ -1026,7 +1026,7 @@ where $\Im z_i > 0$.
 
 当 $f(x)$ 的分母多项式的最高幂次至少比分子的最高幂次大 2 时
 $$
-\lim_{R \rightarrow \infty} \int_S f(z) \mathrm{d} z \leq \lim_{R \rightarrow \infty} \abs{\int_S f(z) \mathrm{d} z} \leq \lim_{R \rightarrow \infty} \frac{C}{R^2} \pi R = \lim_{R \rightarrow \infty} \frac{\pi C}{R} = 0
+\lim_{R \rightarrow \infty} \int_S f(z) \mathrm{d} z \leq \lim_{R \rightarrow \infty} \left| \int_S f(z) \mathrm{d} z \right| \leq \lim_{R \rightarrow \infty} \frac{C}{R^2} \pi R = \lim_{R \rightarrow \infty} \frac{\pi C}{R} = 0
 $$
 Thus,
 $$

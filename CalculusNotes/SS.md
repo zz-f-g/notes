@@ -114,7 +114,7 @@ D[digital]
 A --sample--> S --quantize--> D
 ```
 
-抽样信号幅值连续，数字信号幅值不连续。
+抽样信号幅值连续，数字信号幅值不连续。它们的时间都不连续。
 
 ---
 
@@ -238,3 +238,173 @@ $$
 $$
 f(t) \rightarrow f(\alpha t)
 $$
+- $|\alpha| < 1$，坐标轴拉长
+- $|\alpha| > 1$，坐标轴收缩
+
+---
+
+一般情况
+
+$$
+f(t) \rightarrow f(at+b)
+$$
+
+- 先平移 $b$，左加右减
+- 标度变换，如果 $a<0$，再翻转
+
+$$
+f(mt+n) \rightarrow f(at+b)
+$$
+
+---
+
+微分和积分
+
+对阶跃信号做微分得到冲激信号。对于冲激信号进行识别，可以应用与自动驾驶的车道线识别。
+
+---
+
+相加和相乘
+
+**同一时刻**对信号进行相加或相乘。
+
+同等功率下，信号的频率越大，传播的距离越短。
+
+信号不做除法，无意义。
+
+---
+
+### 1.4
+
+阶跃信号和冲激信号
+
+---
+
+奇异信号和奇异函数
+
+函数不连续或导数积分不连续
+
+---
+
+单位斜变信号
+$$
+R(t) =
+\begin{cases}
+0 & (t<0) \\
+t & (t>0)
+\end{cases}
+$$
+
+三角形脉冲
+$$
+f(t) =
+\begin{cases}
+\frac{K}{\tau}R(t) & (t \leq \tau) \\
+0 & (t>\tau)
+\end{cases}
+$$
+
+---
+
+单位阶跃信号
+$$
+u(t) = R'(t) = 
+\begin{cases}
+0 & (t<0) \\
+1 & (t>0)
+\end{cases}
+$$
+
+No def or $\frac{1}{2}$ on $t = 0$.
+
+---
+
+用单位阶跃信号描述其他信号
+
+门函数
+$$
+f(t) = u\left(t+ \frac{\tau}{2}\right)- u\left(t - \frac{\tau}{2}\right)
+$$
+
+与其他函数相乘，只保留 $\tau$ 时间内的部分。（卡门）
+
+---
+
+符号函数
+$$
+sgn(t) = 2u(t) - 1 = u(t) - u(-t)
+$$
+
+---
+
+单位冲激函数
+
+$$
+\begin{align*}
+&\delta(t) = \begin{cases}0 &(t \neq 0) \\ \infty & (t=0) \end{cases} \\
+&\int_{-\infty}^{\infty} \delta(t) \mathrm{d}t = 1 \\
+&\int_{-\infty}^{\infty} \delta(t) \mathrm{d}t = \int_{0-}^{0+} \delta(t) \mathrm{d}t \\
+\end{align*}
+$$
+
+---
+
+用阶跃函数定义（不严谨）
+
+$$
+\delta(t) = \frac{d}{dt} u(t)
+$$
+
+---
+
+用极限定义
+$$
+\begin{align*}
+&u_{\Delta}(t) =
+\begin{cases}
+\frac{1}{\tau} R(t) &(t\leq \tau) \\
+1 & (t> \tau)
+\end{cases}\\
+&\delta(t) = \lim_{\tau \rightarrow 0} \frac{d}{dt} u_{\Delta}(t)
+\end{align*}
+$$
+
+或者用门限函数。
+
+---
+
+冲激函数的性质
+
+1. 抽样性
+2. 奇偶性（$\delta(t) = \delta(-t)$）
+3. 冲激偶
+4. 标度变换
+
+---
+
+抽样性
+$$
+\int_{-\infty}^{\infty} \delta(t - t_{0}) f(t) \mathrm{d} t = f(t_{0})
+$$
+
+---
+
+冲激偶
+
+$$
+\begin{align*}
+&\delta'(t) = \frac{d}{dt}\delta(t)\\
+&\int_{-\infty}^{\infty} \delta'(t) = 0\\
+&\int_{-\infty}^{0} \delta'(t) = \delta(t)\\
+&
+\end{align*}
+$$
+
+---
+
+### 1.5
+
+信号的分解
+
+---
+

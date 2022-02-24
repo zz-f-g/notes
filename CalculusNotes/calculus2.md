@@ -261,9 +261,24 @@ VIII
 
 $$
 \begin{align*}
-    &\int \frac{x^{2}+1}{x^{4}+1} \mathrm{d} x\\
-    =& \int \frac{1+ \frac{1}{x^{2}}}{x^{2}+ \frac{1}{x^{2}}} \mathrm{d}x\\
-    =& \int \frac{\mathrm{d}\left(x - \frac{1}{x}\right)}{\left(x- \frac{1}{x}\right)^{2} + 2}\\
-    =& \frac{\sqrt{2}}{2} \arctan \frac{\sqrt{2}}{2} \left(x - \frac{1}{x}\right) + C
+    &\int \frac{\mathrm{d}x}{1+\sqrt{x^{2}+2x+2}}\\
+    \overset{x+1 = \tan t}{=}& \int \frac{\sec^{2}t \mathrm{d}t}{1+\sec t}\\
+    =& \int \frac{\mathrm{d}t}{\cos t(1+\cos t)}\\
+    =& \int \sec t \mathrm{d}t - \int \frac{\mathrm{d}t}{2 \cos^{2} \frac{t}{2}}\\
+    =& \ln | \sec t + \tan t| - \tan \frac{t}{2} + C\\
+    =& \ln | 1+x + \sqrt{x^{2}+ 2x + 2}| - \tan \frac{t}{2} + C\\
+1+x=& \tan t = \frac{2\tan \frac{t}{2}}{1 - \tan^{2}\frac{t}{2}}\\
+\Rightarrow& \tan \frac{t}{2} = \frac{-1 \pm \sqrt{x^{2}+2x+2}}{1+x}\\
+& t \in (-\pi, \pi), \frac{t}{2} \in (-\frac{\pi}{2}, \frac{\pi}{2}), \tan \frac{t}{2} \in (-1, 1)\\
+\tan \frac{t}{2} =& \frac{-1 + \sqrt{x^{2}+2x+2}}{1+x}\\
+    &\int \frac{\mathrm{d}x}{1+\sqrt{x^{2}+2x+2}}\\
+    =& \ln |1+x+\sqrt{x^{2}+ 2x + 2}| - \frac{-1 + \sqrt{x^{2}+ 2x + 2}}{x+1} + C
 \end{align*}
 $$
+
+***Attention***:
+在采用第二类换元法进行计算时，计算结束一定要把主元换回来，换回来的时候注意两个元的取值范围。
+
+---
+
+IX
