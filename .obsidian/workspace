@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "CSNotes/DC.md",
+            "file": "CSNotes/Embedded.md",
             "mode": "source",
             "source": false
           }
@@ -69,7 +69,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "CSNotes/DC.md",
+                "file": "CSNotes/Embedded.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -86,7 +86,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CSNotes/DC.md"
+                "file": "CSNotes/Embedded.md"
               }
             }
           },
@@ -108,15 +108,15 @@
   },
   "active": "cbd14e3121250708",
   "lastOpenFiles": [
+    "CSNotes/Embedded.md",
+    "CSNotes/python.assets/v2-a522ba0ab76425ac76efa924813d55e6_b.jpg",
+    "CalculusNotes/ComplexFunction.assets/image-20211031104400092.png",
+    "CalculusNotes/ComplexFunction.assets/image-20211031140634455.png",
+    "CalculusNotes/ComplexFunction.assets/image-20211107115005487.png",
+    "CalculusNotes/ComplexFunction.assets/image-20211107184142838.png",
     "CSNotes/DC.md",
     "Pasted image 20220224145439.png",
     "CalculusNotes/ComplexFunction.md",
-    "CalculusNotes/SS.md",
-    "CalculusNotes/optimize.md",
-    "CalculusNotes/calculus2.md",
-    "CSNotes/python.md",
-    "CSNotes/LittleProject.md",
-    "CSNotes/LinuxLearning.md",
-    "CSNotes/DS.md"
+    "CalculusNotes/SS.md"
   ]
 }
