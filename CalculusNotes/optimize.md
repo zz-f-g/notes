@@ -92,24 +92,71 @@ $$
 
 ## 5 Calculus Basic
 
+---
+
 ### 5.1
 
 序列、极限、函数连续性
 
-微积分的基本理念：利用仿射函数对函数进行局部近似。
+---
+
+- 定理一：收敛序列极限唯一（反证法）
+- 定理二：任意收敛序列极限有界
+- 定理三：单调有界序列必有极限（极限是上确界）
+- 定理四：子列和原序列极限相同
+
+---
+
+定义矩阵序列的极限
+
 $$
-\begin{aligned}
-f: R^n \rightarrow R^m \\
-L \in R^{m \times n}, y \in R^m \\
-A(x) = L(x) + y \\
-\end{aligned}
+\lim_{k \rightarrow \infty} \Vert A_{k} - A \Vert = 0
 $$
+ Here, $\Vert \cdot \Vert: R^{m \times n} \rightarrow R$ is matrix norm. And a definition:
+ $$
+ \Vert A \Vert = \sqrt{\sum_{i, j} \vert a_{ij} \vert^{2}}
+$$
+$$
+\begin{align*}
+&A \in \mathbb{R}^{n \times n} \\
+&\vert \lambda_{i}(A) \vert < 1 \iff \lim_{k \rightarrow \infty} A^{k} = O \iff \sum_{k=1}^{\infty} A^{k} = (I_{n}-A)^{-1}
+\end{align*}
+$$
+
+The continuousness of $A(\xi): \mathbb{R}^{r} \rightarrow \mathbb{R}^{m \times n}$
+
+To be continued...
 
 ---
 
 ### 5.2
 
 differentiable
+
+---
+
+微积分的基本理念：利用仿射函数对函数进行局部近似。
+$$
+\begin{align*}
+&\vec{f}: R^n \rightarrow R^m \\
+&\vec{L} \in R^{m \times n}, \vec{y} \in R^m \\
+&\vec{A}(\vec{x}) = \vec{L}(\vec{x}) + \vec{y} \\
+&\lim_{\vec{x} \rightarrow \vec{x}_{0}, \vec{x}_{0} \in \Omega} \frac{\Vert \vec{f}(\vec{x}) - \vec{A}(\vec{x}) \Vert}{\Vert \vec{\vec{x}} - \vec{\vec{x}}_{0} \Vert} = \vec{0}\\
+&\lim_{\vec{x} \rightarrow \vec{x}_{0}, \vec{x}_{0} \in \Omega} \frac{\Vert \vec{f}(\vec{x}) - \vec{L}(\vec{x}-\vec{x}_{0}) - \vec{f}(\vec{x}_{0}) \Vert}{\Vert \vec{x} - \vec{x}_{0} \Vert} = \vec{0}\\
+&D \vec{f}(\vec{x}_{0}) = \vec{L} = \begin{bmatrix} \frac{\partial \vec{f}}{\partial x_{1}} (\vec{x_{0}}), \cdots, \frac{\partial \vec{f}}{\partial x_{n}} (\vec{x_{0}})\end{bmatrix} \\
+=&\begin{bmatrix} \frac{\partial f_{1}}{\partial x_{1}} & \cdots & \frac{\partial f_{1}}{\partial x_{n}} \\ \cdots &  & \cdots \\ \frac{\partial f_{n}}{\partial x_{1}} & \cdots & \frac{\partial f_{n}}{\partial x_{n}}\end{bmatrix} \\
+\end{align*}
+$$
+
+---
+
+$$
+\begin{align*}
+&f: \mathbb{R}^{n}\rightarrow \mathbb{R} \\
+&\nabla f(\vec{x}) = D f(\vec{x})^{T} = \begin{bmatrix} \frac{\partial f}{\partial x_{1}}  \\ \vdots \\ \frac{\partial f}{\partial x_{n}}\end{bmatrix} \\
+&D^{2} f(\vec{x}) = D \nabla f(\vec{x}) = \begin{bmatrix} \frac{\partial}{\partial x_{1}}\left(\frac{\partial f}{\partial x_{1}}\right)  & \cdots & \frac{\partial}{\partial x_{n}}\left(\frac{\partial f}{\partial x_{1}}\right) \\ \vdots &  & \vdots \\ \frac{\partial}{\partial x_{1}}\left(\frac{\partial f}{\partial x_{n}}\right)  & \cdots & \frac{\partial}{\partial x_{n}}\left(\frac{\partial f}{\partial x_{n}}\right)\end{bmatrix}
+\end{align*}
+$$
 
 ---
 
