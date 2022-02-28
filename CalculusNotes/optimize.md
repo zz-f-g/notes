@@ -285,3 +285,268 @@ $$
 \end{align*}
 $$
 第二条条件指的是矩阵正定。
+
+---
+
+## 7 一维搜索算法
+
+---
+
+$$
+\varphi(\alpha) = f(\boldsymbol{x}_{k}+\alpha \boldsymbol{d}_{k})
+$$
+
+---
+
+### 7.1
+
+Introduction
+
+求解单变量单值函数在闭区间的最小值。前提是在闭区间上单峰。
+
+---
+
+### 7.2
+
+黄金分割法
+
+---
+
+只知道给定输入的函数值，不知道导数。
+
+方法：对称压缩。
+
+计算
+$$
+f(a_{1}), f(b_{1})
+$$
+从而压缩掉一个区间
+$$
+[a_{0,}a_{1}] \text{ or } [b_{1}, b_{0}]
+$$
+
+---
+
+$$
+\begin{align*}
+    &f(a_{1)}< f(b_{1}) \Rightarrow x^{*} \in [a_{0}, b_{1}]\\
+    &f(a_{1)} \geq f(b_{1}) \Rightarrow x^{*} \in [a_{1}, b_{0}]\\
+\end{align*}
+$$
+
+---
+
+如何选择 $a_{1}, b_{1}$？
+
+**固定的压缩比**
+
+$$
+\begin{align*}
+    &\rho (b_{0}-a_{0}) = (a_{1}-a_{0}) \\
+    &\rho (b_{1}-a_{0}) = (b_{1}-b_{2}) \\
+\end{align*}
+$$
+![[Pasted image 20220228210928.png]]
+
+---
+
+$$
+\begin{align*}
+    &\frac{\rho}{1-\rho} = \frac{1-\rho}{1} \\
+    &\rho = \frac{3-\sqrt{5}}{2} \text{ or } \frac{3+\sqrt{5}}{2} \left(> \frac{1}{2}\right) \\
+    &1-\rho = \frac{\sqrt{5}-1}{2}
+\end{align*}
+$$
+
+---
+
+从区间 $[a_{0}, b_{0}]$ 压缩到精度为 $\varepsilon$.
+
+压缩次数
+
+$$
+N = \frac{\ln \frac{b_{0}-a_{0}}{\varepsilon}}{\ln (1-\rho)}
+$$
+ 向上取整。
+
+ ---
+
+```python
+
+```
+
+---
+
+ ### 7.3
+
+ Fibbonaci Array
+
+ ---
+
+ 如果压缩比 $\rho$ 可以调整？
+
+ $$
+ \{\rho_{k}\}
+$$
+
+ 仍然保持对称压缩的方法。
+
+每次迭代只计算一次函数值。
+
+---
+
+![[Pasted image 20220228211007.png]]
+
+---
+
+$$
+\begin{align*}
+    &\rho_{k+1}(1-\rho_{k}) = 1 - 2\rho_{k}\\
+    &\rho_{k+1} = \frac{1-2\rho_{k}}{1-\rho_{k}} = 1 - \frac{\rho_{k}}{1-\rho_{k}}\\
+    & \frac{b_{0}-a_{0}}{\varepsilon} = (1-\rho_{1})(1-\rho_{2}) \cdots (1-\rho_{k}) \\
+    \text{minimize } & (1-\rho_{1})(1-\rho_{2}) \cdots (1-\rho_{k}) \\
+    \text{subject to } & \rho_{k+1} = 1 - \frac{\rho_{k}}{1-\rho_{k}} \\
+    &0 \leq \rho_{k} \leq \frac{1}{2}, k = 1, \cdots, N
+\end{align*}
+$$
+
+---
+
+Fibbonaci Array
+
+| -1  | 0   | 1   | 2   | 3   | 4   | 5   |
+| --- | --- | --- | --- | --- | --- | --- |
+| 0   | 1   | 1   | 2   | 3   | 5   | 8   | 
+
+---
+
+$$
+\begin{align*}
+    &1-\rho_{k} = \frac{F_{N-k+1}}{F_{N-k+2}} \\
+    &(1 - \rho_{1}) \cdots (1 - \rho_{N}) = \frac{1}{F_{N-k+1}}
+\end{align*}
+$$
+
+---
+
+最后一次压缩比为 1/2，实际操作中应该修正为
+
+$$
+\frac{1}{2} - \varepsilon
+$$
+
+---
+
+### 7.4
+
+二分法
+
+---
+
+前提：可以计算一阶导数。
+
+计算 $f\left(\frac{x_{1}+x_{2}}{2}\right)'$
+
+如果导数为正，舍弃右侧；如果导数为负，舍弃左侧。
+
+$$
+\rho = \frac{1}{2}
+$$
+
+---
+
+### 7.5
+
+Newton Iteration
+
+---
+
+前提：可以计算二阶导数。
+
+Taylor Theorem
+
+$$
+\begin{align*}
+    &q(x) = f(x_{k}) + f'(x_{k}) (x-x_{k}) + \frac{1}{2} f''(x_{k}) (x-x_{k})^{2}\\
+    &\text{minimize } q(x)\\
+    &\text{subject to }x\\
+    & x_{k+1} = x_{k} - \frac{f'(x_{k})}{f''(x_{k+1})}
+\end{align*}
+$$
+
+用牛顿切线法寻找 $f'(x) = 0$ 的解。
+
+---
+
+Iteration precision
+
+$$
+|x_{k+1} - x_{k}| = \left|\frac{f'(x_{k})}{f''(x_{k+1})} \right| \leq \varepsilon
+$$
+
+---
+
+If $f''(x_{k}) \leq 0$: 得到的是极大值，之后在凸优化，凹优化问题中会有详细讨论。
+
+---
+
+### 7.6
+
+割线法——近似二阶
+
+---
+
+割线法运用了两步的历史信息。
+
+$$
+\begin{align*}
+    &f''(x_{k}) = \frac{f'(x_{k})-f'(x_{k-1})}{x_{k}-x_{k-1}} \\
+    &x_{k+1} = x_{k} - f'(x_{k}) \frac{x_{k}-x_{k-1}}{f'(x_{k})-f'(x_{k-1})}
+\end{align*}
+$$
+
+---
+
+### 7.7
+
+划界法
+
+---
+
+如何确定初始单峰区间？
+
+$$
+\forall x_{1}, x_{2}, x_{3}
+$$
+
+---
+
+### 7.8
+
+多维搜索优化问题中的一维搜索。
+
+---
+
+$$
+\begin{align*}
+    &\boldsymbol{x}_{k+1} = \boldsymbol{x}_{k} + \alpha_{k} \boldsymbol{d}_{k} \\
+    &\Phi(\alpha) = f(\boldsymbol{x} + \alpha \boldsymbol{d}_{k})
+\end{align*}
+$$
+
+对 $\Phi(\alpha)$ 进行一维搜索。
+
+$$
+\Phi'(\alpha) = \boldsymbol{d}_{k}^{T} \nabla f(\boldsymbol{x}+\alpha \boldsymbol{d}_{k})
+$$
+
+---
+
+多维搜索问题的矛盾：
+
+- 将算力用于计算下降方向
+- 将算力用于计算最佳步长
+
+一般来说方向的选取更为重要。
+
+---

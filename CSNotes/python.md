@@ -353,7 +353,7 @@ class User:
 
 
 
-![img](python.assets/v2-a522ba0ab76425ac76efa924813d55e6_b.jpg)
+![img](v2-a522ba0ab76425ac76efa924813d55e6_b.jpg)
 
 
 

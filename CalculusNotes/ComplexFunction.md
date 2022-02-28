@@ -508,7 +508,7 @@ $$
 
 双连通区域由外边界和内边界构成。
 
-![image-20211031104400092](ComplexFunction.assets/image-20211031104400092.png)
+![image-20211031104400092](image-20211031104400092.png)
 
 转化成单连通区域
 $$
@@ -576,7 +576,7 @@ For ==Multiply Connected domains==, we use similar method as proof in [Cauchy's 
 $$
 \oint_{C_{out}} \frac{f(z)}{z - z_0} \text{d}z - \oint_{C_{in}} \frac{f(z)}{z - z_0} \text{d}z = i 2 \pi f(z_0)
 $$
-![image-20211031140634455](ComplexFunction.assets/image-20211031140634455.png)
+![image-20211031140634455](image-20211031140634455.png)
 
 ### Derivatives of Analytic Functions
 
@@ -898,7 +898,7 @@ $$
 
 #### Laurent's Theorem
 
-![image-20211107115005487](ComplexFunction.assets/image-20211107115005487.png)
+![image-20211107115005487](image-20211107115005487.png)
 
 CONDITION:
 
@@ -1018,7 +1018,7 @@ $$
 \mathrm{pv} \int_{-\infty}^{\infty} f(x) \mathrm{d}x = \lim_{R \rightarrow \infty} \int_{-R}^R f(x) \mathrm{d}x
 $$
 
-![image-20211107184142838](ComplexFunction.assets/image-20211107184142838.png)
+![image-20211107184142838](image-20211107184142838.png)
 $$
 \mathrm{pv} \int_{-\infty}^{\infty} f(x) \mathrm{d}x + \lim_{R \rightarrow \infty}\int_S f(z) \mathrm{d}z = i 2 \pi \sum_{i = 1}^{k} \mathrm{Res}_{z = z_i} f(z)
 $$
