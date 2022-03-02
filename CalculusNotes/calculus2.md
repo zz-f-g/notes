@@ -89,6 +89,130 @@ $\ln(-x)$ is antiderivative of $\frac{1}{x}$ on $(-\infty, 0)$.
 
 ---
 
+### 微分方程
+
+---
+
+I
+
+如果微分方程的解中所含的任意独立常数的个数等于微分方程的阶数，那么这个解称之为微分方程的**通解**。
+
+不含任意常数的解，称为**特解**。
+
+通解不包含的解，称为**奇解**。如：
+$$
+\begin{align*}
+    & y'^{2} - 4y^{2} = 0\\
+    & \frac{\mathrm{d}y}{\sqrt{y}} = 2 \mathrm{d}x \\
+    & y = (x+C)^{2}
+\end{align*}
+$$
+求得了通解，但是不能包含解 $y=0$.
+
+n 阶微分方程的一般形式：
+
+$$
+\begin{align*}
+    f(x, y', y'', \cdots, y^{(n)}) = 0
+\end{align*}
+$$
+
+---
+
+II
+
+齐次微分方程
+$$
+\begin{align*}
+    \frac{\mathrm{d}y}{\mathrm{d}x} = \varphi(\frac{y}{x})
+\end{align*}
+$$
+解法：
+$$
+\begin{align*}
+    &u = \frac{y}{x}\\
+    & \frac{\mathrm{d}ux}{\mathrm{d}x} = \varphi(u)\\
+    & u + x \frac{\mathrm{d}u}{\mathrm{d}x} = \varphi(u)\\
+    & \frac{\mathrm{d}u}{\varphi(u)-u} = \frac{\mathrm{d}x}{x}
+\end{align*}
+$$
+
+---
+
+III
+
+一阶线性微分方程
+$$
+\begin{align*}
+    & \frac{\mathrm{d}y}{\mathrm{d}x} + P(x)y = Q(x) \\
+    & z = y e^{\int P(x) \mathrm{d}x} \\
+    \mathrm{d} y &= \mathrm{d} \left(z e^{-\int P(x) \mathrm{d}x}\right) \\
+    &= e^{-\int P(x) \mathrm{d}x} \mathrm{d}z - z P(x) e^{- \int P(x) \mathrm{d}x} \mathrm{d}x \\
+    &= e^{-\int P(x) \mathrm{d}x} \mathrm{d}z - y P(x) \mathrm{d}x \\
+    & e^{-\int P(x) \mathrm{d}x} \frac{\mathrm{d}z}{\mathrm{d}x} = Q(x) \\
+    & y = e^{-\int P(x) \mathrm{d}x} \left(\int e^{P(x) \mathrm{d}x} Q(x) \mathrm{d}x+C \right)
+\end{align*}
+$$
+
+---
+
+IV
+
+Bernoulli Equation
+$$
+\begin{align*}
+    & \frac{\mathrm{d}y}{\mathrm{d}x} + P(x)y = Q(x)y^{\mu} \\
+    & z = y^{1-\mu}, y = z^{\frac{1}{1-\mu}} \\
+    & (\frac{1}{1-\mu}) \frac{y}{z} \frac{\mathrm{d}z}{\mathrm{d}x} + P(x) y = Q(x) \frac{y}{z} & (y=0) \\
+    & \frac{\mathrm{d}z}{\mathrm{d}x} + (1-\mu) P(x) z = (1-\mu) Q(x)
+\end{align*}
+$$
+
+---
+
+V
+
+$$
+y'' = f(x,y') \Rightarrow p' = f(x, p)
+$$
+
+---
+
+VI
+
+$$
+\begin{align*}
+    & y'' = f(y,y') \\
+    & y' = p \Rightarrow y'' = \frac{\mathrm{d}p}{\mathrm{d}x} = p \cdot \frac{\mathrm{d}p}{\mathrm{d}y} \\
+    & \frac{\mathrm{d}p}{\mathrm{d}y} = g(y, p) = \frac{1}{p} f(y,p)
+\end{align*}
+$$
+
+---
+
+VII
+
+二阶**线性**齐次微分方程
+$$
+\begin{align*}
+    y'' + P(x) y' + Q(x) = 0
+\end{align*}
+$$
+二阶**线性**非齐次微分方程
+$$
+\begin{align*}
+    y'' + P(x) y' + Q(x) = f(x)
+\end{align*}
+$$
+**线性指的是系数多项式只由 $x$ 决定。**
+
+Properties:
+
+1. Linear Combination: $y_{1},y_{2}$ is linearly independent $\Rightarrow y = C_{1} y_{1} + C_{2} y_{2}$
+2. General + Special: $y = Y + y^{*}$
+
+---
+
 ## Exercise
 
 ---

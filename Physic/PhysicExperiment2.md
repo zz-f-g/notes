@@ -23,3 +23,32 @@
 - 意见和建议……
 
 ---
+
+声学实验
+
+- Frank-Herz
+
+光学实验
+
+- 牛顿环
+- 迈克耳孙干涉仪
+
+力学试验
+
+---
+
+牛顿环
+
+第 k 条暗纹
+
+$$
+\begin{align*}
+    &\Delta = 2 (R - \sqrt{R^{2} - r^{2}}) + \frac{\lambda}{2}\\
+    &\Delta = k \lambda + \frac{\lambda}{2}\\
+    &r_{k}^{2} = k \lambda R
+\end{align*}
+$$
+
+---
+
+Na 灯：$\lambda = (589.3 \pm 0.2) \text{nm}$
