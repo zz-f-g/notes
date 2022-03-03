@@ -396,7 +396,9 @@ $$
 &\delta'(t) = \frac{d}{dt}\delta(t)\\
 &\int_{-\infty}^{\infty} \delta'(t) = 0\\
 &\int_{-\infty}^{0} \delta'(t) = \delta(t)\\
-&
+& \int_{-\infty}^{\infty} \delta'(t) f(t) \mathrm{d}t \\
+=& (\delta(t) f(t))|_{-\infty}^{\infty} - \int_{-\infty}^{\infty} f'(t) \delta(t) \mathrm{t}\\
+=& -f'(0)
 \end{align*}
 $$
 
@@ -405,6 +407,236 @@ $$
 ### 1.5
 
 信号的分解
+
+---
+
+- 直流+交流
+- 奇+偶
+- 脉冲
+- 实部+虚部
+- 正交
+- (分形理论)
+
+---
+
+DC+AC
+$$
+\begin{align*}
+    &f(t) = f_{D}(t) + f_{A}(t) \\
+    & f_{D}(t) = \frac{1}{T} \int_{t_{0}}^{t_{0}+T} f(t) \mathrm{d}t \\
+    P &= \frac{1}{T} \int_{t_{0}}^{t_{0}+T} f^{2}(t) \mathrm{d}t \\
+    &= \frac{1}{T} \left( \int_{t_{0}}^{t_{0}+T} [f_{D}(t) + f_{A}(t)]^{2} \mathrm{d}t \right) \\
+    &= f_{D}^{2}(t) + \frac{1}{T} \left( \int_{t_{0}}^{t_{0}+T} f_{A}^{2}(t) \mathrm{d}t \right)
+\end{align*}
+$$
+DC,AC 正交。
+
+---
+
+odd+even
+
+$$
+\begin{align*}
+    & f_{o}= \frac{1}{2}(f(t)-f(-t))
+    & f_{e}= \frac{1}{2}(f(t)+f(-t))
+\end{align*}
+$$
+
+---
+
+pulse
+
+$$
+\begin{align*}
+    f(t) &= \sum_{\tau=-\infty}^{\infty}  f(\tau) [u(t-\tau) - u(t-\tau-\Delta \tau)] \\
+    &= \sum_{\tau=-\infty}^{\infty}  f(\tau) \frac{[u(t-\tau) - u(t-\tau-\Delta \tau)]}{\Delta \tau} \Delta \tau \\
+    &= \int_{-\infty}^{\infty} f(\tau) \delta(t-\tau) \mathrm{d}\tau
+\end{align*}
+$$
+
+---
+
+Real+Imag
+
+$$
+\begin{align*}
+    & f(t) = f_{r}(t) + j f_{i}(t)\\
+    & f_{r}(t) = \frac{1}{2} [ f(t) + f^{*}(t) ] \\
+    & f_{i}(t) = \frac{1}{2j} [ f(t) - f^{*}(t) ] \\
+\end{align*}
+$$
+
+---
+
+正交
+
+---
+
+### 1.6
+
+系统模型及其分类
+
+---
+
+系统模型的基本运算
+
+- 加法器
+- 乘法器
+- 标量乘法器
+- 微分器
+- 积分器
+- 延时器
+
+---
+
+系统的表示
+
+1. 数学表达式
+2. 系统图：形象地表示其功能
+
+---
+
+系统的互联
+
+1. 级联 Cascade
+2. 并联 Parallel
+3. 反馈 Feedback
+
+---
+
+系统的分类
+
+1. 即时系统（无记忆）：全电阻网络
+    - 恒等系统
+2. 动态系统（记忆）：输出不仅和当前输入有关，也和其他时刻的输入有关。
+
+---
+
+可逆性：单射
+
+如果一个系统和另一个系统级联之后构成恒等系统，则两个系统互逆。
+
+---
+
+因果性
+
+输出只与此前输入有关则为因果系统。
+
+非因果系统：
+$$
+\begin{align*}
+    &y(t) = x(t+1) \\
+    &y(n) = x(n) + x(n+1) \\
+    &y(n) = x(-n)
+\end{align*}
+$$
+
+一切即时系统（无记忆）都是因果的。一切物理可实现的连续时间系统都是因果的。
+
+---
+
+稳定性
+
+输入有界 ---> 输出有界
+
+RC; RLC 均为稳定系统。
+
+不稳定系统
+$$
+\begin{align*}
+    & y(n) = \sum_{k = -\infty}^{n} x(k) \\
+    & y(t) = \int_{-\infty}^{t} x(\tau) \mathrm{d}\tau
+\end{align*}
+$$
+
+---
+
+时变、时不变系统
+
+时不变：输入产生时间平移，输出只产生相同的时间平移。time-invariant
+
+---
+
+线性
+
+叠加性+齐次性
+
+线性系统一定是线性方程，但反之不成立。
+
+$$
+\begin{align*}
+    & y(t) = kx(t) + 2
+\end{align*}
+$$
+
+去掉 (+2) 才是线性系统。
+
+$$
+\begin{align*}
+    & y(t) = kx(t)
+\end{align*}
+$$
+
+线性系统满足零输入时零输出。
+
+---
+
+增量线性系统
+
+线性系统+与输入无关的响应（零输入响应）
+
+---
+
+重点：**确定性**信号作用下的**集总参数***线性***时不变**系统。
+
+---
+
+### 1.7
+
+线性时不变系统
+
+---
+
+## 1.8
+
+系统分析方法
+
+---
+
+```mermaid
+graph LR
+I --> |"x(t)"|LS[Linear System]
+```
+
+---
+
+- 输入输出描述法
+- 状态变量分析法（多输入输出）
+
+数学模型解法：
+
+- 时域分析
+    - 经典方法
+        - 连续系统：微分方程
+        - 离散系统：差分方程
+    - 卷积积分
+- 变换域
+    - FT
+    - LT
+    - ZT
+    - (DFT)
+    - (DWT)
+
+---
+
+## 2 Time Domain Analysis on Continuous System
+
+---
+
+1. 建立系统模型（写微分方程）：元件约束，拓扑约束。
+2. 求系统响应（解方程）
+    1. 经典法
+    2. 双零法（零输入响应，零输出响应）
 
 ---
 
