@@ -166,3 +166,25 @@ char a = 1;
 ```
 
 a 的存储单元的前七个改成 0，后一个改成 1.
+
+---
+
+```cpp
+#include <iostream>
+using namespace std;
+int main()
+{
+    char a[] = {1,2,3,4};
+    short *I = (int *)a;
+    cout << hex << *I << endl; // 0x102
+    return 0;
+}
+```
+
+低地址低字节
+
+---
+
+``signed`` and ``unsigned``
+
+两种数的比较电路不同。

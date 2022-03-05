@@ -204,12 +204,16 @@ $$
 $$
 \begin{align*}
     &f:\mathbb{R}^{n} \rightarrow \mathbb{R}, \text{domain:} \Omega \subset \mathbb{R}^{n}\\
-    &\exists \epsilon > 0, \forall x: 0 < \Vert x - x^{*} \Vert < \epsilon, f(x) > f(x^{*})
+    &\exists \epsilon > 0, \forall x: 0 < \Vert x - x^{*} \Vert < \epsilon, f(x) > f(x^{*}) \text{ local minimum}\\
+    &\forall x \in \Omega \text{\\} \{x_{0}\}, f(x) > f(x^{*}) \text{ global minimum}\\
 \end{align*}
 $$
 
 - 局部极小点
 - 全局最小点
+$$
+x^{*} = \mathrm{argmin}_{x \in \Omega} f(x)
+$$
 
 ---
 
@@ -219,9 +223,19 @@ $$
 
 ---
 
-可行方向
+可行方向：为了研究非内点为极小点的情况。
 
 所有的可行方向构成了可行基在某一个点附近的逼近。
+
+$\boldsymbol{d}$ is feasible direction of $\boldsymbol{x_{0}}$.
+$$
+\begin{align*}
+    & \exists \alpha_{0} > 0, \forall \alpha \in [0, \alpha_{0}], \boldsymbol{x_{0}} + \alpha \boldsymbol{d} \in \Omega
+\end{align*}
+$$
+定义很像极限。
+
+---
 
 方向导数
 
@@ -231,9 +245,10 @@ $$
 计算简化
 $$
 \begin{align*}
-    &\phi(\alpha) = f(x+\alpha d) \\
-    &\frac{\partial f}{\partial d}(x) = \lim_{\alpha \rightarrow 0} \frac{\phi(\alpha)-\phi(0)}{\alpha} \\
-    &= \phi'(0) = \nabla f(x)^{T} d = d^{T}\nabla f(x)
+    \phi(\alpha) =& f(x+\alpha d) \\
+    \frac{\partial f}{\partial d}(x) =& \left. \frac{\mathrm{d}}{\mathrm{d}\alpha}  \varphi(\alpha) \right|_{\alpha = 0}\\
+    =& Df(x) d \\
+    =& d^{T}\nabla f(x)
 \end{align*}
 $$
 
@@ -241,10 +256,22 @@ $$
 
 定理一：局部极小点的一阶必要条件
 
-这是**排除法**
+这是**排除法**。
 
 $$
-\frac{\partial f}{\partial d}(x^{*}) = d^{T} \nabla f(x^{*}) \geq 0
+\begin{align*}
+    & f \in C^{1}\\
+    & \forall \boldsymbol{d} \text{ is feasible, } \frac{\partial f}{\partial \boldsymbol{d}}(\boldsymbol{x}^{*}) = \boldsymbol{d}^{T} \nabla f(\boldsymbol{x}^{*}) \geq 0\\
+\end{align*}
+$$
+
+Proof: 
+$$
+\begin{align*}
+    f(x) - f(x^{*}) &= \varphi(\alpha) - \varphi(0) \\
+    &= \varphi'(0) \alpha + o(\alpha) \\
+    &\geq 0
+\end{align*}
 $$
 
 如果 $x^{*}$ 在 $\Omega$ 内部，则：
@@ -256,11 +283,22 @@ $$
 
 定理二：局部极小点的二阶必要条件
 
-前提：满足一阶必要条件
+前提：满足一阶必要条件 $f \in C^{2}$
 $$
 \phi''(0) = d^{T} D^{2}f(x^{*}) d \geq 0
 $$
-黑塞矩阵半正定。
+黑塞矩阵**半正定**。
+
+Proof:
+$$
+\begin{align*}
+    \varphi'(\alpha) &= Df(\boldsymbol{x}^{*} + \alpha \boldsymbol{d}) \cdot \boldsymbol{d} \\
+        &= \boldsymbol{d}^{T} \nabla f(\boldsymbol{x}^{*} + \alpha \boldsymbol{d}) \\
+    \varphi''(\alpha) &= \boldsymbol{d}^{T} \frac{\mathrm{d}}{\mathrm{d}\alpha} (\nabla f(\boldsymbol{x}^{*} + \alpha \boldsymbol{d})) \\
+        &= \boldsymbol{d}^{T} \boldsymbol{F}(x^{*} + \alpha \boldsymbol{d}) \boldsymbol{d} \\
+    \varphi(\alpha) &= \varphi(0) + \varphi'(0) \alpha + \frac{\varphi''(0)}{2} \alpha^{2} + o(\alpha^{2})
+\end{align*}
+$$
 
 ---
 
@@ -276,15 +314,15 @@ $$
 
 定理三：局部极小点的二阶充分条件
 
-前提：内点
+前提：内点，$f \in C^{2}$
 
 $$
 \begin{align*}
-    &\nabla f(x^{*}) = 0\\
-    &F(x^{*}) = D^{2}f(x^{*}) > 0
+    &\nabla f(\boldsymbol{x}^{*}) = 0\\
+    &\boldsymbol{F}(\boldsymbol{x}^{*}) = D^{2}f(\boldsymbol{x}^{*}) > 0
 \end{align*}
 $$
-第二条条件指的是矩阵正定。
+第二条条件指的是矩阵**正定**。
 
 ---
 
@@ -372,7 +410,27 @@ $$
  ---
 
 ```python
-
+def GoldenSectionSearch(func, start, end, precision):
+    rho = (3-sqrt(5))/2
+    a,b = [start],[end]
+    ak = start + rho * (end - start)
+    bk = end - rho * (end - start)
+    fak = func(ak)
+    fbk = func(bk)
+    while (end - start > precision):
+        if (fak <= fbk):
+            end = bk
+            bk,fbk = ak,fak
+            ak = start + rho * (end - start)
+            fak = func(ak)
+        else:
+            start = ak
+            ak, fak = bk, fbk
+            bk = end - rho * (end - start)
+            fbk = func(bk)
+        a.append(start)
+        b.append(end)
+    return (a,b)
 ```
 
 ---
@@ -434,6 +492,51 @@ $$
 $$
 \frac{1}{2} - \varepsilon
 $$
+
+---
+
+```python
+def FibonacciSearch(func, start, end, precision, epsilon):
+    x,y = 1,1
+    a,b = [start],[end]
+    while (precision*y/(1+epsilon)<(end-start)):
+        temp = x
+        x = y
+        y = temp+y
+
+    ak = (x*start+(y-x)*end)/y
+    bk = (x*end+(y-x)*start)/y
+    fak = func(ak)
+    fbk = func(bk)
+
+    while (y>2):
+        temp = x
+        x = y - x
+        y = temp
+        if (fak <= fbk):
+            end = bk
+            bk,fbk = ak,fak
+            ak = (x*start+(y-x)*end)/y
+            fak = func(ak)
+        else:
+            start = ak
+            ak, fak = bk, fbk
+            bk = (x*end+(y-x)*start)/y
+            fbk = func(bk)
+        a.append(start)
+        b.append(end)
+    
+    if (y==2):
+        ak = (start+end)/2 - epsilon*(end-start)
+        bk = (start+end)/2 + epsilon*(end-start)
+        if (func(ak) <= func(bk)):
+            a.append(start)
+            b.append(bk)
+        else:
+            a.append(ak)
+            b.append(end)
+    return (a,b)
+```
 
 ---
 
@@ -507,6 +610,21 @@ $$
 
 ---
 
+```python
+def SecantMethod(f, x1, x2, precision):
+    def GetNullPoint(f, x1, x2):
+        return (f(x2)*x1-f(x1)*x2)/(f(x2)-f(x1))
+    PointLog = [x1, x2]
+    while (abs(x2-x1)>precision*abs(x1)):
+        temp = x2
+        x2 = GetNullPoint(f, x1, x2)
+        x1 = temp
+        PointLog.append(x2)
+    return PointLog
+```
+
+---
+
 ### 7.7
 
 划界法
@@ -518,6 +636,14 @@ $$
 $$
 \forall x_{1}, x_{2}, x_{3}
 $$
+```mermaid
+flowchart TD
+I["x1<x2<x3"] --> A["f(x2)<f(x1) && f(x2)<f(x3)"] --> O1["[x1,x3]"]
+I --> B["f(x1)<f(x2)<f(x3)"] --> C["x4<x1"] --> D["f(x4)>f(x1)"] --> O2["[x4,x2]"]
+C --> E["f(x4)<f(x1)"] -->C
+I --> F["f(x1)>f(x2)>f(x3)"] --> G["x4>x3"] --> H["f(x4)>f(x3)"] --> O3["[x2,x4]"]
+G --> J["f(x4)<f(x1)"] -->G
+```
 
 ---
 
