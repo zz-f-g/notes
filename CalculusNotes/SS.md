@@ -597,7 +597,7 @@ $$
 
 ---
 
-## 1.8
+### 1.8
 
 系统分析方法
 
@@ -633,10 +633,153 @@ I --> |"x(t)"|LS[Linear System]
 
 ---
 
+### 2.1
+
+---
+
+### 2.2
+
+系统数学模型的建立
+
+---
+
 1. 建立系统模型（写微分方程）：元件约束，拓扑约束。
 2. 求系统响应（解方程）
     1. 经典法
     2. 双零法（零输入响应，零输出响应）
+        1. 零输入：经典法
+        2. 零状态：卷积积分
 
 ---
 
+在 RLC 电路中，有几个**独立的**储能元件，微分方程就有几阶。
+
+例：两个并联的电容存在关联，不独立。
+
+---
+
+### 2.3
+
+用时域经典法求解微分方程‘
+
+---
+
+用高阶微分方程表示系统：
+$$
+\begin{align*}
+    & C_{0} \frac{\mathrm{d}^{n}}{\mathrm{d}t^{n}} r(t) + \cdots +C_{n} r(t) \\
+    =& E_{0} \frac{\mathrm{d}^{n}}{\mathrm{d}t^{n}} e(t) + \cdots +E_{n} e(t) \\
+    \text{Homogeneous sol: }& C_{0} \frac{\mathrm{d}^{n}}{\mathrm{d}t^{n}} r(t) + \cdots +C_{n} r(t) = 0 \\
+    & C_{0} \alpha^{n} + \cdots + C_{n} \alpha = 0
+\end{align*}
+$$
+
+如果没有重根：
+$$
+r(t) = \sum_{k=0}^{n} A_{k} e^{\alpha_{k}t}
+$$
+如果有重根：
+$$
+\begin{align*}
+    & \alpha_{1} = \cdots = \alpha_{k} \\
+    & r(t) = \left( \sum_{i=1}^{k} A_{i} t^{k-i} \right) e^{\alpha_{1}t} + \sum_{i=k+1}^{n} A_{i}e^{\alpha_{i}t}
+\end{align*}
+$$
+
+---
+
+特解和激励的数学形式有关
+$$
+\begin{align*}
+    e(t) = E && r_{p}(t) &= B \\
+    e(t) = t^{n} && r_{p}(t) &= P_{n}(t) \\
+    e(t) = \cos \omega t && r_{p}(t) &= B_{1} \cos \omega t + B_{2} \sin \omega t
+\end{align*}
+$$
+
+---
+
+借助初始条件确定 $A_{i}$
+
+---
+
+### 2.4
+
+起始点的跳变
+
+---
+
+求解系统的齐次解以后
+$$
+\begin{align*}
+    i_{h}(t) &= f(t) && (t \geq 0^{+}) \\
+        &= f(t) u(t)
+\end{align*}
+$$
+
+---
+
+通过 $i(0_-)$ 求解 $i(0_{+})$ 
+
+依据电路元件的性质：
+
+- $i_L(0_{-)}= i_L(0_{+})$
+- $u_C(0_{-}) = u_C(0_{+})$
+
+$$
+\begin{align*}
+    & r^{(k)}(0_{-}) = \begin{bmatrix} r(0_{-}) & \frac{\mathrm{d}}{\mathrm{d}t} r(0_{-})  & \cdots & \frac{\mathrm{d}^{n-1}}{\mathrm{d}t^{n-1}}r(0_{-}) \end{bmatrix} \\
+    \rightarrow & r^{(k)}(0_{+}) = \begin{bmatrix} r(0_{+}) & \frac{\mathrm{d}}{\mathrm{d}t} r(0_{+})  & \cdots & \frac{\mathrm{d}^{n-1}}{\mathrm{d}t^{n-1}}r(0_{+}) \end{bmatrix}
+\end{align*}
+$$
+
+---
+
+但是当有冲击激励强迫作用于系统，上述的换路定理不再成立。
+
+$$
+\begin{align*}
+    v_{C}(t) &= v_{C}(0_{-}) \frac{1}{C} \int_{0_{-}}^{t} i(t) \mathrm{d}t \\
+        &=v_{C}(0_{-}) \frac{1}{C} \int_{0_{-}}^{0^{+}} i(t) \mathrm{d}t + \frac{1}{C} \int_{0_{+}}^{t} i(t) \mathrm{d}t
+\end{align*}
+$$
+
+---
+
+冲激函数匹配法确定初始条件
+
+$t=0$ 时刻等式左右的 $\delta(t)$ 以及各阶导数应该系数相等（平衡）。
+
+？？？
+
+---
+
+### 2.5
+
+零输入响应和零状态响应
+
+---
+
+$$
+e(t) = H[r(t)] + H[x(0_{-})]
+$$
+
+可以将原始状态等效成激励源。
+$$
+H[x(0_{-})] = H[r_{0}(t)]
+$$
+
+---
+
+- 全响应 = 齐次响应 + 特解
+- 全响应 = 零输入响应 + 零状态响应
+- 全响应 = 暂态响应 + 稳态响应
+
+特解包含在零状态响应中，因为零输入显然只是自由的。零状态响应中也有自由的成分。
+
+---
+
+零输入响应不存在跳变
+$$
+r_{zi}^{(k)}(0_{+}) = r_{zi}^{(k)}(0_{-})
+$$

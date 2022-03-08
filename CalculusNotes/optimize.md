@@ -178,6 +178,22 @@ principle of derivative
 
 ---
 
+$f:\mathbb{R}^{n} \rightarrow \mathbb{R}$ 的水平集为
+$$
+\{\boldsymbol{x} \in \mathbb{R}^{n}: f(\boldsymbol{x}) = c, c \in \mathbb{R} \}
+$$
+梯度向量和水平集曲线在这点的切线正交。
+$$
+\begin{align*}
+    & \boldsymbol{x} = \boldsymbol{x}(\theta), f(\boldsymbol{x}) = c, g(\theta) = f(\boldsymbol{x}(\theta)) \\
+    & g'(\theta) = 0 \\
+    & D f(\boldsymbol{x}) \frac{\partial \boldsymbol{x}}{\partial \theta} = 0 \\
+    & \frac{\partial \boldsymbol{x}}{\partial \theta} \cdot \nabla f(\boldsymbol{x}) = 0
+\end{align*}
+$$
+
+---
+
 ### 5.6
 
 Taylor series
@@ -384,7 +400,7 @@ $$
     &\rho (b_{1}-a_{0}) = (b_{1}-b_{2}) \\
 \end{align*}
 $$
-![[Pasted image 20220228210928.png]]
+![[CalculusNotes/images/Pasted image 20220228210928.png]]
 
 ---
 
@@ -453,7 +469,7 @@ $$
 
 ---
 
-![[Pasted image 20220228211007.png]]
+![[CalculusNotes/images/Pasted image 20220228211007.png]]
 
 ---
 
@@ -676,3 +692,189 @@ $$
 一般来说方向的选取更为重要。
 
 ---
+
+## 8 梯度方法
+
+---
+
+### 8.1
+
+Introduction
+
+---
+
+函数在一个点处在沿着梯度方向增加最快。
+$$
+\begin{align*}
+    & \Vert \boldsymbol{d} \Vert = 1 \\
+    & \boldsymbol{d}^{T} \nabla f(\boldsymbol{x}) \leq \Vert f(\boldsymbol{x}) \Vert
+\end{align*}
+$$
+取负梯度方向
+$$
+\begin{align*}
+    f(\boldsymbol{x}_{0} - \alpha \nabla f(\boldsymbol{x}_{0})) &= f(\boldsymbol{x}_{0}) - \alpha \nabla f(\boldsymbol{x}_{0}) + o(\alpha) \\
+    \boldsymbol{x}_{k+1} &= \boldsymbol{x}_{k} - \alpha_{k} \nabla f(\boldsymbol{x}_{k})
+\end{align*}
+$$
+
+---
+
+### 8.2
+
+最速下降法
+
+---
+
+$$
+\alpha_{k} = \mathrm{argmin}_{\alpha \geq 0} f(\boldsymbol{x}_{k} - \alpha \nabla f(\boldsymbol{x}_{k}))
+$$
+在梯度法的同时计算一个一维搜索问题。
+
+---
+
+**正交性**
+
+迭代过程得到序列 $\{ \boldsymbol{x}_{k} \}$.
+$$
+\forall k \geq 0, (\boldsymbol{x}_{k+1} - \boldsymbol{x}_{k}) \cdot (\boldsymbol{x}_{k+2} - \boldsymbol{x}_{k+1}) = 0
+$$
+Proof:
+$$
+\begin{align*}
+    & (\boldsymbol{x}_{k+1} - \boldsymbol{x}_{k}) \cdot (\boldsymbol{x}_{k+2} - \boldsymbol{x}_{k+1}) = \alpha_{k} \alpha_{k+1} (\nabla f(\boldsymbol{x}_{k}) \cdot \nabla f(\boldsymbol{x}_{k+1})) \\
+    & 0 = \varphi'_{k}(\alpha_{k}) = f'(\boldsymbol{x}_{k} - \alpha \nabla f(\boldsymbol{x}_{k})) \\
+    & f'(\boldsymbol{x}_{k} - \alpha \nabla f(\boldsymbol{x}_{k})) = D f(\boldsymbol{x}_{k+1}) \cdot (-\nabla f(\boldsymbol{x}_{k})) = - \nabla f(\boldsymbol{x}_{k+1}) \cdot \nabla f(\boldsymbol{x}_{k}) \\
+    & \nabla f(\boldsymbol{x}_{k+1}) \cdot \nabla f(\boldsymbol{x}_{k}) = 0 \Rightarrow (\boldsymbol{x}_{k+1} - \boldsymbol{x}_{k}) \cdot (\boldsymbol{x}_{k+2} - \boldsymbol{x}_{k+1}) = 0
+\end{align*}
+$$
+Q.E.D
+
+---
+
+**严格下降**
+
+$$
+\forall k \geq 0 , \nabla f(\boldsymbol{x}_{k}) \neq 0, f(\boldsymbol{x}_{k+1}) < f(\boldsymbol{x}_{k})
+$$
+Obviously.
+
+---
+
+**停止条件**：一阶必要条件
+$$
+\nabla f(\boldsymbol{x}_{k}) = 0
+$$
+适合数值计算的停止条件
+$$
+\begin{align*}
+    & \Vert f(\boldsymbol{x}_{k}) \Vert < \varepsilon \\
+    & \frac{|f(\boldsymbol{x}_{k+1})-f(\boldsymbol{x}_{k})|}{|f(\boldsymbol{x}_{k})|} < \varepsilon \\
+    & \frac{|f(\boldsymbol{x}_{k+1})-f(\boldsymbol{x}_{k})|}{\max\{1, |f(\boldsymbol{x}_{k})|\}} < \varepsilon
+\end{align*}
+$$
+避免停止过程中分母过小。
+
+---
+
+二次函数
+
+$Q \in \mathbb{R}^{n \times n}$ 是对称正定矩阵。
+$$
+f(\boldsymbol{x}) = \frac{1}{2} \boldsymbol{x}^{T} Q \boldsymbol{x} + \boldsymbol{b}^{T} \boldsymbol{x}
+$$
+最优的步长可以有解析解。
+$$
+\alpha_{k} = \frac{\boldsymbol{g}_{k}^{T}\boldsymbol{g}_{k}}{\boldsymbol{g}_{k}^{T}Q \boldsymbol{g}_{k}}
+$$
+
+---
+
+当目标函数为
+$$
+f(\boldsymbol{x}) = \frac{x_{1}^{2}}{5} + x_{2}^{2}
+$$
+图像为比较扁的椭圆，迭代路径会不停在狭窄的谷底抖动。这是最速下降法的缺陷之一。
+
+可以使用预调矩阵将水平集进行变换，把它”变圆“。
+
+---
+
+### 8.3
+
+梯度方法的性质分析——收敛性
+
+---
+
+全局收敛：任意初始点产生的迭代序列收敛到一阶必要条件的点。
+
+收敛有多快？
+
+局部收敛：足够靠近极小点的初始点产生的迭代序列收敛到一阶必要条件的点。
+
+离极小点得有多近？
+
+---
+
+目标函数设定为二次函数
+$$
+\begin{align*}
+    f(\boldsymbol{x}) &= \frac{1}{2} \boldsymbol{x}^{T} Q \boldsymbol{x} - \boldsymbol{b}^{T} \boldsymbol{x} \\
+    \nabla f(\boldsymbol{x}) &= \boldsymbol{Q} \boldsymbol{x} - \boldsymbol{b} \\
+    \boldsymbol{F}(x) &= Q > 0 \\
+    \boldsymbol{x}^{*} &= \boldsymbol{Q}^{-1} \boldsymbol{x}
+\end{align*}
+$$
+
+---
+
+- 最速下降法
+- 固定步长下降法
+
+$$
+V(\boldsymbol{x}) = f(\boldsymbol{x}) + \frac{1}{2} \boldsymbol{x}^{*T} Q \boldsymbol{x}^{*} = \frac{1}{2} (\boldsymbol{x}-\boldsymbol{x}^{*})^{T} Q (\boldsymbol{x}-\boldsymbol{x}^{*})
+$$
+当 $\boldsymbol{x} = \boldsymbol{x}^{*}$，$V(\boldsymbol{x}) = 0$.
+
+---
+
+迭代公式
+$$
+\begin{align*}
+    & \boldsymbol{x}_{k+1} = \boldsymbol{x}_{k} + \alpha g(\boldsymbol{x}_{k}) \\
+    & g(\boldsymbol{x}_{k}) = 
+\end{align*}
+$$
+满足
+$$
+V(\boldsymbol{x}_{k+1}) = (1 - \gamma_{k}) V(\boldsymbol{x}_{k})
+$$
+
+---
+
+最速下降法为**全局收敛**算法。
+
+---
+
+固定步长算法在满足条件时为**全局收敛**算法。
+$$
+\alpha \leq \frac{2}{\lambda_{max}(Q)}
+$$
+
+---
+
+**收敛率**
+
+矩阵的条件数
+$$
+r = \frac{\lambda_{max}(Q)}{\lambda_{min}(Q)}
+$$
+
+---
+
+**收敛阶数**
+
+$$
+0 < \lim_{k \rightarrow \infty} \frac{\Vert \boldsymbol{x}_{k+1} - \boldsymbol{x}^{*} \Vert}{\Vert \boldsymbol{x}_{k} - \boldsymbol{x}^{*} \Vert^{p}} < \infty
+$$
+最速下降法在最不理想的情况下收敛阶数为 1.
