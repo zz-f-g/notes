@@ -783,3 +783,148 @@ $$
 $$
 r_{zi}^{(k)}(0_{+}) = r_{zi}^{(k)}(0_{-})
 $$
+
+---
+
+将输入信号分解为简单信号的和，分别求解。
+$$
+\begin{align*}
+    x_{i}(t) & \rightarrow y_{i}(t) \\
+    \sum x_{i}(t) & \rightarrow \sum  y_{i}(t)
+\end{align*}
+$$
+
+---
+
+### 2.6
+
+冲激响应和阶跃响应
+
+---
+
+将输入信号分解为一系列矩形脉冲信号。
+$$
+\begin{align*}
+    x_{\Delta}(t) &= \sum_{k=-\infty}^{\infty} x(k \Delta)(t-k \Delta)\Delta \\
+    x(t) &= \int x(\tau) \delta(t-\tau) \mathrm{d}\tau
+\end{align*}
+$$
+
+---
+
+单位冲激响应：单位冲激信号在**零状态**响应。
+$$
+\delta(t) \rightarrow h(t)
+$$
+
+---
+
+一阶电路的冲激响应。
+$$
+RC \frac{\mathrm{d}v_{C}}{\mathrm{d}t} + v_{C} = \delta(t)
+$$
+$\delta(t)$ 在 $t=0_{+}$ 时刻转化为系统的储能。之后体现为在初始储能后齐次方程的解。
+$$
+\begin{align*}
+    & RC \frac{\mathrm{d}v_{C}}{\mathrm{d}t} + v_{C} = 0 \\
+    & \alpha = - \frac{1}{RC} \\
+    & v_{C} = A e^{- \frac{t}{RC}} u(t)
+\end{align*}
+$$
+
+---
+
+求 $v_C(0_{+})$.
+
+方法一：
+$$
+\begin{align*}
+    & \frac{\mathrm{d}v_{C}}{\mathrm{d}t} = a \delta(t) + b \Delta u(t) \\
+    & v_{C} = a \Delta u(t) \\
+    & \Rightarrow a = \frac{1}{RC} \\
+    & v_{C}= \frac{1}{RC} e^{- \frac{t}{RC}} u(t) \\
+    & i = C \frac{\mathrm{d}v_{C}}{\mathrm{d} t} = - \frac{1}{R^{2}C} e^{- \frac{t}{RC}} u(t) + \frac{1}{R} \delta(t)
+\end{align*}
+$$
+
+方法二：直接将解得形式代入解得常数。
+
+---
+
+阶跃响应：系统在单位阶跃信号下的**零状态**响应。
+
+---
+
+### 2.7
+
+卷积
+
+---
+
+$$
+f_{1}(t) * f_{2}(t) = \int_{-\infty}^{\infty} f_{1}(\tau) f_{2}(t - \tau) \mathrm{d} \tau
+$$
+
+---
+
+求系统的零状态响应 $r_{zs} (t)$ .
+$$
+\begin{align*}
+    r(t) &= H[e(t)] \\
+        &= H\left[\int e(\tau) \delta(t-\tau) \mathrm{d} \tau\right]\\
+        &= \int e(\tau) H[\delta(t - \tau)] \mathrm{d} \tau \\
+        &= \int e(\tau) h(t - \tau) \mathrm{d} \tau \\
+        &= e(t) * h(t)
+\end{align*}
+$$
+
+运算过程的实质：一个信号不懂，另一个信号翻转以后平移 $t$.
+
+用图解法求积分限，再用解析法。
+
+$$
+f_{1}(t) \text{ on } [a,b], f_{2}(t) \text{ on } [c,d] \Rightarrow g(t) = f_{1}(t) * f_{2}(t) \text{ on } [a+c,b+d]
+$$
+
+---
+
+### 2.8
+
+卷积性质
+
+---
+
+1. 交换律
+2. 分配律（并联）
+3. 结合律（级联）
+
+---
+
+微积分性质
+$$
+\begin{align*}
+    & g'(t) = f'(t) * h(t) = f(t) * h'(t) \\
+    & g^{(-1)} = f^{(-1)} * h(t) = f(t) * h^{(-1)}(t) & (Integral) \\
+    & g^{(m-n)}= f^{(m)}* h^{(-n)} = f^{(-n)} * h^{(m)}
+\end{align*}
+$$
+
+---
+
+冲激函数和阶跃函数
+$$
+\begin{align*}
+    & f(t) * \delta(t) = f(t) \\
+    & f(t) * \delta^{(n)}(t) = f^{(n)}(t) \\
+    & f(t) * u(t) = f^{(-1)}(t) = \int_{-\infty}^{t} f(\lambda) \mathrm{d} \lambda
+\end{align*}
+$$
+
+**可导和可微的区别**：求导以后再积分是不是本身？
+
+---
+
+时移特性
+$$
+f(t-t_{1}) * h(t - t_{2}) = g(t-t_{1}-t_{2})
+$$

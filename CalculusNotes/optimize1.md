@@ -706,15 +706,16 @@ Introduction
 函数在一个点处在沿着梯度方向增加最快。
 $$
 \begin{align*}
-    & \Vert \boldsymbol{d} \Vert = 1 \\
-    & \boldsymbol{d}^{T} \nabla f(\boldsymbol{x}) \leq \Vert f(\boldsymbol{x}) \Vert
+    \Vert \boldsymbol{d} \Vert &= 1 \\
+    \varphi(\alpha) &= f(\boldsymbol{x} + \alpha \boldsymbol{d}) \\
+    \varphi'(0) &= \boldsymbol{d}^{T} \nabla f(\boldsymbol{x}) \leq \Vert f(\boldsymbol{x}) \Vert
 \end{align*}
 $$
 取负梯度方向
 $$
 \begin{align*}
-    f(\boldsymbol{x}_{0} - \alpha \nabla f(\boldsymbol{x}_{0})) &= f(\boldsymbol{x}_{0}) - \alpha \nabla f(\boldsymbol{x}_{0}) + o(\alpha) \\
-    \boldsymbol{x}_{k+1} &= \boldsymbol{x}_{k} - \alpha_{k} \nabla f(\boldsymbol{x}_{k})
+    & f(\boldsymbol{x}_{0} - \alpha \nabla f(\boldsymbol{x}_{0})) = f(\boldsymbol{x}_{0}) - \alpha \Vert \nabla f(\boldsymbol{x}_{0}) \Vert^{2} + o(\alpha) \\
+    & \boldsymbol{x}_{k+1} = \boldsymbol{x}_{k} - \alpha_{k} \boldsymbol{g}_{k} & \boldsymbol{g}_{k} = \nabla f(\boldsymbol{x}_{k})
 \end{align*}
 $$
 
@@ -742,10 +743,11 @@ $$
 Proof:
 $$
 \begin{align*}
-    & (\boldsymbol{x}_{k+1} - \boldsymbol{x}_{k}) \cdot (\boldsymbol{x}_{k+2} - \boldsymbol{x}_{k+1}) = \alpha_{k} \alpha_{k+1} (\nabla f(\boldsymbol{x}_{k}) \cdot \nabla f(\boldsymbol{x}_{k+1})) \\
-    & 0 = \varphi'_{k}(\alpha_{k}) = f'(\boldsymbol{x}_{k} - \alpha \nabla f(\boldsymbol{x}_{k})) \\
-    & f'(\boldsymbol{x}_{k} - \alpha \nabla f(\boldsymbol{x}_{k})) = D f(\boldsymbol{x}_{k+1}) \cdot (-\nabla f(\boldsymbol{x}_{k})) = - \nabla f(\boldsymbol{x}_{k+1}) \cdot \nabla f(\boldsymbol{x}_{k}) \\
-    & \nabla f(\boldsymbol{x}_{k+1}) \cdot \nabla f(\boldsymbol{x}_{k}) = 0 \Rightarrow (\boldsymbol{x}_{k+1} - \boldsymbol{x}_{k}) \cdot (\boldsymbol{x}_{k+2} - \boldsymbol{x}_{k+1}) = 0
+    0 &= \varphi'_{k}(\alpha_{k}) \\
+        &= f'(\boldsymbol{x}_{k} - \alpha \nabla f(\boldsymbol{x}_{k})) \\
+        &= D f(\boldsymbol{x}_{k+1}) (-\nabla f(\boldsymbol{x}_{k})) \\
+        &= - \nabla f(\boldsymbol{x}_{k+1}) \cdot \nabla f(\boldsymbol{x}_{k}) \\
+    & \Rightarrow (\boldsymbol{x}_{k+1} - \boldsymbol{x}_{k}) \cdot (\boldsymbol{x}_{k+2} - \boldsymbol{x}_{k+1}) = 0
 \end{align*}
 $$
 Q.E.D
@@ -786,6 +788,12 @@ $$
 最优的步长可以有解析解。
 $$
 \alpha_{k} = \frac{\boldsymbol{g}_{k}^{T}\boldsymbol{g}_{k}}{\boldsymbol{g}_{k}^{T}Q \boldsymbol{g}_{k}}
+$$
+Proof:
+$$
+\begin{align*}
+    \alpha_{k}= \mathrm{argmin}_{\alpha_{k}} f(\boldsymbol{x}_{k} - \alpha_{k} \boldsymbol{g}_{k})
+\end{align*}
 $$
 
 ---
@@ -841,13 +849,21 @@ $$
 迭代公式
 $$
 \begin{align*}
-    & \boldsymbol{x}_{k+1} = \boldsymbol{x}_{k} + \alpha g(\boldsymbol{x}_{k}) \\
-    & g(\boldsymbol{x}_{k}) = 
+    & \boldsymbol{x}_{k+1} = \boldsymbol{x}_{k} + \alpha g_{k} \\
+    & g_{k} = \nabla f(\boldsymbol{x}_{k}) = \boldsymbol{Q}\boldsymbol{x}_{k}-\boldsymbol{b}
 \end{align*}
 $$
 满足
 $$
 V(\boldsymbol{x}_{k+1}) = (1 - \gamma_{k}) V(\boldsymbol{x}_{k})
+$$
+可以求解 $\gamma_k$.
+$$
+\begin{align*}
+    & \boldsymbol{y}_{k} = \boldsymbol{x}_{k} - \boldsymbol{x}^{*} \\
+    & V(\boldsymbol{x}_{k}) = \frac{1}{2} \boldsymbol{y}_{k}^{T} Q \boldsymbol{y}_{k} \\
+    & V(\boldsymbol{x}_{k+1}) = \frac{1}{2} (\boldsymbol{y}_{k} - \alpha_{k}\boldsymbol{g}_{k})^{T} Q (\boldsymbol{y}_{k} - \alpha_{k}\boldsymbol{g}_{k})
+\end{align*}
 $$
 
 ---
@@ -878,3 +894,114 @@ $$
 0 < \lim_{k \rightarrow \infty} \frac{\Vert \boldsymbol{x}_{k+1} - \boldsymbol{x}^{*} \Vert}{\Vert \boldsymbol{x}_{k} - \boldsymbol{x}^{*} \Vert^{p}} < \infty
 $$
 最速下降法在最不理想的情况下收敛阶数为 1.
+
+---
+
+## 9 牛顿法
+
+---
+
+### 9.1
+
+---
+
+在确定搜索方向的时候，最速下降法只用到了一阶导数（梯度），如果用到二阶导数？
+
+将目标函数在迭代点附近进行二阶泰勒展开。
+
+$$
+\begin{align*}
+    f(\boldsymbol{x}) &= f(\boldsymbol{x}_{k}) + (\boldsymbol{x}-\boldsymbol{x}_{k})^{T} \boldsymbol{g}_{k} + \frac{1}{2} (\boldsymbol{x}-\boldsymbol{x}_{k})^{T} \boldsymbol{F}(\boldsymbol{x}_{k}) (\boldsymbol{x}-\boldsymbol{x}_{k}) + o(\Vert \boldsymbol{x} - \boldsymbol{x}_{k} \Vert^{2}) \\
+    f'(\boldsymbol{x}) &\approx \boldsymbol{g}_{k} + \boldsymbol{F}(\boldsymbol{x}_{k}) (\boldsymbol{x}-\boldsymbol{x}_{k}) \\
+    \boldsymbol{x}_{k+1} &= \boldsymbol{x}_{k}- \boldsymbol{F}^{-1}(\boldsymbol{x}_{k}) \boldsymbol{g}_{k}
+\end{align*}
+$$
+
+---
+
+牛顿法分两步：
+
+1. 求解 $\boldsymbol{F}(\boldsymbol{x}_{k}) \boldsymbol{d}_{k} = - \boldsymbol{g}_{k}$
+2. 迭代 $\boldsymbol{x}_{k+1} = \boldsymbol{x}_{k} + \boldsymbol{d}_{k}$
+
+牛顿法也可以用于求解多元方程 $\boldsymbol{g}(\boldsymbol{x}) = \boldsymbol{0}$
+
+$\boldsymbol{F}(\boldsymbol{x})$ 为 $\boldsymbol{g}(\boldsymbol{x}_{k})$ 的 Jacobian Matrix.
+$$
+\boldsymbol{F}(\boldsymbol{x})_{i \times j} = \frac{\partial g_{i}}{\partial x_{j}}
+$$
+
+---
+
+### 9.2
+
+牛顿法的性质分析
+
+---
+
+$f \in C^{3}, \nabla f(\boldsymbol{x}^{*})=0, \exists \boldsymbol{F}^{-1}(\boldsymbol{x}^{*})$
+$$
+\begin{align*}
+    \forall \boldsymbol{x}_{0} \Vert \boldsymbol{x}_{0} - \boldsymbol{x}^{*} \Vert < \varepsilon, p=2
+\end{align*}
+$$
+
+Proof:
+$$
+\begin{align*}
+    & \nabla f(\boldsymbol{x}) = \nabla f(\boldsymbol{x}_{0}) + \boldsymbol{F}(\boldsymbol{x}_{0})(\boldsymbol{x}-\boldsymbol{x}_{0}) + O(\Vert \boldsymbol{x} - \boldsymbol{x}_{0} \Vert^{2})
+\end{align*}
+$$
+
+---
+
+牛顿法的缺陷：如果初始点离极小点较远，牛顿法不一定能收敛。
+
+有时候会导致 Hessen 矩阵为奇异矩阵，方法失败。
+
+---
+
+加入一维搜索，计算牛顿法的步长。
+
+---
+
+### 9.3
+
+---
+
+牛顿法的缺陷 2：如果 Hessen 矩阵不正定
+
+Levenberg Marquardt 修正。
+$$
+\boldsymbol{F}(\boldsymbol{x}_{k}) \rightarrow \boldsymbol{F}(\boldsymbol{x}_{k}) + \mu_{k} I
+$$
+
+---
+
+### 9.4
+
+在非线性最小二乘法中的应用
+
+---
+
+例子：用正弦函数拟合实验数据。
+$$
+\hat{y} = A \sin(\omega t + \varphi)
+$$
+确定参数 $A, \omega, \varphi$.
+
+构造目标函数
+$$
+\sum_{i=1}^{m} (y_{i} - A \sin(\omega t + \varphi))^{2}
+$$
+决策变量
+$$
+\boldsymbol{x} = \begin{bmatrix} A & \omega & \varphi \end{bmatrix}^{T}
+$$
+定义
+$$
+r_{i}(\boldsymbol{x}) = y_{i} - A \sin (\omega t + \varphi)
+$$
+
+---
+
