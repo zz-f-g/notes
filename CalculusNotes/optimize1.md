@@ -792,7 +792,12 @@ $$
 Proof:
 $$
 \begin{align*}
-    \alpha_{k}= \mathrm{argmin}_{\alpha_{k}} f(\boldsymbol{x}_{k} - \alpha_{k} \boldsymbol{g}_{k})
+    \alpha_{k} &= \mathrm{argmin}_{\alpha_{k}} f(\boldsymbol{x}_{k} - \alpha_{k} \boldsymbol{g}_{k}) \\
+    f(\boldsymbol{x}_{k}-\alpha_{k}\boldsymbol{g}_{k}) &= \frac{1}{2} (\boldsymbol{x}_{k} - \alpha_{k} \boldsymbol{g}_{k})^{T} \boldsymbol{Q} (\boldsymbol{x}_{k} - \alpha_{k} \boldsymbol{g}_{k}) + \boldsymbol{b}^{T} (\boldsymbol{x}_{k} - \alpha_{k} \boldsymbol{g}_{k}) \\
+        &= f(\boldsymbol{x}_{k}) - \alpha_{k} \boldsymbol{x}_{k}^{T}\boldsymbol{Q}\boldsymbol{g}_{k} + \frac{1}{2} \alpha_{k}^{2} \boldsymbol{g}_{k}^{T} \boldsymbol{Q}\boldsymbol{g}_{k} - \alpha_{k} \boldsymbol{b}^{T}\boldsymbol{g}_{k} \\
+        &= \frac{1}{2} \boldsymbol{g}_{k}^{T} \boldsymbol{Q}\boldsymbol{g}_{k} \alpha_{k}^{2} - \boldsymbol{g}_{k}^{T} (\boldsymbol{Q}\boldsymbol{x}_{k} - \boldsymbol{b}) \alpha_{k} + f(\boldsymbol{x}_{k}) \\
+    \alpha_{k} &= \frac{\boldsymbol{g}_{k}^{T}(\boldsymbol{Q}\boldsymbol{x}_{k} - \boldsymbol{b})}{\boldsymbol{g}_{k}^{T} \boldsymbol{Q} \boldsymbol{g}_{k}} \\
+        &= \frac{\boldsymbol{g}_{k}^{T}\boldsymbol{g}_{k}}{\boldsymbol{g}_{k}^{T} \boldsymbol{Q} \boldsymbol{g}_{k}} & (\boldsymbol{g}_{k} = \boldsymbol{Q}\boldsymbol{x}_{k} - \boldsymbol{b}) \\
 \end{align*}
 $$
 
@@ -830,7 +835,7 @@ $$
     f(\boldsymbol{x}) &= \frac{1}{2} \boldsymbol{x}^{T} Q \boldsymbol{x} - \boldsymbol{b}^{T} \boldsymbol{x} \\
     \nabla f(\boldsymbol{x}) &= \boldsymbol{Q} \boldsymbol{x} - \boldsymbol{b} \\
     \boldsymbol{F}(x) &= Q > 0 \\
-    \boldsymbol{x}^{*} &= \boldsymbol{Q}^{-1} \boldsymbol{x}
+    \boldsymbol{x}^{*} &= \boldsymbol{Q}^{-1} \boldsymbol{b}
 \end{align*}
 $$
 
@@ -839,10 +844,16 @@ $$
 - 最速下降法
 - 固定步长下降法
 
+---
+
 $$
-V(\boldsymbol{x}) = f(\boldsymbol{x}) + \frac{1}{2} \boldsymbol{x}^{*T} Q \boldsymbol{x}^{*} = \frac{1}{2} (\boldsymbol{x}-\boldsymbol{x}^{*})^{T} Q (\boldsymbol{x}-\boldsymbol{x}^{*})
+\begin{align*}
+    V(\boldsymbol{x}) &= \frac{1}{2} (\boldsymbol{x}-\boldsymbol{x}^{*})^{T} Q (\boldsymbol{x}-\boldsymbol{x}^{*}) \\
+        &= f(\boldsymbol{x}) + \boldsymbol{b}^{T}\boldsymbol{x} - \boldsymbol{x}^{T}\boldsymbol{Q}\boldsymbol{x}^{*} + \frac{1}{2} \boldsymbol{x}^{*T} \boldsymbol{Q} \boldsymbol{x}^{*} \\
+        &= f(\boldsymbol{x}) + \frac{1}{2} \boldsymbol{x}^{*T} Q \boldsymbol{x}^{*} 
+\end{align*}
 $$
-当 $\boldsymbol{x} = \boldsymbol{x}^{*}$，$V(\boldsymbol{x}) = 0$.
+当 $\boldsymbol{x} = \boldsymbol{x}^{*}$，$V(\boldsymbol{x}) = 0$. 可以用 $\Vert V(\boldsymbol{x}) \Vert$ 的大小衡量收敛的情况。
 
 ---
 
@@ -857,16 +868,96 @@ $$
 $$
 V(\boldsymbol{x}_{k+1}) = (1 - \gamma_{k}) V(\boldsymbol{x}_{k})
 $$
+
+---
+
 可以求解 $\gamma_k$.
 $$
 \begin{align*}
-    & \boldsymbol{y}_{k} = \boldsymbol{x}_{k} - \boldsymbol{x}^{*} \\
-    & V(\boldsymbol{x}_{k}) = \frac{1}{2} \boldsymbol{y}_{k}^{T} Q \boldsymbol{y}_{k} \\
-    & V(\boldsymbol{x}_{k+1}) = \frac{1}{2} (\boldsymbol{y}_{k} - \alpha_{k}\boldsymbol{g}_{k})^{T} Q (\boldsymbol{y}_{k} - \alpha_{k}\boldsymbol{g}_{k})
+    \boldsymbol{y}_{k} &= \boldsymbol{x}_{k} - \boldsymbol{x}^{*} \\
+    V(\boldsymbol{x}_{k}) &= \frac{1}{2} \boldsymbol{y}_{k}^{T} Q \boldsymbol{y}_{k} \\
+    V(\boldsymbol{x}_{k+1}) &= \frac{1}{2} (\boldsymbol{y}_{k} - \alpha_{k}\boldsymbol{g}_{k})^{T} Q (\boldsymbol{y}_{k} - \alpha_{k}\boldsymbol{g}_{k}) \\
+        &= V(\boldsymbol{x}_{k}) - \alpha_{k} \boldsymbol{g}_{k}^{T} \boldsymbol{Q} \boldsymbol{y}_{k} + \frac{1}{2} \boldsymbol{g}_{k}^{T} \boldsymbol{Q} \boldsymbol{g}_{k} \alpha_{k}^{2} \\
+    \gamma_{k} &= \frac{V(\boldsymbol{x}_{k})-V(\boldsymbol{x}_{k+1})}{V(\boldsymbol{x}_{k})} \\
+        &= \frac{2\boldsymbol{g}_{k}^{T}\boldsymbol{Q}\boldsymbol{y}_{k} \alpha - \boldsymbol{g}_{k}^{T}\boldsymbol{Q}\boldsymbol{g}_{k} \alpha^{2}}{\boldsymbol{y}_{k}^{T} \boldsymbol{Q} \boldsymbol{y}_{k}} \\
+        &= \frac{2 \boldsymbol{g}_{k}^{T} \boldsymbol{g}_{k} \alpha - \boldsymbol{g}_{k}^{T} \boldsymbol{Q} \boldsymbol{g}_{k} \alpha^{2}}{\boldsymbol{g}_{k}^{T} \boldsymbol{Q}^{-1} \boldsymbol{g}_{k}} \\
+        &= \alpha \frac{\boldsymbol{g}_{k}^{T} \boldsymbol{Q} \boldsymbol{g}_{k}}{\boldsymbol{g}_{k}^{T} \boldsymbol{Q}^{-1} \boldsymbol{g}_{k}} \left(2 \frac{\boldsymbol{g}_{k}^{T} \boldsymbol{g}_{k}}{\boldsymbol{g}_{k}^{T} \boldsymbol{Q} \boldsymbol{g}_{k}} - \alpha\right)
 \end{align*}
 $$
 
 ---
+
+迭代序列 $\{\boldsymbol{x}_{k}\}$ 收敛于极小点的充分必要条件
+$$
+\sum_{k=0}^{\infty} \gamma_{k} = \infty
+$$
+Proof:
+$$
+\begin{align*}
+    & \boldsymbol{x}_{k} \iff \boldsymbol{x}^{*} \iff V(\boldsymbol{x}_{k}) \rightarrow 0 \\
+    & \iff \prod_{k=0}^{\infty} (1-\gamma_{k}) = 0 \\
+    & \iff - \sum_{k=0}^{\infty} \ln(1-\gamma_{k}) = \infty \\
+\end{align*}
+$$
+
+---
+
+To prove:
+$$
+\sum_{k=0}^{\infty} \gamma_{k} = \infty \iff - \sum_{k=0}^{\infty} \ln(1-\gamma_{k}) = \infty
+$$
+Step 1:
+$$
+\begin{align*}
+    & - \ln(1-\gamma_{k}) > \gamma_{k} \\
+    & \sum_{k=0}^{\infty} \gamma_{k} = \infty \Rightarrow - \sum_{k=0}^{\infty} \ln(1-\gamma_{k}) = \infty
+\end{align*}
+$$
+
+---
+
+Step2: （反证法）
+$$
+\begin{align*}
+    & \sum_{k=0}^{\infty} \gamma_{k} < \infty \Rightarrow \gamma_{k} \rightarrow 0 \\
+    & \left. [-\ln(1-\gamma_{k})]' \right|_{\gamma_{k}=0} = 1 < 2 \\
+    & \Rightarrow \exists \varepsilon > 0, \forall \gamma_{k} < \varepsilon, -\ln(1-\gamma_{k}) < 2 \gamma_{k} \\
+    & \Rightarrow - \sum_{k=0}^{\infty} \ln(1-\gamma_{k}) < 2 \sum_{k=0}^{\infty} \gamma_{k} < \infty
+\end{align*}
+$$
+Q.E.D
+
+注意到在 Step 2 中的证明中，条件 $\gamma_{k} > 0$ 是必不可少的，这和之前最速下降法的[严格下降](optimize1#8.2)性质对应。
+
+---
+
+瑞利不等式
+$$
+\forall \boldsymbol{Q} \in \mathbb{R}^{n \times n}, \boldsymbol{Q} = \boldsymbol{Q}^{T} > 0, \lambda_{min}(\boldsymbol{Q}) \Vert \boldsymbol{x} \Vert^{2} \leq \boldsymbol{x}^{T} \boldsymbol{Q} \boldsymbol{x} \leq \lambda_{max}(\boldsymbol{Q}) \Vert \boldsymbol{x} \Vert^{2}
+$$
+
+---
+
+将之前求得的目标函数为二次函数的最速下降法的步长
+$$
+\alpha_{k} = \frac{\boldsymbol{g}_{k}^{T} \boldsymbol{g}_{k}}{\boldsymbol{g}_{k}^{T} \boldsymbol{Q} \boldsymbol{g}_{k}}
+$$
+带入下降因子中
+$$
+\begin{align*}
+    \gamma_{k} &= \alpha_{k} \frac{\boldsymbol{g}_{k}^{T} \boldsymbol{Q} \boldsymbol{g}_{k}}{\boldsymbol{g}_{k}^{T} \boldsymbol{Q}^{-1} \boldsymbol{g}_{k}} \left(2 \frac{\boldsymbol{g}_{k}^{T} \boldsymbol{g}_{k}}{\boldsymbol{g}_{k}^{T} \boldsymbol{Q} \boldsymbol{g}_{k}} - \alpha_{k} \right) \\
+    &= \frac{\boldsymbol{g}_{k}^{T} \boldsymbol{g}_{k}}{\boldsymbol{g}_{k} \boldsymbol{Q}^{-1} \boldsymbol{g}_{k}}\left(2 \frac{\boldsymbol{g}_{k}^{T} \boldsymbol{g}_{k}}{\boldsymbol{g}_{k}^{T} \boldsymbol{Q} \boldsymbol{g}_{k}} - \frac{\boldsymbol{g}_{k}^{T}\boldsymbol{g}_{k}}{\boldsymbol{g}_{k}^{T}\boldsymbol{Q}\boldsymbol{g}_{k}} \right) \\
+    &= \frac{(\boldsymbol{g}_{k}^{T}\boldsymbol{g}_{k})^{2}}{\boldsymbol{g}_{k}^{T}\boldsymbol{Q}^{-1}\boldsymbol{g}_{k} \cdot \boldsymbol{g}_{k}^{T}\boldsymbol{Q}\boldsymbol{g}_{k}}
+\end{align*}
+$$
+根据 Rayleigh 不等式
+$$
+\begin{align*}
+    & \frac{\lambda_{min}}{\lambda_{max}} \leq \gamma_{k} \leq \frac{\lambda_{max}}{\lambda_{min}}\\
+    & \sum_{k=0}^{\infty} \gamma_{k} = \infty
+\end{align*}
+$$
+这个过程和初始取点无关，因此：
 
 最速下降法为**全局收敛**算法。
 
@@ -874,8 +965,37 @@ $$
 
 固定步长算法在满足条件时为**全局收敛**算法。
 $$
-\alpha \leq \frac{2}{\lambda_{max}(Q)}
+0 < \alpha < \frac{2}{\lambda_{max}(Q)}
 $$
+Proof:
+
+Sufficiency:
+$$
+\begin{align*}
+    \gamma_{k} &= \alpha \frac{\boldsymbol{g}_{k}^{T} \boldsymbol{Q} \boldsymbol{g}_{k}}{\boldsymbol{g}_{k}^{T} \boldsymbol{Q}^{-1} \boldsymbol{g}_{k}} \left(2 \frac{\boldsymbol{g}_{k}^{T} \boldsymbol{g}_{k}}{\boldsymbol{g}_{k}^{T} \boldsymbol{Q} \boldsymbol{g}_{k}} - \alpha\right)\\
+    &\geq \alpha \frac{\boldsymbol{g}_{k}^{T} \boldsymbol{Q} \boldsymbol{g}_{k}}{\boldsymbol{g}_{k}^{T} \boldsymbol{g}_{k}} \cdot \frac{\boldsymbol{g}_{k}^{T}\boldsymbol{g}_{k}}{\boldsymbol{g}_{k}^{T} \boldsymbol{Q}^{-1} \boldsymbol{g}_{k}} \left(\frac{2}{\lambda_{max}(\boldsymbol{Q})}-\alpha\right)\\
+    &> \alpha \lambda^{2}_{min}(\boldsymbol{Q})\left(\frac{2}{\lambda_{max}(\boldsymbol{Q})}-\alpha\right) \\
+    & > 0 \\
+    \sum_{k-0}^{\infty}\gamma_{k} &= \infty
+\end{align*}
+$$
+Necessity:
+$$
+\begin{align*}
+    \boldsymbol{x}^{(k+1)} - \boldsymbol{x}^{*} &= \boldsymbol{x}^{(k)} - \alpha (\boldsymbol{Q}\boldsymbol{x}^{(k)} - \boldsymbol{b}) - \boldsymbol{x}^{*} \\
+        &= \boldsymbol{x}^{(k)} - \boldsymbol{x}^{*} - \alpha \boldsymbol{Q} \boldsymbol{x}^{(k)} + \alpha \boldsymbol{Q} \boldsymbol{x}^{*} \\
+        &= (\boldsymbol{I} - \alpha \boldsymbol{Q}) ( \boldsymbol{x}^{(k)} - \boldsymbol{x}^{*})
+\end{align*}
+$$
+如果 $\boldsymbol{x}^{(0)} - \boldsymbol{x}^{*}$ 是矩阵 $\boldsymbol{Q}$ 的特征向量，对应特征值 $\lambda_{max}$.
+$$
+\begin{align*}
+    \boldsymbol{x}^{(k+1)} - \boldsymbol{x}^{*} &= (1 - \alpha \lambda_{max}(\boldsymbol{Q})) (\boldsymbol{x}^{(k)} - \boldsymbol{x}^{*}) \\
+        &= (1 - \alpha \lambda_{max}(\boldsymbol{Q}))^{k+1} (\boldsymbol{x}^{(0)} - \boldsymbol{x}^{*}) \\
+        \Vert \boldsymbol{x}^{(k+1)} - \boldsymbol{x}^{*} \Vert &= | 1 - \alpha \lambda_{max}(Q) |^{k+1} \Vert \boldsymbol{x}^{(0)} - \boldsymbol{x}^{*} \Vert
+\end{align*}
+$$
+如果 $\alpha \leq 0 \text{ or }\alpha \geq \frac{2}{\lambda_{max}(\boldsymbol{Q})}$, 将不收敛。
 
 ---
 
