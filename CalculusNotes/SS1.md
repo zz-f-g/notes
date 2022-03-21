@@ -370,6 +370,12 @@ $$
 $$
 
 或者用门限函数。
+$$
+\begin{align*}
+    &p(t) = \frac{1}{\tau} \left[u\left(t + \frac{\tau}{2}\right) - u \left(t - \frac{\tau}{2}\right) \right] \\
+    & \delta(t) = \lim_{\tau \rightarrow 0} p(t) = \lim_{\tau \rightarrow 0} \frac{1}{\tau} \left[u \left( t + \frac{\tau}{2} \right) - u \left( t - \frac{\tau}{2} \right) \right]
+\end{align*}
+$$
 
 ---
 
@@ -393,14 +399,24 @@ $$
 
 $$
 \begin{align*}
-&\delta'(t) = \frac{d}{dt}\delta(t)\\
-&\int_{-\infty}^{\infty} \delta'(t) = 0\\
-&\int_{-\infty}^{0} \delta'(t) = \delta(t)\\
-& \int_{-\infty}^{\infty} \delta'(t) f(t) \mathrm{d}t \\
-=& (\delta(t) f(t))|_{-\infty}^{\infty} - \int_{-\infty}^{\infty} f'(t) \delta(t) \mathrm{t}\\
-=& -f'(0)
+    &\delta'(t) = \frac{d}{dt}\delta(t) \Rightarrow \int_{-\infty}^{t} \delta'(\tau) \mathrm{d} \tau = \delta(t)\\
+    &\int_{-\infty}^{\infty} \delta'(t) \mathrm{d}t = 0\\
+    & \int_{-\infty}^{\infty} \delta'(t) f(t) \mathrm{d}t \\
+    =& \left. (\delta(t) f(t)) \right|_{-\infty}^{\infty} - \int_{-\infty}^{\infty} f'(t) \delta(t) \mathrm{d}t\\
+    =& -f'(0) \\
+    & \int_{-\infty}^{\infty} \delta^{(n)} (t) f(t) \mathrm{d}t = (-1)^{n} f^{(n)}(0)
 \end{align*}
 $$
+冲激偶就像时空的褶皱。
+
+---
+
+$$
+\begin{align*}
+    & f(t) \delta'(t) = f(0) \delta'(t) - f'(0)\delta(t)
+\end{align*}
+$$
+???
 
 ---
 
@@ -452,6 +468,10 @@ $$
     &= \sum_{\tau=-\infty}^{\infty}  f(\tau) \frac{[u(t-\tau) - u(t-\tau-\Delta \tau)]}{\Delta \tau} \Delta \tau \\
     &= \int_{-\infty}^{\infty} f(\tau) \delta(t-\tau) \mathrm{d}\tau
 \end{align*}
+$$
+也可以分解成连续阶跃信号的和
+$$
+f(t) = f(0) u(t) + \int_{0}^{t} \frac{\mathrm{d}}{\mathrm{d}\tau} f(\tau) u(t-\tau) \mathrm{d}\tau , t \geq 0
 $$
 
 ---
@@ -560,6 +580,15 @@ $$
 线性
 
 叠加性+齐次性
+
+对于系统：
+$$
+r(t) = H\{e[f(t)]\}
+$$
+下面的命题仍然成立
+$$
+\sum_{i} c_{i} r(t) = H \left\{ \sum_{i} c_{i} e[f(t)] \right\}
+$$
 
 线性系统一定是线性方程，但反之不成立。
 
@@ -750,7 +779,7 @@ $$
 
 $t=0$ 时刻等式左右的 $\delta(t)$ 以及各阶导数应该系数相等（平衡）。
 
-？？？
+???
 
 ---
 
@@ -928,3 +957,241 @@ $$
 $$
 f(t-t_{1}) * h(t - t_{2}) = g(t-t_{1}-t_{2})
 $$
+
+---
+
+## 3 Fourier Transformation
+
+---
+
+### 3.1
+
+Introduction
+
+---
+
+研究信号的分解
+
+讲信号分解为什么样的简单基本信号？
+
+分解以后可以利用线性叠加得到总响应。
+$$
+\begin{align*}
+    x(t) &= \sum_{i} a_{i} x_{i}(t) \\
+    y(t) &= \sum_{i} a_{i} y_{i}(t) & x_{i} \rightarrow y_{i}
+\end{align*}
+$$
+之前利用卷积进行了冲激响应的分解。
+
+---
+
+信号分解可以在：
+
+- 时域（物理现实）
+- 频域（既有物理，又有数学）
+- 变换域（数学工具）
+
+可以分解为正弦分量（频率不同），把时间为变量的时域分析变成以频率为变量的频域分析。
+
+---
+
+频域分析
+
+研究对象：连续时间信号和系统
+
+基本单元：正弦信号或复指数信号
+
+傅里叶级数和傅里叶变换。
+
+傅里叶级数对应周期信号。
+
+傅里叶变换对应非周期信号。
+
+---
+
+### 3.2
+
+周期信号
+
+---
+
+正交函数集
+$$
+\int_{t_{1}}^{t_{2}} \varphi_{1}(t) \varphi_{2}(t) \mathrm{d} t = 0
+$$
+$$
+\int_{t_{1}}^{t_{2}} \varphi_{i}(t) \varphi_{j}(t) = \begin{cases} 0 & i \neq j \\ K_{i} & i = j \end{cases}
+$$
+$K_{i} = 1$ 归一化正交函数集。
+
+???
+
+---
+
+信号的正交分解
+$$
+f(t) \approx \sum_{i} C_{i} \varphi_{i}(t)
+$$
+误差
+$$
+\varepsilon = \frac{1}{t_{2}-t_{1}} \int_{t_{1}}^{t_{2}} \left(f(t) - \sum_{j} C_{j} \varphi_{j}(t)\right)^{2} \mathrm{d}t
+$$
+当 $n \rightarrow \infty, \varepsilon \rightarrow 0$.
+
+---
+
+三角函数集
+
+$$
+\begin{align*}
+    & \int_{-\frac{T}{2}}^{\frac{T}{2}} \cos n \omega t \sin m \omega t \mathrm{d} t = 0 \\
+    & \int_{-\frac{T}{2}}^{\frac{T}{2}} \cos n \omega t \cos m \omega t \mathrm{d} t = \begin{cases} 0 & m \neq n \\ K & n = m \end{cases} \\
+    & \int_{-\frac{T}{2}}^{\frac{T}{2}} \sin n \omega t \sin m \omega t \mathrm{d} t = \begin{cases} 0 & m \neq n \\ K & n = m \end{cases}
+\end{align*}
+$$
+
+---
+
+满足迪利克雷条件
+
+- 间断点存在，个数有限
+- 极大值极小值个数有限
+- 绝对可积
+
+---
+
+$$
+f(t) = a_{0} + \sum_{n=1}^{\infty} (a_{n} \cos n \omega t + b_{n} \sin n \omega t)
+$$
+系数公式
+$$
+\begin{align*}
+    & a_{n} = \frac{<f(t), \cos n \omega t>}{<\cos n \omega t, \cos n \omega t>} \\
+    & b_{n} = \frac{<f(t), \sin n \omega t>}{<\sin n \omega t, \sin n \omega t>} \\
+    &
+\end{align*}
+$$
+Gram-Schmidt
+
+---
+
+周期锯齿波
+$$
+\begin{align*}
+    & f(t) = \frac{A}{T} t (- \frac{T}{2} < t \leq \frac{T}{2}) \\
+    & f(t) = 0 + \frac{A}{\pi} \sin \omega t - \frac{A}{2\pi} \sin 2 \omega t + \cdots \\
+    & b_{n} = \frac{A}{n \pi} (-1)^{n+1}
+\end{align*}
+$$
+
+---
+
+当然可以使用有相位差的余弦（或正弦）分量表示。
+$$
+f(t) = c_{0} + \sum_{i=1}^{\infty} c_{i} \cos (i \omega t + \varphi_{i}) = d_{0} + \sum_{i=1}^{\infty} d_{i} \sin (i \omega t + \varphi_{i})
+$$
+
+---
+
+指数形式的傅里叶级数
+
+指数函数集
+$$
+\{ e^{j n \omega t}\}, n = 0, \pm 1, \pm 2, \cdots
+$$
+
+存在负频率，（物理现实中不存在）。
+
+---
+
+$$
+\begin{align*}
+    f(t) &= a_{0} + \sum_{n=1}^{\infty} (a_{n} \cos n \omega t + b_{n} \sin n \omega t) \\
+        &= a_{0} + \sum_{n=1}^{\infty} \left(a_{n} \frac{e^{j n \omega t}-e^{-j n \omega t}}{2} + b_{n} \frac{e^{j n \omega t}-e^{-j n \omega t}}{2j}\right)\\
+        &= F(0) + \sum_{n=-\infty}^{\infty} \left(\frac{a_{n}-jb_{n}}{2}e^{j n \omega t}\right) \\
+        &= \sum F(n) e^{j n \omega t}
+\end{align*}
+$$
+???
+$$
+F(n) = \frac{1}{T} \int_{T} f(t) e^{-j n \omega t} \mathrm{d}t
+$$
+
+$f(t)$ 和 $F(n)$ 是一一对应的。
+
+---
+
+频谱图
+
+- 幅度频谱图 $c_{i}, |F(i)| \sim i$
+- 相位频谱图 $\varphi_{i} \sim $
+
+周期信号的频谱图
+
+- 离散性（自变量取孤立的整数值）
+- 谐波性
+- 收敛性（频率越大，幅度越小）
+
+???奇偶函数
+
+---
+
+三角函数的频谱图横坐标只有非负半轴
+
+指数函数的频谱图横坐标有全部轴
+
+指数频谱图的幅频特性为三角频谱图的对半分（偶函数）
+
+指数频谱图的相频特性为三角频谱图的中心对称（奇函数）
+
+---
+
+冲击序列
+$$
+\delta_{T}(t) = \sum_{n=-\infty}^{\infty} \delta(t-nT)
+$$
+求频谱图
+$$
+F(n) = \frac{1}{T} \int_{- \frac{T}{2}}^{\frac{T}{2}} \delta(t) e^{-j n \omega t} \mathrm{d}t = \frac{1}{T}
+$$
+满足离散型和谐波性，但是不满足收敛性。
+
+---
+
+偶函数的频谱图
+$$
+\begin{align*}
+    & b_{n} = 0 \\
+    & F(n) = \frac{a_{n}}{2}
+\end{align*}
+$$
+
+奇函数的频谱图
+$$
+\begin{align*}
+    &a_{n} = 0 \\
+    &F(n) = -j \frac{b_{n}}{2}
+\end{align*}
+$$
+
+奇f谐函数
+???
+
+---
+
+帕塞娃定理
+???
+$$
+\begin{align*}
+    P &= \frac{1}{T} \int_{0}^{T} f^{2}(t) \mathrm{d}t \\
+        &= \frac{1}{T} \int_{0}^{T}  \left[a_{0} + \sum(a_{n}\cos n \omega t +b_{n} \sin n \omega t)\right]^{2} \mathrm{d}t \\
+        &= a_{0}^{2} + \frac{1}{2} \sum (a_{n}^{2} + b_{n}^{2})
+\end{align*}
+$$
+
+---
+
+傅里叶有限级数和最小均方误差
+???
+
+Gibbs 现象

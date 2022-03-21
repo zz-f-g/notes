@@ -1125,3 +1125,384 @@ $$
 
 ---
 
+## 9 Conjugate Direction Method
+
+---
+
+### 9.1
+
+Introduction
+
+---
+
+二次型函数
+$$
+f(\boldsymbol{x}) = \frac{1}{2} \boldsymbol{x}^{T} \boldsymbol{Q} \boldsymbol{x} - \boldsymbol{b}^{T} \boldsymbol{x}
+$$
+共轭方向
+$$
+\forall i \neq j, \boldsymbol{d}_{i} \boldsymbol{Q} \boldsymbol{d}_{j} = 0
+$$
+共轭方向法的优势
+
+- n 维问题，n 步结果
+- 共轭梯度法不需要计算黑森矩阵
+- 不需要存储大矩阵，不需要求逆
+
+---
+
+任意小于等于正定实对称阵的阶数的共轭方向线性无关。
+
+反证法
+$$
+\begin{align*}
+    & \alpha_{0} \boldsymbol{d}_{0} + \cdots + \alpha_{k} \boldsymbol{d}_{k} = 0\\
+    & \boldsymbol{d}_{j}^{T} \boldsymbol{Q} (\alpha_{0} \boldsymbol{d}_{0} + \cdots + \alpha_{k} \boldsymbol{d}_{k}) = 0\\
+    & \alpha_{j} \boldsymbol{d}_{j}^{T} \boldsymbol{Q} \boldsymbol{d}_{j} = 0 \\
+    & \Vert \boldsymbol{d}_{j} \Vert \neq 0, \boldsymbol{Q} > 0 \Rightarrow \alpha_{j} = 0
+\end{align*}
+$$
+构成一组基。
+
+---
+
+通过 Gram-Schmidt 方法构造共轭方向。
+
+---
+
+### 9.2
+
+基本的共轭方向法
+
+---
+
+基本的共轭方向算法：以共轭方向作为下降的方向。
+
+$$
+\begin{align*}
+    \boldsymbol{x}_{k+1} &= \boldsymbol{x}_{k} + \alpha_{k} \boldsymbol{d}_{k} \\
+    \alpha_{k} &= - \frac{\boldsymbol{g}_{k}^{T} \boldsymbol{d}_{k}}{\boldsymbol{d}_{k}^{T} \boldsymbol{Q} \boldsymbol{d}_{k}} 
+\end{align*}
+$$
+
+---
+
+n 步收敛性质
+$$
+\forall \boldsymbol{x}_{0}, \boldsymbol{x}_{n} = \boldsymbol{x}^{*}
+$$
+
+Proof:
+$$
+\begin{align*}
+    & \boldsymbol{x}^{*} - \boldsymbol{x}_{0} = \beta_{0} \boldsymbol{d}_{0} + \cdots + \beta_{n-1} \boldsymbol{d}_{n-1}
+\end{align*}
+$$
+To prove $\beta_{k} = \alpha_{k}$
+$$
+\begin{align*}
+    \boldsymbol{d}_{k}^{T} \boldsymbol{Q} (\boldsymbol{x}^{*} - \boldsymbol{x}_{0}) &= \beta_{k} \boldsymbol{d}_{k}^{T} \boldsymbol{Q} \boldsymbol{d}_{k} \\
+    \beta_{k} & = \frac{\boldsymbol{d}_{k}^{T} \boldsymbol{Q} (\boldsymbol{x}^{*} - \boldsymbol{x}_{0})}{\boldsymbol{d}_{k}^{T}\boldsymbol{Q} \boldsymbol{d}_{k}} \\
+    \boldsymbol{d}_{k}^{T} \boldsymbol{Q} (\boldsymbol{x}_{0} - \boldsymbol{x}^{*}) &= \boldsymbol{d}_{k}^{T} \boldsymbol{Q} (\boldsymbol{x}_{0} - \boldsymbol{x}_{k}) + \boldsymbol{d}_{k} \boldsymbol{Q} ( \boldsymbol{x}_{k} - \boldsymbol{x}^{*}) \\
+    \boldsymbol{x}_{0} - \boldsymbol{x}_{k} &= -\alpha_{0} \boldsymbol{d}_{0} + \cdots + \alpha_{k-1} \boldsymbol{d}_{k-1} \\
+    \boldsymbol{d}_{k}^{T} \boldsymbol{Q} (\boldsymbol{x}_{0} - \boldsymbol{x}_{k}) &= 0 \\
+    \boldsymbol{d}_{k}^{T} \boldsymbol{Q} (\boldsymbol{x}_{0} - \boldsymbol{x}^{*}) &= \boldsymbol{d}_{k}^{T} \boldsymbol{Q} (\boldsymbol{x}_{k} - \boldsymbol{x}^{*}) = \boldsymbol{d}_{k}^{T} (\boldsymbol{g}_{k} - 0) = \boldsymbol{d}_{k}^{T}  \boldsymbol{g}_{k} \\
+    \beta_{k} &= - \frac{\boldsymbol{d}_{k}^{T} \boldsymbol{g}_{k}}{\boldsymbol{d}_{k}^{T}\boldsymbol{Q} \boldsymbol{d}_{k}}
+\end{align*}
+$$
+Q.E.D
+
+---
+
+共轭方向算法，每一步都是贪心算法。
+$$
+f(\boldsymbol{x}_{k+1}) = \min_{\alpha_{0,}\cdots, \alpha_{k}} f\left(\boldsymbol{x}_{0} + \sum_{i=0}^{k} \alpha_{i} \boldsymbol{d}_{i}\right)
+$$
+
+---
+
+### 9.3
+
+共轭梯度法
+
+---
+
+随着迭代不断计算出共轭方向。
+$$
+\begin{align*}
+    & \boldsymbol{d}_{0} = - \boldsymbol{g}_{0}\\
+    & \boldsymbol{d}_{k+1} = - \boldsymbol{g}_{k+1} + \beta_{k} \boldsymbol{d}_{k} \\
+    & \beta_{k} = - \frac{\boldsymbol{g}_{k+1}^{T}\boldsymbol{Q}\boldsymbol{d}_{k}}{\boldsymbol{d}_{k}^{T}\boldsymbol{Q}\boldsymbol{d}_{k}}
+\end{align*}
+$$
+Proof:
+$$
+\begin{align*}
+    \boldsymbol{d}_{0}^{T} \boldsymbol{Q} \boldsymbol{d}_{1} &= \boldsymbol{d}_{0}^{T} \boldsymbol{Q} (-\boldsymbol{g}_{1} + \beta_{0} \boldsymbol{d}_{0}) \\
+        &= \boldsymbol{d}_{0}^{T} \boldsymbol{Q} \left(-\boldsymbol{g}_{1} + \frac{\boldsymbol{g}_{1}^{T}\boldsymbol{Q}\boldsymbol{d}_{0}}{\boldsymbol{d}_{0}^{T}\boldsymbol{Q}\boldsymbol{d}_{0}} \boldsymbol{d}_{0}\right)\\
+        &= 0
+\end{align*}
+$$
+数学归纳法
+$$
+\begin{align*}
+    \boldsymbol{d}_{k}^{T}\boldsymbol{Q}\boldsymbol{d}_{k+1}
+\end{align*}
+$$
+
+---
+
+### 9.4
+
+目标函数为一般函数时的共轭梯度法
+
+---
+
+如何避免计算黑森矩阵？
+$$
+\begin{align*}
+    \alpha_{k} &= - \frac{\boldsymbol{g}_{k}^{T} \boldsymbol{d}_{k}}{\boldsymbol{d}_{k}^{T} \boldsymbol{Q} \boldsymbol{d}_{k}} \\
+    \beta_{k} &= \frac{\boldsymbol{g}_{k+1}^{T} \boldsymbol{Q} \boldsymbol{d}_{k}}{\boldsymbol{d}_{k}^{T} \boldsymbol{Q} \boldsymbol{d}_{k}}
+\end{align*}
+$$
+
+$\alpha_{k}$ 的求解直接使用一维搜索算法。
+
+用若干方法替换 $\beta_{k}$ 中的 $\boldsymbol{Q} \boldsymbol{d}_{k}$.
+
+三种公式
+
+- Hestens-Stiefel
+- Polak-Ribiere
+- Fletcher-Reeves
+
+---
+
+## 10. 拟牛顿法
+
+---
+
+### 10.1
+
+Introduction
+
+---
+
+牛顿法的缺陷
+
+1. 不能保证全局收敛
+2. 必须计算黑森矩阵，对于不正定的情况，不一定能找到下一个迭代点
+3. 矩阵求逆
+
+---
+
+### 10.2
+
+黑森矩阵逆矩阵的近似
+
+---
+
+$$
+\boldsymbol{d}_{k} = - \boldsymbol{F}(\boldsymbol{x}_{k})^{-1} \boldsymbol{g}_{k}
+$$
+
+构造近似矩阵 $\boldsymbol{H}_{k} \approx \boldsymbol{F}(\boldsymbol{x}_{k})^{-1}$
+
+$$
+\begin{align*}
+    & \boldsymbol{x}_{k+1} = \boldsymbol{x}_{k} - \boldsymbol{F}(\boldsymbol{x}_{k})^{-1} \boldsymbol{g}_{k} \\
+    \rightarrow & \boldsymbol{x}_{k+1} = \boldsymbol{x}_{k} - \alpha_{k} \boldsymbol{H}_{k} \boldsymbol{g}_{k} \\
+    f(\boldsymbol{x}_{k+1}) &= f(\boldsymbol{x}_{k}) + \boldsymbol{g}_{k}^{T} (\boldsymbol{x}_{k+1} - \boldsymbol{x}_{k}) + o(\Vert \boldsymbol{x}_{k+1} - \boldsymbol{x}_{k} \Vert) \\
+    &= f(\boldsymbol{x}_{k}) + \boldsymbol{g}_{k}^{T} (-\alpha_{k}\boldsymbol{H}_{k} \boldsymbol{g}_{k}) + o(\Vert \boldsymbol{x}_{k+1} - \boldsymbol{x}_{k} \Vert) \\
+    &= f(\boldsymbol{x}_{k}) -\alpha_{k} \boldsymbol{g}_{k}^{T} \boldsymbol{H}_{k} \boldsymbol{g}_{k} + o(\Vert \boldsymbol{x}_{k+1} - \boldsymbol{x}_{k} \Vert) \\
+\end{align*}
+$$
+
+保证下降的最简单方法是使得近似矩阵 $\boldsymbol{H}_{k}$ 为正定矩阵。
+
+---
+
+如何保证所谓的“**近似**？先讨论他们应该满足的条件。
+
+对于二次函数
+
+$$
+\begin{align*}
+    & \boldsymbol{F}(\boldsymbol{x}) = \boldsymbol{Q} \\
+    & \boldsymbol{g}_{k+1} - \boldsymbol{g}_{k} = \boldsymbol{Q}(\boldsymbol{x}_{k+1} - \boldsymbol{x}_{k}) \\
+    & \Delta \boldsymbol{g}_{k} = \Delta \boldsymbol{x}_{k} \\
+    & \boldsymbol{Q}^{-1} \Delta \boldsymbol{g}_{k} = \Delta \boldsymbol{x}_{k} \\
+    & \boldsymbol{H}_{k+1} \Delta \boldsymbol{g}_{k} = \Delta \boldsymbol{x}_{k} \\
+\end{align*}
+$$
+
+$$
+\boldsymbol{H}_{n} \begin{bmatrix} \Delta\boldsymbol{g}_{0} &   \Delta\boldsymbol{g}_{1} & \cdots & \Delta\boldsymbol{g}_{n-1} \end{bmatrix} = \begin{bmatrix} \Delta\boldsymbol{x}_{0} & \Delta\boldsymbol{x}_{1} & \cdots & \Delta\boldsymbol{x}_{n-1} \end{bmatrix}
+$$
+
+在生成的过程中
+
+$$
+\begin{align*}
+    & \boldsymbol{H}_{n} \Delta \boldsymbol{g}_{k} = \Delta \boldsymbol{x}_{k} & k = 0, 1, \cdots, n-1
+\end{align*}
+$$
+
+拟牛顿法的迭代公式
+
+$$
+\left\{
+\begin{align*}
+    \boldsymbol{d}_{k} &= - \boldsymbol{H}_{k} \boldsymbol{g}_{k} \\
+    \boldsymbol{x}_{k+1} &= \boldsymbol{x}_{k} + \alpha_{k} \boldsymbol{d}_{k} \\
+    \alpha_{k} &= \mathrm{argmin}_{\alpha>0} f(\boldsymbol{x}_{k+1})
+\end{align*}
+\right.
+$$
+
+---
+
+拟牛顿法也是一种共轭方向法。
+
+对于对称的矩阵
+$$
+\boldsymbol{H}_{n+1} \Delta \boldsymbol{g}_{k} = \Delta \boldsymbol{x}_{k}, k = 0, 1, \cdots , n
+$$
+
+$\boldsymbol{d}_{0},\boldsymbol{d}_{1},\cdots,\boldsymbol{d}_{n+1}$ 关于 $\boldsymbol{Q}$ 是共轭的。
+
+证明采用数学归纳法
+$$
+\begin{align*}
+    \boldsymbol{d}_{1}^{T} \boldsymbol{Q} \boldsymbol{d}_{0} &= - \boldsymbol{g}_{1}^{T} \boldsymbol{H}_{1} \boldsymbol{Q} \boldsymbol{d}_{0} \\
+        &= -\boldsymbol{g}_{1}^{T} \boldsymbol{H}_{1} \boldsymbol{Q} \frac{\Delta\boldsymbol{x}_{0}}{\alpha_{0}} \\
+        &= - \frac{1}{\alpha_{0}} \boldsymbol{g}_{1}^{T} \boldsymbol{H}_{1} \Delta \boldsymbol{g}_{0} \\
+        &= - \frac{1}{\alpha_{0}}\boldsymbol{g}_{1}^{T} \Delta \boldsymbol{x}_{0} \\
+        &= - \boldsymbol{g}_{1}^{T} \Delta \boldsymbol{d}_{0}\\
+    \alpha_{0} & = \mathrm{argmin}_{\alpha} \varphi(\alpha) = f(\boldsymbol{x}_{0} + \alpha \boldsymbol{d}_{0}) \\
+    \varphi'(\alpha_{0}) &= 0 \\
+    0 &= \boldsymbol{g}_{1}^{T} \boldsymbol{d}_{0} \\
+    \Rightarrow \boldsymbol{d}_{1}^{T} \boldsymbol{Q} \boldsymbol{d}_{0} & = 0
+\end{align*}
+$$
+
+---
+
+假设 $\boldsymbol{d}_{0}, \cdots, \boldsymbol{d}_{k}$ 关于 $\boldsymbol{Q}$ 共轭。下证：$\forall i = 0,\cdots,k, \boldsymbol{d}_{k+1}^{T}\boldsymbol{Q}\boldsymbol{d}_{i} = 0$
+
+应用相同的思路
+$$
+\begin{align*}
+    \boldsymbol{d}_{k+1}^{T} \boldsymbol{Q} \boldsymbol{d}_{i} &= -\boldsymbol{g}_{k+1} \Delta \boldsymbol{d}_{i}
+\end{align*}
+$$
+
+根据[此时梯度与此前任意共轭方向正交的特性](#9.2)，$\boldsymbol{d}_{k+1}^{T} \boldsymbol{Q} \boldsymbol{d}_{i} = 0$
+
+后续讨论构造 $\boldsymbol{H}_{k}$ （不唯一）的三种方法。
+
+---
+
+### 10.3
+
+秩一修正公式
+
+---
+
+矩阵的迭代方程
+$$
+\boldsymbol{H}_{k+1} = \boldsymbol{H}_{k} + \alpha_{k} \boldsymbol{z}_{k} \boldsymbol{z}_{k}^{T}
+$$
+
+根据 $\boldsymbol{H}_{k+1} \Delta \boldsymbol{g}_{k} = \Delta \boldsymbol{x}_{k}$，求解 $\alpha_{k}, \boldsymbol{z}_{k}$.
+
+$$
+\begin{align*}
+    & (\boldsymbol{H}_{k} + \alpha_{k} \boldsymbol{z}_{k} \boldsymbol{z}_{k}^{T}) \Delta \boldsymbol{g}_{k} = \Delta \boldsymbol{x}_{k} \\
+    & \alpha_{k} (\Delta \boldsymbol{g}_{k}^{T} \boldsymbol{z}_{k}) \boldsymbol{z}_{k} = \Delta \boldsymbol{x}_{k} - \boldsymbol{H}_{k} \Delta \boldsymbol{g}_{k} \\
+    & \boldsymbol{z}_{k} = \frac{\Delta \boldsymbol{x}_{k} - \boldsymbol{H}_{k} \Delta \boldsymbol{g}_{k}}{\alpha_{k}(\Delta \boldsymbol{g}_{k}^{T} \boldsymbol{z}_{k})} \\
+    & \alpha_{k} \boldsymbol{z}_{k} \boldsymbol{z}_{k}^{T} =
+        \frac{(\Delta \boldsymbol{x}_{k} - \boldsymbol{H}_{k} \Delta \boldsymbol{g}_{k})
+            (\Delta \boldsymbol{x}_{k} - \boldsymbol{H}_{k} \Delta \boldsymbol{g}_{k})^{T}}
+        {\alpha_{k}(\Delta \boldsymbol{g}_{k}^{T} \boldsymbol{z}_{k})^{2}} \\
+    & \alpha_{k} (\Delta \boldsymbol{g}_{k}^{T} \boldsymbol{z}_{k})^{2} 
+        = \Delta \boldsymbol{g}_{k}^{T} [\alpha_{k} (\Delta \boldsymbol{g}_{k}^{T} \boldsymbol{z}_{k}) \boldsymbol{z}_{k}] 
+        = \Delta \boldsymbol{g}_{k}^{T} (\Delta \boldsymbol{x}_{k} - \boldsymbol{H}_{k} \Delta \boldsymbol{g}_{k})\\
+    & \alpha_{k} \boldsymbol{z}_{k} \boldsymbol{z}_{k}^{T}
+        = \frac{(\Delta \boldsymbol{x}_{k} - \boldsymbol{H}_{k} \Delta \boldsymbol{g}_{k})(\Delta \boldsymbol{x}_{k} - \boldsymbol{H}_{k} \Delta \boldsymbol{g}_{k})^{T}}
+        {\Delta \boldsymbol{g}_{k}^{T} ( \Delta \boldsymbol{x}_{k} - \boldsymbol{H}_{k} \Delta \boldsymbol{g}_{k})}
+\end{align*}
+$$
+
+---
+
+秩一算法的步骤
+
+1. 置初始值 $k=0, \boldsymbol{x}_{0}, \boldsymbol{H}_{0} = \boldsymbol{H}_{0}^{T}$
+2. ``while`` $\boldsymbol{g}_{k} \neq \boldsymbol{0}$, $\boldsymbol{d}_{k} = - \boldsymbol{H}_{k} \boldsymbol{g}_{k}$
+3. 计算
+$$
+\begin{align*}
+    &\alpha_{k} = \mathrm{argmin}_{\alpha>0} f(\boldsymbol{x}_{k} + \alpha \boldsymbol{d}_{k}) \\
+    & \boldsymbol{x}_{k+1} = \boldsymbol{x}_{k} + \alpha_{k} \boldsymbol{d}_{k} \\
+    & \Delta \boldsymbol{x}_{k} = \alpha_{k} \boldsymbol{d}_{k} \\
+    & \boldsymbol{g}_{k+1} = \nabla f(\boldsymbol{x}_{k+1}) \\
+    & \Delta \boldsymbol{g}_{k+1} = \boldsymbol{g}_{k+1} - \boldsymbol{g}_{k} \\
+    & \boldsymbol{H}_{k+1} = \boldsymbol{H}_{k} + 
+        \frac{(\Delta \boldsymbol{x}_{k} - \boldsymbol{H}_{k} \Delta \boldsymbol{g}_{k})(\Delta \boldsymbol{x}_{k} - \boldsymbol{H}_{k} \Delta \boldsymbol{g}_{k})^{T}}
+        {\Delta \boldsymbol{g}_{k}^{T} ( \Delta \boldsymbol{x}_{k} - \boldsymbol{H}_{k} \Delta \boldsymbol{g}_{k})}
+\end{align*}
+$$  
+---
+
+下面证明：虽然秩一算法是由 $\boldsymbol{H}_{k+1} \Delta \boldsymbol{g}_{k} = \Delta \boldsymbol{x}_{k}$ 推导得到，但是
+
+$$
+\forall i = 0, 1, \cdots, k, \boldsymbol{H}_{k+1} \Delta \boldsymbol{g}_{i} = \Delta \boldsymbol{x}_{i}
+$$
+
+即证
+
+$$
+\begin{align*}
+    & \frac{(\Delta \boldsymbol{x}_{k} - \boldsymbol{H}_{k} \Delta \boldsymbol{g}_{k})(\Delta \boldsymbol{x}_{k} - \boldsymbol{H}_{k} \Delta \boldsymbol{g}_{k})^{T}}
+    {\Delta \boldsymbol{g}_{k}^{T} ( \Delta \boldsymbol{x}_{k} - \boldsymbol{H}_{k} \Delta \boldsymbol{g}_{k})}
+    \Delta \boldsymbol{g}_{i} = 0 \\
+    \Rightarrow & (\Delta \boldsymbol{x}_{k} - \boldsymbol{H}_{k} \Delta \boldsymbol{g}_{k})^{T} \Delta \boldsymbol{g}_{i} = 0
+\end{align*}
+$$
+
+接下来顺着证明
+
+$$
+\begin{align*}
+    \Delta \boldsymbol{x}_{k} \Delta \boldsymbol{g}_{i}
+        - \Delta \boldsymbol{g}_{k}^{T} \boldsymbol{H}_{k} \Delta \boldsymbol{g}_{i}
+        &= \Delta \boldsymbol{x}_{k}^{T} \Delta \boldsymbol{g}_{i} - \Delta \boldsymbol{g}_{k}^{T} \Delta \boldsymbol{x}_{i} \\
+        &= \Delta \boldsymbol{x}_{k}^{T} \Delta \boldsymbol{g}_{i} - \Delta \boldsymbol{x}_{k}^{T} \boldsymbol{Q} \Delta \boldsymbol{x}_{i} \\
+        &= \Delta \boldsymbol{x}_{k}^{T} \Delta \boldsymbol{g}_{i} - \Delta \boldsymbol{x}_{k}^{T} \Delta \boldsymbol{g}_{i} \\
+        &= 0
+\end{align*}
+$$
+Q.E.D
+
+---
+
+秩一算法的缺陷
+
+1. 迭代得到的 $\boldsymbol{H}$ 不一定是正定的。
+2. 当 $\Delta \boldsymbol{g}_{k}^{T} (\Delta \boldsymbol{x}_{k} - \boldsymbol{H}_{k} \Delta \boldsymbol{g}_{k}) \approx 0$  时，计算误差比较大。
+
+---
+
+### 10.4
+
+DFP Algorithm
+
+---
+
+### 10.5
+
+BFGS Algorithm
+
+---
