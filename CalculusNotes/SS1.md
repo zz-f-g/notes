@@ -626,6 +626,12 @@ $$
 
 ---
 
+1. 线性 $e_{1} \rightarrow r_{1}, e_{2} \rightarrow r_{2} \Rightarrow c_{1} e_{1} + c_{2} e_{2} \rightarrow c_{1} r_{1} + c_{2} r_{2}$
+2. 时不变 $e(t) \rightarrow r(t) \Rightarrow e(t-\tau) \rightarrow r(t-\tau)$
+3. 微分、积分 $e \rightarrow r \Rightarrow \frac{\mathrm{d}e}{\mathrm{d}t} \rightarrow \frac{\mathrm{d}r}{\mathrm{d}t}$
+
+---
+
 ### 1.8
 
 系统分析方法
@@ -658,11 +664,13 @@ I --> |"x(t)"|LS[Linear System]
 
 ---
 
-## 2 Time Domain Analysis on Continuous System
+## 2 时域分析法
 
 ---
 
 ### 2.1
+
+Introduction
 
 ---
 
@@ -722,7 +730,8 @@ $$
 \begin{align*}
     e(t) = E && r_{p}(t) &= B \\
     e(t) = t^{n} && r_{p}(t) &= P_{n}(t) \\
-    e(t) = \cos \omega t && r_{p}(t) &= B_{1} \cos \omega t + B_{2} \sin \omega t
+    e(t) = \cos \omega t && r_{p}(t) &= B_{1} \cos \omega t + B_{2} \sin \omega t \\
+    e(t) = t^{p} e^{\alpha t} \cos \omega t && r_{p}(t) &= (A_{0} + \cdots A_{p}t^{p}) e^{\alpha t} \cos \omega t + (B_{0} + \cdots + B_{p} t^{p}) e^{\alpha t} \sin \omega t
 \end{align*}
 $$
 
@@ -779,7 +788,61 @@ $$
 
 $t=0$ 时刻等式左右的 $\delta(t)$ 以及各阶导数应该系数相等（平衡）。
 
-???
+举例
+
+![[Pasted image 20220321183710.png]]
+
+---
+
+Differential Equation
+$$
+\begin{align*}
+    & i_{S}(t) = \frac{1}{R} L \frac{\mathrm{d}i_{L}}{\mathrm{d}t} + i_{L} + C \frac{\mathrm{d}}{\mathrm{d}t} \left( L \frac{\mathrm{d}i_{L}}{\mathrm{d}t} \right) \\
+    & \frac{\mathrm{d}^{2}i_{L}}{\mathrm{d}t^{2}} + \frac{1}{RC} \frac{\mathrm{d}i_{L}}{\mathrm{d}t} + \frac{1}{CL} i_{L} = \frac{1}{CL} \delta(t)
+\end{align*}
+$$
+二阶导数项存在奇异函数，一阶导数项存在阶跃函数，因此 $i_{L}$ 为连续函数。
+$$
+\begin{align*}
+    & i_{L}(0_{+}) = i_{L}(0_{-}) = 0 \\
+    & \frac{\mathrm{d}i_{L}}{\mathrm{d}t}(0_{+}) = \frac{\mathrm{d}i_{L}}{\mathrm{d}t}(0_{-}) + \frac{1}{LC} = \frac{1}{LC}
+\end{align*}
+$$
+将这两个作为初始条件，齐次解就是最终解。
+
+---
+
+$$
+\begin{align*}
+    & \frac{\mathrm{d}r}{\mathrm{d}t}+3r = 3 \delta'(t) \\
+    & \frac{\mathrm{d}r}{\mathrm{d}t} = a \delta(t) + b \delta'(t) + c \Delta u(t) & \Delta u = u(t), t \in (0_{-}, 0_{+}) \\
+    & r = a \Delta u(t) + b \delta(t) \\
+    & \begin{bmatrix}
+        3 & 0 & 1 \\ 
+        1 & 3 & 0 \\ 
+        0 & 1 & 0 \end{bmatrix}
+    \begin{bmatrix}
+        a \\ 
+        b \\ 
+        c \end{bmatrix}
+    = \begin{bmatrix}
+        0 \\ 
+        0 \\ 
+        3 \end{bmatrix} \Rightarrow \begin{bmatrix}
+        a \\ 
+        b \\ 
+        c \end{bmatrix} = \begin{bmatrix}
+        -9 \\ 
+        3 \\ 
+        27 \end{bmatrix} \\
+    &r = -9 \Delta u(t) + 3 \delta(t)\\
+    &r(0_{+}) - r(0_{-}) = -9
+\end{align*}
+$$
+
+关于单位跳变函数 $\Delta u(t)$. 它是为了研究在 0 附近的跳变行为所特殊定义的函数。
+
+它和阶跃函数很像，但并不是，它的积分等于 0. 因此在高阶导数项中可以“凭空”出现 $\Delta u(t)$，见上题。
 
 ---
 
@@ -810,7 +873,17 @@ $$
 
 零输入响应不存在跳变
 $$
-r_{zi}^{(k)}(0_{+}) = r_{zi}^{(k)}(0_{-})
+\begin{align*}
+    & r_{zi}^{(k)}(0_{+}) = r_{zi}^{(k)}(0_{-})\\
+    & r_{zi}(t) = \sum_{k=1}^{n} A_{zi,k} e^{\alpha_{k}t} 
+\end{align*}
+$$
+总响应
+$$
+\begin{align*}
+    r(t) &= r_{zi}(t) + r_{zs}(t) \\
+        &= \sum A_{zik} e^{\alpha_{k}t} + \sum A_{zsk} e^\alpha
+\end{align*}
 $$
 
 ---
@@ -876,11 +949,68 @@ $$
 \end{align*}
 $$
 
-方法二：直接将解得形式代入解得常数。
+方法二：直接将解的形式代入解得常数。（==求完冲激响应一定要加上阶跃函数项==）
+
+$$
+\begin{align*}
+    &v_{C} = A e^{- \frac{t}{RC}} u(t)
+\end{align*}
+$$
+
+阶跃响应：系统在单位阶跃信号下的**零状态**响应。
 
 ---
 
-阶跃响应：系统在单位阶跃信号下的**零状态**响应。
+求冲激响应 $h(t)(n>m)$
+$$
+\begin{align*}
+    & \begin{bmatrix}
+        1 & a_{n-1} & \cdots & a_{0} \end{bmatrix} \begin{bmatrix}
+        \frac{\mathrm{d}^{n}}{\mathrm{d}t^{n}} r \\ 
+        \frac{\mathrm{d}^{n-1}}{\mathrm{d}t^{n-1}} r \\ 
+        \vdots \\ 
+        r
+        \end{bmatrix} = 
+        \begin{bmatrix}
+        1 & b_{m-1} & \cdots & b_{0} \end{bmatrix} \begin{bmatrix}
+        \frac{\mathrm{d}^{m}}{\mathrm{d}t^{m}} e \\ 
+        \frac{\mathrm{d}^{m-1}}{\mathrm{d}t^{m-1}} e \\ 
+        \vdots \\ 
+        e
+        \end{bmatrix} 
+\end{align*}
+$$
+
+先求冲激响应 $\hat{h}(t)$
+$$
+\begin{align*}
+    & \begin{bmatrix}
+        1 & a_{n-1} & \cdots & a_{0} \end{bmatrix} \begin{bmatrix}
+        \frac{\mathrm{d}^{n}}{\mathrm{d}t^{n}} r \\ 
+        \frac{\mathrm{d}^{n-1}}{\mathrm{d}t^{n-1}} r \\ 
+        \vdots \\ 
+        r
+        \end{bmatrix} = \delta(t)
+\end{align*}
+$$
+仅有最高阶导数含有 $\delta(t)$. 因此得到初始条件
+$$
+\hat{h}^{(n-1)}(0_{+}) = 1, \hat{h}^{(n-1)}(0_{+}) = \cdots = \hat{h}(0_{+}) = 0
+$$
+根据齐次解和初始条件得到 $\hat{h}(t)$ 后（==求完冲激响应一定要加上阶跃函数项==）
+$$
+h(t) = \begin{bmatrix} 1 & b_{m-1} & \cdots & b_{0} \end{bmatrix}
+    \begin{bmatrix}
+        \frac{\mathrm{d}^{m}}{\mathrm{d}t^{m}} \hat{h} \\ 
+        \frac{\mathrm{d}^{m-1}}{\mathrm{d}t^{m-1}} \hat{h} \\ 
+        \vdots \\ 
+        \hat{h}
+    \end{bmatrix}
+$$
+
+---
+
+对于 $(n \leq m)$ 的情况，只能采用之前的方法去求解，上一片的方法不行，因为 $h$ 中含有奇异函数项。
 
 ---
 
@@ -907,13 +1037,20 @@ $$
 \end{align*}
 $$
 
-运算过程的实质：一个信号不懂，另一个信号翻转以后平移 $t$.
+运算过程的实质：一个信号不动，另一个信号翻转以后平移 $t$.
 
 用图解法求积分限，再用解析法。
 
 $$
 f_{1}(t) \text{ on } [a,b], f_{2}(t) \text{ on } [c,d] \Rightarrow g(t) = f_{1}(t) * f_{2}(t) \text{ on } [a+c,b+d]
 $$
+
+---
+
+求解系统响应使用双零法
+
+- 零输入：齐次解，用初始条件求系数
+- 零状态：卷积
 
 ---
 
@@ -938,6 +1075,10 @@ $$
 \end{align*}
 $$
 
+**可导和可微的区别**：求导以后再积分是不是本身？
+
+对于不可微的函数，不能应用微分性质。
+
 ---
 
 冲激函数和阶跃函数
@@ -949,8 +1090,6 @@ $$
 \end{align*}
 $$
 
-**可导和可微的区别**：求导以后再积分是不是本身？
-
 ---
 
 时移特性
@@ -960,7 +1099,7 @@ $$
 
 ---
 
-## 3 Fourier Transformation
+## 3 傅里叶变换
 
 ---
 
@@ -1052,7 +1191,10 @@ $$
 
 ---
 
-满足迪利克雷条件
+傅里叶级数存在：
+
+1. 能量有限 $\int_{-\infty}^{\infty} f^{2}(t) \mathrm{d}t < \infty$
+2. 满足迪利克雷条件
 
 - 间断点存在，个数有限
 - 极大值极小值个数有限
@@ -1195,3 +1337,110 @@ $$
 ???
 
 Gibbs 现象
+
+---
+
+### 3.3
+
+典型周期信号的傅里叶级数
+
+---
+
+脉宽为 $\tau$，周期为 $T$ 的方波信号
+
+$$
+\begin{align*}
+    F(n \omega_{1}) &= \frac{1}{T} \int_{- \frac{T}{2}}^{\frac{T}{2}} f(t) e^{-jn \omega_{1} t} \mathrm{d}t \\
+        &= \frac{1}{T} \int_{- \frac{\tau}{2}}^{\frac{\tau}{2}} E e^{-jn\omega_{1}t} \mathrm{d}t \\
+        &= \frac{E \tau}{T} \mathrm{Sa}\left(\frac{n \omega_{1} \tau}{2}\right)
+\end{align*}
+$$
+
+谱线间隔：$\omega_{1} = \frac{2\pi}{T}$，信号的周期越大，间隔越近，对于非周期信号，$T \rightarrow \infty$
+
+![[Pasted image 20220322085837.png]]
+
+---
+
+其他典型信号
+
+- 周期锯齿脉冲
+- 周期三角脉冲
+- 周期半波余弦
+- 周期全波余弦
+
+---
+
+### 3.4
+
+傅里叶变换——非周期信号的频谱分析
+
+---
+
+存在条件：绝对可积
+
+---
+
+$$
+\begin{align*}
+    & T_{1} \rightarrow \infty \\
+    & F(n \omega_{1}) = \frac{1}{T_{1}} \int_{- \frac{\tau}{2}}^{\frac{\tau}{2}}f(t) e^{-jn \omega_{1}t} \mathrm{d}t \rightarrow 0 \\
+    & \omega_{1} \rightarrow 0
+\end{align*}
+$$
+
+离散谱 ---> 连续谱
+
+不再使用 $F(n \omega_{1})$ 而使用谱密度函数（类似[概率密度函数](PossibilityStatistics#密度函数)）
+
+$$
+\begin{align*}
+    & \omega_{1} \rightarrow \mathrm{d} \omega\\
+    & n \omega_{1} \rightarrow \omega
+\end{align*}
+$$
+
+$$
+\begin{align*}
+    F(\omega) &= \lim_{T_{1} \rightarrow \infty} T_{1} F(n \omega_{1}) \\
+        &= \int_{- \frac{\tau}{2}}^{\frac{\tau}{2}} f(t) e^{-j \omega t} \mathrm{d} t
+\end{align*}
+$$
+
+$$
+F(\omega) = |F(\omega)| e^{j \varphi(\omega)}
+$$
+
+- $|F(\omega)| \sim \omega$ 幅频
+- $\varphi(\omega) \sim \omega$ 相频
+
+---
+
+反变换
+
+$$
+\begin{align*}
+    f(t) &= \sum F(n \omega_{1}) e^{j n \omega_{1} t} \\
+        &= \sum \frac{F(n \omega_{1})}{\omega_{1}} e^{j n \omega_{1} t} \omega_{1} \\
+        &= \sum \frac{F(\omega)}{T_{1}\omega_{1}} e^{j \omega t} \omega_{1} \\
+        & \rightarrow \frac{1}{2\pi} \int_{-\infty}^{\infty} F(\omega) e^{j \omega t} \mathrm{d} \omega
+\end{align*}
+$$
+
+---
+
+$$
+\begin{align*}
+    F(\omega) &= \int_{-\infty}^{\infty} f(t) e^{-j \omega t} \mathrm{d} t \\
+        &= \int_{-\infty}^{\infty} (f_{even}(t) + f_{odd}(t))(\cos \omega t - j \sin \omega t) \mathrm{d} t \\
+        &= \int_{-\infty}^{\infty} f_{even}(t) \cos \omega t \mathrm{d} t - j \int_{-\infty}^{\infty} f_{odd}(t) \sin \omega t \mathrm{d}t
+\end{align*}
+$$
+
+---
+
+傅里叶变换的物理意义
+
+$$
+f(t) = \int_{0}^{\infty} \frac{|F(\omega)|}{\pi} \mathrm{d} \omega \cos [\omega t + \varphi(\omega)]
+$$

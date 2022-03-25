@@ -360,6 +360,22 @@ int main()
     p = &a; // 合理合法
 ```
 
+但是可以这样
+
+```cpp
+    char * p = new char[8];
+    char * q = p;
+    p = &a;
+    delete[] q;
+```
+
+```cpp
+    char * p = new char[8];
+    char * q = p;
+    delete[] q;
+    delete[] p; // 但是这样又会报错，不能再次释放
+```
+
 ---
 
 变量的生命期
@@ -374,7 +390,7 @@ int main()
 
 讲变量转入函数，将实参的数据**拷贝**一份放入函数的栈顶。
 
-函数中的形参从栈顶取得相应的数据。
+函数中的形参从栈顶取得相应的数据，形参本身不开辟新的空间。
 
 因此函数如果修改形参的话，改变的是**拷贝的数据**，不改变外部的数据。
 
@@ -388,3 +404,132 @@ int func(const int * a, int * b);
 
 ---
 
+函数结果返回
+
+```cpp
+XX* func()
+{
+    XX xx = ...;
+    return &xx;
+}
+```
+
+如何理解这个==非常隐蔽的错误==？
+
+> 基本常识：同一个文件中的所有函数都公用同一个栈。
+
+在执行完函数 ``func()`` 后，虽然返回值指针所指的地址还是目标值，但是随着==后续函数的执行，栈区的值被覆盖==，将出现非常隐蔽的错误。
+
+---
+
+``new`` 和 ``delete``  处理的是堆区的数据，因此如果在函数中执行这两个语句，可以。
+
+```cpp
+XX* func()
+{
+    XX* ab = new XX();
+    return ab;
+}
+```
+
+这样返回指针值，不会被后续函数执行的结果所覆盖。
+
+---
+
+函数指针
+
+```cpp
+#include <iostream>
+
+struct YY {
+    int (*funP)(int a, int b);
+};
+
+int Minus(int a, int b)
+{
+    return a - b;
+}
+int Multiple(int a, int b)
+{
+    return a * b;
+}
+
+int main()
+{
+    YY yy;
+    yy.funP = Minus; // or &Minus
+    std::cout << yy.funP(1, 2) << std::endl;
+    yy.funP = Multiple; // or Multiple
+    std::cout << yy.funP(1, 2) << std::endl;
+    return 0;
+}
+```
+
+---
+
+位段
+
+```cpp
+struct ABC{
+    char a : 1; // a: 1bit 0/1
+    char g : 7; // g: 7bits
+}
+```
+
+---
+
+联合
+
+```cpp
+#include <iostream>
+using namespace std;
+typedef union
+{
+    char a;
+    char b;
+}utype;
+
+int main()
+{
+    utype c;
+    c.a = 'A';
+    cout << c.b << endl;
+    return 0;
+}
+```
+
+---
+
+```cpp
+#include <iostream>
+using namespace std;
+struct bits
+{
+    unsigned char bit0 : 1;
+    unsigned char bit1 : 1;
+    unsigned char bit2 : 1;
+    unsigned char bit3 : 1;
+    unsigned char bit4 : 1;
+    unsigned char bit5 : 1;
+    unsigned char bit6 : 1;
+    unsigned char bit7 : 1;
+};
+
+typedef union
+{
+    char a;
+    bits b;
+}utype;
+
+int main()
+{
+    utype c;
+    c.a = 1;
+    c.b.bit0; // \x01
+    return 0;
+}
+```
+
+先定义的 ``bit0``，位数较低。
+
+---

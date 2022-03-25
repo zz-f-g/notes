@@ -1125,7 +1125,7 @@ $$
 
 ---
 
-## 9 Conjugate Direction Method
+## 9 共轭方向法
 
 ---
 
