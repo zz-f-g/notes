@@ -56,3 +56,106 @@ $$
 
 矢量图
 ![[Pasted image 20220321141512.png]]
+
+---
+
+## week 02
+
+一个质点沿半径 0.01m 的圆周运动，其角位置 $\theta = 2 + 4t^{3}$（SI），求：
+
+1. 在 $t=2\mathrm{s}$ 时，它的速度、加速度的大小各为多少？
+2. 当切向加速度的大小恰好是总加速度的一半时，$\theta$ 值为多少？
+3. 在什么时刻，切向加速度的大小恰好和法向加速度相等？
+
+解：记 $R = 0.01\mathrm{m}$.
+
+$$
+\begin{align*}
+    & \theta = 2 + 4t^{3} \\
+    & \frac{\mathrm{d}\theta}{\mathrm{d}t} = 12 t^{2} \\
+    & \frac{\mathrm{d}^{2}\theta}{\mathrm{d}t^{2}}= 24 t \\
+    & v = R \frac{\mathrm{d}\theta}{\mathrm{d}t} = 0.12 t^{2} \\
+    & a_{n} = R \left(\frac{\mathrm{d}\theta}{\mathrm{d}t} \right)^{2} = 1.44 t^{4} \\
+    & a_{\tau} = R \frac{\mathrm{d}^{2}\theta}{\mathrm{d}t^{2}} = 0.24 t
+\end{align*}
+$$
+
+（1）代入 $t=2$，
+$$
+\begin{align*}
+    & v = 0.48 \mathrm{m} \cdot \mathrm{s}^{-1} \\
+    & a_{n} = 23.04 \mathrm{m} \cdot \mathrm{s}^{-2} \\
+    & a_{\tau} = 0.48 \mathrm{m} \cdot \mathrm{s}^{-2} \\
+    & a = \sqrt{a_{n}^{2} + a_{\tau}^{2}} \approx 23.045 \mathrm{m} \cdot \mathrm{s}^{-2}
+\end{align*}
+$$
+
+（2）
+$$
+\begin{align*}
+    & a_{\tau} = \frac{1}{2} a \Rightarrow a_{n} = \sqrt{3} a_{\tau} \\
+    & 1.44 t^{4} = \sqrt{3} \cdot 0.24 t \\
+    & t = \sqrt[3]{\frac{\sqrt{3}}{6}} = 0.66 \mathrm{s}
+\end{align*}
+$$
+
+（3）
+$$
+\begin{align*}
+    & a_{\tau} = a_{n} \\
+    & 1.44 t^{4} = 0.24 t \\
+    & t = \sqrt[3]{\frac{1}{6}} = 0.55 \mathrm{s}
+\end{align*}
+$$
+
+一颗子弹在一定高度以水平初速度 $v_{0}$ 射出，忽略空气阻力。取枪口为坐标原点，沿 $v_{0}$ 方向为 $Ox$ 轴，竖直方向为 $Oy$ 轴，并取发射时刻为 $t=0$，试求：
+
+1. 子弹在任意时刻 $t$ 的位置坐标及轨道方程。
+2. 子弹在任意时刻 $t$ 的速度，切向加速度和法向加速度。
+
+解：（1）
+
+$$
+\begin{align*}
+    & x = v_{0} t \\
+    & y = \frac{1}{2} g t^{2}
+\end{align*}
+$$
+
+消去时间得到轨道方程
+
+$$
+y = \frac{gx^{2}}{2v_{0}^{2}}
+$$
+
+（2）
+
+速度大小
+
+$$
+v = \sqrt{v_{0}^{2} + g^{2} t^{2}}
+$$
+
+速度方向（与 $Ox$ 轴夹角）
+
+$$
+\alpha = \mathrm{arctan} \frac{gt}{v_{0}}
+$$
+
+切向加速度
+
+$$
+a_{\tau} = g \sin \alpha = \frac{g^{2}t}{\sqrt{v_{0}^{2} + g^{2}t^{2}}}
+$$
+方向和速度方向相同
+
+法向加速度
+$$
+a_{n} = g \cos \alpha = \frac{gv_{0}}{\sqrt{v_{0}^{2} + g^{2}t^{2}}}
+$$
+
+方向和速度方向垂直，和 $-Ox$ 方向夹角为
+
+$$
+\frac{\pi}{2} - \alpha = \arctan \frac{v_{0}}{gt}
+$$

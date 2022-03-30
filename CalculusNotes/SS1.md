@@ -1111,7 +1111,7 @@ Introduction
 
 研究信号的分解
 
-讲信号分解为什么样的简单基本信号？
+将信号分解为什么样的简单基本信号？
 
 分解以后可以利用线性叠加得到总响应。
 $$
@@ -1173,25 +1173,25 @@ f(t) \approx \sum_{i} C_{i} \varphi_{i}(t)
 $$
 误差
 $$
-\varepsilon = \frac{1}{t_{2}-t_{1}} \int_{t_{1}}^{t_{2}} \left(f(t) - \sum_{j} C_{j} \varphi_{j}(t)\right)^{2} \mathrm{d}t
+\varepsilon = \frac{1}{t_{2}-t_{1}} \int_{t_{1}}^{t_{2}} \left(f(t) - \sum_{j=1}^{n} C_{j} \varphi_{j}(t)\right)^{2} \mathrm{d}t
 $$
 当 $n \rightarrow \infty, \varepsilon \rightarrow 0$.
 
 ---
 
-三角函数集
+三角函数集是正交函数集
 
 $$
 \begin{align*}
     & \int_{-\frac{T}{2}}^{\frac{T}{2}} \cos n \omega t \sin m \omega t \mathrm{d} t = 0 \\
-    & \int_{-\frac{T}{2}}^{\frac{T}{2}} \cos n \omega t \cos m \omega t \mathrm{d} t = \begin{cases} 0 & m \neq n \\ K & n = m \end{cases} \\
-    & \int_{-\frac{T}{2}}^{\frac{T}{2}} \sin n \omega t \sin m \omega t \mathrm{d} t = \begin{cases} 0 & m \neq n \\ K & n = m \end{cases}
+    & \int_{-\frac{T}{2}}^{\frac{T}{2}} \cos n \omega t \cos m \omega t \mathrm{d} t = \begin{cases} 0 & m \neq n \\ \frac{T}{2} & n = m \end{cases} \\
+    & \int_{-\frac{T}{2}}^{\frac{T}{2}} \sin n \omega t \sin m \omega t \mathrm{d} t = \begin{cases} 0 & m \neq n \\ \frac{T}{2} & n = m \end{cases}
 \end{align*}
 $$
 
 ---
 
-傅里叶级数存在：
+傅里叶级数存在条件：
 
 1. 能量有限 $\int_{-\infty}^{\infty} f^{2}(t) \mathrm{d}t < \infty$
 2. 满足迪利克雷条件
@@ -1203,26 +1203,43 @@ $$
 ---
 
 $$
-f(t) = a_{0} + \sum_{n=1}^{\infty} (a_{n} \cos n \omega t + b_{n} \sin n \omega t)
+f(t) = a_{0} + \sum_{n=1}^{\infty} (a_{n} \cos n \omega_{1} t + b_{n} \sin n \omega_{1} t)
 $$
 系数公式
 $$
 \begin{align*}
-    & a_{n} = \frac{<f(t), \cos n \omega t>}{<\cos n \omega t, \cos n \omega t>} \\
-    & b_{n} = \frac{<f(t), \sin n \omega t>}{<\sin n \omega t, \sin n \omega t>} \\
+    & a_{n} = \frac{<f(t), \cos n \omega_{1} t>}{<\cos n \omega_{1} t, \cos n \omega_{1} t>} \\
+    & b_{n} = \frac{<f(t), \sin n \omega_{1} t>}{<\sin n \omega_{1} t, \sin n \omega_{1} t>} \\
     &
 \end{align*}
 $$
-Gram-Schmidt
+很像 Gram-Schmidt 方法。
+
+这里的内积记号取积分的定义（离散的向量到连续的定义域）
+
+$$
+\begin{align*}
+    & a_{n} = \frac{2}{T_{1}} \int_{t_{0}}^{t_{0}+T} f(t) \cos n \omega_{1} \mathrm{d}t \\
+    & b_{n} = \frac{2}{T_{1}} \int_{t_{0}}^{t_{0}+T} f(t) \sin n \omega_{1} \mathrm{d}t
+\end{align*}
+$$
+特别地，$a_{0}$ 表示直流分量。
+$$
+a_{0} = \frac{1}{T_{1}} \int_{t_{0}}^{t_{0} + T} f(t) \mathrm{d}t
+$$
 
 ---
 
 周期锯齿波
 $$
 \begin{align*}
-    & f(t) = \frac{A}{T} t (- \frac{T}{2} < t \leq \frac{T}{2}) \\
+    &\left\{ \begin{aligned}
+        &f(t) = \frac{A}{T} t (- \frac{T}{2} < t \leq \frac{T}{2}) \\\\
+        &f(t+T) = f(t)
+    \end{aligned}\right. \\
+    & a_{n} = 0 \\
+    & b_{n} = \frac{2}{T} \int_{- \frac{T}{2}}^{\frac{T}{2}} \frac{A}{T} t \sin \frac{2n \pi t}{T} \mathrm{d}t = \frac{A}{n \pi} (-1)^{n+1} \\
     & f(t) = 0 + \frac{A}{\pi} \sin \omega t - \frac{A}{2\pi} \sin 2 \omega t + \cdots \\
-    & b_{n} = \frac{A}{n \pi} (-1)^{n+1}
 \end{align*}
 $$
 
@@ -1241,6 +1258,11 @@ $$
 $$
 \{ e^{j n \omega t}\}, n = 0, \pm 1, \pm 2, \cdots
 $$
+其正交性的定义：和共轭相乘
+
+$$
+\int_{t_{0}}^{t_{0}+T} e^{jn \omega_{1} t} \overline{e^{jm \omega_{1} t}} \mathrm{d}t = \int_{t_{0}}^{t_{0}+T} e^{j(n-m)\omega t} \mathrm{d}t
+$$
 
 存在负频率，（物理现实中不存在）。
 
@@ -1248,15 +1270,22 @@ $$
 
 $$
 \begin{align*}
-    f(t) &= a_{0} + \sum_{n=1}^{\infty} (a_{n} \cos n \omega t + b_{n} \sin n \omega t) \\
-        &= a_{0} + \sum_{n=1}^{\infty} \left(a_{n} \frac{e^{j n \omega t}-e^{-j n \omega t}}{2} + b_{n} \frac{e^{j n \omega t}-e^{-j n \omega t}}{2j}\right)\\
-        &= F(0) + \sum_{n=-\infty}^{\infty} \left(\frac{a_{n}-jb_{n}}{2}e^{j n \omega t}\right) \\
-        &= \sum F(n) e^{j n \omega t}
+    f(t) &= a_{0} + \sum_{n=1}^{\infty} (a_{n} \cos n \omega_{1} t + b_{n} \sin n \omega_{1} t) \\
+        &= a_{0} + \sum_{n=1}^{\infty} \left(a_{n} \frac{e^{j n \omega_{1} t}+e^{-j n \omega_{1} t}}{2} + b_{n} \frac{e^{j n \omega_{1} t}-e^{-j n \omega_{1} t}}{2j}\right)\\
+        &= F(0) + \sum_{n=1}^{\infty} \left(\frac{a_{n}-jb_{n}}{2}e^{j n \omega_{1} t} + \frac{a_{n}+jb_{n}}{2} e^{-jn \omega_{1} t}\right) \\
+        &= F(0) + \sum_{n=1}^{\infty} [ F(n \omega_{1})e^{jn \omega_{1} t} + F(-n \omega_{1}) e^{-jn \omega_{1} t} ] & (-b_{n} = b_{-n}) \\
+        &= \sum_{-\infty}^{\infty} F(n) e^{j n \omega t}
 \end{align*}
 $$
-???
+
+---
+
 $$
-F(n) = \frac{1}{T} \int_{T} f(t) e^{-j n \omega t} \mathrm{d}t
+\begin{align*}
+    F(n) &= \frac{a_{n}-jb_{n}}{2} \\
+        &= \frac{1}{T} \int_{t_{0}}^{t_{0}+T} f(t) (\cos  n \omega_{1} t - j \sin n \omega_{1} t)\\
+        &= \frac{1}{T} \int_{t_{0}}^{t_{0}+T} f(t) e^{-j n \omega t} \mathrm{d}t
+\end{align*}
 $$
 
 $f(t)$ 和 $F(n)$ 是一一对应的。
@@ -1265,16 +1294,31 @@ $f(t)$ 和 $F(n)$ 是一一对应的。
 
 频谱图
 
+$$
+\begin{align*}
+    & F(n \omega_{1}) = \frac{a_{n}-jb_{n}}{2} = \frac{1}{2} c_{n} e^{j \varphi_{i}}\\
+    & \varphi_{i} = -\arctan \frac{b_{n}}{a_{n}}\\
+    & |F(n \omega_{1})| = \frac{1}{2} c_{n}
+\end{align*}
+$$
+
 - 幅度频谱图 $c_{i}, |F(i)| \sim i$
-- 相位频谱图 $\varphi_{i} \sim $
+- 相位频谱图 $\varphi_{i} \sim i$
+
+奇偶性
+
+- 幅频函数是偶函数
+- 相频函数是奇函数
+
+这一点实际上保证了在指数函数的形式下，得到的==时域函数仍然是实数函数==，虚部为 0.
+
+---
 
 周期信号的频谱图
 
 - 离散性（自变量取孤立的整数值）
 - 谐波性
 - 收敛性（频率越大，幅度越小）
-
-???奇偶函数
 
 ---
 
@@ -1316,27 +1360,60 @@ $$
 \end{align*}
 $$
 
-奇f谐函数
-???
-
 ---
 
-帕塞娃定理
-???
+奇谐函数 $f(t) = -f\left(t \pm \frac{T}{2}\right)$
+
+![[Pasted image 20220330170218.png]]
+
+奇谐函数的偶次谐波分量为 0.
+
 $$
 \begin{align*}
-    P &= \frac{1}{T} \int_{0}^{T} f^{2}(t) \mathrm{d}t \\
-        &= \frac{1}{T} \int_{0}^{T}  \left[a_{0} + \sum(a_{n}\cos n \omega t +b_{n} \sin n \omega t)\right]^{2} \mathrm{d}t \\
-        &= a_{0}^{2} + \frac{1}{2} \sum (a_{n}^{2} + b_{n}^{2})
+    F(n \omega) &= \frac{1}{T_{1}} \int_{- \frac{T_{1}}{2}}^{\frac{T_{1}}{2}} f(t) e^{-jn \omega_{1} t} \mathrm{d}t \\
+        &= \frac{1}{T_{1}} \left( \int_{- \frac{T_{1}}{2}}^{0} f(t) e^{-jn \omega_{1} t}\mathrm{d}t + \int_{0}^{\frac{T_{1}}{2}} f(t) e^{-jn \omega_{1} t}\mathrm{d}t \right) \\
+        &= \frac{1}{T_{1}} \left( -\int_{0}^{\frac{T_{1}}{2}} f\left(t - \frac{T_{1}}{2}\right) e^{-jn \omega_{1} \left(t- \frac{T_{1}}{2}\right)}\mathrm{d}t + \int_{0}^{\frac{T_{1}}{2}} f(t) e^{-jn \omega_{1} t}\mathrm{d}t \right) \\
+        &= \frac{1}{T_{1}} \int_{0}^{\frac{T_{1}}{2}} f(t) \left(e^{-jn \omega_{1} t} - e^{-jn \omega_{1} \left(t- \frac{T_{1}}{2}\right)} \right)\mathrm{d}t \\
+        &= \frac{1}{T_{1}} (1-e^{jn \pi}) \int_{0}^{\frac{T_{1}}{2}} f(t) e^{-jn \omega_{1} t} \mathrm{d}t \\
 \end{align*}
 $$
 
 ---
 
+偶谐函数 $f(t) = f(t \pm \frac{T_{1}}{2})$
+
+![[Pasted image 20220330171817.png]]
+
+同理，偶谐函数的奇次谐波分量为 0.
+
+$$
+F(n \omega_{1}) = \frac{1}{T_{1}}(1+e^{jn \pi}) \int_{0}^{\frac{T_{1}}{2}} f(t) e^{-jn \omega_{1} t} \mathrm{d}t
+$$
+
+---
+
+帕塞娃定理（Parseval's Theorem）
+
+$$
+\begin{align*}
+    P &= \frac{1}{T} \int_{0}^{T} f^{2}(t) \mathrm{d}t \\
+        &= \frac{1}{T} \int_{0}^{T}  \left[a_{0} + \sum_{n=1}^{\infty} (a_{n}\cos n \omega t +b_{n} \sin n \omega t)\right]^{2} \mathrm{d}t \\
+        &= a_{0}^{2} + \frac{1}{2} \sum_{n=1}^{\infty} (a_{n}^{2} + b_{n}^{2}) \\
+        &= \sum_{-\infty}^{\infty} |F(n)|^{2}
+\end{align*}
+$$
+
+功率谱系数：$|F(n)|^{2} \sim n$
+
+---
+
 傅里叶有限级数和最小均方误差
-???
 
 Gibbs 现象
+
+- Fourier 级数在信号的连续点处收敛于信号本身，在信号的不连续点处收敛于信号==左右极限的平均值==。
+- 用有限项级数作为近似时，会不可避免地在信号的不连续处出现==震荡==和==超量==。
+- 超量的幅度不会随着项数的增加而减少，只是会向不连续点压缩，频率增大，能量占比减少。
 
 ---
 
@@ -1352,6 +1429,7 @@ $$
 \begin{align*}
     F(n \omega_{1}) &= \frac{1}{T} \int_{- \frac{T}{2}}^{\frac{T}{2}} f(t) e^{-jn \omega_{1} t} \mathrm{d}t \\
         &= \frac{1}{T} \int_{- \frac{\tau}{2}}^{\frac{\tau}{2}} E e^{-jn\omega_{1}t} \mathrm{d}t \\
+        &= \frac{E}{-jn \omega_{1} T} \left(e^{- \frac{jn \omega_{1} \tau}{2}} - e^{\frac{jn \omega_{1} \tau}{2}}\right) \\
         &= \frac{E \tau}{T} \mathrm{Sa}\left(\frac{n \omega_{1} \tau}{2}\right)
 \end{align*}
 $$
@@ -1368,6 +1446,96 @@ $$
 - 周期三角脉冲
 - 周期半波余弦
 - 周期全波余弦
+
+结论：周期锯齿余弦的振幅以 $\frac{1}{n}$ 的形式衰减，后三者以 $\frac{1}{n^{2}}$ 的形式衰减。
+
+---
+
+周期锯齿波
+$$
+\begin{align*}
+    &\left\{ \begin{aligned}
+        &f(t) = \frac{A}{T} t (- \frac{T}{2} < t \leq \frac{T}{2}) \\\\
+        &f(t+T) = f(t)
+    \end{aligned}\right. \\
+    & a_{n} = 0 \\
+    & b_{n} = \frac{2}{T} \int_{- \frac{T}{2}}^{\frac{T}{2}} \frac{A}{T} t \sin \frac{2n \pi t}{T} \mathrm{d}t = \frac{A}{n \pi} (-1)^{n+1} \\
+    & f(t) = 0 + \frac{A}{\pi} \sin \omega t - \frac{A}{2\pi} \sin 2 \omega t + \cdots \\
+\end{align*}
+$$
+
+---
+
+周期三角脉冲
+$$
+\begin{align*}
+    &\begin{aligned}
+        f(t) &= E\left(1 - \frac{2|t|}{T_{1}}\right) & t \in \left[- \frac{T_{1}}{2}, \frac{T_{1}}{2}\right] \\
+        f(t) &= f(t \pm T_{1}) & t \in \mathbb{R}
+    \end{aligned} \\
+    & b_{n} = 0 \\
+    & a_{0} = \frac{E}{2} \\
+\end{align*}
+$$
+$$
+\begin{align*}
+    a_{n} &= \frac{2}{T_{1}} \int_{- \frac{T_{1}}{2}}^{\frac{T_{1}}{2}} f(t) \cos n \omega_{1} t \mathrm{d}t \\
+        &= \frac{4}{T_{1}} \int_{0}^{\frac{T_{1}}{2}} E\left(1- \frac{2t}{T_{1}}\right) \cos n \omega_{1} t \mathrm{d}t \\
+        &= \frac{2E}{n^{2}\pi^{2}} (1 - \cos n \pi) \\
+    f(t) &= \frac{E}{2} + \frac{2E}{\pi^{2}} \sum_{n=0}^{\infty} \frac{1}{n^{2}}(1-\cos n \pi) 
+\end{align*}
+$$
+
+---
+
+周期半波余弦
+
+$$
+\begin{align*}
+    f(t) &= E \cos \omega_{1} t & t \in \left[- \frac{\pi}{4 \omega_{1}}, \frac{\pi}{4 \omega_{1}}\right] \\
+        &= 0 & t \in \left[\frac{-\pi}{2 \omega_{1}}, - \frac{\pi}{4 \omega_{1}}\right] \cup \left[\frac{\pi}{2 \omega_{1}},  \frac{\pi}{4 \omega_{1}}\right]
+\end{align*}
+$$
+$$
+\begin{align*}
+    b_{n} &= 0 \\
+    a_{0} &= \frac{1}{T_{1}} \int_{- \frac{T_{1}}{4}}^{\frac{T_{1}}{4}} E \cos \omega_{1} t \mathrm{d} t \\
+        &= \frac{E}{2 \pi} \int_{- \frac{\pi}{2}}^{\frac{\pi}{2}} \cos \theta \mathrm{d} \theta \\
+        &= \frac{E}{\pi} \\
+    a_{n} &= \frac{2}{T_{1}} \int_{-\frac{T_{1}}{4}}^{\frac{T_{1}}{4}} E \cos \omega_{1} t \cos n \omega_{1} \mathrm{d} t \\
+        &= \frac{E}{T_{1}} \int_{-\frac{T_{1}}{4}}^{\frac{T_{1}}{4}} [\cos (n-1) \omega_{1} t - \cos (n+1) \omega_{1} t] \mathrm{d} t \\
+        &= \frac{E}{2 \pi} \left(\frac{1}{n-1} \int_{-\left(n-1\right) \frac{\pi}{2}}^{(n-1) \frac{\pi}{2}} \cos \theta \mathrm{d} \theta - \frac{1}{n+1} \int_{-(n+1) \frac{\pi}{2}}^{(n+1) \frac{\pi}{2}} \cos \theta \mathrm{d} \theta\right) \\
+        &= - \frac{2E}{\pi} \frac{1}{n^{2}-1} \cos\frac{n \pi}{2}
+\end{align*}
+$$
+周期半波余弦的频谱只含有直流、基频和偶数倍基频的分量。
+
+---
+
+周期全波余弦信号
+$$
+\begin{align*}
+    f(t) &= E \cos \frac{\omega_{1} t}{2} & t \in \left[- \frac{T_{1}}{2}, \frac{T_{1}}{2}\right] \\
+    b_{n} &= 0 \\
+    a_{0} &= \frac{1}{T_{1}} \int_{-\frac{T_{1}}{2}}^{\frac{T_{1}}{2}} E \cos \frac{\omega_{1} t}{2} \mathrm{d} t \\
+        &= \frac{2E}{\pi} \\
+    a_{n} &= \frac{2}{T_{1}} \int_{-\frac{T_{1}}{2}}^{\frac{T_{1}}{2}} E \cos \left(\frac{\omega_{1} t}{2}\right) \cos (n \omega_{1}t )\mathrm{d} t \\
+        &= \frac{E}{T_{1}} \int_{-\frac{T_{1}}{2}}^{\frac{T_{1}}{2}} \left(\cos \left(n- \frac{1}{2}\right) \omega_{1} t - \cos \left(n+ \frac{1}{2}\right) \omega_{1} t \right) \mathrm{d} t \\
+        &= \frac{(-1)^{n+1}}{4n^{2} -1}\frac{4E}{\pi}
+\end{align*}
+$$
+
+---
+
+频带宽度
+
+引出：第一个零点以内 $[- \frac{2\pi}{\tau}, \frac{2 \pi}{\tau}]$ 包含了大部分的能量，信号的功率主要集中在低频段。
+
+在满足一定失真条件下，信号可以用某段频率范围的信号表示，次频率范围称为**频带宽度**。
+
+对于方波信号，$B_{\omega} = \frac{2 \pi}{\tau}$ 或 $B_{f} = \frac{1}{\tau}$.
+
+对于一般的周期信号，取幅度大于 $\frac{1}{10} |F(n \omega_{1})|_{max}$ 的频率范围为频带宽度。
 
 ---
 
@@ -1390,6 +1558,8 @@ $$
 $$
 
 离散谱 ---> 连续谱
+
+---
 
 不再使用 $F(n \omega_{1})$ 而使用谱密度函数（类似[概率密度函数](PossibilityStatistics#密度函数)）
 
@@ -1433,7 +1603,10 @@ $$
 \begin{align*}
     F(\omega) &= \int_{-\infty}^{\infty} f(t) e^{-j \omega t} \mathrm{d} t \\
         &= \int_{-\infty}^{\infty} (f_{even}(t) + f_{odd}(t))(\cos \omega t - j \sin \omega t) \mathrm{d} t \\
-        &= \int_{-\infty}^{\infty} f_{even}(t) \cos \omega t \mathrm{d} t - j \int_{-\infty}^{\infty} f_{odd}(t) \sin \omega t \mathrm{d}t
+        &= \int_{-\infty}^{\infty} f_{even}(t) \cos \omega t \mathrm{d} t - j \int_{-\infty}^{\infty} f_{odd}(t) \sin \omega t \mathrm{d}t \\
+        &= 2 \int_{0}^{\infty} f_{even}(t) \cos \omega t \mathrm{d} t - j 2 \int_{0}^{\infty} f_{odd}(t) \sin \omega t \mathrm{d} t \\
+    R(\omega) &= 2 \int_{0}^{\infty} f_{even}(t) \cos \omega t \mathrm{d} t \\
+    X(\omega) &= 2 \int_{0}^{\infty} f_{odd}(t) \sin \omega t \mathrm{d} t
 \end{align*}
 $$
 
@@ -1442,5 +1615,71 @@ $$
 傅里叶变换的物理意义
 
 $$
-f(t) = \int_{0}^{\infty} \frac{|F(\omega)|}{\pi} \mathrm{d} \omega \cos [\omega t + \varphi(\omega)]
+\begin{align*}
+    f(t) &= \frac{1}{2 \pi} \int_{-\infty}^{\infty} F(\omega) e^{j \omega t} \mathrm{d} \omega \\
+        &= \frac{1}{2\pi} \int_{-\infty}^{\infty} |F(\omega)| e^{j \varphi_{\omega}} e^{j \omega t} \mathrm{d} \omega \\
+        &= \frac{1}{2\pi} \int_{-\infty}^{\infty} |F(\omega)| \left[\cos (\omega t + \varphi_{\omega}) + j \sin (\omega t + \varphi_{\omega}) \right] \mathrm{d} \omega \\
+        &= \frac{1}{2\pi} \int_{-\infty}^{\infty} |F(\omega)| \cos ( \omega t + \varphi_{\omega}) \mathrm{d} \omega \\
+        &= \int_{0}^{\infty} \frac{|F(\omega)|}{\pi} \mathrm{d} \omega \cos [\omega t + \varphi(\omega)]
+\end{align*}
 $$
+其中已利用 $\varphi_{\omega}$ 是奇函数，第二部分函数的积分主值是 0.
+
+这样就也可以将非周期信号转化称为一系列频率的谐振的和，其振幅为 $\frac{|F(\omega)|}{\pi} \mathrm{d} \omega$.
+
+---
+
+### 3.5
+
+典型非周期信号的频谱
+
+---
+
+- 矩形脉冲信号
+- 单边指数信号
+- 直流信号
+- 符号函数
+- 升余弦脉冲信号
+
+---
+
+矩形脉冲信号
+$$
+\begin{align*}
+    f(t) &= \begin{cases}
+        E & t \in \left[- \frac{\tau}{2}, \frac{\tau}{2}\right] \\
+        0 & else
+        \end{cases} \\
+    F(\omega) &= \int_{-\infty}^{\infty} f(t) e^{-j \omega t} \mathrm{d}t \\
+        &= E \int_{- \frac{\tau}{2}}^{\frac{\tau}{2}} e^{-j \omega t} \mathrm{d} t \\
+        &= E \tau \mathrm{Sa} \left( \frac{\omega \tau}{2} \right)
+\end{align*}
+$$
+
+---
+
+单边指数信号
+$$
+\begin{align*}
+    f(t) & = E e^{-\alpha t} u(t) \\
+    F(\omega) &= \int_{-\infty}^{\infty} E e^{-\alpha t} u(t) e^{-j \omega t} \mathrm{d} t \\
+        &= E \int_{0}^{\infty} e^{-(\alpha+j \omega)t} \mathrm{d} t \\
+        &= \frac{E}{\alpha + j \omega}
+\end{align*}
+$$
+幅频曲线
+$$
+|F(\omega)| = \frac{E}{\sqrt{\alpha^{2} + \omega^{2}}}
+$$
+相频曲线
+$$
+\varphi(\omega) = - \arctan \frac{\omega}{\alpha}
+$$
+
+---
+
+直流信号
+
+不满足绝对可积的条件，因此不能直接积分变换。
+
+取矩形脉冲信号 $\tau \rightarrow \infty$ 的极限

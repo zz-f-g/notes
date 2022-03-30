@@ -1125,11 +1125,11 @@ $$
 
 ---
 
-## 9 共轭方向法
+## 10 共轭方向法
 
 ---
 
-### 9.1
+### 10.1
 
 Introduction
 
@@ -1170,7 +1170,7 @@ $$
 
 ---
 
-### 9.2
+### 10.2
 
 基本的共轭方向法
 
@@ -1221,7 +1221,7 @@ $$
 
 ---
 
-### 9.3
+### 10.3
 
 共轭梯度法
 
@@ -1252,7 +1252,7 @@ $$
 
 ---
 
-### 9.4
+### 10.4
 
 目标函数为一般函数时的共轭梯度法
 
@@ -1278,11 +1278,11 @@ $\alpha_{k}$ 的求解直接使用一维搜索算法。
 
 ---
 
-## 10. 拟牛顿法
+## 11 拟牛顿法
 
 ---
 
-### 10.1
+### 11.1
 
 Introduction
 
@@ -1296,7 +1296,7 @@ Introduction
 
 ---
 
-### 10.2
+### 11.2
 
 黑森矩阵逆矩阵的近似
 
@@ -1403,7 +1403,7 @@ $$
 
 ---
 
-### 10.3
+### 11.3
 
 秩一修正公式
 
@@ -1495,14 +1495,100 @@ Q.E.D
 
 ---
 
-### 10.4
+### 11.4
 
 DFP Algorithm
 
 ---
 
-### 10.5
+### 11.5
 
 BFGS Algorithm
 
 ---
+
+## 12 求解线性方程组
+
+---
+
+## 12.1
+
+最小二乘分析
+
+---
+
+$\boldsymbol{A} \in R^{m \times n}, \mathrm{rank} \boldsymbol{A} = n, \boldsymbol{b} \in R^{m}, m\geq n$.
+
+求解
+$$
+\boldsymbol{A} \boldsymbol{x} = \boldsymbol{b}
+$$
+
+$$
+\boldsymbol{x}^{*} = \mathrm{argmin}_{\boldsymbol{x}} \Vert \boldsymbol{A} \boldsymbol{x} - \boldsymbol{b} \Vert
+$$
+
+---
+
+引理
+$$
+\begin{align*}
+    &\boldsymbol{A} \in R^{m \times n}, m \geq n \\
+    & \mathrm{rank} A = n \iff \mathrm{rank} \boldsymbol{A}^{T}\boldsymbol{A} = n (|\boldsymbol{A}^{T} \boldsymbol{A}| \neq 0)
+\end{align*}
+$$
+ PROOF:
+
+$$
+
+$$
+
+---
+
+## 12.2
+
+递推最小二乘法
+
+---
+
+根据已有的数据求解得到 $\boldsymbol{x}^{*}$，再根据更新的数据，求出更新的 $\boldsymbol{x}^{*}$
+
+---
+
+## 13 无约束优化问题和神经网络
+
+---
+
+### 13.1
+
+introduction
+
+---
+
+神经网络的核心是**确定神经元之间连接的权重**。这个确定的过程称为**训练**。
+
+---
+
+### 13.2
+
+单个神经元训练
+
+---
+
+$$
+y = \sum_{i=1}^{n} w_{i} x_{i} = \boldsymbol{w}^{T} \boldsymbol{x}
+$$
+$\boldsymbol{w}$ 称为权重向量，$\boldsymbol{x}$ 称为输入向量。
+
+---
+
+选定一组数据集
+$$
+\begin{align*}
+    &\boldsymbol{X_{d}} = \begin{bmatrix} 
+        x_{d,1} & x_{d,2} & \cdots  & x_{d,p} \end{bmatrix} \\
+    &\boldsymbol{Y_{d}} = \begin{bmatrix} 
+        y_{d,1} & y_{d,2} & \cdots  & y_{d,p} \end{bmatrix} \\
+     \mathrm{minimize} & \frac{1}{2} \Vert Y_{d} - \boldsymbol{X}_{d}^{T} \boldsymbol{w} \Vert
+\end{align*}
+$$
