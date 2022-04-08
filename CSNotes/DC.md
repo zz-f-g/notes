@@ -795,3 +795,261 @@ CMOS 三态输出门电路
 
 - 噪声容限
 - 扇出系数：输出端最多的带同类门的个数
+
+---
+
+编码器
+
+把输入的每一个高低电平信号转化成一个对应的二进制编码
+
+举例：键盘
+
+---
+
+普通编码器
+
+同一时刻==只允许==输入一个信号。
+
+---
+
+8 线- 3 线编码器：节约数据线的数量。
+
+| I0  | I1  | I2  | I3  | I4  | I5  | I6  | I7  | Y1  | Y2  | Y3  |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 1   | 0   | 0   | 0   | 0   | 0   | 0   | 0   | 0   | 0   | 0   |
+| 0   | 1   | 0   | 0   | 0   | 0   | 0   | 0   | 0   | 0   | 1   |
+| 0   | 0   | 1   | 0   | 0   | 0   | 0   | 0   | 0   | 1   | 0   |
+| 0   | 0   | 0   | 1   | 0   | 0   | 0   | 0   | 0   | 1   | 1   |
+| 0   | 0   | 0   | 0   | 1   | 0   | 0   | 0   | 1   | 0   | 0   |
+| 0   | 0   | 0   | 0   | 0   | 1   | 0   | 0   | 1   | 0   | 1   |
+| 0   | 0   | 0   | 0   | 0   | 0   | 1   | 0   | 1   | 1   | 0   |
+| 0   | 0   | 0   | 0   | 0   | 0   | 0   | 1   | 1   | 1   | 1   | 
+
+---
+
+$$
+\left\{\begin{aligned}
+Y_{2}=& I_{0}^{\prime} I_{1}^{\prime} I_{2}^{\prime} I_{3}^{\prime} I_{4} I_{5}^{\prime} I_{6}^{\prime} I_{7}^{\prime}+I_{0}^{\prime} I_{1}^{\prime} I_{2}^{\prime} I_{3}^{\prime} I_{4}^{\prime} I_{5} I_{6}^{\prime} I_{7}^{\prime} \\
+&+I_{0}^{\prime} I_{1}^{\prime} I_{2}^{\prime} I_{3}^{\prime} I_{4}^{\prime} I_{5}^{\prime} I_{6} I_{7}^{\prime}+I_{0}^{\prime} I_{1}^{\prime} I_{2}^{\prime} I_{3}^{\prime} I_{4}^{\prime} I_{5}^{\prime} I_{6}^{\prime} I_{7} \\
+Y_{1}=& I_{0}^{\prime} I_{1}^{\prime} I_{2} I_{3}^{\prime} I_{4}^{\prime} I_{5}^{\prime} I_{6}^{\prime} I_{7}^{\prime}+I_{0}^{\prime} I_{1}^{\prime} I_{2}^{\prime} I_{3} I_{4}^{\prime} I_{5}^{\prime} I_{6}^{\prime} I_{7}^{\prime} \\
+&+I_{0}^{\prime} I_{1}^{\prime} I_{2}^{\prime} I_{3}^{\prime} I_{4}^{\prime} I_{5}^{\prime} I_{6} I_{7}^{\prime}+I_{0}^{\prime} I_{1}^{\prime} I_{2}^{\prime} I_{3}^{\prime} I_{4}^{\prime} I_{5}^{\prime} I_{6}^{\prime} I_{7} \\
+Y_{0}=& I_{0}^{\prime} I_{1} I_{2}^{\prime} I_{3}^{\prime} I_{4}^{\prime} I_{5}^{\prime} I_{6}^{\prime} I_{7}^{\prime}+I_{0}^{\prime} I_{1}^{\prime} I_{2}^{\prime} I_{3} I_{4}^{\prime} I_{5}^{\prime} I_{6}^{\prime} I_{7}^{\prime} \\
+&+I_{0}^{\prime} I_{1}^{\prime} I_{2}^{\prime} I_{3}^{\prime} I_{4}^{\prime} I_{5} I_{6}^{\prime} I_{7}^{\prime}+I_{0}^{\prime} I_{1}^{\prime} I_{2}^{\prime} I_{3}^{\prime} I_{4}^{\prime} I_{5}^{\prime} I_{6}^{\prime} I_{7}
+\end{aligned}\right.
+$$
+
+利用约束项化简
+
+$$
+\left\{\begin{array}{l}
+Y_{2}=I_{4}+I_{5}+I_{6}+I_{7} \\
+Y_{1}=I_{2}+I_{3}+I_{6}+I_{7} \\
+Y_{0}=I_{1}+I_{3}+I_{5}+I_{7}
+\end{array}\right.
+$$
+
+使用与非门实现
+
+$$
+\left\{\begin{array}{l}
+Y_{2}=\overline{\overline{I_{4}} \cdot \overline{I_{5}} \cdot \overline{I_{6}} \cdot \overline{I_{7}}} \\
+Y_{1}=\overline{\overline{I_{2}} \cdot \overline{I_{3}} \cdot \overline{I_{6}} \cdot \overline{I_{7}}} \\
+Y_{0}=\overline{\overline{I_{1}} \cdot \overline{I_{3}} \cdot \overline{I_{5}} \cdot \overline{I_{7}}}
+\end{array}\right.
+$$
+
+---
+
+如何用与非门实现 8421-BCD 编码器？
+
+---
+
+优先编码器
+
+允许同时输入多个信号，内部进行优先级处理，对优先级最高的进行编码。
+
+---
+
+8 线-3 线优先编码器 SN74LS148N
+
+| ST' | IN'0 | IN'1 | IN'2 | IN'3 | IN'4 | IN'5 | IN'6 | IN'7 | Y'2 | Y'1 | Y'0 | Y'EX | Y'S |
+| --- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | --- | --- | --- | ---- | --- |
+| 1   | X    | X    | X    | X    | X    | X    | X    | X    | 1   | 1   | 1   | 1    | 1   |
+| 0   | 1    | 1    | 1    | 1    | 1    | 1    | 1    | 1    | 1   | 1   | 1   | 1    | 0   |
+| 0   | X    | X    | X    | X    | X    | X    | X    | 0    | 0   | 0   | 0   | 0    | 1   |
+| 0   | X    | X    | X    | X    | X    | X    | 0    | 1    | 0   | 0   | 1   | 0    | 1   |
+| 0   | X    | X    | X    | X    | X    | 0    | 1    | 1    | 0   | 1   | 0   | 0    | 1   |
+| 0   | X    | X    | X    | X    | 0    | 1    | 1    | 1    | 0   | 1   | 1   | 0    | 1   |
+| 0   | X    | X    | X    | 0    | 1    | 1    | 1    | 1    | 1   | 0   | 0   | 0    | 1   |
+| 0   | X    | X    | 0    | 1    | 1    | 1    | 1    | 1    | 1   | 0   | 1   | 0    | 1   |
+| 0   | X    | 0    | 1    | 1    | 1    | 1    | 1    | 1    | 1   | 1   | 0   | 0    | 1   |
+| 0   | 0    | 1    | 1    | 1    | 1    | 1    | 1    | 1    | 1   | 1   | 1   | 0    | 1   |
+
+- $\overline{ST}$ 使能端，低电平有效
+- 扩展端，低电平有效（表明输出是否有意义）
+- Ys，高电平有效（表明是否有输入）
+
+---
+
+集成编码器 74LS147 BCD 编码器
+
+$$
+\left\{\begin{array}{l}
+Y_{{ }_{3}}^{\prime}=\left(I_{8}+I_{9}\right)^{\prime} \\
+Y_{2}^{\prime}=\left(I_{7} I_{8}^{\prime} I_{9}^{\prime}+I_{6} I_{8}^{\prime} I_{9}^{\prime}+I_{5} I_{8}^{\prime} I_{9}^{\prime}+I_{4} I_{8}^{\prime} I_{9}^{\prime}\right)^{\prime} \\
+Y_{1}^{\prime}=\left(I_{7} I_{8}^{\prime} I_{9}^{\prime}+I_{6} I_{8}^{\prime} I_{9}^{\prime}+I_{3} I_{4}^{\prime} I_{5}^{\prime} I_{8}^{\prime} I_{9}^{\prime}+I_{2} I_{4}^{\prime} I_{5}^{\prime} I_{8}^{\prime} I_{9}^{\prime}\right)^{\prime} \\
+Y_{0}^{\prime}=\left(I_{9}+I_{7} I_{8}^{\prime} I_{9}^{\prime}+I_{5} I_{6}^{\prime} I_{8}^{\prime} I_{9}^{\prime}+I_{3} I_{4}^{\prime} I_{6}^{\prime} I_{8}^{\prime} I_{9}^{\prime}+I_{1} I_{2}^{\prime} I_{4}^{\prime} I_{6}^{\prime} I_{8}^{\prime} I_{9}^{\prime}\right)^{\prime}
+\end{array}\right.
+$$
+
+![[Pasted image 20220331135906.png]]
+
+---
+
+将两个 8 线- 3 线编码器结合成 16 线- 4 线编码器
+
+![[Pasted image 20220331140748.png]]
+
+---
+
+译码器
+
+编码的逆运算
+
+- 二进制译码器
+- 二—十进制译码器
+- 显示译码器
+
+---
+
+二进制译码器
+
+3 线—8 线译码器
+
+| A2  | A1  | A0  | Y7  | Y6  | Y5  | Y4  | Y3  | Y2  | Y1  | Y0  |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 0   | 0   | 0   | 0   | 0   | 0   | 0   | 0   | 0   | 0   | 1   |
+| 0   | 0   | 1   | 0   | 0   | 0   | 0   | 0   | 0   | 1   | 0   |
+| 0   | 1   | 0   | 0   | 0   | 0   | 0   | 0   | 1   | 0   | 0   |
+| 0   | 1   | 1   | 0   | 0   | 0   | 0   | 1   | 0   | 0   | 0   |
+......
+
+---
+
+74LS138 
+
+使能端
+
+- S1：高电平有效
+- S2、S3：低电平有效
+
+同时有效才可以译码。
+
+输入高电平有效，输出低电平有效。
+
+---
+
+逻辑表达式
+
+$$
+\left\{\begin{array}{l}
+\overline{Y_{0}}=\overline{\overline{A_{2}} \overline{A_{1}} \overline{A_{0}}}=\overline{m}_{0} \\
+\overline{Y_{1}}=\overline{\overline{A_{2}} \overline{A_{1}} A_{0}}=\overline{m}_{1} \\
+\overline{Y_{2}}=\overline{\overline{A_{2}} A_{1} \overline{A_{0}}}=\overline{m}_{2} \\
+\overline{Y_{3}}=\overline{\overline{A_{2}} A_{1} A_{0}}=\overline{m}_{3} \\
+\overline{Y_{4}}=\overline{A_{2} \overline{A_{1}} \overline{A_{0}}}=\overline{m}_{4} \\
+\overline{Y_{5}}=\overline{A_{2} \overline{A_{1}} A_{0}}=\overline{m}_{5} \\
+\overline{Y_{6}}=\overline{A_{2} A_{1} \overline{A_{0}}}=\overline{m}_{6} \\
+\overline{Y_{7}}=\overline{A_{2} A_{1} A_{0}}=\overline{m}_{7}
+\end{array}\right.
+$$
+
+---
+
+扩展使用：4 线—16 线译码器
+
+- 当 D3 为 0 时，高位片封锁，低位片工作，剩余三位输送给低位片
+- 当 D3 为 1 时，低位片封锁，高位片工作，剩余三位输送给高位片
+
+![[Pasted image 20220331143441.png]]
+
+---
+
+![[Pasted image 20220331143619.png]]
+
+---
+
+二—十进制译码器
+
+8421 BCD  码到十进制数
+
+CT74LS42
+
+$$
+\begin{align*}
+    & \overline{Y_{0}} = \overline{m}_{0} \\
+    & \overline{Y_{1}} = \overline{m}_{1} \\
+    & \overline{Y_{2}} = \overline{m}_{2} \\
+    & \overline{Y_{3}} = \overline{m}_{3} \\
+    & \overline{Y_{4}} = \overline{m}_{4} \\
+    & \overline{Y_{5}} = \overline{m}_{5} \\
+    & \overline{Y_{6}} = \overline{m}_{6} \\
+    & \overline{Y_{7}} = \overline{m}_{7} \\
+    & \overline{Y_{8}} = \overline{m}_{8} \\
+    & \overline{Y_{9}} = \overline{m}_{9} \\
+\end{align*}
+$$
+
+5421，2421，余 3 码？
+
+---
+
+译码器的应用
+
+- 实现存储系统的地址译码
+- 实现逻辑函数
+- 带使能端的译码器可以用作数据分配器
+
+---
+
+地址译码
+
+```mermaid
+flowchart TD
+Input --> |"A1-Am"|d["Adress Decoder"] --> |"0,2^m-1"|S["Storage Matrix"] --> R["Storage Register"] --> Output
+```
+
+---
+
+实现逻辑函数（CT74LS138）
+
+举例：Y = A'B'C + ABC' + C
+
+采用 3 线— 8 线译码器
+
+```
+A2 = A, A1 = B, A0 = C
+
+Y = m1 + m3 + m5 + m6 + m7 
+  = (m1' m3' m5' m6' m7')'
+```
+
+对译码器的对应输出端进行与非操作。
+
+当然也可以实现多输出函数。
+
+用两片芯片实现 4 位逻辑函数？
+
+---
+
+数据分配器
+
+根据地址码将地址开关拨到不同的位置，将数据传递给不同的位置。
+
+---
+
+- 将地址码输入改为从芯片的输入端输入
+- 将数据的输入改为从芯片的控制端输入
+
+![[Pasted image 20220331150055.png]]
+

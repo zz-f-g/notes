@@ -159,3 +159,98 @@ $$
 $$
 \frac{\pi}{2} - \alpha = \arctan \frac{v_{0}}{gt}
 $$
+
+---
+
+## week 03
+
+一条轻绳跨过轻滑轮（滑轮和轴之间的摩擦力可以忽略），在绳的一段挂质量为 $m_{1}$ 的物体，另一端有质量为 $m_{2}$ 的环。当环以相对于绳为恒定的加速度 $a_{2}$ 向下滑动时，物体和环分别相对于地面的加速度是多少？环和绳之间的摩擦力是多少？
+
+解：设环和绳之间的摩擦力为 $f$，物体和环相对于地面的加速度分别是 $a_{10},a_{20}$.
+
+$$
+\begin{align*}
+    m_{2} a_{20} &= m_{2} g - f \\
+    m_{1} a_{10} &= m_{1} g - f \\
+    a_{2} &= a_{10} + a_{20}
+\end{align*}
+$$
+
+解得
+
+$$
+\left\{
+\begin{align*}
+    a_{10} &= \frac{m_{2}a_{2}+(m_{1}-m_{2})g}{m_{1}+m_{2}} \\
+    a_{20} &= \frac{m_{1}a_{2}-(m_{1}-m_{2})g}{m_{1}+m_{2}} \\
+    f &= \frac{m_{1}m_{2}}{m_{1}+m_{2}} (2g-a_{2})
+\end{align*}
+\right.
+$$
+
+![[Pasted image 20220401101636.png]]
+
+解：（１）在 AB 开始运动到 C 开始运动的这段时间，记两者的加速度为 $a$，记 $l = 0.4 \text{m}$
+
+$$
+\begin{align*}
+    m_{A} g &= (m_{A}+m_{B}) a \\
+    l &= \frac{1}{2} a t^{2} \\
+    \Rightarrow t&= \sqrt{\frac{2l(m_{A}+m_{B})}{m_{A}g}} = 0.4 \text{s}
+\end{align*}
+$$
+
+（２）设 C 开始运动前 AB 的速度为 $v_{1}$，要求的速度为 $v_{2}$。动量守恒：
+
+$$
+\begin{align*}
+    2Mv_{1} &= 3M v_{2} \\
+    v_{1} &= at \\
+    \Rightarrow v_{2} &= \frac{2}{3} \sqrt{gl} = \frac{4}{3} \text{m/s}
+\end{align*}
+$$
+
+---
+
+## week 04
+
+一颗子弹在抢通里前进时所受的合力大小为 $F = 400 - \frac{4 \times 10^{5}}{3} t$(SI)，子弹从枪口射出的速度为 300 $\mathrm{m} \cdot \mathrm{s}^{-1}$. 假设子弹离开枪口时合力刚好为零，求：
+
+1. 子弹走完枪筒全长所用的时间；
+2. 子弹在枪筒中所受的冲量；
+3. 子弹的质量。
+
+解：（1）离开枪口时合力为零
+$$
+\begin{align*}
+    &400 - \frac{4\times 10^{5}}{3} t = 0 \\
+    &t = 3 \times 10^{-3} \mathrm{s}
+\end{align*}
+$$
+（2）
+$$
+\begin{align*}
+    I &= \int_{0}^{t} F \mathrm{d}\tau \\
+        &= \int_{0}^{3 \times 10^{-3}} \left(400 - \frac{4 \times 10^{5}}{3} \tau \right)\mathrm{d}\tau \\
+        &= 0.6 \mathrm{N}\cdot \mathrm{s}
+\end{align*}
+$$
+（3）
+$$
+m = \frac{I}{v} = 2 \times 10^{-3} \mathrm{kg}
+$$
+
+一质量均匀分布的柔软轻绳索竖直地悬挂着，绳子的下端刚好接触水平桌面。如果无初速度地释放绳索的上端，绳索将落在桌面上。证明：在绳索下落的过程中，任意时刻作用于桌面的压力，等于已经落到桌面上的绳索所受重力的三倍。
+
+证明：绳索在下落过程中，其内部不存在张力，各质量元自由下落，加速度为 $g$. 记 $t$ 时刻落到桌面上的绳索长度为 $x$
+$$
+\begin{align*}
+    x &= \frac{1}{2} gt^{2} \\
+    v &= gt \\
+    P &= \lambda (L-x)v \\
+    \frac{\mathrm{d}P}{\mathrm{d}t} &= \lambda L g - F \\
+    F &= \lambda gL - \frac{\mathrm{d}P}{\mathrm{d}t} \\
+        &= 3 \lambda g x
+\end{align*}
+$$
+Q.E.D

@@ -1290,6 +1290,8 @@ $$
 
 $f(t)$ 和 $F(n)$ 是一一对应的。
 
+可以观察到，这和指数函数的正交性定义是相关的。
+
 ---
 
 频谱图
@@ -1334,11 +1336,11 @@ $$
 
 冲击序列
 $$
-\delta_{T}(t) = \sum_{n=-\infty}^{\infty} \delta(t-nT)
+\delta_{T}(t) = \sum_{n=-\infty}^{\infty} \delta(t-nT_{1})
 $$
 求频谱图
 $$
-F(n) = \frac{1}{T} \int_{- \frac{T}{2}}^{\frac{T}{2}} \delta(t) e^{-j n \omega t} \mathrm{d}t = \frac{1}{T}
+F(n) = \frac{1}{T_{1}} \int_{- \frac{T_{1}}{2}}^{\frac{T_{1}}{2}} \delta(t) e^{-j n \omega_{1} t} \mathrm{d}t = \frac{1}{T_{1}}
 $$
 满足离散型和谐波性，但是不满足收敛性。
 
@@ -1356,7 +1358,8 @@ $$
 $$
 \begin{align*}
     &a_{n} = 0 \\
-    &F(n) = -j \frac{b_{n}}{2}
+    &F(n) = -j \frac{b_{n}}{2} \\
+    &F(-n) = j \frac{b_{n}}{2}
 \end{align*}
 $$
 
@@ -1389,6 +1392,8 @@ $$
 $$
 F(n \omega_{1}) = \frac{1}{T_{1}}(1+e^{jn \pi}) \int_{0}^{\frac{T_{1}}{2}} f(t) e^{-jn \omega_{1} t} \mathrm{d}t
 $$
+
+其实偶谐函数可以理解为：实际的基波频率是给定的基波频率的两倍，实际的周期是 $\frac{T_{1}}{2}$.
 
 ---
 
@@ -1482,7 +1487,7 @@ $$
     a_{n} &= \frac{2}{T_{1}} \int_{- \frac{T_{1}}{2}}^{\frac{T_{1}}{2}} f(t) \cos n \omega_{1} t \mathrm{d}t \\
         &= \frac{4}{T_{1}} \int_{0}^{\frac{T_{1}}{2}} E\left(1- \frac{2t}{T_{1}}\right) \cos n \omega_{1} t \mathrm{d}t \\
         &= \frac{2E}{n^{2}\pi^{2}} (1 - \cos n \pi) \\
-    f(t) &= \frac{E}{2} + \frac{2E}{\pi^{2}} \sum_{n=0}^{\infty} \frac{1}{n^{2}}(1-\cos n \pi) 
+    f(t) &= \frac{E}{2} + \frac{2E}{\pi^{2}} \sum_{n=1}^{\infty} \frac{1}{n^{2}}(1-\cos n \pi) 
 \end{align*}
 $$
 
@@ -1529,7 +1534,7 @@ $$
 
 频带宽度
 
-引出：第一个零点以内 $[- \frac{2\pi}{\tau}, \frac{2 \pi}{\tau}]$ 包含了大部分的能量，信号的功率主要集中在低频段。
+引出：对于方波信号，第一个零点以内 $[- \frac{2\pi}{\tau}, \frac{2 \pi}{\tau}]$ 包含了大部分的能量，信号的功率主要集中在低频段。
 
 在满足一定失真条件下，信号可以用某段频率范围的信号表示，次频率范围称为**频带宽度**。
 
@@ -1683,3 +1688,363 @@ $$
 不满足绝对可积的条件，因此不能直接积分变换。
 
 取矩形脉冲信号 $\tau \rightarrow \infty$ 的极限
+$$
+\begin{align*}
+    F(\omega) &= \lim_{\tau \rightarrow \infty} E \tau \mathrm{Sa}\left(\frac{\omega \tau}{2}\right) \\
+    &= 2\pi E \lim_{\tau \rightarrow \infty} \frac{\tau}{2\pi} \mathrm{Sa} \left(\frac{\omega \tau}{2}\right) \\
+    &= 2\pi E \delta(\omega)
+\end{align*}
+$$
+
+时域无限宽，频域无线窄。
+
+---
+
+关于 $\delta(\omega)$ 的另一个形式的（假装）证明：
+$$
+\begin{align*}
+    \int_{-\infty}^{\infty} \frac{\tau}{2\pi} \mathrm{Sa} \left(\frac{\omega \tau}{2}\right) \mathrm{d} \omega &= \frac{1}{\pi} \int_{-\infty}^{\infty} \mathrm{Sa} \theta \mathrm{d}\theta \\
+    \int_{-\infty}^{\infty} \mathrm{Sa} \theta \mathrm{d} \theta &= \int_{-\infty}^{\infty} \frac{\sin x}{x} \mathrm{d}x = \pi \\
+    \Rightarrow \int_{-\infty}^{\infty} \frac{\tau}{2\pi} \mathrm{Sa}\left(\frac{\omega \tau}{2}\right) \mathrm{d} \omega &= 1
+\end{align*}
+$$
+当 $\omega = 0$ 时，
+$$
+\lim_{\tau \rightarrow \infty} \frac{\tau}{2\pi} \mathrm{Sa} \left(\frac{\omega \tau}{2}\right) = \lim_{\tau \rightarrow \infty} \frac{\tau}{2\pi} = \infty 
+$$
+
+---
+
+符号函数
+
+同样不满足绝对可积的条件，取下面函数的近似。
+$$
+\begin{align*}
+    \mathrm{sgn}(t) &= \lim_{\alpha \rightarrow 0^{+}}f_{\alpha}(t) = \lim_{\alpha \rightarrow 0^{+}} \left\{\begin{aligned}
+        e^{-\alpha t} && (t>0) \\
+        -e^{\alpha t} && (t<0)
+    \end{aligned}\right. \\
+    F_{\alpha}(\omega) &= \int_{-\infty}^{\infty} f_{\alpha}(t) e^{-j \omega t} \mathrm{d} t \\
+        &= - \int_{-\infty}^{0} e^{(\alpha-j \omega) t} \mathrm{d} t + \int_{0}^{\infty} e^{-(\alpha+j \omega)t} \mathrm{d}t \\
+        &= - \frac{1}{\alpha-j \omega} + \frac{1}{\alpha + j \omega} \\
+        &= -j \frac{2\omega}{\alpha^{2}+\omega^{2}} \\
+    F(\omega) &= \lim_{\alpha \rightarrow 0^{+}} F_{\alpha}(\omega) = -j \frac{2}{\omega}
+\end{align*}
+$$
+
+---
+
+升余弦脉冲信号
+$$
+f(t) = \frac{E}{2} \left(1 + \cos \frac{\pi t}{\tau}\right)
+$$
+$$
+\begin{align*}
+    F(\omega) &= \int_{-\infty}^{\infty} f(t) e^{-j \omega t} \mathrm{d}t \\
+        &= \int_{-\tau}^{\tau} \frac{E}{2} \left(1 + \cos \frac{\pi t}{\tau}\right) e^{-j \omega t} \mathrm{d}t \\
+        &= E \tau \left[\mathrm{Sa}(\omega \tau) + \frac{1}{2} \mathrm{Sa}\left(\omega \tau - \pi\right) + \frac{1}{2} \mathrm{Sa}(\omega \tau + \pi)\right] \\
+        &= \frac{E\sin(\omega \tau)}{\omega\left[1-\left(\frac{\omega \tau}{\pi}\right)^{2}\right]}
+\end{align*}
+$$
+
+---
+
+### 3.6
+
+冲激函数和阶跃函数的傅里叶变换
+
+---
+
+冲激函数
+
+$$
+\begin{align*}
+    F(\omega) &= \int_{-\infty}^{\infty} \delta(t) e^{-j \omega t} \mathrm{d}t \\
+        &= 1
+\end{align*}
+$$
+
+时域无穷窄，频域无穷宽。
+
+$$
+\begin{align*}
+    & \delta(t) \rightarrow 1 \\
+    & \delta(\omega) \rightarrow \frac{1}{2\pi}
+\end{align*}
+$$
+
+---
+
+冲激偶函数
+
+$$
+\begin{align*}
+    F(\omega) &= \int_{-\infty}^{\infty} \delta'(t) e^{- j \omega t} \mathrm{d}t \\
+        &= - (e^{-j \omega t})' \\
+        &= j \omega
+\end{align*}
+$$
+
+---
+
+阶跃函数
+$$
+\begin{align*}
+    u(t) &= \lim_{\alpha \rightarrow 0^{+}} f_{\alpha}(t) = \lim_{\alpha \rightarrow 0} \left\{\begin{aligned}
+            e^{- \alpha t} && (t>0) \\
+            0 && (t<0)
+        \end{aligned} \right. \\
+    F_{\alpha}(t) &= \int_{-\infty}^{\infty} f_{\alpha}(t) e^{-j \omega t} \mathrm{d}t \\
+        &= \int_{0}^{\infty} e^{-\alpha t} e^{-j \omega t} \mathrm{d} t \\
+        &= \frac{1}{\alpha + j \omega} \\
+    F(u(t)) &= \frac{1}{j \omega}
+\end{align*}
+$$
+
+---
+
+这样做是不对的！
+$$
+\begin{align*}
+    F[u(t)] &= \lim_{\alpha \rightarrow 0} \frac{1}{\alpha+j \omega} \\
+        &= \lim_{\alpha \rightarrow 0} \left( \frac{\alpha}{\alpha^{2}+\omega^{2}} - j \frac{\omega}{\alpha^{2}+\omega^{2}} \right) \\
+        &= \lim_{\alpha \rightarrow 0} \left(\frac{1}{\alpha} \frac{1}{1+\left(\frac{\omega}{\alpha}\right)^{2}} - j \frac{\omega}{\alpha^{2}+\omega^{2}}\right) \\
+        &= \pi \delta(0) + \frac{1}{j \omega}
+\end{align*}
+$$
+??? Last Step
+
+---
+
+可以通过符号函数的傅里叶变换得到
+$$
+\begin{align*}
+    u(t) &= \frac{1}{2} + \frac{1}{2} \mathrm{sgn}(t) \\
+    F[u(t)] &= F\left(\frac{1}{2}\right) + \frac{1}{2} \left(-j \frac{2}{\omega}\right) \\
+        &= \frac{1}{2} 2\pi \delta(\omega) + \frac{1}{j \omega} \\
+        &= \pi \delta(\omega) + \frac{1}{j \omega}
+\end{align*}
+$$
+
+---
+
+### 3.7
+
+傅里叶变换的基本性质
+
+---
+
+对称性质
+$$
+\begin{align*}
+    f(t) &= \frac{1}{2\pi} \int_{-\infty}^{\infty} F(\omega) e^{j \omega t} \mathrm{d} t \\
+    f(-t) &= \frac{1}{2\pi}\int_{+\infty}^{-\infty} F(\omega) e^{-j \omega t} \mathrm{d}(-t) \\
+        &= \frac{1}{2\pi}\int_{-\infty}^{\infty} F(\omega) e^{-j \omega t} \mathrm{d}t \\
+        & \omega \leftrightarrow t\\
+    f(-\omega) &= \frac{1}{2\pi} \int_{-\infty}^{\infty} F(t) e^{-j \omega t} \mathrm{d}t \\
+    F[F(t)] &= 2\pi f(- \omega)
+\end{align*}
+$$
+
+---
+
+线性性质
+$$
+F(c_{1}f_{1}(t) + c_{2}f_{2}(t)) = c_{1}F_{1}(\omega) + c_{2}F_{2}(\omega)
+$$
+
+---
+
+时域积分
+
+$$
+\begin{align*}
+    & \int_{-\infty}^{t} f(t) \mathrm{d} t \rightarrow \pi F(0) \delta(\omega) + \frac{F(\omega)}{j \omega}
+\end{align*}
+$$
+
+---
+
+### 3.8
+
+卷积定理
+
+---
+
+- 时域卷积定理
+- 频域卷积定理
+
+$$
+\begin{align*}
+    &f_{1}(t) \rightarrow F_{1}(\omega) \\
+    &f_{2}(t) \rightarrow F_{2}(\omega) \\
+    & f_{1}(t) * f_{2}(t) \rightarrow F_{1}(\omega) \cdot F_{2}(\omega) \\
+    & f_{1}(t) \cdot f_{2}(t) \rightarrow \frac{1}{2\pi} F_{1}(\omega) * F_{2}(\omega)
+\end{align*}
+$$
+
+---
+
+$$
+\begin{align*}
+    F(f_{1}(t) * f_{2}(t)) &= \int_{-\infty}^{\infty} e^{-j \omega t} \left( \int_{-\infty}^{\infty} f_{1}(\tau) f_{2}(t-\tau) \mathrm{d}\tau \right) \mathrm{d} t \\
+        &= \int_{-\infty}^{\infty} f_{1}(\tau) \left(\int_{-\infty}^{\infty} f_{2}(t-\tau) e^{-j\omega(t-\tau)} \mathrm{d}(t-\tau)\right) e^{-j \omega \tau} \mathrm{d} \tau \\
+        &= F_{1}(\omega) F_{2}(\omega)
+\end{align*}
+$$
+
+---
+
+用卷积求解积分函数的频域
+$$
+\begin{align*}
+    & \int_{-\infty}^{t} f(t) \mathrm{d} t = \int_{-\infty}^{\infty} f(\tau) u(t-\tau) \mathrm{d} \tau = f(t) * u(t) \\
+    & \int_{-\infty}^{t} f(t) \mathrm{d} t \rightarrow F(\omega) F(u(t))
+\end{align*}
+$$
+
+---
+
+求系统响应
+
+$$
+\begin{align*}
+    & r(t) = e(t) * h(t) \Rightarrow r(t) = F^{-1}(E(\omega)H(\omega))
+\end{align*}
+$$
+
+但是在实际操作中，常用 Laplace 变换。
+
+---
+
+### 3.9
+
+周期信号的傅里叶变换
+
+---
+
+周期信号不满足绝对可积条件，因此不能仅仅使用定义求。
+
+引入==奇异函数==。
+
+---
+
+正弦函数的傅里叶变换
+
+$$
+\begin{align*}
+    & 1 \rightarrow 2\pi \delta(\omega) \\
+    & F(\cos \omega_{0} t) = F\left( \frac{e^{j \omega_{0} t}+e^{-j \omega_{0} t}}{2}\right) \rightarrow \frac{1}{2} [2\pi \delta(\omega - \omega_{0}) + 2\pi \delta(\omega+\omega_{0})] = \pi \delta(\omega-\omega_{0}) + \pi \delta(\omega+\omega_{0})
+\end{align*}
+$$
+
+---
+
+一般周期信号
+
+$$
+\begin{align*}
+    f(t) &= \sum_{-\infty}^{\infty} F(n \omega_{1}) e^{j n \omega_{1} t} \\
+        & \rightarrow \sum_{-\infty}^{\infty} F(n \omega_{1}) 2\pi \delta(\omega - n \omega_{1}) \\
+        & \rightarrow 2\pi \sum_{-\infty}^{\infty} F(n \omega_{1}) \delta(\omega - n \omega_{1})
+\end{align*}
+$$
+
+周期信号的频谱由一系列冲激函数构成。乘以 Dirac Delta 再乘以 $2\pi$. 频谱密度是无穷大。
+
+---
+
+单个脉冲的傅里叶变换 $F_{0}(\omega)$ 和脉冲经过周期延拓以后的周期函数的傅里叶级数的关系。
+
+$$
+\begin{align*}
+    & f_{0}(t) \rightarrow F_{0}(\omega) \\
+    & F_{0}(\omega) = \int_{-\infty}^{\infty} f_{0}(t) e^{-j \omega t} \mathrm{d} t \\
+    & F(n \omega_{1}) = \frac{1}{T_{1}}\left. F_{0}(\omega) \right|_{\omega=n \omega_{1}}
+\end{align*}
+$$
+???
+
+---
+
+周期单位冲激序列的傅里叶变换
+
+$$
+\begin{align*}
+    & \delta_{T}(t)= \sum_{-\infty}^{\infty} \delta(t - n T_{1}) \\
+    & F(\delta_{T}(t)) = \frac{1}{T_{1}} F(\delta(t)) = \frac{1}{T_{1}} \\
+    & \delta_{T}(t) = \sum_{-\infty}^{\infty} \frac{1}{T_{1}}e^{jn \omega_{1}t} \\
+    & F(\delta_{T}(t)) = \frac{1}{T_{1}} \sum_{-\infty}^{\infty} F(e^{jn \omega_{1} t}) = \frac{2\pi}{T_{1}} \sum_{-\infty}^{\infty} \delta(\omega - n \omega_{1})
+\end{align*}
+$$
+
+---
+
+周期矩形脉冲序列的傅里叶变换
+
+$$
+\begin{align*}
+    &F(n \omega_{1}) =  \frac{E\tau}{T_{1}} \mathrm{Sa} \left(\frac{n \omega_{1} \tau}{2}\right) \\
+    & F(\omega) = E \tau \omega_{1} \mathrm{Sa} \left(\frac{\omega \tau}{2}\right) \delta(\omega - n \omega_{1})
+\end{align*}
+$$
+
+或者使用时域卷积定理
+
+$$
+\begin{align*}
+    & f(t) = f_{0}(t) * \delta_{T}(t) \\
+    & F(\omega) = F_{0}(\omega) \omega_{1} \sum_{-\infty}^{\infty} \delta(\omega - n \omega_{1})
+\end{align*}
+$$
+
+---
+
+### 3.10
+
+抽样信号的傅里叶变换
+
+---
+
+在一定条件下，可以用离散时间信号**代替**连续时间信号而不丢失原来连续时间信号的信息。
+
+- 抽样
+- 理想抽样
+- 矩形脉冲抽样
+
+---
+
+$$
+\begin{align*}
+    & f_{s}(t) = f(t) \cdot p(t) \\
+    & F_{s}(\omega) = \frac{1}{2\pi} F(\omega) * P(\omega)
+\end{align*}
+$$
+
+抽样脉冲取
+
+$$
+\begin{align*}
+    & P(\omega) = 2\pi \sum_{-\infty}^{\infty} P_{n} \delta(\omega - n \omega_{s}) \\
+    & F_{s}(\omega) = \sum_{-\infty}^{\infty} P_{n} F(\omega - n \omega_{s})
+\end{align*}
+$$
+
+---
+
+理想抽样
+
+$$
+\begin{align*}
+    & p(t) = \delta_{T}(t) \\
+    & F_{s}(\omega) = \frac{1}{T_{s}} \sum_{-\infty}^{\infty} F(\omega-n \omega_{s})
+\end{align*}
+$$
+???
+
+---
+
+矩形脉冲信号
+???
+
+---

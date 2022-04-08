@@ -1447,12 +1447,13 @@ $$
     & \boldsymbol{x}_{k+1} = \boldsymbol{x}_{k} + \alpha_{k} \boldsymbol{d}_{k} \\
     & \Delta \boldsymbol{x}_{k} = \alpha_{k} \boldsymbol{d}_{k} \\
     & \boldsymbol{g}_{k+1} = \nabla f(\boldsymbol{x}_{k+1}) \\
-    & \Delta \boldsymbol{g}_{k+1} = \boldsymbol{g}_{k+1} - \boldsymbol{g}_{k} \\
+    & \Delta \boldsymbol{g}_{k} = \boldsymbol{g}_{k+1} - \boldsymbol{g}_{k} \\
     & \boldsymbol{H}_{k+1} = \boldsymbol{H}_{k} + 
         \frac{(\Delta \boldsymbol{x}_{k} - \boldsymbol{H}_{k} \Delta \boldsymbol{g}_{k})(\Delta \boldsymbol{x}_{k} - \boldsymbol{H}_{k} \Delta \boldsymbol{g}_{k})^{T}}
         {\Delta \boldsymbol{g}_{k}^{T} ( \Delta \boldsymbol{x}_{k} - \boldsymbol{H}_{k} \Delta \boldsymbol{g}_{k})}
 \end{align*}
 $$  
+
 ---
 
 下面证明：虽然秩一算法是由 $\boldsymbol{H}_{k+1} \Delta \boldsymbol{g}_{k} = \Delta \boldsymbol{x}_{k}$ 推导得到，但是

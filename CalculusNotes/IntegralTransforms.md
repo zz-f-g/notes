@@ -330,6 +330,7 @@ $$
 L(t^a) = \int_0^{\infty} e^{-st} t^a \mathrm{d}t = \int_0^{\infty} e^{-x} \left(\frac{x}{s} \right)^a \frac{1}{s} \mathrm{d}x = \frac{\Gamma(a+1)}{s^{a+1}}
 $$
 事实上，$\Gamma(a+1) = a! \ (a \in Z)$.
+
 Derivations and Integrations:
 $$
 \begin{align}
