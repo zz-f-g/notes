@@ -187,3 +187,130 @@ Conclusion
 $$
 f(\infty) = \lim_{t \rightarrow \infty} f(t) = \lim_{s \rightarrow 0} s F(s)
 $$
+
+---
+
+## 4.4
+
+Inverse Laplace Transform
+
+---
+
+- 部分分式分解
+    - 一阶实数极点
+    - 重根情况
+    - 共轭复数根
+    - 假分式
+- 留数法
+
+---
+
+一阶实数极点
+$$
+\begin{align*}
+    F(s) &= A(s)/B(s)\\
+        &= \frac{A(s)}{\prod_{i=1}^{n}(s-s_{i})} \\
+        &= \sum_{i=1}^{n} \frac{k_{i}}{s-s_{i}} \\
+    k_{i} &= \lim_{s \rightarrow s_{i}} (s - s_{i})F(s)
+\end{align*}
+$$
+
+---
+
+重根情况
+$$
+\begin{align*}
+    F(s) &= \sum_{i=1}^{n} \frac{k_{i}}{(s-s_{0})^{i}} \\
+    k_{i} &= \frac{1}{(n-i)!} \lim_{s \rightarrow s_{0}} \frac{\mathrm{d}}{\mathrm{d}s} [ (s-s_{0})^{n} F(s) ]
+\end{align*}
+$$
+
+---
+
+共轭复数根情况
+$$
+\begin{align*}
+    F(s) &= \sum_{i=1}^{n} \frac{k_{i}}{s-s_{i}} \\
+    s_{i} = s_{j}^{*} & \Rightarrow k_{i} = k_{j}^{*} \\
+\end{align*}
+$$
+
+---
+
+假分式
+$$
+\begin{align*}
+    F(s) &= p_{m-n}(s) + F'(s) \\
+    \mathscr{L}^{-1}(1) &= \delta(s) \\
+    \mathscr{L}^{-1}(s) &= \delta'(s) \\
+    & \cdots
+\end{align*}
+$$
+
+---
+
+含有 $e^{-\alpha s}$ 项的非有理式
+
+使用 $t$-shifting 性质
+$$
+\begin{align*}
+    F(s) &= e^{-\alpha s} G(s) \\
+    f(t) &= g(t - \alpha) u(t - \alpha)
+\end{align*}
+$$
+
+---
+
+## 4.5
+
+$s$ 域电路分析
+
+---
+
+分析步骤
+
+1. 列 $s$ 域方程
+    - 列 $t$ 域方程，用 Laplace Tranform 转化成 $s$ 域方程
+    - 直接套用元件的 $s$ 域模型
+2. 求解 $s$ 域方程
+3. Inverse Laplace Transform
+
+---
+
+从 $t$ 域方程到 $s$ 方程，可以不考虑零点跳变。
+$$
+\begin{align*}
+    \mathscr{L}\left[\frac{\mathrm{d}f(t)}{\mathrm{d}t}\right] &= s F(s) - f(0_{-}) \\
+    \mathscr{L}\left[\frac{\mathrm{d}^{2}f(t)}{\mathrm{d}t^{2}}\right] &= s^{2} F(s) - sf(0_{-}) - f'(0_{-}) \\
+\end{align*}
+$$
+
+---
+
+电阻
+$$
+\begin{align*}
+    U_{R}(t) &= R I_{R}(t) \\
+    U_{R}(s) &= R I_{R}(s) \\
+\end{align*}
+$$
+
+---
+
+电感
+$$
+\begin{align*}
+    u_{L}(t) &= L \frac{\mathrm{d}i_{L}(t)}{\mathrm{d}t} \\
+    U_{L}(s) &= Ls I_{L}(s)  - Li_{L}(0_{-})
+\end{align*}
+$$
+
+---
+
+电容
+$$
+\begin{aligned}
+    &v_{C}(t)=\frac{1}{C} \int_{-\infty}^{t} i_{C}(\tau) \mathrm{d} t \\
+    &V_{C}(s)=I_{C}(s) \frac{1}{s C}+\frac{1}{s} v_{C}\left(0_{-}\right)
+\end{aligned}
+$$
