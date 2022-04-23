@@ -6,7 +6,7 @@
 
 ---
 
-## 4.1
+### 4.1
 
 introduction
 
@@ -35,7 +35,7 @@ $\sigma = 0$ 时退化为 Fourier Transform.
 
 ---
 
-## 4.2
+### 4.2
 
 Definition of Laplace Transform
 
@@ -120,7 +120,7 @@ More Details in [[IntegralTransforms#Laplace Transformation]]
 
 ---
 
-## 4.3
+### 4.3
 
 Basic Properties of Laplace Transformation
 
@@ -190,7 +190,7 @@ $$
 
 ---
 
-## 4.4
+### 4.4
 
 Inverse Laplace Transform
 
@@ -261,7 +261,7 @@ $$
 
 ---
 
-## 4.5
+### 4.5
 
 $s$ 域电路分析
 
@@ -314,3 +314,299 @@ $$
     &V_{C}(s)=I_{C}(s) \frac{1}{s C}+\frac{1}{s} v_{C}\left(0_{-}\right)
 \end{aligned}
 $$
+
+---
+
+### 4.6
+
+系统函数
+
+---
+
+$$
+r_{zs}(t) = e(t) * h(t) \Rightarrow R_{zs}(s) = E(s)H(s)
+$$
+取 $e(t) = \delta(t)$
+$$
+H(s) = R_{zs} = \mathscr{L}[r(t)] = \mathscr{L}[h(t)]
+$$
+
+---
+
+几种系统函数
+
+- 策动点函数：激励和响应在同一个端口
+    - 策动点导纳
+    - 策动点电阻
+- 转移函数
+    - 转移导纳
+    - 转移电阻
+    - 电压比
+    - 电流比
+
+---
+
+可以利用 $s$ 域元件模型图求解网络函数
+$$
+H(s) = \frac{R_{zs}(s)}{E(s)}
+$$
+其实求的是零状态响应，不用考虑 $s$ 域元件模型的 $0_{-}$ 状态。
+
+---
+
+联结方式
+
+- 并联
+$$
+h(t) = h_{1}(t) + h_{2}(t) \Rightarrow H(s) = H_{1}(s) + H_{2}(s)
+$$
+- 串联
+$$
+h(t) = h_{1}(t) * h_{2}(t) \Rightarrow H(s) = H_{1}(s) H_{2}(s)
+$$
+- 反馈
+$$
+\begin{align*}
+    & E_{2}(s) = E(s) - E_{1}(s) \\
+    & R(s) = E_{2}(s) H_{1}(s) \\
+    & E_{1}(s) = R(s) H_{2}(s) \\
+    & H(s) = \frac{R(s)}{E(s)} = \frac{H_{1}(s)}{1 + H_{1}(s)H_{2}(s)}
+\end{align*}
+$$
+
+---
+
+### 4.7
+
+系统函数的零点、极点
+
+---
+
+Laplace Transform region of convergence is the **intersection** of each Laplace Transform.
+
+---
+
+$$
+X(s) = \frac{A_{p_{1}}(s)}{B_{p_{2}}(s)} = M \frac{\prod_{i=1}^{p_{1}} (s-\alpha_{i})}{\prod_{i=1}^{p_{2}} (s-\beta_{i})}
+$$
+
+- 零点 $\alpha_{i}$ （用空心圆表示）
+- 极点 $\beta_{i}$ （用叉号表示）
+
+可以在复平面上画出零极点图。
+
+---
+
+如果网络函数只有一重极点
+$$
+\begin{align*}
+    H(s) &= \sum_{i=1}^{n} \frac{K_{i}}{s - p_{i}} \\
+    h(t) &= \sum_{i=1}^{n} K_{i} e^{p_{i}t}
+\end{align*}
+$$
+如果网络函数含有多重极点，将一重极点的结果乘以对应的 $t$ 的幂次就可以了。
+
+---
+
+对于物理可行的稳定系统
+$$
+t \rightarrow \infty , h(t) \rightarrow 0
+$$
+极点落在复平面的左半平面上。
+
+如果极点落在虚轴上，要进一步判断极点的重数。重数大于一的极点落在虚轴上一定不稳定。
+
+---
+
+零状态响应的自由响应分量和强迫响应分量
+
+$$
+\begin{align*}
+    E(s) &= \frac{\sum_{l=1}^{u}(s-z_{l})}{\sum_{k=1}^{v}(s-p_{k})} = \sum_{k=1}^{v} \frac{A_{k}}{s-p_{k}} \\
+    H(s) &= \frac{\sum_{j=1}^{m}(s-z_{j})}{\sum_{i=1}^{n}(s-p_{i})} = \sum_{i=1}^{n} \frac{A_{i}}{s-p_{i}} \\
+    R(s) &= \sum_{i=1}^{n} \frac{A_{i}}{s-p_{i}} + \sum_{k=1}^{v} \frac{A_{k}}{s-p_{k}}\\
+    r(t) &= \sum_{i=1}^{n} A_{i} e^{p_{i}t} + \sum_{i=1}^{v} A_{k} e^{p_{k}t}
+\end{align*}
+$$
+第一项为自由响应，第二项为强迫响应。
+
+两者相加的过程中，有可能相加为零，丢失某个频率。
+
+---
+
+暂态响应和稳态响应
+
+- 暂态响应 $\mathrm{Re} (p) < 0$
+- 稳态响应 $\mathrm{Re} (p) = 0$
+
+---
+
+### 4.8
+
+频响特性
+
+---
+
+定义：系统在正弦信号激励下稳态响应随频率变化的情况
+$$
+H(j \omega)
+$$
+前提：系统是**稳定**的**因果**系统（极点全部位于左半复平面）$\lim_{t \rightarrow \infty} h(t) = 0$
+
+---
+
+系统函数 $H(s)$，激励 $e(t) = E_{m} \sin (\omega_{0} t)$，设系统的稳态响应：
+$$
+r_{mm}(t) = E_{m} H_{0} \sin(\omega_{0} t + \varphi_{0})
+$$
+则记频响特性
+$$
+\left. H(s) \right|_{s=j \omega_{0}} = H(j \omega_{0}) = H_{0} e^{j \varphi_{0}}
+$$
+???
+
+---
+
+几种常见滤波器
+
+- 低通滤波器：低频导通，高频阻态
+- 高通滤波器：高频导通，低频阻态
+- 带通滤波器：某一段频率范围导通，其他阻态
+- 带阻滤波器：某一段频率范围阻态，其他导通
+
+---
+
+根据零极点图绘制频响特性曲线
+
+$$
+H(j \omega) = \left. K \frac{\prod_{j=1}^{m}(s - z_{j})}{\prod_{i=1}^{n}(s - p_{i})} \right|_{s=j \omega}
+$$
+
+- 分子项 $j \omega - z_{j} = N_{j} e^{j \psi_{j}}$
+- 分母项 $j \omega - p_{i} = M_{i} e^{j \theta_{i}}$
+
+$$
+\begin{align*}
+    &|H(j \omega)| = K \frac{\prod_{j=1}^{m}N_{j}}{\prod_{i=1}^{n}M_{i}} \\
+    &\varphi(\omega) = \sum_{j=1}^{m}\psi_{j} - \sum_{i=1}^{n}\psi_{i}
+\end{align*}
+$$
+
+---
+
+RC 高通
+$$
+\begin{align*}
+    H(s) &= \frac{R}{R+\frac{1}{sC}} = \frac{s}{s+\frac{1}{RC}} \\
+    N_{1} &= j \omega = \omega e^{j \frac{\pi}{2}} \\
+    M_{1} &= j \omega + \frac{1}{RC} = \sqrt{\omega^{2} + \frac{1}{(RC)^{2}}} e^{j \arctan \omega RC} \\
+    |H(j \omega)| &= \frac{\omega}{\sqrt{\omega^{2} + \frac{1}{(RC)^{2}}}} \\
+    \varphi(j \omega) &= \frac{\pi}{2} - \arctan \omega RC = \arctan \frac{1}{\omega RC}
+\end{align*}
+$$
+
+---
+
+RC 低通
+$$
+H(s) = \frac{1}{RC} \cdot \frac{1}{s+\frac{1}{RC}}
+$$
+同理。
+
+---
+
+带通：低通和高通级联
+
+![[Pasted image 20220421104504.png|500]]
+
+$$
+\begin{align*}
+    H(s) &= \frac{1}{R_{1}C_{1}} \frac{1}{s+ \frac{1}{R_{1}C_{1}}} k \frac{s}{s + \frac{1}{R_{2}C_{2}}} \\
+        &= \frac{ks}{R_{1}C_{1}\left(s+ \frac{1}{R_{1}C_{1}}\right)\left(s+ \frac{1}{R_{2}C_{2}}\right)} \\
+\end{align*}
+$$
+
+如果令 $R_{1}C_{1} \ll R_{2}C_{2}$，那么在频率较小的时候，极点 $- \frac{1}{R_{1}C_{1}}$ 对函数的影响较小，可以仅仅受极点 $- \frac{1}{R_{2}C_{2}}$ 和原点零点的影响，为高通滤波器；在频率较大的时候，可以看作仅仅受极点 $- \frac{1}{R_{1}C_{1}}$ 的影响，为低通滤波器。
+
+$$
+\left. H(j \omega) \right|_{\frac{1}{R_{2}C_{2}} < \omega <  \frac{1}{R_{1}C_{1}}} \approx \frac{k}{R_{1}C_{1}} \frac{j \omega}{\frac{1}{R_{1}C_{1}} \cdot j \omega } = k
+$$
+
+---
+
+### 4.10
+
+全通网络
+
+---
+
+全通网络：对于所有频率的正弦波，都能按照同样的幅度传输系数通过，不发生线性失真。
+$$
+H(j \omega) = C
+$$
+零极点图：零点位于右半复平面，极点位于左半复平面，关于虚数轴镜像对称。
+$$
+H(j \omega) = K \frac{\prod_{i=1}^{n} (j \omega - z_{i})}{\prod_{i=1}^{n} (j \omega - p_{i})}
+$$
+???
+
+---
+
+最小相移系统：零点全部位于左半复平面。
+???
+
+---
+
+### 4.11
+
+线性系统的稳定性
+
+---
+
+定义：BIBO，有界输入得到有界零状态输出。
+
+充分必要条件
+$$
+\int_{-\infty}^{\infty} |h(t)| \mathrm{d} t < \infty
+$$
+
+---
+
+Proof:
+
+充分性
+$$
+\begin{align*}
+    r(t) &= \int_{-\infty}^{\infty} h(\tau) e(t - \tau) \mathrm{d} t \\
+        & \leq M_{e} \int_{-\infty}^{\infty} h(\tau) \mathrm{d}t \\
+        & \leq M_{e} \int_{-\infty}^{\infty} |h(\tau)| \mathrm{d}t \\
+        & \leq M_{e}M_{h}
+\end{align*}
+$$
+
+---
+
+必要性
+$$
+\begin{align*}
+    \exists e(t) &= \mathrm{sgn} [h(t)] \\
+    r(t) &= \int_{-\infty}^{\infty} h(\tau) e(t - \tau) \mathrm{d} t \\
+    r(0) &= \int_{-\infty}^{\infty} h(\tau) e(- \tau) \mathrm{d}t \\
+        &= \int_{-\infty}^{\infty} |h(t)|\mathrm{d}t
+\end{align*}
+$$
+
+---
+
+系统稳定性的判据
+
+- 时域：冲激响应绝对可积
+- 频域：系统函数的极点
+    - 极点全部位于左半平面：稳定
+    - 存在极点位于右半平面：不稳定
+    - 虚轴上存在一阶极点：临界稳定（实际不稳定）
+    - 虚轴上存在高阶极点：不稳定
+
+---
+
+

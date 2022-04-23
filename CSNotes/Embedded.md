@@ -681,3 +681,55 @@ CPU 读取数据的过程（MOV 指令）
 
 不同的外设形成不同的层次，构成计算机组成的**树状体系**。
 
+---
+
+## 单片机概论
+
+---
+
+单片机的最小系统
+
+给定单片机，需要的工作条件
+
+- 电源
+- 时钟系统
+- RESET 系统
+
+---
+
+| 指令系统   | 制造商                       |
+| ---------- | ---------------------------- |
+| x86(AMD64) | Intel, AMD                   |
+| ARM        | ...（买 ARM 核，自造单片机） |
+| RISC-V     | OpenSource                             |
+
+这些指令系统的 CPU 完全不可通用，因为指令的二进制编码不同。
+
+底层的不通用也导致了软件的不通用。
+
+---
+
+操作系统不兼容：不同操作系统之间的软件也是不可移植的，即使 CPU 相同。
+
+```mermaid
+flowchart TD
+hardware --> OS --> software1 & software2 & softwares["..."]
+hardware --> OS' --> software1' & software2' & softwares'["..."]
+```
+
+不同的软件根据操作系统开发。
+
+---
+
+但是通过虚拟解释器，可以让不同的编程语言（java, Python）在不同的 OS 上运行。
+
+```mermaid
+flowchart TD
+hardware --> OS1 --> env1["virtual environment for OS1"] --> Python3
+hardware --> OS2 --> env2["virtual environment for OS2"] --> Python3
+```
+
+---
+
+如何点亮 LED 灯？
+
