@@ -221,12 +221,11 @@ $$
 $$
 \forall x_1, x_2 \in (a,b), f(\frac{x_1 + x_2}{2}) <(>) \frac{f(x_1) + f(x_2)}{2} \\
 $$
-拐点：函数凹凸性的分界点。
+拐点：函数凹凸性的分界点，是**坐标**。
 
 ---
 
-$f(x)$ 在包含 $x_0$ 的开区间内可导且 $f'(x_0)>0$，判断：
-$\exists \delta > 0, f(x)$ 在 $U(x_0, \delta)$ 上单调递增。
+$f(x)$ 在包含 $x_0$ 的开区间内可导且 $f'(x_0)>0$，判断：$\exists \delta > 0, f(x)$ 在 $U(x_0, \delta)$ 上单调递增。
 
 不一定：构造离谱函数:sob:
 $$
@@ -1262,3 +1261,25 @@ Q.E.D
 一般遇到高阶导数直接泰勒中值定理套中间的点就对了。
 
 ---
+
+XIX
+
+Function $f(x)$ is continuous and derivative on $[0,1]$, $f(1) = 0$, constant $a>1$.
+
+To prove: $\exists \xi \in (0,1), f'(\xi) = - \frac{a}{\xi} f(\xi)$
+
+*Sol*:
+
+**构造函数**
+$$
+\begin{align*}
+    F(x) &= x^{a} f(x), F(0) = F(1) = 0 \\
+    F'(x) &= a x^{a-1} f(x) + x^{a} f'(x) \\
+        &= x^{a} [f'(x) + \frac{a}{x} f(x)]
+\end{align*}
+$$
+
+直接应用罗尔定理就结束了。
+
+***Attention***:
+只差一步

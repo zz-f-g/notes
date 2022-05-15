@@ -121,7 +121,7 @@ XOR
 
 加法器
 
-![[Pasted image 20220302102403.png]]
+![[images/image20220302102403.png]]
 
 ---
 
@@ -581,7 +581,7 @@ write 0xccdde register001 // 1+20+3=24 bit
 
 ---
 
-![[Pasted image 20220330105110.png]]
+![[images/image20220330105110.png]]
 
 - ALU：计算单元（加减乘除与或非）
 - 通用寄存器：临时存储中间数据，经常和内存进行互相读写
@@ -618,7 +618,7 @@ CPU 和内存之间有两种角色的总线：
 
 ---
 
-![[Pasted image 20220406100930.png]]
+![[images/image20220406100930.png]]
 
 - AD15 - AD0: Address & Data
 - RD: CPU 等待内存写入数据

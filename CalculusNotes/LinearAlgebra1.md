@@ -457,21 +457,37 @@ $\left[\begin{matrix}I & 0 \\ A_{21}A_{11}^{-1} & I\end{matrix}\right],\ \left[\
 
 舒尔补也可以用来求逆：
 $$
-A=\left[\begin{matrix}A_{11} & A_{12} \\ A_{21} & A_{22}\end{matrix}\right]=
-\left[\begin{matrix}I & 0 \\ A_{21}A_{11}^{-1} & I\end{matrix}\right]
-\left[\begin{matrix}A_{11} & 0 \\ 0 & S\end{matrix}\right]
-\left[\begin{matrix}I & A_{11}^{-1}A_{12} \\ 0 & I\end{matrix}\right]\\
-\begin{aligned}
-\text{then}\
-A^{-1} &=&
-\left[\begin{matrix}I & A_{11}^{-1}A_{12} \\ 0 & I\end{matrix}\right]^{-1}
-\left[\begin{matrix}A_{11}^{-1} & 0 \\ 0 & S^{-1}\end{matrix}\right]
-\left[\begin{matrix}I & 0 \\ A_{21}A_{11}^{-1} & I\end{matrix}\right]^{-1} \\
-&=&
-\left[\begin{matrix}I & -A_{11}^{-1}A_{12} \\ 0 & I\end{matrix}\right]
-\left[\begin{matrix}A_{11}^{-1} & 0 \\ 0 & S^{-1}\end{matrix}\right]
-\left[\begin{matrix}I & 0 \\ -A_{21}A_{11}^{-1} & I\end{matrix}\right]
-\end{aligned}
+\begin{align*}
+    & A = \begin{bmatrix}
+        A_{11} & A_{12} \\ 
+        A_{21} & A_{22}
+    \end{bmatrix}=
+    \begin{bmatrix}
+        I & 0 \\ 
+        A_{21}A_{11}^{-1} & I
+    \end{bmatrix}
+    \begin{bmatrix}
+        A_{11} & 0 \\ 
+        0 & S
+    \end{bmatrix}
+    \begin{bmatrix}
+        I & A_{11}^{-1}A_{12} \\ 
+        0 & I
+    \end{bmatrix}\\
+\end{align*}
+$$
+
+$$
+\begin{align*}
+    A^{-1} &=
+    \begin{bmatrix}I & A_{11}^{-1}A_{12} \\ 0 & I\end{bmatrix}^{-1}
+    \begin{bmatrix}A_{11}^{-1} & 0 \\ 0 & S^{-1}\end{bmatrix}
+    \begin{bmatrix}I & 0 \\ A_{21}A_{11}^{-1} & I\end{bmatrix}^{-1} \\
+    &=
+    \begin{bmatrix}I & -A_{11}^{-1}A_{12} \\ 0 & I\end{bmatrix}
+    \begin{bmatrix}A_{11}^{-1} & 0 \\ 0 & S^{-1}\end{bmatrix}
+    \begin{bmatrix}I & 0 \\ -A_{21}A_{11}^{-1} & I\end{bmatrix}
+\end{align*}
 $$
 
 ### 2.5_矩阵的因式分解
@@ -519,19 +535,23 @@ $$
 
 设 ***A*** 可以只用倍加行变换转化为阶梯型矩阵 ***U***，则
 $$
-E_p\cdots E_1A=U\\
-A=LU,\ L=(E_p\cdots E_1)^{-1}
+\begin{align*}
+&E_p\cdots E_1A=U\\
+&A=LU, L=(E_p\cdots E_1)^{-1}
+\end{align*}
 $$
 其中 $E_i$ 均为单位下三角矩阵。（思考一下平时解多元一次线性方程组时的方法）
 
-可以从此证明 ***L***也为单位下三角矩阵。
+可以从此证明 ***L*** 也为单位下三角矩阵。
 
 由于 $E_p\cdots E_1\cdot L=E_p\cdots E_1\cdot (E_p\cdots E_1)^{-1}=I$，因此将 ***A*** 变换为 ***U*** 的倍加行变换的步骤也将待求的 ***L*** 转化成了单位矩阵。求法见下面的[练习一](#练习)。
 
 对于必须要用行交换才能转化为阶梯型的矩阵，其对应的 ***L*** 将不再是单位下三角矩阵，而是**置换单位下三角矩阵**（指经过行交换以后可以成为单位下三角矩阵）。
 $$
-L=PL'\\
-A=PL'U
+\begin{align*}
+&L=PL'\\
+&A=PL'U
+\end{align*}
 $$
 
 #### 三角因式分解练习
@@ -549,8 +569,10 @@ $$
 
 那么可以找到在这样的变换下将 ***L*** 的第一列转化为单位矩阵的第一列的 ***L***的第一列。
 $$
+\begin{align*}
 L=\left[\begin{matrix}1&0&0&0\\-2&1&0&0\\1&&1&0\\-3&&&1\end{matrix}\right]\\
 L_{i1}=A_{i1}/A_{11}
+\end{align*}
 $$
 这样经过相同的变换：
 $$
@@ -558,7 +580,7 @@ L_{1,i1}=L_{i1}-\frac{A_{i1}}{A_{11}}L_{11}=0,\ \text{when}\ i\neq 1
 $$
 而其他元素不变。
 
-相似地，可以根据 ***A~1~*** 求出 ***L*** 的第二列，以此类推。同过对 ***A*** 的行化简可以求出 ***L***.
+相似地，可以根据 $A_{1}$ 求出 ***L*** 的第二列，以此类推。同过对 ***A*** 的行化简可以求出 ***L***.
 $$
 L=\left[\begin{matrix}1&0&0&0\\-2&1&0&0\\1&-3&1&0\\-3&4&2&1\end{matrix}\right]\\
 $$
@@ -568,16 +590,20 @@ $$
 二、求 $A=\left[\begin{matrix}2&-4&-2&3\\6&-9&-5&8\\2&-7&-3&9\\4&-2&-2&-1\\-6&3&3&4\end{matrix}\right]$ 的 LU 分解。
 
 $$
-A\sim A_1=\left[\begin{matrix}2&-4&-2&3\\0&3&1&-1\\0&-3&-1&6\\0&6&2&-7\\0&-9&-3&13\end{matrix}\right]
-\sim A_2=\left[\begin{matrix}2&-4&-2&3\\0&3&1&-1\\0&0&0&5\\0&0&0&-5\\0&0&0&10\end{matrix}\right]
-\sim A_3=\left[\begin{matrix}2&-4&-2&3\\0&3&1&-1\\0&0&0&5\\0&0&0&0\\0&0&0&0\end{matrix}\right]
+\begin{align*}
+    &A\sim A_1=\left[\begin{matrix}2&-4&-2&3\\0&3&1&-1\\0&-3&-1&6\\0&6&2&-7\\0&-9&-3&13\end{matrix}\right] \\
+    &\sim A_2=\left[\begin{matrix}2&-4&-2&3\\0&3&1&-1\\0&0&0&5\\0&0&0&-5\\0&0&0&10\end{matrix}\right] \\
+    &\sim A_3=\left[\begin{matrix}2&-4&-2&3\\0&3&1&-1\\0&0&0&5\\0&0&0&0\\0&0&0&0\end{matrix}\right]
+\end{align*}
 $$
 由于该矩阵并不是每一列都有主元列，因此从基本的定义出发，重新探寻新的简单方法。
 $$
-A_3=E_3E_2E_1A\\
-E_1=\left[\begin{matrix}1&0&0&0&0\\-3&1&0&0&0\\-1&0&1&0&0\\-2&0&0&1&0\\3&0&0&0&1\end{matrix}\right]\\
-E_2=\left[\begin{matrix}1&0&0&0&0\\0&1&0&0&0\\0&1&1&0&0\\0&-2&0&1&0\\0&3&0&0&1\end{matrix}\right]\\
-E_3=\left[\begin{matrix}1&0&0&0&0\\0&1&0&0&0\\0&0&1&0&0\\0&0&1&1&0\\0&0&-2&0&1\end{matrix}\right]
+\begin{align*}
+&A_3=E_3E_2E_1A\\
+&E_1=\left[\begin{matrix}1&0&0&0&0\\-3&1&0&0&0\\-1&0&1&0&0\\-2&0&0&1&0\\3&0&0&0&1\end{matrix}\right]\\
+&E_2=\left[\begin{matrix}1&0&0&0&0\\0&1&0&0&0\\0&1&1&0&0\\0&-2&0&1&0\\0&3&0&0&1\end{matrix}\right]\\
+&E_3=\left[\begin{matrix}1&0&0&0&0\\0&1&0&0&0\\0&0&1&0&0\\0&0&1&1&0\\0&0&-2&0&1\end{matrix}\right]
+\end{align*}
 $$
 因此在做没有主元的一列时，对于 ***L***，直接补齐下一列即可。
 $$
@@ -594,25 +620,27 @@ $$
 
 事实上，对于练习二，我们还可以对矩阵 ***L***，***U*** 进行简化，去掉多余的 0.
 $$
-A=\left[\begin{matrix}
+\begin{align*}
+&A=\left[\begin{matrix}
 2&-4&-2&3\\
 6&-9&-5&8\\
 2&-7&-3&9\\
 4&-2&-2&-1\\
 -6&3&3&4
 \end{matrix}\right]=LU\\
-L=\left[\begin{matrix}
+&L=\left[\begin{matrix}
 1&0&0\\
 3&1&0\\
 1&-1&1\\
 2&2&-1\\
 -3&-3&2
 \end{matrix}\right]\\
-U=\begin{bmatrix}
+&U=\begin{bmatrix}
 2&-4&-2&3\\
 0&3&1&-1\\
 0&0&0&5
 \end{bmatrix}
+\end{align*}
 $$
 
 对于这样的因式分解，首先要满足必要条件 ***A*** 不可逆。一个 $m\times n$ 的矩阵乘 $n\times m$ 矩阵（$m>n$）的结果必然不可逆。因为后一个矩阵的各列必然线性相关，得到的结果矩阵的各列必然也线性相关。
@@ -621,10 +649,12 @@ $$
 
 基础知识参见第四章中有关秩的内容。
 $$
-A \in R^{m \times n}, \mathrm{rank}A = r
+\begin{align*}
+&A \in R^{m \times n}, \mathrm{rank}A = r
 \Rightarrow A = P E_r Q \\
-E_r = \begin{bmatrix} I_r & O \\ O & O \end{bmatrix} = \sum_{i=1}^r 1_{i \times i} \\
-A = \sum_{i=1}^{r} \vec{p}_i \vec{q}_i^T
+&E_r = \begin{bmatrix} I_r & O \\ O & O \end{bmatrix} = \sum_{i=1}^r 1_{i \times i} \\
+&A = \sum_{i=1}^{r} \vec{p}_i \vec{q}_i^T
+\end{align*}
 $$
 
 ~~~python

@@ -116,7 +116,7 @@ $$
 \end{align*}
 $$
 
-More Details in [[IntegralTransforms#Laplace Transformation]]
+More Details in [Laplace Transformation](IntegralTransforms#Laplace Transformation)
 
 ---
 
@@ -517,7 +517,7 @@ $$
 
 带通：低通和高通级联
 
-![[Pasted image 20220421104504.png|500]]
+![500](images/image20220421104504.png|500)
 
 $$
 \begin{align*}
@@ -609,4 +609,226 @@ $$
 
 ---
 
+## 7 离散时间系统的时域分析
 
+---
+
+### 7.1
+
+introduction
+
+用序列表示离散信号的时候一定要标出 $n=0$ 的位置，前后加大括号。
+
+---
+
+### 7.2
+
+离散时间信号——序列
+
+---
+
+前向差分
+$$
+\Delta x(n) = x(n+1) - x(n)
+$$
+
+后向差分
+$$
+\nabla x(n) = x(n) - x(n-1)
+$$
+
+重排：在重排的过程中，对于压缩（抽取：decimation），会有信息丢失（不可逆）；对于扩展（插值：interpolation），需要有信息补足（可逆）。
+
+---
+
+单位样值信号
+
+$$
+\delta(n) = \left\{\begin{aligned}
+    0 && n \neq 0 \\
+    1 && n = 0
+\end{aligned}\right.
+$$
+
+$$
+x(n) = \sum_{m=-\infty}^{\infty} x(m) \delta(n - m)
+$$
+
+---
+
+单位阶跃信号
+
+$$
+u(n) = \left\{\begin{aligned}
+    1 && n \geq 0 \\
+    0 && n < 0
+\end{aligned}\right. = \sum_{k=0}^{\infty} \delta(n - k)
+$$
+
+$u(0) = 1$
+
+---
+
+矩形序列
+
+$$
+R(n) = \left\{\begin{align*}
+        1 && 0 \leq n \leq N-1 \\
+        0 && \text{else}
+    \end{align*}\right. = u(0) - u(n - N)
+$$
+
+---
+
+斜变序列
+
+$$
+S(n) = n u(n)
+$$
+
+---
+
+单边指数序列
+
+$$
+x(n) = a^{n} u(n)
+$$
+
+- 当 $a < -1$，震荡发散
+- 当 $-1 < a < 0$，震荡衰减
+
+---
+
+正弦序列
+
+$$
+x(n) = \sin \omega_{0} n
+$$
+
+离散域中的频率量纲为**弧度**。
+
+$$
+\omega_{0} \in (-\pi, \pi)
+$$
+
+---
+
+周期序列的条件：$x(n+N) = x(n)$
+
+1. $\frac{2\pi}{\omega_{0}}= N$ 正整数
+2. $\frac{2\pi}{\omega_{0}}= \frac{N}{m}$ 有理数
+3. $\frac{2\pi}{\omega_{0}}\notin Q$ 不是周期序列
+
+---
+
+复指数序列
+
+$$
+\begin{align*}
+    &x(n) = e^{j \omega_{0} n} = \cos \omega_{0} n + j \sin \omega_{0} n \\
+    & |x(n)| = 1 \\
+    & \mathrm{arg} x(n) = \omega_{0} n
+\end{align*}
+$$
+
+---
+
+### 7.3
+
+离散时间系统的数学模型
+
+---
+
+仍然只研究线性、时不变、因果系统。
+
+因果性：系统响应不能出现在激励之前。
+
+差分方程
+
+举例：人口增长（响应）和国外净移民（激励）
+$$
+\begin{align*}
+    & y(n+1) - (1+a-b)y(n) = x(n)
+\end{align*}
+$$
+
+---
+
+从微分方程到差分方程
+
+$$
+\begin{align*}
+    & \frac{\mathrm{d}y}{\mathrm{d}t} = ay(t) + f(t) \\
+    & \frac{\mathrm{d}y}{\mathrm{d}t} \approx \frac{y(t)-y(t-T)}{T} \approx \frac{y(t+T)-y(t)}{T} \\
+    & y(t) = y(nT) \rightarrow y(n) \\
+    & x(t) = x(nT) \rightarrow x(n) \\
+    & \frac{y(n) - y(n-1)}{T} = a y(n) + f(n) \\
+    & y(n) + \frac{1}{1+aT} y(n-1) + \frac{T}{1+aT} f(n)
+\end{align*}
+$$
+
+---
+
+标量乘法器
+
+```mermaid
+flowchart LR
+a["x(n)"] ---> c((a)) ---> b["ax(n)"]
+```
+
+延时器：移位寄存器
+
+```mermaid
+flowchart LR
+a["x(n)"] ---> c(("1/E")) ---> b["x(n-1)"]
+```
+
+---
+
+差分方程通用形式
+
+$$
+\sum_{k=0}^{N} a_{k} y(n - k) = \sum_{r=0}^{M} b_{r} x(n - r)
+$$
+
+阶数：==响应==变量最高和最低序号的差数 $N$
+
+---
+
+### 7.4
+
+线性常系数差分方程的求解
+
+---
+
+迭代法：基础解法，但是无法得到解析解
+
+---
+
+时域经典法：齐次解 + 通解
+
+$$
+\begin{align*}
+    &\sum_{k=0}^{N} a_{k} y(n - k) = \sum_{r=0}^{M} b_{r} x(n - r) \\
+    & \sum_{k=0}^{N} a_{k} y(n - k) = 0 \\
+    & \sum_{k=0}^{N} a_{k} r^{k} = 0
+\end{align*}
+$$
+
+- 无重根 $y_{h}(n) = \sum_{k=1}^{N} C_{k} r_{k}^{n}$
+- 有重根 $y_{h}(n) = \sum_{i=1}^{m} C_{i}n^{m-i}r_{i}^{n} + \sum_{j=m+1}^{N} C_{j} r_{j}^{n}$
+- 有共轭复根
+
+---
+
+差分方程的边界条件
+
+$$
+\{ y(-1), \cdots, y(-N) \}
+$$
+
+---
+
+特解
+
+和连续时域相同

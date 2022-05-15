@@ -115,13 +115,15 @@ P(A) = 0.3 \ P(B) = 0.4 \ P(\overline{A}C) = 0.25 \ P(AB) = 0 \ P(BC) = 0.2 \\
 $$
 
 $$
-P(\overline{A}\overline{B}\overline{C})=1-P(A)-P(B)-P(C)+P(AB)+P(AC)+P(BC)-P(ABC)\\
-=1-P(A)-P(B)-[P(C)-P(AC)]+P(AB)+P(BC)-P(ABC)\\
-=1-P(A)-P(B)-P(\overline{A}C)+P(AB)+P(BC)-P(ABC)\\
-0 \leq P(ABC) \leq P(AB) =0 \ \Rightarrow P(ABC)=0\\
-P(\overline{A}\overline{B}\overline{C})=1-P(A)-P(B)-P(\overline{A}C)+P(AB)+P(BC)\\
-=1-0.3-0.4-0.25+0+0.2\\
-=0.25
+\begin{align*}
+&P(\overline{A}\overline{B}\overline{C})=1-P(A)-P(B)-P(C)+P(AB)+P(AC)+P(BC)-P(ABC)\\
+&=1-P(A)-P(B)-[P(C)-P(AC)]+P(AB)+P(BC)-P(ABC)\\
+&=1-P(A)-P(B)-P(\overline{A}C)+P(AB)+P(BC)-P(ABC)\\
+&0 \leq P(ABC) \leq P(AB) =0 \ \Rightarrow P(ABC)=0\\
+&P(\overline{A}\overline{B}\overline{C})=1-P(A)-P(B)-P(\overline{A}C)+P(AB)+P(BC)\\
+&=1-0.3-0.4-0.25+0+0.2\\
+&=0.25
+\end{align*}
 $$
 
 ### 条件概率
@@ -145,10 +147,12 @@ P(AB) = P(A) P(B)
 $$
 定义（三个事件**相互**独立）：
 $$
-P(AB) = P(A) P(B) \\
-P(BC) = P(B) P(C) \\
-P(AC) = P(A) P(C) \\
-P(ABC) = P(A) P(B) P(C)
+\begin{align*}
+&P(AB) = P(A) P(B) \\
+&P(BC) = P(B) P(C) \\
+&P(AC) = P(A) P(C) \\
+&P(ABC) = P(A) P(B) P(C)
+\end{align*}
 $$
 注意第四个等式的成立并不建立在前三个等式成立的基础上。对于前三个等式成立而第四个等式不成立的情况，称作三个时间**两两独立**。
 
@@ -193,7 +197,7 @@ $$
 
 给定一个随机事件：
 $$
-\forall \omega \in \Omega, \existss X=X(\omega)
+\forall \omega \in \Omega, \exists X=X(\omega)
 $$
 ***X*** 为单值实值函数。定义为一维随机变量。
 
@@ -217,21 +221,23 @@ $$
 ### 常用离散型随机变量
 
 $$
-X \sim B(n,p) \\
-P(X=k) = \binom{n}{k} p^k (1-p)^{n-k} \\
-X = 0, 1, 2, \cdots, n \\
+\begin{align*}
+&X \sim B(n,p) \\
+&P(X=k) = \binom{n}{k} p^k (1-p)^{n-k} \\
+&X = 0, 1, 2, \cdots, n \\
 \\
-X \sim G(p) \\
-P(X=k) = p (1-p)^{k-1} \\
-X = 1, 2, \cdots, \infty \\
+&X \sim G(p) \\
+&P(X=k) = p (1-p)^{k-1} \\
+&X = 1, 2, \cdots, \infty \\
 \\
-X \sim H(N,M,n) \\
-P(X=k) = \frac{\binom{M}{k}\binom{N-M}{n-k}}{\binom{N}{n}} \\
-\max(0, n+M-N) \leq k \leq \min(n,M) \\
+&X \sim H(N,M,n) \\
+&P(X=k) = \frac{\binom{M}{k}\binom{N-M}{n-k}}{\binom{N}{n}} \\
+&\max(0, n+M-N) \leq k \leq \min(n,M) \\
 \\
-X \sim P(\lambda) \ \lambda > 0 \\
-P(X=k) = \frac{\lambda ^k}{k!} e^{-\lambda} \\
-X = 0, 1, 2, \cdots, \infty
+&X \sim P(\lambda) \ \lambda > 0 \\
+&P(X=k) = \frac{\lambda ^k}{k!} e^{-\lambda} \\
+&X = 0, 1, 2, \cdots, \infty
+\end{align*}
 $$
 
 泊松分布中，$\lambda$ 表示数学期望。
@@ -260,8 +266,10 @@ p_{ij} > 0 \\
 $$
 边缘概率函数：
 $$
-p_{i.} = P(X = a_i) = P(\cup_j \{X = a_i, Y = b_j\}) = \sum_j P(X = a_i, Y = b_j) = \sum_j p_{ij} \\
-p_{.j} = P(Y = b_j) = P(\cup_i \{X = a_i, Y = b_j\}) = \sum_i P(X = a_i, Y = b_j) = \sum_i p_{ij}
+\begin{align*}
+&p_{i.} = P(X = a_i) = P(\cup_j \{X = a_i, Y = b_j\}) = \sum_j P(X = a_i, Y = b_j) = \sum_j p_{ij} \\
+&p_{.j} = P(Y = b_j) = P(\cup_i \{X = a_i, Y = b_j\}) = \sum_i P(X = a_i, Y = b_j) = \sum_i p_{ij}
+\end{align*}
 $$
 
 ### 随机变量的独立性和条件分布
@@ -297,8 +305,10 @@ $$
 
 同理有对二维（乃至多维）的随机变量的分布函数的定义：
 $$
-F(x, y) = P(X \leq x, Y \leq y) \\
-P(a < X \leq b, c < Y \leq d) = F(b, d) - F(b, c) - F(a, d) + F(a, c)
+\begin{align*}
+&F(x, y) = P(X \leq x, Y \leq y) \\
+&P(a < X \leq b, c < Y \leq d) = F(b, d) - F(b, c) - F(a, d) + F(a, c)
+\end{align*}
 $$
 二维分布函数的性质：
 
@@ -326,7 +336,7 @@ $$
 - $F(x)$ 是连续函数，且当 $f(x)$ 在 $x = x_0$ 处连续时，$f(x) = F'(x)$
 - $\forall c \in R, P(X = c) = 0$
 - $\forall a < b, P(a < X \leq b) = \int_a^b f(x) \mathrm{d}x$
-- $P(a < X \leq b) = P(a \leq X < b) = P(a \leq X \leq b) = P(a < X < b) $
+- $P(a < X \leq b) = P(a \leq X < b) = P(a \leq X \leq b) = P(a < X < b)$
 
 ### 常用连续性随机变量
 
@@ -456,7 +466,10 @@ $\rho$ 是两个随机变量的相关系数。详细见下一节和[相关系数
 
 定义：
 $$
-\forall -\infty < x, y < \infty, P(X<x, Y<y) = F(x,y) = F_X(x) \cdot F_Y(y) = P(X<x) \cdot P(Y<y)
+\begin{align*}
+&\forall -\infty < x, y < \infty,\\
+& P(X<x, Y<y) = F(x,y) = F_X(x) \cdot F_Y(y) = P(X<x) \cdot P(Y<y)
+\end{align*}
 $$
 等价于：
 $$
@@ -559,8 +572,10 @@ F_V(v) = 1 - (1 - F_X(v)) \cdot (1 - F_Y(v))
 $$
 后面会用到的一个公式：
 $$
+\begin{align*}
 U = \mathrm{max} (X_1, X_2, \cdots, X_n) \Rightarrow F_U(u) = F^n(u) \\
 V = \mathrm{min} (X_1, X_2, \cdots, X_n) \Rightarrow F_V(v) = 1 - (1 - F(v))^n
+\end{align*}
 $$
 
 ## 第四章 随机变量的数字特征
@@ -1034,11 +1049,13 @@ $\chi^2$ 分布的期望，方差和可加性
 PROOF:
 
 $$
-E(Y) = \sum E(X_i^2) = \sum(D(X_i) + (E(X))^2)) = n \\
-D(Y) = \sum D(X_i^2) = \sum [E(X_i^4) - E^2(X_i^2)] \\
-E(X_i^4) = \frac{1}{\sqrt{2 \pi}}\int_{- \infty}^{+ \infty} x^4 e^{- \frac{x^2}{2}} \mathrm{d}x = 3 \times 1 = 3 \\
-E(X_i^2) = \frac{1}{\sqrt{2 \pi}}\int_{- \infty}^{+ \infty} x^2 e^{- \frac{x^2}{2}} \mathrm{d}x = 1 \\
-D(Y) = 2n
+\begin{align*}
+&E(Y) = \sum E(X_i^2) = \sum(D(X_i) + (E(X))^2)) = n \\
+&D(Y) = \sum D(X_i^2) = \sum [E(X_i^4) - E^2(X_i^2)] \\
+&E(X_i^4) = \frac{1}{\sqrt{2 \pi}}\int_{- \infty}^{+ \infty} x^4 e^{- \frac{x^2}{2}} \mathrm{d}x = 3 \times 1 = 3 \\
+&E(X_i^2) = \frac{1}{\sqrt{2 \pi}}\int_{- \infty}^{+ \infty} x^2 e^{- \frac{x^2}{2}} \mathrm{d}x = 1 \\
+&D(Y) = 2n
+\end{align*}
 $$
 
 p 分位数 $\chi^2_p(n)$

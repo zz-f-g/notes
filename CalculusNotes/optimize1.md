@@ -117,7 +117,7 @@ $$
 \lim_{k \rightarrow \infty} \Vert A_{k} - A \Vert = 0
 $$
  Here, $\Vert \cdot \Vert: R^{m \times n} \rightarrow R$ is matrix norm. And a definition:
- $$
+$$
  \Vert A \Vert = \sqrt{\sum_{i, j} \vert a_{ij} \vert^{2}}
 $$
 $$
@@ -129,7 +129,10 @@ $$
 
 The continuousness of $A(\xi): \mathbb{R}^{r} \rightarrow \mathbb{R}^{m \times n}$
 
-To be continued...
+Definition:
+$$
+\lim_{\Vert \boldsymbol{\xi} - \boldsymbol{\xi}_{0} \Vert \rightarrow 0} \Vert \boldsymbol{A}(\boldsymbol{\xi}) - \boldsymbol{A}(\boldsymbol{\xi}_{0}) \Vert = 0
+$$
 
 ---
 
@@ -147,18 +150,6 @@ $$
 &\vec{A}(\vec{x}) = \vec{L}(\vec{x}) + \vec{y} \\
 &\lim_{\vec{x} \rightarrow \vec{x}_{0}, \vec{x}_{0} \in \Omega} \frac{\Vert \vec{f}(\vec{x}) - \vec{A}(\vec{x}) \Vert}{\Vert \vec{\vec{x}} - \vec{\vec{x}}_{0} \Vert} = \vec{0}\\
 &\lim_{\vec{x} \rightarrow \vec{x}_{0}, \vec{x}_{0} \in \Omega} \frac{\Vert \vec{f}(\vec{x}) - \vec{L}(\vec{x}-\vec{x}_{0}) - \vec{f}(\vec{x}_{0}) \Vert}{\Vert \vec{x} - \vec{x}_{0} \Vert} = \vec{0}\\
-&D \vec{f}(\vec{x}_{0}) = \vec{L} = \begin{bmatrix} \frac{\partial \vec{f}}{\partial x_{1}} (\vec{x_{0}}), \cdots, \frac{\partial \vec{f}}{\partial x_{n}} (\vec{x_{0}})\end{bmatrix} \\
-=&\begin{bmatrix} \frac{\partial f_{1}}{\partial x_{1}} & \cdots & \frac{\partial f_{1}}{\partial x_{n}} \\ \cdots &  & \cdots \\ \frac{\partial f_{n}}{\partial x_{1}} & \cdots & \frac{\partial f_{n}}{\partial x_{n}}\end{bmatrix} \\
-\end{align*}
-$$
-
----
-
-$$
-\begin{align*}
-&f: \mathbb{R}^{n}\rightarrow \mathbb{R} \\
-&\nabla f(\vec{x}) = D f(\vec{x})^{T} = \begin{bmatrix} \frac{\partial f}{\partial x_{1}}  \\ \vdots \\ \frac{\partial f}{\partial x_{n}}\end{bmatrix} \\
-&D^{2} f(\vec{x}) = D \nabla f(\vec{x}) = \begin{bmatrix} \frac{\partial}{\partial x_{1}}\left(\frac{\partial f}{\partial x_{1}}\right)  & \cdots & \frac{\partial}{\partial x_{n}}\left(\frac{\partial f}{\partial x_{1}}\right) \\ \vdots &  & \vdots \\ \frac{\partial}{\partial x_{1}}\left(\frac{\partial f}{\partial x_{n}}\right)  & \cdots & \frac{\partial}{\partial x_{n}}\left(\frac{\partial f}{\partial x_{n}}\right)\end{bmatrix}
 \end{align*}
 $$
 
@@ -170,9 +161,83 @@ derivative matrix
 
 ---
 
+$$
+\begin{align*}
+&\vec{L} = D \vec{f}(\vec{x}_{0}) \\
+&= \begin{bmatrix} \frac{\partial \vec{f}}{\partial x_{1}} (\vec{x_{0}}), \cdots, \frac{\partial \vec{f}}{\partial x_{n}} (\vec{x_{0}})\end{bmatrix} \\
+&=\begin{bmatrix} \frac{\partial f_{1}}{\partial x_{1}} & \cdots & \frac{\partial f_{1}}{\partial x_{n}} \\ \cdots &  & \cdots \\ \frac{\partial f_{n}}{\partial x_{1}} & \cdots & \frac{\partial f_{n}}{\partial x_{n}}\end{bmatrix} \\
+\end{align*}
+$$
+
+---
+
+对于单值函数 $f: \mathbb{R}^{n}\rightarrow \mathbb{R}$，定义梯度和黑塞矩阵
+
+$$
+\begin{align*}
+    &\nabla f(\vec{x}) = D f(\vec{x})^{T} 
+    = \begin{bmatrix} 
+        \frac{\partial f}{\partial x_{1}}  \\ 
+        \vdots \\ 
+        \frac{\partial f}{\partial x_{n}}
+    \end{bmatrix} \\
+    & \boldsymbol{F}(\boldsymbol{x)} = D^{2} f(\vec{x}) = D \nabla f(\vec{x}) \\
+    & = \begin{bmatrix} 
+        \frac{\partial}{\partial x_{1}}\left(\frac{\partial f}{\partial x_{1}}\right)  & \cdots & \frac{\partial}{\partial x_{n}}\left(\frac{\partial f}{\partial x_{1}}\right) \\ 
+        \vdots & \ddots & \vdots \\ 
+        \frac{\partial}{\partial x_{1}}\left(\frac{\partial f}{\partial x_{n}}\right)  & \cdots & \frac{\partial}{\partial x_{n}}\left(\frac{\partial f}{\partial x_{n}}\right)
+    \end{bmatrix}
+\end{align*}
+$$
+
+---
+
 ### 5.4
 
 principle of derivative
+
+---
+
+在定义域均为开集的情况下
+$$
+\begin{align*}
+    & g: D \rightarrow \mathbb{R}, D \in \mathbb{R}^{n} \\
+    & \boldsymbol{f}: (a, b) \rightarrow D \\
+    & h(t) = g[\boldsymbol{f}(t)]
+\end{align*}
+$$
+则有求导法则
+$$
+\frac{\mathrm{d}}{\mathrm{d}t} h(t) = D g(\boldsymbol{f}(t)) \cdot D \boldsymbol{f} (t) = (\nabla g[\boldsymbol{f}(t)])^{T} \cdot \begin{bmatrix}
+    f_{1}'(t)  \\ 
+    \vdots \\ 
+    f_{n}'(t)
+\end{bmatrix}
+$$
+
+---
+
+$$
+\begin{align*}
+    & \boldsymbol{f}, \boldsymbol{g}: \mathbb{R}^{n} \rightarrow \mathbb{R}^{m} \\
+    & h: \mathbb{R}^{n} \rightarrow \mathbb{R} \\
+    & h(\boldsymbol{x}) = \boldsymbol{f}(\boldsymbol{x})^{T} \cdot \boldsymbol{g}(\boldsymbol{x})
+\end{align*}
+$$
+乘积求导法则
+$$
+D h(\boldsymbol{x}) = \boldsymbol{f}(\boldsymbol{x})^{T} D \boldsymbol{g}(\boldsymbol{x}) + \boldsymbol{g}(x)^{T} D \boldsymbol{f}(\boldsymbol{x})
+$$
+
+---
+
+其他常用公式
+$$
+\begin{align*}
+    & D (\boldsymbol{y}^{T} \boldsymbol{x}) = \boldsymbol{y}^{T} \\
+    & D (\boldsymbol{x}^{T} \boldsymbol{A} \boldsymbol{x}) = \boldsymbol{x}^{T} (\boldsymbol{A} + \boldsymbol{A}^{T})
+\end{align*}
+$$
 
 ---
 
@@ -204,13 +269,22 @@ Taylor series
 
 ---
 
+$$
+\begin{align*}
+    &f(\boldsymbol{x}) = f(\boldsymbol{x}_{0}) + D f(\boldsymbol{x}_{0}) (\boldsymbol{x} - \boldsymbol{x}_{0}) \\
+    &+ \frac{1}{2} (\boldsymbol{x} - \boldsymbol{x}_{0})^{T} D^{2} f(\boldsymbol{x}_{0}) (\boldsymbol{x} - \boldsymbol{x}_{0}) + o(\Vert \boldsymbol{x}-\boldsymbol{x}_{0} \Vert^{2})
+\end{align*}
+$$
+
+---
+
 ## 6 集合约束和无约束优化问题
 
 ---
 
 ### 6.1
 
-intoduction
+introduction
 
 ---
 
@@ -223,9 +297,9 @@ $$
 从可行集合中找到使得目标函数最小的点。
 $$
 \begin{align*}
-    &f:\mathbb{R}^{n} \rightarrow \mathbb{R}, \text{domain:} \Omega \subset \mathbb{R}^{n}\\
-    &\exists \epsilon > 0, \forall x: 0 < \Vert x - x^{*} \Vert < \epsilon, f(x) > f(x^{*}) \text{ local minimum}\\
-    &\forall x \in \Omega \text{\\} \{x_{0}\}, f(x) > f(x^{*}) \text{ global minimum}\\
+    & &&f:\Omega \rightarrow \mathbb{R}, \Omega \subset \mathbb{R}^{n}\\
+    &\text{local} &&\exists \epsilon > 0, \forall x: 0 < \Vert x - x^{*} \Vert < \epsilon, f(x) > f(x^{*}) \\
+    &\text{global} &&\forall x \in \Omega \text{\\} \{x^{*}\}, f(x) > f(x^{*}) \\
 \end{align*}
 $$
 
@@ -260,15 +334,15 @@ $$
 方向导数
 
 $$
-\frac{\partial f}{\partial d}(x) = \lim_{\alpha \rightarrow 0} \frac{f(x+\alpha d)-f(x)}{\alpha}
+\frac{\partial f}{\partial \boldsymbol{d}}(x) = \lim_{\alpha \rightarrow 0} \frac{f(x+\alpha d)-f(x)}{\alpha}
 $$
 计算简化
 $$
 \begin{align*}
     \phi(\alpha) =& f(x+\alpha d) \\
-    \frac{\partial f}{\partial d}(x) =& \left. \frac{\mathrm{d}}{\mathrm{d}\alpha}  \varphi(\alpha) \right|_{\alpha = 0}\\
-    =& Df(x) d \\
-    =& d^{T}\nabla f(x)
+    \frac{\partial f}{\partial \boldsymbol{d}}(x) =& \left. \frac{\mathrm{d}}{\mathrm{d}\alpha}  \varphi(\alpha) \right|_{\alpha = 0}\\
+    =& Df(x) \boldsymbol{d} \\
+    =& \boldsymbol{d}^{T}\nabla f(x)
 \end{align*}
 $$
 
@@ -330,6 +404,13 @@ $$
 
 - $x = \begin{bmatrix}0 \\ 0\end{bmatrix}, f(x) = x_{1}^{2} - x_{2}^{2}$
 
+$$
+D^{2} f(\boldsymbol{x}) = \begin{bmatrix}
+        2 & 0 \\ 
+        0 & -2
+    \end{bmatrix} \ngeq 0
+$$
+
 ---
 
 定理三：局部极小点的二阶充分条件
@@ -346,13 +427,21 @@ $$
 
 ---
 
-## 7 一维搜索算法
+证明：瑞利不等式
+$$
+\lambda_{min}(\boldsymbol{P}) \Vert \boldsymbol{x} \Vert^{2} \leq \boldsymbol{x}^{T} \boldsymbol{P} \boldsymbol{x} \leq \lambda_{max}(\boldsymbol{P}) \Vert \boldsymbol{x} \Vert^{2}
+$$
+
+$$
+\begin{align*}
+    &\varphi(\alpha) = f(\boldsymbol{x^{*} + \alpha \boldsymbol{d}}) = f(x^{*}) + \frac{1}{2} \boldsymbol{x}^{T} \boldsymbol{F}(\boldsymbol{x}^{*}) \boldsymbol{x}^{T} + o(\Vert \boldsymbol{x} \Vert^{2}) \\
+    &\geq f(\boldsymbol{x}^{*}) + \frac{1}{2} \lambda_{min}(\boldsymbol{F}(\boldsymbol{x}^{*})) \Vert \boldsymbol{x} \Vert^{2} + o(\Vert \boldsymbol{x} \Vert^{2})
+\end{align*}
+$$
 
 ---
 
-$$
-\varphi(\alpha) = f(\boldsymbol{x}_{k}+\alpha \boldsymbol{d}_{k})
-$$
+## 7 一维搜索算法
 
 ---
 
@@ -387,10 +476,12 @@ $$
 
 $$
 \begin{align*}
-    &f(a_{1)}< f(b_{1}) \Rightarrow x^{*} \in [a_{0}, b_{1}]\\
-    &f(a_{1)} \geq f(b_{1}) \Rightarrow x^{*} \in [a_{1}, b_{0}]\\
+    &f(a_{1})< f(b_{1}) \Rightarrow x^{*} \in [a_{0}, b_{1}]\\
+    &f(a_{1}) \geq f(b_{1}) \Rightarrow x^{*} \in [a_{1}, b_{0}]\\
 \end{align*}
 $$
+
+此后还要==充分利用上一次计算的结果==。
 
 ---
 
@@ -404,7 +495,7 @@ $$
     &\rho (b_{1}-a_{0}) = (b_{1}-b_{2}) \\
 \end{align*}
 $$
-![[CalculusNotes/images/Pasted image 20220228210928.png]]
+![](CalculusNotes/images/image20220228210928.png)
 
 ---
 
@@ -423,11 +514,11 @@ $$
 压缩次数
 
 $$
-N = \frac{\ln \frac{b_{0}-a_{0}}{\varepsilon}}{\ln (1-\rho)}
+N = \frac{\ln \frac{\varepsilon}{b_{0}-a_{0}}}{\ln (1-\rho)}
 $$
  向上取整。
 
- ---
+---
 
 ```python
 def GoldenSectionSearch(func, start, end, precision):
@@ -459,11 +550,11 @@ def GoldenSectionSearch(func, start, end, precision):
 
  Fibbonaci Array
 
- ---
+---
 
  如果压缩比 $\rho$ 可以调整？
 
- $$
+$$
  \{\rho_{k}\}
 $$
 
@@ -473,7 +564,7 @@ $$
 
 ---
 
-![[CalculusNotes/images/Pasted image 20220228211007.png]]
+![](images/image20220228211007.png)
 
 ---
 
@@ -1456,7 +1547,7 @@ $$
         \frac{(\Delta \boldsymbol{x}_{k} - \boldsymbol{H}_{k} \Delta \boldsymbol{g}_{k})(\Delta \boldsymbol{x}_{k} - \boldsymbol{H}_{k} \Delta \boldsymbol{g}_{k})^{T}}
         {\Delta \boldsymbol{g}_{k}^{T} ( \Delta \boldsymbol{x}_{k} - \boldsymbol{H}_{k} \Delta \boldsymbol{g}_{k})}
 \end{align*}
-$$  
+$$
 
 ---
 
@@ -1516,7 +1607,7 @@ BFGS Algorithm
 
 ---
 
-## 12.1
+### 12.1
 
 最小二乘分析
 
@@ -1529,34 +1620,187 @@ $$
 \boldsymbol{A} \boldsymbol{x} = \boldsymbol{b}
 $$
 
+或者在无解的情况下，求解
 $$
 \boldsymbol{x}^{*} = \mathrm{argmin}_{\boldsymbol{x}} \Vert \boldsymbol{A} \boldsymbol{x} - \boldsymbol{b} \Vert
 $$
 
 ---
 
-引理
+引理：Gram 矩阵在系数矩阵列满秩时可逆。
 $$
 \begin{align*}
     &\boldsymbol{A} \in R^{m \times n}, m \geq n \\
     & \mathrm{rank} A = n \iff \mathrm{rank} \boldsymbol{A}^{T}\boldsymbol{A} = n (|\boldsymbol{A}^{T} \boldsymbol{A}| \neq 0)
 \end{align*}
 $$
- PROOF:
 
+---
+
+PROOF:
+
+充分性
 $$
-
+\begin{align*}
+    & \text{Nul} (\boldsymbol{A}^{T} \boldsymbol{A}): \boldsymbol{A}^{T} \boldsymbol{A} \boldsymbol{x} = \boldsymbol{0} \\
+    & \forall \boldsymbol{x} \in \text{Nul}(\boldsymbol{A}^{T}\boldsymbol{A}), 
+        \boldsymbol{x}^{T} \boldsymbol{A}^{T} \boldsymbol{A} \boldsymbol{x} = \boldsymbol{0} \\
+    & \Rightarrow \Vert \boldsymbol{A} \boldsymbol{x} \Vert = 0 \\
+    & \mathrm{rank} \boldsymbol{A} = n \Rightarrow \mathrm{Nul} (\boldsymbol{A}^{T}\boldsymbol{A}) = \{ \boldsymbol{0} \} \\
+    & \mathrm{rank} (\boldsymbol{A}^{T} \boldsymbol{A}) = n - \mathrm{dim} \mathrm{Nul} (\boldsymbol{A}^{T}\boldsymbol{A}) = n
+\end{align*}
+$$
+必要性
+$$
+\begin{align*}
+    &\mathrm{Nul}\boldsymbol{A} \subset \mathrm{Nul} \boldsymbol{A}^{T} \boldsymbol{A} = \{ \boldsymbol{0} \} \\
+    & \mathrm{rank} \boldsymbol{A} = n - \mathrm{dim} \mathrm{Nul} \boldsymbol{A} = n
+\end{align*}
 $$
 
 ---
 
-## 12.2
+$$
+\begin{align*}
+    & \text{minimize} && \Vert \boldsymbol{A} \boldsymbol{x} - \boldsymbol{b} \Vert^{2} \\
+    & \text{subject to} && \boldsymbol{x} \in \mathbb{R}^n
+\end{align*}
+$$
+
+$$
+\begin{align*}
+    & f(\boldsymbol{x}) = (\boldsymbol{A} \boldsymbol{x} - \boldsymbol{b})^{T} 
+        (\boldsymbol{A} \boldsymbol{x} - \boldsymbol{b}) \\
+    & =(\boldsymbol{x}^{T} \boldsymbol{A}^{T} - \boldsymbol{b}^{T}) (\boldsymbol{A} \boldsymbol{x} - \boldsymbol{b}) \\
+    & = \boldsymbol{x}^{T} (\boldsymbol{A}^{T} \boldsymbol{A}) \boldsymbol{x} 
+        - 2 \boldsymbol{b}^{T} \boldsymbol{A} \boldsymbol{x} + \boldsymbol{b}^{T} \boldsymbol{b} \\
+    & \boldsymbol{x}^{*} = (\boldsymbol{A}^{T} \boldsymbol{A})^{-1} \boldsymbol{A}^{T} \boldsymbol{b}
+\end{align*}
+$$
+可以证明这个解是全局最小值。
+
+---
+
+根据几何联想，垂线最短，可以猜测：
+$$
+(\boldsymbol{b} - \boldsymbol{A} \boldsymbol{x}^{*})^{T}\boldsymbol{a}_{i} = 0
+$$
+其中 $\boldsymbol{a}_{i}$ 是 $\boldsymbol{A}$ 的列向量。误差和系数矩阵的列空间垂直。
+
+---
+
+正交投影算子 $\boldsymbol{P} = \boldsymbol{A} (\boldsymbol{A}^{T} \boldsymbol{A})^{-1} \boldsymbol{A}^{T}$
+
+证明：对于子空间 $V \subset \mathbb{R}^{m}$，设 $V = \mathrm{Col}\boldsymbol{A}, \boldsymbol{A} \in \mathbb{R}^{m \times n}, m \geq n, \mathrm{rank} \boldsymbol{A} = n$
+$$
+\begin{align*}
+    & \forall \boldsymbol{x}_{V} \in V, \boldsymbol{x}_{V} = \boldsymbol{A} \boldsymbol{c} , \boldsymbol{c} \in \mathbb{R}^{n} \\
+    & \boldsymbol{x}_{V} := \mathrm{argmin}_{\boldsymbol{t}} \Vert \boldsymbol{x} - \boldsymbol{t} \Vert \\
+    & \boldsymbol{c} = (\boldsymbol{A}^{T} \boldsymbol{A})^{-1} \boldsymbol{A}^{T} \boldsymbol{x} \\
+    & \boldsymbol{x}_{V} = \boldsymbol{A} (\boldsymbol{A}^{T} \boldsymbol{A})^{-1} \boldsymbol{A}^{T} \boldsymbol{x}
+\end{align*}
+$$
+
+---
+
+### 12.2
 
 递推最小二乘法
 
 ---
 
 根据已有的数据求解得到 $\boldsymbol{x}^{*}$，再根据更新的数据，求出更新的 $\boldsymbol{x}^{*}$
+
+记 $\boldsymbol{G} = \boldsymbol{A}^{T} \boldsymbol{A}$，基于原有的数据，有
+$$
+\boldsymbol{x}_{0} = \boldsymbol{G}_{0}^{-1} \boldsymbol{A}_{0}^{T} \boldsymbol{b}_{0}
+$$
+加入新数据
+$$
+\begin{align*}
+    & \boldsymbol{G}_{1} = \begin{bmatrix} \boldsymbol{A}_{0}^{T} & \boldsymbol{A}_{1}^{T} \end{bmatrix} \cdot \begin{bmatrix} \boldsymbol{A}_{0} \\ \boldsymbol{A}_{1} \end{bmatrix} = G_{0} + \boldsymbol{A}_{1}^{T} \boldsymbol{A}_{1} \\
+    & \boldsymbol{x}_{1} = \boldsymbol{G}_{1}^{-1} \begin{bmatrix} \boldsymbol{A}_{0}^{T} & \boldsymbol{A}_{1}^{T} \end{bmatrix} \begin{bmatrix} \boldsymbol{b}_{0} \\ \boldsymbol{b}_{1} \end{bmatrix} \\
+    & = \boldsymbol{G}_{1}^{-1} (\boldsymbol{A}_{0}^{T} \boldsymbol{b}_{0} + \boldsymbol{A}_{1}^{T} \boldsymbol{b}_{1}) \\
+    & = \boldsymbol{G}_{1}^{-1} (\boldsymbol{G}_{0} \boldsymbol{x}_{0} + \boldsymbol{A}_{1}^{T} \boldsymbol{b}_{1}) \\
+    & = \boldsymbol{G}_{1}^{-1} (\boldsymbol{G}_{1} - \boldsymbol{A}_{1}^{T} \boldsymbol{A}_{1}) \boldsymbol{x}_{0} + \boldsymbol{G}_{1}^{-1} \boldsymbol{A}_{1}^{T} \boldsymbol{b}_{1} \\
+    & = \boldsymbol{x}_{0} + \boldsymbol{G}_{1}^{-1} \boldsymbol{A}_{1} (\boldsymbol{b}_{1} - \boldsymbol{A}_{1}^{T} \boldsymbol{x}_{0})
+\end{align*}
+$$
+
+---
+
+递推公式
+$$
+\begin{align*}
+    & \boldsymbol{G}_{k+1} = \boldsymbol{G}_{k} + \boldsymbol{A}_{k+1}^{T} \boldsymbol{A}_{k+1} \\
+    & \boldsymbol{x}_{k+1} = \boldsymbol{x}_{k} + \boldsymbol{G}_{k+1}^{-1} \boldsymbol{A}_{k+1}^{T} (\boldsymbol{b}_{k+1} - \boldsymbol{A}_{k+1} \boldsymbol{x}_{k})
+\end{align*}
+$$
+
+根据引理
+$$
+(\boldsymbol{A} + \boldsymbol{UV})^{-1} = \boldsymbol{A}^{-1} - (\boldsymbol{A}^{-1} \boldsymbol{U})(I + \boldsymbol{V}\boldsymbol{A}^{-1} \boldsymbol{U})^{-1}(\boldsymbol{V}\boldsymbol{A}^{-1})
+$$
+记 $\boldsymbol{P}_{k} = \boldsymbol{G}_{k}^{-1}$，则有
+$$
+\boldsymbol{P}_{k+1} = \boldsymbol{P}_{k} - \boldsymbol{P}_{k} \boldsymbol{A}_{k+1}^{T} (I + \boldsymbol{A}_{k+1} \boldsymbol{P}_{k} \boldsymbol{A}_{k+1}^{T}) \boldsymbol{A}_{k+1} \boldsymbol{P}_{k}
+$$
+
+---
+
+如果每次只来一行新数据，即 $\boldsymbol{A}_{k+1} = \boldsymbol{a}_{k+1}^{T}$
+
+$$
+\begin{align*}
+    & \boldsymbol{P}_{k+1} = \boldsymbol{P}_{k} - \frac{\boldsymbol{P}_{k} \boldsymbol{a}_{k+1} \boldsymbol{a}_{k+1}^{T} \boldsymbol{P}_{k}}{1 + \boldsymbol{a}_{k+1}^{T} \boldsymbol{P}_{k} \boldsymbol{a}_{k+1}} \\
+    & \boldsymbol{x}_{k+1} = \boldsymbol{x}_{k} + (b_{k+1} - \boldsymbol{a}_{k+1}^{T} \boldsymbol{x}_{k}) \boldsymbol{P}_{k+1} \boldsymbol{a}_{k+1}
+\end{align*}
+$$
+
+---
+
+### 12.3
+
+线性方程组的最小范数解
+
+---
+
+$$
+\begin{align*}
+    & \text{minimize} && \Vert \boldsymbol{x} \Vert \\
+    & \text{subject to} && \boldsymbol{A} \boldsymbol{x} = \boldsymbol{b} \\
+    & && \boldsymbol{A} \in \mathbb{R}^{m \times n} \\
+    & && \mathrm{rank} \boldsymbol{A} = m \leq n \\
+    & && \boldsymbol{b} \in \mathbb{R}^{m} \\
+    & \Rightarrow && \boldsymbol{x}^{*} = \boldsymbol{A}^{T} (\boldsymbol{A} \boldsymbol{A}^{T})^{-1} \boldsymbol{b}
+\end{align*}
+$$
+
+brief proof:
+
+$$
+\begin{align*}
+    & \boldsymbol{x}^{*T} (\boldsymbol{x} - \boldsymbol{x}^{*}) = \boldsymbol{b}^{T} (\boldsymbol{A} \boldsymbol{A}^{T})^{-1} \boldsymbol{A} (\boldsymbol{x} - \boldsymbol{A}^{T} (\boldsymbol{A}\boldsymbol{A}^{T})^{-1} \boldsymbol{b}) = \boldsymbol{0}
+\end{align*}
+$$
+
+---
+
+### 12.4
+
+Kaczmarz Algorithm
+
+---
+
+### 12.5
+
+一般意义下线性方程组的求解
+
+---
+
+$$
+A^{\dagger}
+$$
 
 ---
 

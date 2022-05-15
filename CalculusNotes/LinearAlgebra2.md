@@ -30,10 +30,11 @@
 证明一个变换是线性变换：
 
 1. ==变换后的元素仍然在原来的空间中==
-2. 加法封闭
-3. 乘法封闭
+    1. 加法封闭
+    2. 乘法封闭
+2. 线性 $L(a \boldsymbol{u} + b \boldsymbol{v}) = a L(\boldsymbol{u}) + b L(\boldsymbol{v})$
 
-举例：
+线性空间举例：
 
 - $R^n$
 - 物理向量的集合
@@ -69,7 +70,7 @@ $$
 表示子空间的两种方式
 
 - 齐次线性方程组的解集
-  - 零空间：满足矩阵方程 $A \vec{x} = \vec{0}$ 的向量的集合。$\text{Nul} A = \{ x: x \in \R^n \text{ and } A \vec{x} = \vec{0} \}$
+  - 零空间：满足矩阵方程 $A \vec{x} = \vec{0}$ 的向量的集合。$\text{Nul} A = \{ x: x \in \mathbb{R}^n \text{ and } A \vec{x} = \vec{0} \}$
 - 向量集合的线性组合
   - 列空间：给出矩阵 $A$ 的列向量张成的空间。$\text{Col} A = \text{Span} \{\vec{a_1}, \cdots, \vec{a_n} \}$
 
@@ -79,7 +80,7 @@ $$
 
 在解线性方程组的过程中，将系数矩阵化为简化阶梯型。
 
-某些情况下发现解集可以表示为线性组合，其中线性组合的权为自由变量的值。
+某些情况下发现解集可以表示为线性组合，其中线性组合的权为自由变量的值（通解）。
 
 两个注意点
 
@@ -89,7 +90,7 @@ $$
 #### 定理三：列空间是子空间
 
 $$
-\text{Col}A = \{ \vec{b}: \vec{b} = A \vec{x} \text{ and } \vec{x} \in \R^n \}
+\text{Col}A = \{ \vec{b}: \vec{b} = A \vec{x} \text{ and } \vec{x} \in \mathbb{R}^n \}
 $$
 
 ### 4.3_线性无关集和基
@@ -110,7 +111,7 @@ $R^n$ 空间的**标准基**：单位矩阵 $I_n$ 的列构成的集合。
 
 CONDITION:
 
-- $S = \{v_1, \cdots, v_p\} \\$
+- $S = \{v_1, \cdots, v_p\}$
 - $H = \text{Span} \{v_1, \cdots, v_p\}$
 - $v_k$ is a linear conbination of other vectors in $S$.
 
@@ -229,6 +230,8 @@ PROOF:
 
 行列式定义：在 $m \times n$ 矩阵 $A$ 中，任取 $k$ 行 $k$ 列，位于这些行列交叉处的元素不改变相对顺序构成的新行列式称为矩阵 $A$ 的 $k$ 阶子式。矩阵的秩定义为矩阵最高阶非零子式的阶数。
 
+阶数高于 $k$ 的所有子式都是 0.
+
 #### 定理十四：秩定理
 
 对于 $m \times n$ 矩阵 $A$：
@@ -246,8 +249,8 @@ PROOF：
 下面的命题等价：（对于 n 阶矩阵 $A$ ）
 
 - 矩阵 $A$ 可逆
-- $A$ 的列是 $\R^n$ 的一组基
-- $A$ 的列空间是 $\R^n$
+- $A$ 的列是 $\mathbb{R}^n$ 的一组基
+- $A$ 的列空间是 $\mathbb{R}^n$
 - $A$ 的列空间的维数是 n
 - $A$ 的秩是 n
 - $A$ 的零空间是 $\{0\}$
@@ -317,8 +320,10 @@ $$
 
 向量空间 $V$ 存在两组基
 $$
+\begin{align*}
 B = \{\vec{b_1}, \cdots, \vec{b_2}\} \\
 C = \{\vec{c_1}, \cdots, \vec{c_2}\}
+\end{align*}
 $$
 存在唯一的坐标变换矩阵
 $$
@@ -432,7 +437,7 @@ $$
 $$
 **特征方程**的解是矩阵 $A$ 的**特征根**。如果 $A$ 是 $n \times n$ 方阵，那么特征方程是**特征根** $\lambda$ 的 $n$ 次多项式，称为**特征多项式**。
 
-特征根 $\lambda$ 作为特征方程根的重数定义为 $\lambda$ 的**（代数）重数**。
+特征根 $\lambda$ 作为特征方程根的重数定义为 $\lambda$ 的**代数重数**。
 $$
 \sum_i n_i = n
 $$
@@ -449,9 +454,10 @@ PROPERTIES:
 
 PROOF：
 $$
-\begin{align}
-|A - \lambda I| = c \Pi_{i=1}^n (\lambda - \lambda_i) = c \left[ \lambda^n - (\sum_{i=1}^n \lambda_i) \lambda^{n-1} + \cdots + (-1)^n \Pi_{i=1}^n \lambda_i \right]
-\end{align}
+\begin{align*}
+    &|A - \lambda I| = c \prod_{i=1}^n (\lambda - \lambda_i) \\
+    &= c \left[ \lambda^{n} - \sum_{i=1}^{n \lambda_{i}} \lambda^{n-1} + \cdots + (-1)^n \prod_{i=1}^n \lambda_i \right]
+\end{align*}
 $$
 根据行列式的性质可知，该多项式的最高项和次高项都来源于矩阵 $A - \lambda I$ 的主对角线元素的积。
 

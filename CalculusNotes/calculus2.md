@@ -137,7 +137,7 @@ $$
 \end{align*}
 $$
 
-（但是存在下面的积分的极限，称为 Cauchy Principle Value in [[ComplexFunction#Cauchy Principle Value]]）
+（但是存在下面的积分的极限，称为 Cauchy Principle Value in [Cauchy Principle Value](ComplexFunction#Cauchy Principle Value)）
 $$
 \lim_{b \rightarrow \infty} \int_{-b}^{b} \frac{x}{\sqrt{1+x^{2}}} \mathrm{d}x = 0
 $$
@@ -173,7 +173,7 @@ $$
         &= \frac{\pi}{2} \int_{0}^{\pi}f(\sin x)\mathrm{d}x
 \end{align*}
 $$
-像极了[[#不定积分]]中的 III 题。
+像极了 [不定积分](#不定积分) 中的 III 题。
 
 ---
 
@@ -606,6 +606,18 @@ $$
 
 IX
 
+$$
+\begin{align*}
+    \int e^{-|x|} &= \left\{ \begin{aligned}
+        - e^{-x} + C && (x \geq 0) \\
+        e^{x} - 2 + C && (x < 0)
+    \end{aligned} \right.
+\end{align*}
+$$
+
+***Attention***:
+原函数连续。
+
 ---
 
 ### 定积分练习
@@ -733,7 +745,7 @@ $$
 $$
 
 **Attention**:
-和复变函数中寻找 [[ComplexFunction#Harmonic Function]] 的过程很像。
+和复变函数中寻找 [Harmonic Function](ComplexFunction#Harmonic Function) 的过程很像。
 
 ---
 
@@ -767,7 +779,7 @@ $$
 $$
 
 ***Attention***:
-这部分内容和线性方程组的特解和通解结合起来理解会比较好。[[LinearAlgebra1#定理六：矩阵方程解的唯一性]]
+这部分内容和线性方程组的特解和通解结合起来理解会比较好。[定理六：矩阵方程解的唯一性](LinearAlgebra1#定理六：矩阵方程解的唯一性)
 
 ---
 

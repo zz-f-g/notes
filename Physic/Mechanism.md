@@ -1,4 +1,4 @@
-# Physic
+# mechanism
 
 ---
 
@@ -289,4 +289,105 @@ $$
     & J_{2} = \frac{1}{12} m_{2}L^{2} + m_{2} \left(\frac{3}{2}L\right)^{2} = \frac{7}{3}m_{2}L^{2} \\
     & J = J_{1} + J_{2} = \frac{m_{1}+7m_{2}}{3} L^{2}
 \end{align*}
+$$
+
+---
+
+## week 06
+
+一根质量为 $m$，长度为 $l$ 的均匀细棒和质量为 $m$ 的小球牢固连接在一端，杆可以绕另一端的水平轴在竖直平面内自由转动。将棒从水平位置自由释放，求：
+
+1. 刚体绕水平轴的转动惯量；
+2. 当下摆至 $\theta$ 角时，刚体的角速度。
+
+解：1
+$$
+J = \frac{1}{3} m l^{2} + m l^{2} = \frac{4}{3} m l^{2}
+$$
+
+2 机械能守恒
+$$
+\begin{align*}
+    mgl \sin \theta + mg \cdot \frac{1}{2} l \sin \theta &= \frac{1}{2} J \dot{\theta}^{2} \\
+    \dot{\theta} &= \frac{3}{2} \sqrt{\frac{g \sin \theta}{l}}
+\end{align*}
+$$
+
+---
+
+如图，长为 $l$ ，质量为 $m$ 的均匀细杆可以绕水平光滑固定轴 $O$ 转动，开始时杆静止在竖直位置，另一质量也为 $m$ 的小球用长为 $l$ 的细绳系在转轴 $O$ 处。现在将小球在竖直平面内拉开至细绳与竖直方向夹角为 $\theta$，使得小球自由下落与杆端发生弹性碰撞，杆的最大偏角为 $\frac{\pi}{3}$，求角度 $\theta$.
+
+![[Pasted image 20220426215835.png]]
+
+解：设碰撞后杆的角速度为 $\omega$，小球的速度为 $v$ （向左为正方向）
+
+机械能守恒
+$$
+mgl(1 - \cos \theta) = \frac{1}{2} \cdot \frac{1}{3} m l^{2} \omega^{2} + \frac{1}{2} m v^{2}
+$$
+绕转轴的角动量守恒
+$$
+ml \sqrt{2gl (1 - \cos \theta)} = \frac{1}{3} ml^{2} \omega + mlv
+$$
+解得
+$$
+\omega = \frac{3}{2} \sqrt{\frac{2g(1-\cos \theta)}{l}}
+$$
+机械能守恒
+$$
+mg \frac{l}{2} \left(1 - \cos \frac{\pi}{3}\right) = \frac{1}{2} \cdot \frac{1}{3} m l^{2} \omega^{2}
+$$
+解得
+$$
+\theta = \arccos \frac{2}{3} = 48.19 \degree
+$$
+
+---
+
+## week 07
+
+一事件在 $S'$ 系中发生在 $x' = 60 \text{m}, t' = 8 \times 10^{-8} \text{s}(y' = z' = 0)$ . $S'$ 相对于 $S$ 系的速度为 $\frac{3}{5}c$ 沿 $x$ 轴正方向。$S, S'$ 的原点在 $t = t' = 0$ 时对齐。求这一事件在 $S$ 系中的坐标。
+
+解：洛伦兹变换
+$$
+\begin{align*}
+    & x = \frac{x' + v t'}{\sqrt{1 - \left(\frac{v}{c}\right)^{2}}} = 93 \text{m} \\
+    & t = \frac{t' + \frac{v}{c^{2}} x'}{\sqrt{1 - \left(\frac{v}{c}\right)^{2}}} = 9.375 \times 10^{-8} \text{s}
+\end{align*}
+$$
+
+地球上的天文学家测定距离地球 $8 \times 10^{11} \text{m}$ 的木卫一火山爆发和墨西哥的火山爆发同时发生，以 $2.5 \times 10^{8} \text{m/s}$ 的速度从地球向木星运动的旅行者也观察到了这两个事件。则对于空间旅行者来说：
+
+1. 这两个事件哪一个先发生？
+2. 这两个事件的空间距离是多少？
+
+解：（1）建立从地球向木星为 $x$ 轴的坐标系 $S$ （地球系）和 $S'$ （旅行者系）。设墨西哥火山爆发为事件 $(0, 0)$ ，则木卫一火山爆发在 $S$ 为事件 $(x = 8 \times 10^{11} \text{m}, 0 )$. 在 $S'$ 系中的时间坐标：
+$$
+t' = \frac{- \frac{v}{c^{2}} x}{\sqrt{1 - \left(\frac{v}{c}\right)^{2}}} < 0
+$$
+木卫一火山爆发先发生。
+
+（2）
+$$
+x' = \frac{x}{\sqrt{1 - \left(\frac{v}{c}\right)^{2}}} = 1.447 \times 10^{9} \text{m}
+$$
+
+---
+
+## week 08
+
+一旅客在星际旅行中打了 5 min 的瞌睡，他乘坐的宇宙飞船相对太阳系的速度是 $0.99c$，那么太阳系中的观测者认为他睡了多长时间？
+
+解：瞌睡开始和瞌睡结束，在旅客参考系中的空间间隔为 0
+$$
+\begin{align*}
+    & \Delta t = \frac{\Delta t' + \frac{v}{c^{2}} \Delta x'}{\sqrt{1 - \frac{v^{2}}{c^{2}}}} = \frac{\Delta t'}{\sqrt{1 - \frac{v^{2}}{c^{2}}}} = 25 \text{min}
+\end{align*}
+$$
+
+要使得电子从 $v_{1} = 1.2 \times 10^{8} \text{m} \cdot \text{s}^{-1}$ 加速到 $v_{2} = 2.4 \times 10^{8} \text{m} \cdot \text{s}^{-1}$，需要对它做功多少？
+
+解：
+$$
+W = \left(\frac{1}{\sqrt{1 - \frac{v_{2}^{2}}{c^{2}}}} - \frac{1}{\sqrt{1 - \frac{v_{1}^{2}}{c^{2}}}}\right) m_{e} c^{2} = \frac{4}{71}\times10^{-14} \text{J}
 $$
