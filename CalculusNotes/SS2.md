@@ -27,6 +27,7 @@ Solutions
 ---
 
 复频域分析的基本信号
+
 $$
 e^{st}, s = \sigma + j \omega
 $$
@@ -42,13 +43,16 @@ Definition of Laplace Transform
 ---
 
 对于因果信号，令零时刻为起始时刻
+
 $$
 \begin{align*}
     &\forall t < 0, f(t) = 0 \\
     &\mathscr{F}[f(t)] = \int_{0}^{\infty} f(t) e^{-j \omega t} \mathrm{d} t
 \end{align*}
 $$
+
 对于不满足迪利克雷条件的信号，引入衰减因子，使他满足绝对可积条件
+
 $$
 \begin{align*}
     \mathscr{\mathscr{L}}[f(t)] &= \int_{0}^{\infty} f(t) e^{-\sigma t} e^{-j \omega t} \mathrm{d} t \\
@@ -59,6 +63,7 @@ $$
 ---
 
 Inverse Laplace Transform
+
 $$
 \begin{align*}
     f(t)e^{-\sigma t} &= \frac{1}{2\pi} \int_{-\infty}^{\infty} F(s) e^{j \omega t} \mathrm{d} \omega \\
@@ -70,6 +75,7 @@ $$
 ---
 
 采用 $0_{-}$ 系统
+
 $$
 F(s) = \int_{0_{-}}^{\infty} f(t) e^{-st} \mathrm{d}t
 $$
@@ -77,6 +83,7 @@ $$
 ---
 
 convergence of Laplace Transform
+
 $$
 \begin{align*}
     &\int_{-\infty}^{\infty} | e^{-\sigma t} f(t) | \mathrm{d} t < \infty \\
@@ -84,6 +91,7 @@ $$
     & \sigma > \sigma_{0} 
 \end{align*}
 $$
+
 Region of Convergence: $\sigma > \sigma_{0}$.
 
 ---
@@ -139,12 +147,14 @@ Basic Properties of Laplace Transformation
 ---
 
 电容的 $s$ domain 模型
+
 $$
 \begin{align*}
     v_{C}(t) &= \frac{1}{C} \int_{-\infty}^{t} i_{C}(\tau) \mathrm{d} \tau \\
     v_{C}(t) &= 
 \end{align*}
 $$
+
 ???
 
 ---
@@ -154,6 +164,7 @@ $$
 Condition: $f(t)$ and $f'(t)$ 可以进行 Laplace Transform
 
 Conclusion
+
 $$
 f(0_{+}) = \lim_{t \rightarrow 0_{+}} f(t) = \lim_{s \rightarrow \infty} s F(s)
 $$
@@ -161,6 +172,7 @@ $$
 ---
 
 Proof:
+
 $$
 \begin{align*}
     sF(s) - f(0) &= \mathscr{L}(f'(t)) \\
@@ -184,6 +196,7 @@ $$
 Condition: $f(t)$ and $f'(t)$ 可以进行 Laplace Transform
 
 Conclusion
+
 $$
 f(\infty) = \lim_{t \rightarrow \infty} f(t) = \lim_{s \rightarrow 0} s F(s)
 $$
@@ -206,6 +219,7 @@ Inverse Laplace Transform
 ---
 
 一阶实数极点
+
 $$
 \begin{align*}
     F(s) &= A(s)/B(s)\\
@@ -218,6 +232,7 @@ $$
 ---
 
 重根情况
+
 $$
 \begin{align*}
     F(s) &= \sum_{i=1}^{n} \frac{k_{i}}{(s-s_{0})^{i}} \\
@@ -228,6 +243,7 @@ $$
 ---
 
 共轭复数根情况
+
 $$
 \begin{align*}
     F(s) &= \sum_{i=1}^{n} \frac{k_{i}}{s-s_{i}} \\
@@ -238,6 +254,7 @@ $$
 ---
 
 假分式
+
 $$
 \begin{align*}
     F(s) &= p_{m-n}(s) + F'(s) \\
@@ -252,6 +269,7 @@ $$
 含有 $e^{-\alpha s}$ 项的非有理式
 
 使用 $t$-shifting 性质
+
 $$
 \begin{align*}
     F(s) &= e^{-\alpha s} G(s) \\
@@ -278,6 +296,7 @@ $s$ 域电路分析
 ---
 
 从 $t$ 域方程到 $s$ 方程，可以不考虑零点跳变。
+
 $$
 \begin{align*}
     \mathscr{L}\left[\frac{\mathrm{d}f(t)}{\mathrm{d}t}\right] &= s F(s) - f(0_{-}) \\
@@ -288,6 +307,7 @@ $$
 ---
 
 电阻
+
 $$
 \begin{align*}
     U_{R}(t) &= R I_{R}(t) \\
@@ -298,6 +318,7 @@ $$
 ---
 
 电感
+
 $$
 \begin{align*}
     u_{L}(t) &= L \frac{\mathrm{d}i_{L}(t)}{\mathrm{d}t} \\
@@ -308,6 +329,7 @@ $$
 ---
 
 电容
+
 $$
 \begin{aligned}
     &v_{C}(t)=\frac{1}{C} \int_{-\infty}^{t} i_{C}(\tau) \mathrm{d} t \\
@@ -326,7 +348,9 @@ $$
 $$
 r_{zs}(t) = e(t) * h(t) \Rightarrow R_{zs}(s) = E(s)H(s)
 $$
+
 取 $e(t) = \delta(t)$
+
 $$
 H(s) = R_{zs} = \mathscr{L}[r(t)] = \mathscr{L}[h(t)]
 $$
@@ -347,9 +371,11 @@ $$
 ---
 
 可以利用 $s$ 域元件模型图求解网络函数
+
 $$
 H(s) = \frac{R_{zs}(s)}{E(s)}
 $$
+
 其实求的是零状态响应，不用考虑 $s$ 域元件模型的 $0_{-}$ 状态。
 
 ---
@@ -357,14 +383,19 @@ $$
 联结方式
 
 - 并联
+
 $$
 h(t) = h_{1}(t) + h_{2}(t) \Rightarrow H(s) = H_{1}(s) + H_{2}(s)
 $$
+
 - 串联
+
 $$
 h(t) = h_{1}(t) * h_{2}(t) \Rightarrow H(s) = H_{1}(s) H_{2}(s)
 $$
+
 - 反馈
+
 $$
 \begin{align*}
     & E_{2}(s) = E(s) - E_{1}(s) \\
@@ -398,20 +429,24 @@ $$
 ---
 
 如果网络函数只有一重极点
+
 $$
 \begin{align*}
     H(s) &= \sum_{i=1}^{n} \frac{K_{i}}{s - p_{i}} \\
     h(t) &= \sum_{i=1}^{n} K_{i} e^{p_{i}t}
 \end{align*}
 $$
+
 如果网络函数含有多重极点，将一重极点的结果乘以对应的 $t$ 的幂次就可以了。
 
 ---
 
 对于物理可行的稳定系统
+
 $$
 t \rightarrow \infty , h(t) \rightarrow 0
 $$
+
 极点落在复平面的左半平面上。
 
 如果极点落在虚轴上，要进一步判断极点的重数。重数大于一的极点落在虚轴上一定不稳定。
@@ -428,6 +463,7 @@ $$
     r(t) &= \sum_{i=1}^{n} A_{i} e^{p_{i}t} + \sum_{i=1}^{v} A_{k} e^{p_{k}t}
 \end{align*}
 $$
+
 第一项为自由响应，第二项为强迫响应。
 
 两者相加的过程中，有可能相加为零，丢失某个频率。
@@ -448,21 +484,27 @@ $$
 ---
 
 定义：系统在正弦信号激励下稳态响应随频率变化的情况
+
 $$
 H(j \omega)
 $$
+
 前提：系统是**稳定**的**因果**系统（极点全部位于左半复平面）$\lim_{t \rightarrow \infty} h(t) = 0$
 
 ---
 
 系统函数 $H(s)$，激励 $e(t) = E_{m} \sin (\omega_{0} t)$，设系统的稳态响应：
+
 $$
 r_{mm}(t) = E_{m} H_{0} \sin(\omega_{0} t + \varphi_{0})
 $$
+
 则记频响特性
+
 $$
 \left. H(s) \right|_{s=j \omega_{0}} = H(j \omega_{0}) = H_{0} e^{j \varphi_{0}}
 $$
+
 ???
 
 ---
@@ -495,6 +537,7 @@ $$
 ---
 
 RC 高通
+
 $$
 \begin{align*}
     H(s) &= \frac{R}{R+\frac{1}{sC}} = \frac{s}{s+\frac{1}{RC}} \\
@@ -508,9 +551,11 @@ $$
 ---
 
 RC 低通
+
 $$
 H(s) = \frac{1}{RC} \cdot \frac{1}{s+\frac{1}{RC}}
 $$
+
 同理。
 
 ---
@@ -541,13 +586,17 @@ $$
 ---
 
 全通网络：对于所有频率的正弦波，都能按照同样的幅度传输系数通过，不发生线性失真。
+
 $$
 H(j \omega) = C
 $$
+
 零极点图：零点位于右半复平面，极点位于左半复平面，关于虚数轴镜像对称。
+
 $$
 H(j \omega) = K \frac{\prod_{i=1}^{n} (j \omega - z_{i})}{\prod_{i=1}^{n} (j \omega - p_{i})}
 $$
+
 ???
 
 ---
@@ -566,6 +615,7 @@ $$
 定义：BIBO，有界输入得到有界零状态输出。
 
 充分必要条件
+
 $$
 \int_{-\infty}^{\infty} |h(t)| \mathrm{d} t < \infty
 $$
@@ -575,6 +625,7 @@ $$
 Proof:
 
 充分性
+
 $$
 \begin{align*}
     r(t) &= \int_{-\infty}^{\infty} h(\tau) e(t - \tau) \mathrm{d} t \\
@@ -587,6 +638,7 @@ $$
 ---
 
 必要性
+
 $$
 \begin{align*}
     \exists e(t) &= \mathrm{sgn} [h(t)] \\
@@ -628,11 +680,13 @@ introduction
 ---
 
 前向差分
+
 $$
 \Delta x(n) = x(n+1) - x(n)
 $$
 
 后向差分
+
 $$
 \nabla x(n) = x(n) - x(n-1)
 $$
@@ -746,6 +800,7 @@ $$
 差分方程
 
 举例：人口增长（响应）和国外净移民（激励）
+
 $$
 \begin{align*}
     & y(n+1) - (1+a-b)y(n) = x(n)

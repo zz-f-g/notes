@@ -19,10 +19,13 @@
 简单例子：回归分析
 
 - 建立模型
+
 $$
 y = b_0 + b_1 t
 $$
+
 - 优化问题
+
 $$
 \min_{b_0, b_1} \left \Vert \begin{bmatrix}
 1 & t_1 \\
@@ -34,6 +37,7 @@ b_0 \\ b_1
 y_1 \\ \vdots \\ y_n
 \end{bmatrix} \right \Vert
 $$
+
 ---
 
 最优化的应用：
@@ -72,6 +76,7 @@ $$
 - 计算机＋最优化理论：迭代法
 	- 搜索方向 $\lambda_k$
 	- 搜索步长 $p^{(k)}$
+
 $$
 x^{(k+1)} = x^{(k)} + \lambda_k p^{(k)}
 $$
@@ -116,10 +121,13 @@ $$
 $$
 \lim_{k \rightarrow \infty} \Vert A_{k} - A \Vert = 0
 $$
+
  Here, $\Vert \cdot \Vert: R^{m \times n} \rightarrow R$ is matrix norm. And a definition:
+ 
 $$
  \Vert A \Vert = \sqrt{\sum_{i, j} \vert a_{ij} \vert^{2}}
 $$
+
 $$
 \begin{align*}
 &A \in \mathbb{R}^{n \times n} \\
@@ -130,6 +138,7 @@ $$
 The continuousness of $A(\xi): \mathbb{R}^{r} \rightarrow \mathbb{R}^{m \times n}$
 
 Definition:
+
 $$
 \lim_{\Vert \boldsymbol{\xi} - \boldsymbol{\xi}_{0} \Vert \rightarrow 0} \Vert \boldsymbol{A}(\boldsymbol{\xi}) - \boldsymbol{A}(\boldsymbol{\xi}_{0}) \Vert = 0
 $$
@@ -143,6 +152,7 @@ differentiable
 ---
 
 微积分的基本理念：利用仿射函数对函数进行局部近似。
+
 $$
 \begin{align*}
 &\vec{f}: R^n \rightarrow R^m \\
@@ -199,6 +209,7 @@ principle of derivative
 ---
 
 在定义域均为开集的情况下
+
 $$
 \begin{align*}
     & g: D \rightarrow \mathbb{R}, D \in \mathbb{R}^{n} \\
@@ -206,7 +217,9 @@ $$
     & h(t) = g[\boldsymbol{f}(t)]
 \end{align*}
 $$
+
 则有求导法则
+
 $$
 \frac{\mathrm{d}}{\mathrm{d}t} h(t) = D g(\boldsymbol{f}(t)) \cdot D \boldsymbol{f} (t) = (\nabla g[\boldsymbol{f}(t)])^{T} \cdot \begin{bmatrix}
     f_{1}'(t)  \\ 
@@ -224,7 +237,9 @@ $$
     & h(\boldsymbol{x}) = \boldsymbol{f}(\boldsymbol{x})^{T} \cdot \boldsymbol{g}(\boldsymbol{x})
 \end{align*}
 $$
+
 乘积求导法则
+
 $$
 D h(\boldsymbol{x}) = \boldsymbol{f}(\boldsymbol{x})^{T} D \boldsymbol{g}(\boldsymbol{x}) + \boldsymbol{g}(x)^{T} D \boldsymbol{f}(\boldsymbol{x})
 $$
@@ -232,6 +247,7 @@ $$
 ---
 
 其他常用公式
+
 $$
 \begin{align*}
     & D (\boldsymbol{y}^{T} \boldsymbol{x}) = \boldsymbol{y}^{T} \\
@@ -251,7 +267,9 @@ $f:\mathbb{R}^{n} \rightarrow \mathbb{R}$ 的水平集为
 $$
 \{\boldsymbol{x} \in \mathbb{R}^{n}: f(\boldsymbol{x}) = c, c \in \mathbb{R} \}
 $$
+
 梯度向量和水平集曲线在这点的切线正交。
+
 $$
 \begin{align*}
     & \boldsymbol{x} = \boldsymbol{x}(\theta), f(\boldsymbol{x}) = c, g(\theta) = f(\boldsymbol{x}(\theta)) \\
@@ -294,7 +312,9 @@ $$
     &\text{subject to } x \in \Omega
 \end{align*}
 $$
+
 从可行集合中找到使得目标函数最小的点。
+
 $$
 \begin{align*}
     & &&f:\Omega \rightarrow \mathbb{R}, \Omega \subset \mathbb{R}^{n}\\
@@ -305,6 +325,7 @@ $$
 
 - 局部极小点
 - 全局最小点
+
 $$
 x^{*} = \mathrm{argmin}_{x \in \Omega} f(x)
 $$
@@ -322,11 +343,13 @@ $$
 所有的可行方向构成了可行基在某一个点附近的逼近。
 
 $\boldsymbol{d}$ is feasible direction of $\boldsymbol{x_{0}}$.
+
 $$
 \begin{align*}
     & \exists \alpha_{0} > 0, \forall \alpha \in [0, \alpha_{0}], \boldsymbol{x_{0}} + \alpha \boldsymbol{d} \in \Omega
 \end{align*}
 $$
+
 定义很像极限。
 
 ---
@@ -336,7 +359,9 @@ $$
 $$
 \frac{\partial f}{\partial \boldsymbol{d}}(x) = \lim_{\alpha \rightarrow 0} \frac{f(x+\alpha d)-f(x)}{\alpha}
 $$
+
 计算简化
+
 $$
 \begin{align*}
     \phi(\alpha) =& f(x+\alpha d) \\
@@ -360,6 +385,7 @@ $$
 $$
 
 Proof: 
+
 $$
 \begin{align*}
     f(x) - f(x^{*}) &= \varphi(\alpha) - \varphi(0) \\
@@ -369,6 +395,7 @@ $$
 $$
 
 如果 $x^{*}$ 在 $\Omega$ 内部，则：
+
 $$
 \nabla f(x^{*}) = 0
 $$
@@ -378,12 +405,15 @@ $$
 定理二：局部极小点的二阶必要条件
 
 前提：满足一阶必要条件 $f \in C^{2}$
+
 $$
 \phi''(0) = d^{T} D^{2}f(x^{*}) d \geq 0
 $$
+
 黑塞矩阵**半正定**。
 
 Proof:
+
 $$
 \begin{align*}
     \varphi'(\alpha) &= Df(\boldsymbol{x}^{*} + \alpha \boldsymbol{d}) \cdot \boldsymbol{d} \\
@@ -423,11 +453,13 @@ $$
     &\boldsymbol{F}(\boldsymbol{x}^{*}) = D^{2}f(\boldsymbol{x}^{*}) > 0
 \end{align*}
 $$
+
 第二条条件指的是矩阵**正定**。
 
 ---
 
 证明：瑞利不等式
+
 $$
 \lambda_{min}(\boldsymbol{P}) \Vert \boldsymbol{x} \Vert^{2} \leq \boldsymbol{x}^{T} \boldsymbol{P} \boldsymbol{x} \leq \lambda_{max}(\boldsymbol{P}) \Vert \boldsymbol{x} \Vert^{2}
 $$
@@ -464,10 +496,13 @@ Introduction
 方法：对称压缩。
 
 计算
+
 $$
 f(a_{1}), f(b_{1})
 $$
+
 从而压缩掉一个区间
+
 $$
 [a_{0,}a_{1}] \text{ or } [b_{1}, b_{0}]
 $$
@@ -495,6 +530,7 @@ $$
     &\rho (b_{1}-a_{0}) = (b_{1}-b_{2}) \\
 \end{align*}
 $$
+
 ![](CalculusNotes/images/image20220228210928.png)
 
 ---
@@ -516,7 +552,8 @@ $$
 $$
 N = \frac{\ln \frac{\varepsilon}{b_{0}-a_{0}}}{\ln (1-\rho)}
 $$
- 向上取整。
+
+向上取整。
 
 ---
 
@@ -546,19 +583,19 @@ def GoldenSectionSearch(func, start, end, precision):
 
 ---
 
- ### 7.3
+### 7.3
 
- Fibbonaci Array
+Fibbonaci Array
 
 ---
 
- 如果压缩比 $\rho$ 可以调整？
+如果压缩比 $\rho$ 可以调整？
 
 $$
- \{\rho_{k}\}
+\{\rho_{k}\}
 $$
 
- 仍然保持对称压缩的方法。
+仍然保持对称压缩的方法。
 
 每次迭代只计算一次函数值。
 
@@ -747,6 +784,7 @@ def SecantMethod(f, x1, x2, precision):
 $$
 \forall x_{1}, x_{2}, x_{3}
 $$
+
 ```mermaid
 flowchart TD
 I["x1<x2<x3"] --> A["f(x2)<f(x1) && f(x2)<f(x3)"] --> O1["[x1,x3]"]
@@ -806,7 +844,9 @@ $$
     \varphi'(0) &= \boldsymbol{d}^{T} \nabla f(\boldsymbol{x}) \leq \Vert f(\boldsymbol{x}) \Vert
 \end{align*}
 $$
+
 取负梯度方向
+
 $$
 \begin{align*}
     & f(\boldsymbol{x}_{0} - \alpha \nabla f(\boldsymbol{x}_{0})) = f(\boldsymbol{x}_{0}) - \alpha \Vert \nabla f(\boldsymbol{x}_{0}) \Vert^{2} + o(\alpha) \\
@@ -825,6 +865,7 @@ $$
 $$
 \alpha_{k} = \mathrm{argmin}_{\alpha \geq 0} f(\boldsymbol{x}_{k} - \alpha \nabla f(\boldsymbol{x}_{k}))
 $$
+
 在梯度法的同时计算一个一维搜索问题。
 
 ---
@@ -832,10 +873,13 @@ $$
 **正交性**
 
 迭代过程得到序列 $\{ \boldsymbol{x}_{k} \}$.
+
 $$
 \forall k \geq 0, (\boldsymbol{x}_{k+1} - \boldsymbol{x}_{k}) \cdot (\boldsymbol{x}_{k+2} - \boldsymbol{x}_{k+1}) = 0
 $$
+
 Proof:
+
 $$
 \begin{align*}
     0 &= \varphi'_{k}(\alpha_{k}) \\
@@ -845,6 +889,7 @@ $$
     & \Rightarrow (\boldsymbol{x}_{k+1} - \boldsymbol{x}_{k}) \cdot (\boldsymbol{x}_{k+2} - \boldsymbol{x}_{k+1}) = 0
 \end{align*}
 $$
+
 Q.E.D
 
 ---
@@ -854,15 +899,19 @@ Q.E.D
 $$
 \forall k \geq 0 , \nabla f(\boldsymbol{x}_{k}) \neq 0, f(\boldsymbol{x}_{k+1}) < f(\boldsymbol{x}_{k})
 $$
+
 Obviously.
 
 ---
 
 **停止条件**：一阶必要条件
+
 $$
 \nabla f(\boldsymbol{x}_{k}) = 0
 $$
+
 适合数值计算的停止条件
+
 $$
 \begin{align*}
     & \Vert f(\boldsymbol{x}_{k}) \Vert < \varepsilon \\
@@ -870,6 +919,7 @@ $$
     & \frac{|f(\boldsymbol{x}_{k+1})-f(\boldsymbol{x}_{k})|}{\max\{1, |f(\boldsymbol{x}_{k})|\}} < \varepsilon
 \end{align*}
 $$
+
 避免停止过程中分母过小。
 
 ---
@@ -877,14 +927,19 @@ $$
 二次函数
 
 $Q \in \mathbb{R}^{n \times n}$ 是对称正定矩阵。
+
 $$
 f(\boldsymbol{x}) = \frac{1}{2} \boldsymbol{x}^{T} Q \boldsymbol{x} + \boldsymbol{b}^{T} \boldsymbol{x}
 $$
+
 最优的步长可以有解析解。
+
 $$
 \alpha_{k} = \frac{\boldsymbol{g}_{k}^{T}\boldsymbol{g}_{k}}{\boldsymbol{g}_{k}^{T}Q \boldsymbol{g}_{k}}
 $$
+
 Proof:
+
 $$
 \begin{align*}
     \alpha_{k} &= \mathrm{argmin}_{\alpha_{k}} f(\boldsymbol{x}_{k} - \alpha_{k} \boldsymbol{g}_{k}) \\
@@ -899,9 +954,11 @@ $$
 ---
 
 当目标函数为
+
 $$
 f(\boldsymbol{x}) = \frac{x_{1}^{2}}{5} + x_{2}^{2}
 $$
+
 图像为比较扁的椭圆，迭代路径会不停在狭窄的谷底抖动。这是最速下降法的缺陷之一。
 
 可以使用预调矩阵将水平集进行变换，把它”变圆“。
@@ -925,6 +982,7 @@ $$
 ---
 
 目标函数设定为二次函数
+
 $$
 \begin{align*}
     f(\boldsymbol{x}) &= \frac{1}{2} \boldsymbol{x}^{T} Q \boldsymbol{x} - \boldsymbol{b}^{T} \boldsymbol{x} \\
@@ -948,18 +1006,22 @@ $$
         &= f(\boldsymbol{x}) + \frac{1}{2} \boldsymbol{x}^{*T} Q \boldsymbol{x}^{*} 
 \end{align*}
 $$
+
 当 $\boldsymbol{x} = \boldsymbol{x}^{*}$，$V(\boldsymbol{x}) = 0$. 可以用 $\Vert V(\boldsymbol{x}) \Vert$ 的大小衡量收敛的情况。
 
 ---
 
 迭代公式
+
 $$
 \begin{align*}
     & \boldsymbol{x}_{k+1} = \boldsymbol{x}_{k} + \alpha g_{k} \\
     & g_{k} = \nabla f(\boldsymbol{x}_{k}) = \boldsymbol{Q}\boldsymbol{x}_{k}-\boldsymbol{b}
 \end{align*}
 $$
+
 满足
+
 $$
 V(\boldsymbol{x}_{k+1}) = (1 - \gamma_{k}) V(\boldsymbol{x}_{k})
 $$
@@ -967,6 +1029,7 @@ $$
 ---
 
 可以求解 $\gamma_k$.
+
 $$
 \begin{align*}
     \boldsymbol{y}_{k} &= \boldsymbol{x}_{k} - \boldsymbol{x}^{*} \\
@@ -983,10 +1046,13 @@ $$
 ---
 
 迭代序列 $\{\boldsymbol{x}_{k}\}$ 收敛于极小点的充分必要条件
+
 $$
 \sum_{k=0}^{\infty} \gamma_{k} = \infty
 $$
+
 Proof:
+
 $$
 \begin{align*}
     & \boldsymbol{x}_{k} \iff \boldsymbol{x}^{*} \iff V(\boldsymbol{x}_{k}) \rightarrow 0 \\
@@ -998,10 +1064,13 @@ $$
 ---
 
 To prove:
+
 $$
 \sum_{k=0}^{\infty} \gamma_{k} = \infty \iff - \sum_{k=0}^{\infty} \ln(1-\gamma_{k}) = \infty
 $$
+
 Step 1:
+
 $$
 \begin{align*}
     & - \ln(1-\gamma_{k}) > \gamma_{k} \\
@@ -1012,6 +1081,7 @@ $$
 ---
 
 Step2: （反证法）
+
 $$
 \begin{align*}
     & \sum_{k=0}^{\infty} \gamma_{k} < \infty \Rightarrow \gamma_{k} \rightarrow 0 \\
@@ -1020,6 +1090,7 @@ $$
     & \Rightarrow - \sum_{k=0}^{\infty} \ln(1-\gamma_{k}) < 2 \sum_{k=0}^{\infty} \gamma_{k} < \infty
 \end{align*}
 $$
+
 Q.E.D
 
 注意到在 Step 2 中的证明中，条件 $\gamma_{k} > 0$ 是必不可少的，这和之前最速下降法的[严格下降](optimize1#8.2)性质对应。
@@ -1027,6 +1098,7 @@ Q.E.D
 ---
 
 瑞利不等式
+
 $$
 \forall \boldsymbol{Q} \in \mathbb{R}^{n \times n}, \boldsymbol{Q} = \boldsymbol{Q}^{T} > 0, \lambda_{min}(\boldsymbol{Q}) \Vert \boldsymbol{x} \Vert^{2} \leq \boldsymbol{x}^{T} \boldsymbol{Q} \boldsymbol{x} \leq \lambda_{max}(\boldsymbol{Q}) \Vert \boldsymbol{x} \Vert^{2}
 $$
@@ -1034,10 +1106,13 @@ $$
 ---
 
 将之前求得的目标函数为二次函数的最速下降法的步长
+
 $$
 \alpha_{k} = \frac{\boldsymbol{g}_{k}^{T} \boldsymbol{g}_{k}}{\boldsymbol{g}_{k}^{T} \boldsymbol{Q} \boldsymbol{g}_{k}}
 $$
+
 带入下降因子中
+
 $$
 \begin{align*}
     \gamma_{k} &= \alpha_{k} \frac{\boldsymbol{g}_{k}^{T} \boldsymbol{Q} \boldsymbol{g}_{k}}{\boldsymbol{g}_{k}^{T} \boldsymbol{Q}^{-1} \boldsymbol{g}_{k}} \left(2 \frac{\boldsymbol{g}_{k}^{T} \boldsymbol{g}_{k}}{\boldsymbol{g}_{k}^{T} \boldsymbol{Q} \boldsymbol{g}_{k}} - \alpha_{k} \right) \\
@@ -1045,13 +1120,16 @@ $$
     &= \frac{(\boldsymbol{g}_{k}^{T}\boldsymbol{g}_{k})^{2}}{\boldsymbol{g}_{k}^{T}\boldsymbol{Q}^{-1}\boldsymbol{g}_{k} \cdot \boldsymbol{g}_{k}^{T}\boldsymbol{Q}\boldsymbol{g}_{k}}
 \end{align*}
 $$
+
 根据 Rayleigh 不等式
+
 $$
 \begin{align*}
     & \frac{\lambda_{min}}{\lambda_{max}} \leq \gamma_{k} \leq \frac{\lambda_{max}}{\lambda_{min}}\\
     & \sum_{k=0}^{\infty} \gamma_{k} = \infty
 \end{align*}
 $$
+
 这个过程和初始取点无关，因此：
 
 最速下降法为**全局收敛**算法。
@@ -1059,12 +1137,15 @@ $$
 ---
 
 固定步长算法在满足条件时为**全局收敛**算法。
+
 $$
 0 < \alpha < \frac{2}{\lambda_{max}(Q)}
 $$
+
 Proof:
 
 Sufficiency:
+
 $$
 \begin{align*}
     \gamma_{k} &= \alpha \frac{\boldsymbol{g}_{k}^{T} \boldsymbol{Q} \boldsymbol{g}_{k}}{\boldsymbol{g}_{k}^{T} \boldsymbol{Q}^{-1} \boldsymbol{g}_{k}} \left(2 \frac{\boldsymbol{g}_{k}^{T} \boldsymbol{g}_{k}}{\boldsymbol{g}_{k}^{T} \boldsymbol{Q} \boldsymbol{g}_{k}} - \alpha\right)\\
@@ -1074,7 +1155,9 @@ $$
     \sum_{k-0}^{\infty}\gamma_{k} &= \infty
 \end{align*}
 $$
+
 Necessity:
+
 $$
 \begin{align*}
     \boldsymbol{x}^{(k+1)} - \boldsymbol{x}^{*} &= \boldsymbol{x}^{(k)} - \alpha (\boldsymbol{Q}\boldsymbol{x}^{(k)} - \boldsymbol{b}) - \boldsymbol{x}^{*} \\
@@ -1082,7 +1165,9 @@ $$
         &= (\boldsymbol{I} - \alpha \boldsymbol{Q}) ( \boldsymbol{x}^{(k)} - \boldsymbol{x}^{*})
 \end{align*}
 $$
+
 如果 $\boldsymbol{x}^{(0)} - \boldsymbol{x}^{*}$ 是矩阵 $\boldsymbol{Q}$ 的特征向量，对应特征值 $\lambda_{max}$.
+
 $$
 \begin{align*}
     \boldsymbol{x}^{(k+1)} - \boldsymbol{x}^{*} &= (1 - \alpha \lambda_{max}(\boldsymbol{Q})) (\boldsymbol{x}^{(k)} - \boldsymbol{x}^{*}) \\
@@ -1090,6 +1175,7 @@ $$
         \Vert \boldsymbol{x}^{(k+1)} - \boldsymbol{x}^{*} \Vert &= | 1 - \alpha \lambda_{max}(Q) |^{k+1} \Vert \boldsymbol{x}^{(0)} - \boldsymbol{x}^{*} \Vert
 \end{align*}
 $$
+
 如果 $\alpha \leq 0 \text{ or }\alpha \geq \frac{2}{\lambda_{max}(\boldsymbol{Q})}$, 将不收敛。
 
 ---
@@ -1097,6 +1183,7 @@ $$
 **收敛率**
 
 矩阵的条件数
+
 $$
 r = \frac{\lambda_{max}(Q)}{\lambda_{min}(Q)}
 $$
@@ -1108,6 +1195,7 @@ $$
 $$
 0 < \lim_{k \rightarrow \infty} \frac{\Vert \boldsymbol{x}_{k+1} - \boldsymbol{x}^{*} \Vert}{\Vert \boldsymbol{x}_{k} - \boldsymbol{x}^{*} \Vert^{p}} < \infty
 $$
+
 最速下降法在最不理想的情况下收敛阶数为 1.
 
 ---
@@ -1142,6 +1230,7 @@ $$
 牛顿法也可以用于求解多元方程 $\boldsymbol{g}(\boldsymbol{x}) = \boldsymbol{0}$
 
 $\boldsymbol{F}(\boldsymbol{x})$ 为 $\boldsymbol{g}(\boldsymbol{x}_{k})$ 的 Jacobian Matrix.
+
 $$
 \boldsymbol{F}(\boldsymbol{x})_{i \times j} = \frac{\partial g_{i}}{\partial x_{j}}
 $$
@@ -1155,6 +1244,7 @@ $$
 ---
 
 $f \in C^{3}, \nabla f(\boldsymbol{x}^{*})=0, \exists \boldsymbol{F}^{-1}(\boldsymbol{x}^{*})$
+
 $$
 \begin{align*}
     \forall \boldsymbol{x}_{0} \Vert \boldsymbol{x}_{0} - \boldsymbol{x}^{*} \Vert < \varepsilon, p=2
@@ -1162,6 +1252,7 @@ $$
 $$
 
 Proof:
+
 $$
 \begin{align*}
     & \nabla f(\boldsymbol{x}) = \nabla f(\boldsymbol{x}_{0}) + \boldsymbol{F}(\boldsymbol{x}_{0})(\boldsymbol{x}-\boldsymbol{x}_{0}) + O(\Vert \boldsymbol{x} - \boldsymbol{x}_{0} \Vert^{2})
@@ -1187,6 +1278,7 @@ $$
 牛顿法的缺陷 2：如果 Hessen 矩阵不正定
 
 Levenberg Marquardt 修正。
+
 $$
 \boldsymbol{F}(\boldsymbol{x}_{k}) \rightarrow \boldsymbol{F}(\boldsymbol{x}_{k}) + \mu_{k} I
 $$
@@ -1200,20 +1292,27 @@ $$
 ---
 
 例子：用正弦函数拟合实验数据。
+
 $$
 \hat{y} = A \sin(\omega t + \varphi)
 $$
+
 确定参数 $A, \omega, \varphi$.
 
 构造目标函数
+
 $$
 \sum_{i=1}^{m} (y_{i} - A \sin(\omega t + \varphi))^{2}
 $$
+
 决策变量
+
 $$
 \boldsymbol{x} = \begin{bmatrix} A & \omega & \varphi \end{bmatrix}^{T}
 $$
+
 定义
+
 $$
 r_{i}(\boldsymbol{x}) = y_{i} - A \sin (\omega t + \varphi)
 $$
@@ -1231,13 +1330,17 @@ Introduction
 ---
 
 二次型函数
+
 $$
 f(\boldsymbol{x}) = \frac{1}{2} \boldsymbol{x}^{T} \boldsymbol{Q} \boldsymbol{x} - \boldsymbol{b}^{T} \boldsymbol{x}
 $$
+
 共轭方向
+
 $$
 \forall i \neq j, \boldsymbol{d}_{i} \boldsymbol{Q} \boldsymbol{d}_{j} = 0
 $$
+
 共轭方向法的优势
 
 - n 维问题，n 步结果
@@ -1249,6 +1352,7 @@ $$
 任意小于等于正定实对称阵的阶数的共轭方向线性无关。
 
 反证法
+
 $$
 \begin{align*}
     & \alpha_{0} \boldsymbol{d}_{0} + \cdots + \alpha_{k} \boldsymbol{d}_{k} = 0\\
@@ -1257,6 +1361,7 @@ $$
     & \Vert \boldsymbol{d}_{j} \Vert \neq 0, \boldsymbol{Q} > 0 \Rightarrow \alpha_{j} = 0
 \end{align*}
 $$
+
 构成一组基。
 
 ---
@@ -1283,17 +1388,21 @@ $$
 ---
 
 n 步收敛性质
+
 $$
 \forall \boldsymbol{x}_{0}, \boldsymbol{x}_{n} = \boldsymbol{x}^{*}
 $$
 
 Proof:
+
 $$
 \begin{align*}
     & \boldsymbol{x}^{*} - \boldsymbol{x}_{0} = \beta_{0} \boldsymbol{d}_{0} + \cdots + \beta_{n-1} \boldsymbol{d}_{n-1}
 \end{align*}
 $$
+
 To prove $\beta_{k} = \alpha_{k}$
+
 $$
 \begin{align*}
     \boldsymbol{d}_{k}^{T} \boldsymbol{Q} (\boldsymbol{x}^{*} - \boldsymbol{x}_{0}) &= \beta_{k} \boldsymbol{d}_{k}^{T} \boldsymbol{Q} \boldsymbol{d}_{k} \\
@@ -1305,11 +1414,13 @@ $$
     \beta_{k} &= - \frac{\boldsymbol{d}_{k}^{T} \boldsymbol{g}_{k}}{\boldsymbol{d}_{k}^{T}\boldsymbol{Q} \boldsymbol{d}_{k}}
 \end{align*}
 $$
+
 Q.E.D
 
 ---
 
 共轭方向算法，每一步都是贪心算法。
+
 $$
 f(\boldsymbol{x}_{k+1}) = \min_{\alpha_{0,}\cdots, \alpha_{k}} f\left(\boldsymbol{x}_{0} + \sum_{i=0}^{k} \alpha_{i} \boldsymbol{d}_{i}\right)
 $$
@@ -1323,6 +1434,7 @@ $$
 ---
 
 随着迭代不断计算出共轭方向。
+
 $$
 \begin{align*}
     & \boldsymbol{d}_{0} = - \boldsymbol{g}_{0}\\
@@ -1330,7 +1442,9 @@ $$
     & \beta_{k} = - \frac{\boldsymbol{g}_{k+1}^{T}\boldsymbol{Q}\boldsymbol{d}_{k}}{\boldsymbol{d}_{k}^{T}\boldsymbol{Q}\boldsymbol{d}_{k}}
 \end{align*}
 $$
+
 Proof:
+
 $$
 \begin{align*}
     \boldsymbol{d}_{0}^{T} \boldsymbol{Q} \boldsymbol{d}_{1} &= \boldsymbol{d}_{0}^{T} \boldsymbol{Q} (-\boldsymbol{g}_{1} + \beta_{0} \boldsymbol{d}_{0}) \\
@@ -1338,7 +1452,9 @@ $$
         &= 0
 \end{align*}
 $$
+
 数学归纳法
+
 $$
 \begin{align*}
     \boldsymbol{d}_{k}^{T}\boldsymbol{Q}\boldsymbol{d}_{k+1}
@@ -1354,6 +1470,7 @@ $$
 ---
 
 如何避免计算黑森矩阵？
+
 $$
 \begin{align*}
     \alpha_{k} &= - \frac{\boldsymbol{g}_{k}^{T} \boldsymbol{d}_{k}}{\boldsymbol{d}_{k}^{T} \boldsymbol{Q} \boldsymbol{d}_{k}} \\
@@ -1460,6 +1577,7 @@ $$
 拟牛顿法也是一种共轭方向法。
 
 对于对称的矩阵
+
 $$
 \boldsymbol{H}_{n+1} \Delta \boldsymbol{g}_{k} = \Delta \boldsymbol{x}_{k}, k = 0, 1, \cdots , n
 $$
@@ -1467,6 +1585,7 @@ $$
 $\boldsymbol{d}_{0},\boldsymbol{d}_{1},\cdots,\boldsymbol{d}_{n+1}$ 关于 $\boldsymbol{Q}$ 是共轭的。
 
 证明采用数学归纳法
+
 $$
 \begin{align*}
     \boldsymbol{d}_{1}^{T} \boldsymbol{Q} \boldsymbol{d}_{0} &= - \boldsymbol{g}_{1}^{T} \boldsymbol{H}_{1} \boldsymbol{Q} \boldsymbol{d}_{0} \\
@@ -1486,6 +1605,7 @@ $$
 假设 $\boldsymbol{d}_{0}, \cdots, \boldsymbol{d}_{k}$ 关于 $\boldsymbol{Q}$ 共轭。下证：$\forall i = 0,\cdots,k, \boldsymbol{d}_{k+1}^{T}\boldsymbol{Q}\boldsymbol{d}_{i} = 0$
 
 应用相同的思路
+
 $$
 \begin{align*}
     \boldsymbol{d}_{k+1}^{T} \boldsymbol{Q} \boldsymbol{d}_{i} &= -\boldsymbol{g}_{k+1} \Delta \boldsymbol{d}_{i}
@@ -1505,6 +1625,7 @@ $$
 ---
 
 矩阵的迭代方程
+
 $$
 \boldsymbol{H}_{k+1} = \boldsymbol{H}_{k} + \alpha_{k} \boldsymbol{z}_{k} \boldsymbol{z}_{k}^{T}
 $$
@@ -1536,6 +1657,7 @@ $$
 1. 置初始值 $k=0, \boldsymbol{x}_{0}, \boldsymbol{H}_{0} = \boldsymbol{H}_{0}^{T}$
 2. ``while`` $\boldsymbol{g}_{k} \neq \boldsymbol{0}$, $\boldsymbol{d}_{k} = - \boldsymbol{H}_{k} \boldsymbol{g}_{k}$
 3. 计算
+
 $$
 \begin{align*}
     &\alpha_{k} = \mathrm{argmin}_{\alpha>0} f(\boldsymbol{x}_{k} + \alpha \boldsymbol{d}_{k}) \\
@@ -1580,6 +1702,7 @@ $$
         &= 0
 \end{align*}
 $$
+
 Q.E.D
 
 ---
@@ -1616,11 +1739,13 @@ BFGS Algorithm
 $\boldsymbol{A} \in R^{m \times n}, \mathrm{rank} \boldsymbol{A} = n, \boldsymbol{b} \in R^{m}, m\geq n$.
 
 求解
+
 $$
 \boldsymbol{A} \boldsymbol{x} = \boldsymbol{b}
 $$
 
 或者在无解的情况下，求解
+
 $$
 \boldsymbol{x}^{*} = \mathrm{argmin}_{\boldsymbol{x}} \Vert \boldsymbol{A} \boldsymbol{x} - \boldsymbol{b} \Vert
 $$
@@ -1628,6 +1753,7 @@ $$
 ---
 
 引理：Gram 矩阵在系数矩阵列满秩时可逆。
+
 $$
 \begin{align*}
     &\boldsymbol{A} \in R^{m \times n}, m \geq n \\
@@ -1640,6 +1766,7 @@ $$
 PROOF:
 
 充分性
+
 $$
 \begin{align*}
     & \text{Nul} (\boldsymbol{A}^{T} \boldsymbol{A}): \boldsymbol{A}^{T} \boldsymbol{A} \boldsymbol{x} = \boldsymbol{0} \\
@@ -1650,7 +1777,9 @@ $$
     & \mathrm{rank} (\boldsymbol{A}^{T} \boldsymbol{A}) = n - \mathrm{dim} \mathrm{Nul} (\boldsymbol{A}^{T}\boldsymbol{A}) = n
 \end{align*}
 $$
+
 必要性
+
 $$
 \begin{align*}
     &\mathrm{Nul}\boldsymbol{A} \subset \mathrm{Nul} \boldsymbol{A}^{T} \boldsymbol{A} = \{ \boldsymbol{0} \} \\
@@ -1677,14 +1806,17 @@ $$
     & \boldsymbol{x}^{*} = (\boldsymbol{A}^{T} \boldsymbol{A})^{-1} \boldsymbol{A}^{T} \boldsymbol{b}
 \end{align*}
 $$
+
 可以证明这个解是全局最小值。
 
 ---
 
 根据几何联想，垂线最短，可以猜测：
+
 $$
 (\boldsymbol{b} - \boldsymbol{A} \boldsymbol{x}^{*})^{T}\boldsymbol{a}_{i} = 0
 $$
+
 其中 $\boldsymbol{a}_{i}$ 是 $\boldsymbol{A}$ 的列向量。误差和系数矩阵的列空间垂直。
 
 ---
@@ -1692,6 +1824,7 @@ $$
 正交投影算子 $\boldsymbol{P} = \boldsymbol{A} (\boldsymbol{A}^{T} \boldsymbol{A})^{-1} \boldsymbol{A}^{T}$
 
 证明：对于子空间 $V \subset \mathbb{R}^{m}$，设 $V = \mathrm{Col}\boldsymbol{A}, \boldsymbol{A} \in \mathbb{R}^{m \times n}, m \geq n, \mathrm{rank} \boldsymbol{A} = n$
+
 $$
 \begin{align*}
     & \forall \boldsymbol{x}_{V} \in V, \boldsymbol{x}_{V} = \boldsymbol{A} \boldsymbol{c} , \boldsymbol{c} \in \mathbb{R}^{n} \\
@@ -1712,10 +1845,13 @@ $$
 根据已有的数据求解得到 $\boldsymbol{x}^{*}$，再根据更新的数据，求出更新的 $\boldsymbol{x}^{*}$
 
 记 $\boldsymbol{G} = \boldsymbol{A}^{T} \boldsymbol{A}$，基于原有的数据，有
+
 $$
 \boldsymbol{x}_{0} = \boldsymbol{G}_{0}^{-1} \boldsymbol{A}_{0}^{T} \boldsymbol{b}_{0}
 $$
+
 加入新数据
+
 $$
 \begin{align*}
     & \boldsymbol{G}_{1} = \begin{bmatrix} \boldsymbol{A}_{0}^{T} & \boldsymbol{A}_{1}^{T} \end{bmatrix} \cdot \begin{bmatrix} \boldsymbol{A}_{0} \\ \boldsymbol{A}_{1} \end{bmatrix} = G_{0} + \boldsymbol{A}_{1}^{T} \boldsymbol{A}_{1} \\
@@ -1730,6 +1866,7 @@ $$
 ---
 
 递推公式
+
 $$
 \begin{align*}
     & \boldsymbol{G}_{k+1} = \boldsymbol{G}_{k} + \boldsymbol{A}_{k+1}^{T} \boldsymbol{A}_{k+1} \\
@@ -1738,10 +1875,13 @@ $$
 $$
 
 根据引理
+
 $$
 (\boldsymbol{A} + \boldsymbol{UV})^{-1} = \boldsymbol{A}^{-1} - (\boldsymbol{A}^{-1} \boldsymbol{U})(I + \boldsymbol{V}\boldsymbol{A}^{-1} \boldsymbol{U})^{-1}(\boldsymbol{V}\boldsymbol{A}^{-1})
 $$
+
 记 $\boldsymbol{P}_{k} = \boldsymbol{G}_{k}^{-1}$，则有
+
 $$
 \boldsymbol{P}_{k+1} = \boldsymbol{P}_{k} - \boldsymbol{P}_{k} \boldsymbol{A}_{k+1}^{T} (I + \boldsymbol{A}_{k+1} \boldsymbol{P}_{k} \boldsymbol{A}_{k+1}^{T}) \boldsymbol{A}_{k+1} \boldsymbol{P}_{k}
 $$
@@ -1792,6 +1932,13 @@ Kaczmarz Algorithm
 
 ---
 
+```python
+from sympy import Matrix
+def Kaczmarz()
+```
+
+---
+
 ### 12.5
 
 一般意义下线性方程组的求解
@@ -1827,11 +1974,13 @@ introduction
 $$
 y = \sum_{i=1}^{n} w_{i} x_{i} = \boldsymbol{w}^{T} \boldsymbol{x}
 $$
+
 $\boldsymbol{w}$ 称为权重向量，$\boldsymbol{x}$ 称为输入向量。
 
 ---
 
 选定一组数据集
+
 $$
 \begin{align*}
     &\boldsymbol{X_{d}} = \begin{bmatrix} 
