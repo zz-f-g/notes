@@ -123,7 +123,7 @@ $$
 $$
 
  Here, $\Vert \cdot \Vert: R^{m \times n} \rightarrow R$ is matrix norm. And a definition:
- 
+
 $$
  \Vert A \Vert = \sqrt{\sum_{i, j} \vert a_{ij} \vert^{2}}
 $$

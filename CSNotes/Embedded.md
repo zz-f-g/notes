@@ -731,5 +731,271 @@ hardware --> OS2 --> env2["virtual environment for OS2"] --> Python3
 
 ---
 
-如何点亮 LED 灯？
+## GPIO-LED
+
+---
+
+CPU 对引脚实行分组管理
+
+- PA 0-15
+- PB 0-15
+- PC 0-15
+- ...
+
+GPIO 控制器是 CPU 的外设，CPU 通过给某个地址写 0，使得对应引脚输出低电平。
+
+GPIO 连接 APB2 再连接 AHB 总线到 CPU。
+
+---
+
+如何在 APB2 工作的时候让 APB1 不工作（为了节能）？
+
+方法：时钟树
+
+停止 APB1 的时钟信号，只开启 APB2 的时钟信号。
+
+时钟使能是独立的控制方式，和设备地址（之前讲过的）没有关系。
+
+
+通过时钟控制寄存器来控制芯片内部各个时钟单元的状态。
+
+---
+
+```mermaid
+flowchart TD
+e[APB2] ---> g["GPIO port C"]
+f[APB1]
+a["外部晶振"] ---> b["9倍频"] ---> c["SYS CLK"] --->d[AHB] ---> e & f
+```
+
+---
+
+PLL 锁相环
+
+鉴相器和分频器等期器件构成的反馈电路，可以实现对于信号的倍频。
+
+---
+
+时钟树的初始化
+
+系统时钟
+
+```c
+void Stm32_Clock_Init(u8 PLL)
+{
+    unsigned char temp=0;
+    MYRCC_DeInit();		  // 复位并配置向量表
+    RCC->CR|=0x00010000;  // 外部高速时钟使能 HSEON
+    while(!(RCC->CR>>17));// 等待外部时钟就绪
+    RCC->CFGR=0X00000400; // APB1=DIV2; APB2=DIV1; AHB=DIV1;
+    PLL-=2;               // 抵消两个单位
+    RCC->CFGR|=PLL<<18;   // 设置 PLL 值 2~16
+    RCC->CFGR|=1<<16;	  // PLLSRC ON
+    FLASH->ACR|=0x32;	  // FLASH 2 个延时周期
+
+    RCC->CR|=0x01000000;  // PLLON
+    while(!(RCC->CR>>25));// 等待 PLL 稳定
+    RCC->CFGR|=0x00000002;// PLL 作为系统时钟
+    while(temp!=0x02)     // 等待 PLL 作为系统时钟设置成功
+    {
+        temp=RCC->CFGR>>2;
+        temp&=0x03;
+    }
+}
+```
+
+---
+
+APB2 时钟
+
+```c
+void LED_Init(void)
+{
+	 RCC->APB2ENR|=1<<4;    // 使能 port C(GPIOC) 时钟
+	 GPIOC->CRL&=0X00000000;  // 置零
+	 GPIOC->CRL|=0X33333333; // 设定为推挽输出
+     GPIOC->ODR|= 0x000000FF; // 初始设定为高电平，LED 灯都不亮
+}
+```
+
+---
+
+GPIO
+
+- 配置寄存器
+- 数据寄存器
+    - GPIOx_IDR
+    - GPIOx-ODR
+- 置位、复位寄存器
+
+要让 PC0 输出低电平，就是让 GPIOC_ODR0 寄存器存 0.
+
+那么如何得到这个地址呢？
+
+- GPIOC? C 对应的地址是什么？
+- ODR? 输出寄存器对应的地址偏移是什么？
+- 0? PC0 对应的地址在第几位？
+
+---
+
+查阅存储器映像的外设地址表可以得到 GPIOC 的基地址。
+
+0x4001 1000 - 0x4001 13ff
+
+ODR 查阅 GPIO 可知，相对于基地址的地址偏移位 0Ch
+
+ODR0 为第 0bit, 如图所示
+
+![images/Pasted image 20220524215138.png](images/Pasted%20image%2020220524215138.png)
+
+因此地址为 0x4001 100C 的第 1bit.
+
+---
+
+```c
+#define PERIPH_BASE           ((uint32_t)0x40000000) /*!< Peripheral base address in the alias region */ 
+#define APB2PERIPH_BASE       (PERIPH_BASE + 0x10000)
+#define GPIOC_BASE            (APB2PERIPH_BASE + 0x1000)
+#define GPIOC_ODR_Addr    (GPIOC_BASE+12) //0x4001100C 
+#define PCout(n)   BIT_ADDR(GPIOC_ODR_Addr,n) // BIT_ADDR 用到了位段的概念
+#define LED0 PCout(0)	// PC0
+LED0 = 0; // led0 lighted
+```
+
+Peripheral adj. 外围的
+
+或者可以通过更加直接的方式
+
+```c
+*GPIOC_ODR_ADDR &= !1; // 0xFFFE
+```
+
+直接将 0bit 设置为 0.
+
+---
+
+如何让对这个地址的访问的过程更友好？
+
+==结构体==：定义一个 GPIO 的结构体，其中==按顺序==定义各成员（配置、输入、输出……），各成员更好对应各地址。
+
+```c
+typedef struct
+{
+    __IO uint32_t CRL;
+    __IO uint32_t CRH;
+    __IO uint32_t IDR;
+    __IO uint32_t ODR;
+    __IO uint32_t BSRR;
+    __IO uint32_t BRR;
+    __IO uint32_t LCKR;
+} GPIO_TypeDef;
+int main()
+{
+    GPIO_TypeDef *myGPIOC = (GPIO_TypeDef *)(0x40011000);
+    myGPIOC->ODR &= 0xFFFE;
+    return 0;
+}
+```
+
+---
+
+在使用结构体的过程中，一定要==保证地址和顺序的对应==。例如，如果 CRL 实际只占用了 2 bytes，那么对应的成员定义改成：
+
+```c
+    __IO uint16_t CRL;
+```
+
+后面一定要加上
+
+```c
+    __IO uint16_t reserved0;
+```
+
+来保证后续地址的正确。
+
+---
+
+不能这样写！
+
+```c
+int main()
+{
+    GPIO_TypeDef myGPIOC = *(GPIO_TypeDef *)(0x40011000);
+    myGPIOC.ODR &= 0xFFFE;
+    return 0;
+}
+```
+
+这样是在内存栈区又开辟了一块临时空间用于存储自动变量 ``myGPIOC``，并不能更改寄存器中的值，只是==读了一下==。
+
+---
+
+位带
+
+本质：用一个 32 bit 的 ``unsigned long`` 型变量来表示 ODR 中 1 bit 的数据。
+
+``volatile`` 可以保证对特殊地址的稳定访问，即使程序中间不小心（或者刻意地）==隐式地==改变了变量在内存中的值，也会访问到==改变以后==的结果。
+
+```c
+#define BITBAND(addr, bitnum) ((addr & 0xF0000000) + 0x2000000 + ((addr & 0xFFFFF) << 5) + (bitnum << 2))
+#define MEM_ADDR(addr)  *((volatile unsigned long  *)(addr))
+#define BIT_ADDR(addr, bitnum)   MEM_ADDR(BITBAND(addr, bitnum))
+#define PCout(n)   BIT_ADDR(GPIOC_ODR_Addr,n)
+#define LED0 PCout(0)	// PC0
+LED = 0;
+```
+
+第一行的带参宏 ``BITBAND`` 相当于一个线性映射，将原来的地址改成了位带中的地址，间隔扩大了 32 倍：首先将 bit 改成了 Byte，扩大 8 倍，对应的 ``bitnum`` 左移 2 位，扩大了 4 倍。
+
+在硬件中实现了==通过更改位带的值改变寄存器中值==的方法。
+
+---
+
+为什么程序一开始就要从 ``main`` 函数开始？
+
+打开汇编代码：
+
+```armasm
+; Reset handler
+Reset_Handler   PROC
+                EXPORT  Reset_Handler             [WEAK]
+                IMPORT  __main
+                LDR     R0, =__main
+                BX      R0
+                ENDP
+```
+
+将 ``__main`` 读入变量然后执行。
+
+``Reset_Handler`` 是一个中断向量，按下板子上的 Reset 按钮以后中断系统从此执行
+
+---
+
+## D/A 转换
+
+---
+
+数字信号转模拟信号
+
+原理：使用反相加法器
+
+![images/Pasted image 20220525105149.png](images/Pasted%20image%2020220525105149.png)
+
+数字信号控制开关
+
+---
+
+模拟信号转数字信号
+
+![images/Pasted image 20220525105601.png](images/Pasted%20image%2020220525105601.png)
+
+逐次比较，使用移位寄存器来凑。反馈控制
+
+转换结束信号发出前，所有寄存器中的值都是中间值，无效。
+
+指标：转换时间
+
+---
+
+
 

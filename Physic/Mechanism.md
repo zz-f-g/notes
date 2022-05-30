@@ -391,3 +391,5 @@ $$
 $$
 W = \left(\frac{1}{\sqrt{1 - \frac{v_{2}^{2}}{c^{2}}}} - \frac{1}{\sqrt{1 - \frac{v_{1}^{2}}{c^{2}}}}\right) m_{e} c^{2} = \frac{4}{71}\times10^{-14} \text{J}
 $$
+
+---

@@ -123,3 +123,29 @@ $$
 $$
 \frac{W}{W_{0}}= \frac{16}{25}
 $$
+
+---
+
+## week 06
+
+一无限长的载流导线中部被弯成圆弧形，如图所示，圆弧形半径为 $R=3\text{cm}$，导线中的电流为 $I=2\text{A}$。求圆弧形中心 $O$ 点的磁感应强度。
+
+![300](https://edu-image.nosdn.127.net/D87DCD24A05E26342EB40E68AE006DF5.jpg?imageView&thumbnail=890x0&quality=100)
+
+解：半无限长直导线在 $O$ 点产生的磁感应强度垂直纸面向外，大小为
+
+$$
+B_{1} = \frac{\mu_{0}I}{4\pi R}
+$$
+
+3/4 圆弧导线在 $O$ 点产生的磁感应强度垂直纸面向内，大小为
+
+$$
+B_{2} = \int_{0}^{\frac{3}{2}\pi} \frac{\mu_{0} I R \mathrm{d} \theta}{4\pi R^{2}} = \frac{3}{8} \frac{\mu_{0}I}{R}
+$$
+
+总磁感应强度垂直纸面向内，大小为
+
+$$
+B = B_{2} - 2 B_{1} = \left(\frac{3}{8} - \frac{1}{2\pi}\right) \frac{\mu_{0}I}{R}
+$$

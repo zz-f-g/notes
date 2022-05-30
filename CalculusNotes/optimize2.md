@@ -771,7 +771,7 @@ Condition:
 - 一阶必要条件
 
 $$
-\exists \boldsymbol{\lambda}^{*} \in \boldsymbol{R}^{m}, \forall \boldsymbol{y} \in T(\boldsymbol{x}^{*}) \text{\\} \{\boldsymbol{0}\}, \boldsymbol{y}^{T} \boldsymbol{L}(\boldsymbol{x}^{*}, \boldsymbol{\lambda}^{*}) \boldsymbol{y} \geq 0
+\exists \boldsymbol{\lambda}^{*} \in \boldsymbol{R}^{m}, \forall \boldsymbol{y} \in T(\boldsymbol{x}^{*}) \text{\\} \{\boldsymbol{0}\}, \boldsymbol{y}^{T} \boldsymbol{L}(\boldsymbol{x}^{*}, \boldsymbol{\lambda}^{*}) \boldsymbol{y} > 0
 $$
 
 Conclusion:
@@ -831,6 +831,67 @@ $$
 $$
 
 加权求和法
+
+---
+
+## 含不等式约束的优化问题
+
+---
+
+### 21.1
+
+Karush-Kuhn-Tucker 条件
+
+---
+
+考虑一般形式的优化问题
+
+$$
+\begin{align*}
+    & \text{minimize} && f(\boldsymbol{x}) \\
+    & \text{subject to} && \boldsymbol{h}(\boldsymbol{x}) = 0 \\
+    & && \boldsymbol{g}(\boldsymbol{x}) \leq 0
+\end{align*}
+$$
+
+其中
+
+$$
+\begin{align*}
+    & f: \mathbb{R}^{n} \rightarrow \mathbb{R} \\
+    & \boldsymbol{h}: \mathbb{R}^{n} \rightarrow \mathbb{R}^{m} \\
+    & \boldsymbol{g}: \mathbb{R}^{n} \rightarrow \mathbb{R}^{p}
+\end{align*}
+$$
+
+---
+
+- 不起作用约束 $g_{j}(\boldsymbol{x}^{*}) < 0$
+- 起作用约束 $g_{j}(\boldsymbol{x}^{*}) = 0$
+
+等式约束总是起作用约束
+
+正则点：所有起作用约束在此处的梯度向量线性无关。
+
+---
+
+一阶必要条件（KKT）
+
+CONDITION:
+
+- $f, \boldsymbol{h}, \boldsymbol{g} \in C^{1}$
+- $\boldsymbol{x}^{*}$ 是正则点和局部极小点
+
+CONCLUSION:
+
+$\exists \boldsymbol{\lambda}^{*} \in \mathbb{R}^{m}, \boldsymbol{\mu}^{*} > \boldsymbol{0} \in \mathbb{R}^{p}$
+
+$$
+\begin{align*}
+    & D(f(\boldsymbol{x}^{*}) + \boldsymbol{\lambda}^{*} h(\boldsymbol{x}^{*}) + \boldsymbol{\mu}^{*} g(\boldsymbol{x}^{*})) = \boldsymbol{0}^{T} \\
+    & \boldsymbol{\mu}^{*T} \boldsymbol{g}(\boldsymbol{x}^{*}) = 0
+\end{align*}
+$$
 
 ---
 
