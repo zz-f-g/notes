@@ -622,21 +622,27 @@ $$
 &= \frac{1}{i 2 \pi} [\oint_C \frac{f(z)}{(z - z_0)^2} \text{d}z + \oint_C \frac{f(z) \Delta z_0}{(z - z_0)^2 (z - z_0 - \Delta z_0)}\text{d}z]
 \end{aligned}
 $$
-Continuouos $f(z)$ $\Rightarrow$ $\left|f(z)\right| < K$, where $K \in \R$.
+Continuouos $f(z)$ $\Rightarrow$ $\left|f(z)\right| < K$, where $K \in \mathbb{R}$.
 
 随便找一些基准点
+
 $$
-2 \Delta z_0 \leq d \leq \left|z - z_0\right| \\
-\frac{1}{\left|z-z_0\right|^2} \leq \frac{1}{d^2} \\
-d \leq \left|z - z_0 - \Delta z_0 + \Delta z_0\right| \leq \left|z - z_0 - \Delta z_0\right| + \left|\Delta z_0\right| \\
-\left|z - z_0 - \Delta z_0\right| \geq d - \Delta z_0 \geq \frac{d}{2} \\
-\oint_C \frac{f(z) \Delta z_0}{(z - z_0)^2 (z - z_0 - \Delta z_0)} \text{d}z \leq \frac{2K}{d^3} \Delta z_0 L \\
-\lim_{\Delta z_0 \rightarrow 0} \oint_C \frac{f(z) \Delta z_0}{(z - z_0)^2 (z - z_0 - \Delta z_0)} \text{d}z = 0
+\begin{align*}
+&2 \Delta z_0 \leq d \leq \left|z - z_0\right| \\
+&\frac{1}{\left|z-z_0\right|^2} \leq \frac{1}{d^2} \\
+&d \leq \left|z - z_0 - \Delta z_0 + \Delta z_0\right| \leq \left|z - z_0 - \Delta z_0\right| + \left|\Delta z_0\right| \\
+&\left|z - z_0 - \Delta z_0\right| \geq d - \Delta z_0 \geq \frac{d}{2} \\
+&\oint_C \frac{f(z) \Delta z_0}{(z - z_0)^2 (z - z_0 - \Delta z_0)} \text{d}z \leq \frac{2K}{d^3} \Delta z_0 L \\
+&\lim_{\Delta z_0 \rightarrow 0} \oint_C \frac{f(z) \Delta z_0}{(z - z_0)^2 (z - z_0 - \Delta z_0)} \text{d}z = 0
+\end{align*}
 $$
+
 其中利用了 [ML 不等式](#ML_Inequation)。最终：
+
 $$
 f'(z_0) = \lim_{\Delta z_0 \rightarrow 0} \frac{f(z_0 + \Delta z_0) - f(z_0)}{\Delta z_0} = \frac{1}{i 2 \pi} \oint_C \frac{f(z)}{(z - z_0)^2} \text{d}z
 $$
+
 以此类推可以得到任意阶导数的公式（数学归纳法？）。
 
 #### Cauchy's Inequality

@@ -190,3 +190,50 @@ $$
 
 ---
 
+交错级数指的是各项正负交错的级数，可以通过正项级数 $u_{n}$ 来表示
+
+$$
+\sum_{n=1}^{\infty} (-1)^{n-1} u_{n}
+$$
+
+Lebniz 定理
+
+Condition:
+
+- $u_{n} \geq u_{n+1}$
+- $\lim_{n \rightarrow \infty} u_{n} = 0$
+
+Conclusion:
+
+- 级数收敛
+- $s \leq u_{1}$
+- $r_{n} := s - s_{n}, |r_{n}| \leq u_{n+1}$
+
+---
+
+幂级数的和函数的性质
+
+$$
+s(x) = \sum_{n=1}^{\infty} a_{n} x^{n}
+$$
+
+1. $s(x)$ 在收敛域上连续。
+2. $s(x)$ 在收敛域上可积，而且可以交换积分和求和的顺序。
+
+$$
+\int_{0}^{x} s(x) \mathrm{d}x = \sum_{n=1}^{\infty} a_{n} \int_{0}^{x} x^{n} \mathrm{d}x = \sum_{n=1}^{\infty} \frac{a_{n}}{n+1} x^{n+1}
+$$
+
+积分函数的收敛域和原来的函数的相同。
+
+并不是所有的函数都可以交换积分和求和的顺序。
+
+3. 也可以交换求导和求和的顺序。
+
+$$
+\frac{\mathrm{d}}{\mathrm{d}x} s(x) = \sum_{n=1}^{\infty} na_{n} x^{n-1}
+$$
+
+收敛半径也是不变的。
+
+---

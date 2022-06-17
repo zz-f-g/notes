@@ -197,15 +197,18 @@ $$
 
 $$
 \begin{align*}
-    & \boldsymbol{A} = \begin{bmatrix} \boldsymbol{B} & \boldsymbol{D} \end{bmatrix} \\
+    & \boldsymbol{A}\boldsymbol{E} = \begin{bmatrix} \boldsymbol{B} & \boldsymbol{D} \end{bmatrix} \\
     & |\boldsymbol{B}| \neq 0 \\
     & \begin{bmatrix} \boldsymbol{B} & \boldsymbol{D} \end{bmatrix} \boldsymbol{x}' = \boldsymbol{b} \\
     & \boldsymbol{B} \boldsymbol{x}_{B} = \boldsymbol{b} \Rightarrow \boldsymbol{x}_{B} = \boldsymbol{B}^{-1} \boldsymbol{b} \\
-    & \boldsymbol{x}' = \begin{bmatrix} \boldsymbol{x}_{B} & \boldsymbol{0} \end{bmatrix}
+    & \boldsymbol{x}' = \begin{bmatrix} \boldsymbol{x}_{B} \\ \boldsymbol{0} \end{bmatrix} \\
+    & \boldsymbol{x} = E^{-1} \begin{bmatrix} \boldsymbol{x}_{B} \\ \boldsymbol{0} \end{bmatrix}
 \end{align*}
 $$
 
 对 $\boldsymbol{x}'$ 进行恢复，就能得到**基本解** $\boldsymbol{x}$.
+
+如何找到所有的基本解？从 $n$ 个列向量中选取 $m$ 个组成新的系数矩阵，共有 $\binom{n}{m}$ 种选取方式。如果矩阵可逆，求解再恢复就能得到基本解。
 
 ---
 
@@ -214,9 +217,11 @@ $$
 - 基变量：向量 $\boldsymbol{x}_{B}$ 中的元素
 - 基本列向量：矩阵 $\boldsymbol{B}$ 中的列向量
 - 退化的基本解：如果基本解中的某些基变量为零，基本解退化
-- 可行解：满足约束 $\boldsymbol{A}\boldsymbol{x} = \boldsymbol{b}, \boldsymbol{x} \geq 0$
+- 可行解：满足约束 $\boldsymbol{A}\boldsymbol{x} = \boldsymbol{b}, \boldsymbol{x} \geq 0$，意思就是在可行集中
 - 基本可行解：既基本又可行
 - 退化的基本可行解
+- 最优可行解：使得目标函数取得最小值时的可行解
+- 最优基本可行解：“基本”的最优可行解
 
 ---
 
@@ -242,8 +247,25 @@ $$
 
 ---
 
-PROOF1
+这个定理的直觉很好理解，因为可行集必定存在边界，这个边界就是基本可行解；而对于最优可行解，一定在边界上：要么是顶点，顶点一定是最优基本可行解；要么是边上，而此时整个边一定都是最优可行解，边的端点（顶点）一定是最优基本可行解。
 
+更加严谨的证明就是对矩阵进行了重排，假设（最优）可行解的前 $p$ 个坐标是正值，其余的都是 0. 对重排以后矩阵的前 $p$ 个列向量进行两种情况的讨论：
+
+1. 这 $p$ 个列向量线性无关，那么这个（最优）可行解必然是基本的。
+2. 这 $p$ 个列向量线性相关，则可以将这个（最优）可行解进行 $\boldsymbol{y}$ 方向的移动。需要满足条件：$\boldsymbol{y}$ 只有前 $p$ 个值为非零值，而且可以保证至少有一个正值，需要满足：
+
+$$
+\begin{align*}
+    & \boldsymbol{A} \cdot \boldsymbol{y} = \boldsymbol{0} \iff \sum_{i=1}^{p} y_{i} \boldsymbol{a}_{i} = \boldsymbol{0} \\
+    & \boldsymbol{x} \rightarrow \boldsymbol{x} - \varepsilon \boldsymbol{y} \in D
+\end{align*}
+$$
+
+对于命题一，可以不断地移动直到成为基本可行解。
+
+对于命题二，可以根据 $\boldsymbol{x}$ 已经是最优可行解证明沿着 $\boldsymbol{y}$ 方向的移动也是最优的，可以不断地移动直到成为最优基本可行解。
+
+Q.E.D
 
 ---
 
@@ -329,13 +351,22 @@ $$
 
 **典式**：对方程 $\boldsymbol{A} \boldsymbol{x} = \boldsymbol{b}$，进行初等行变换以后，存在 $m$ 个变量，每个变量都各自对应一个方程，且仅仅在该方程中出现，系数为 1.
 
-考虑增广矩阵规范形
+选择不同的列向量作为 $\mathbb{R}^{m}$ 空间的基，得到的典式也不同。考虑在基 $\boldsymbol{a}_{1}, \cdots, \boldsymbol{a}_{m}$ 上的==增广矩阵规范形==
 
 $$
 \begin{bmatrix} \boldsymbol{I}_{m} & \boldsymbol{Y}_{m,n-m} & \boldsymbol{y}_{0} \end{bmatrix} \sim \begin{bmatrix} \boldsymbol{A}  & \boldsymbol{b} \end{bmatrix}
 $$
 
+- 基变量：和作为基的列向量对应的变量
+- 非基变量
+
 ---
+
+上面的问题的可行解为
+
+$$
+\boldsymbol{x} = \begin{bmatrix} \boldsymbol{y}_{0} \\ \boldsymbol{0} \end{bmatrix}
+$$
 
 存在关系
 
@@ -372,16 +403,27 @@ $$
 
 ---
 
-对于其他的向量
+对于其他的向量 $\boldsymbol{a}_{j} (m < j \leq n)$
 
 $$
 \begin{align*}
-    \boldsymbol{a}_{j} &= \sum_{i=1, i \neq q}^{m} Y_{ij}\boldsymbol{a}_{i} + Y_{pj}\boldsymbol{a}_{p} \\
-    \boldsymbol{a}_{j} &= \sum_{\substack{i=1 \\ i \neq p}}^{m} \left(Y_{i j}-\frac{Y_{p j}}{Y_{p q}} Y_{i q}\right) \boldsymbol{a}_{i}+\frac{Y_{p j}}{Y_{p q}} \boldsymbol{a}_{q}
+    \boldsymbol{a}_{j} &= \sum_{i=1, i \neq p}^{m} Y_{ij}\boldsymbol{a}_{i} + Y_{pj}\boldsymbol{a}_{p} \\
+    &= \sum_{\substack{i=1 \\ i \neq p}}^{m} \left(Y_{i j}-\frac{Y_{p j}}{Y_{p q}} Y_{i q}\right) \boldsymbol{a}_{i}+\frac{Y_{p j}}{Y_{p q}} \boldsymbol{a}_{q}
 \end{align*}
 $$
 
-???
+在更新的矩阵中，第 $j$ 行就变成了
+
+$$
+\begin{align*}
+    & Y_{ij}' = Y_{ij} - \frac{Y_{pj}}{Y_{pq}} Y_{iq} && (i \neq p) \\
+    & Y_{pj}' = \frac{Y_{pj}}{Y_{pq}}
+\end{align*}
+$$
+
+这就是枢轴变换，本质上是将第 $p$ 行作为被倍加的行进行第三类初等行变换，使得第 $q$ 列成为只有 $Y_{pq} = 1$，其余都是 0 的向量。
+
+增广矩阵规范型的最后一列 $\boldsymbol{y}_{0}$ 就是基变量。
 
 ---
 
@@ -530,7 +572,7 @@ Q.E.D
 
 ---
 
-法线空间是导数矩阵的行空间。
+法线空间是导数矩阵的行空间。由梯度向量张成。
 
 $$
 N(\boldsymbol{x}^{*}) = \mathrm{Col} (D \boldsymbol{h}(\boldsymbol{x}^{*})^{T})
@@ -884,14 +926,359 @@ CONDITION:
 
 CONCLUSION:
 
-$\exists \boldsymbol{\lambda}^{*} \in \mathbb{R}^{m}, \boldsymbol{\mu}^{*} > \boldsymbol{0} \in \mathbb{R}^{p}$
+$\exists \boldsymbol{\lambda}^{*} \in \mathbb{R}^{m}, \boldsymbol{\mu}^{*} \in \mathbb{R}^{p}$
 
 $$
 \begin{align*}
-    & D(f(\boldsymbol{x}^{*}) + \boldsymbol{\lambda}^{*} h(\boldsymbol{x}^{*}) + \boldsymbol{\mu}^{*} g(\boldsymbol{x}^{*})) = \boldsymbol{0}^{T} \\
+    & \boldsymbol{\mu}^{*} \geq \boldsymbol{0} \\
+    & D[f(\boldsymbol{x}^{*}) + \boldsymbol{\lambda}^{*T} h(\boldsymbol{x}^{*}) + \boldsymbol{\mu}^{*T} g(\boldsymbol{x}^{*})] = \boldsymbol{0}^{T} \\
     & \boldsymbol{\mu}^{*T} \boldsymbol{g}(\boldsymbol{x}^{*}) = 0
+\end{align*}
+$$
+
+$\boldsymbol{\mu}^{*}$ 为 KKT 乘子。
+
+---
+
+起作用约束的下标集
+
+$$
+\begin{align*}
+    & g_{j}(\boldsymbol{x}^{*}) = 0 \\
+    & j \in J(\boldsymbol{x}^{*})
+\end{align*}
+$$
+
+由于 $\boldsymbol{\mu}^{*T} \boldsymbol{g}(\boldsymbol{x}^{*}) = \boldsymbol{0}$
+
+$$
+\begin{align*}
+    & \sum_{j \notin J(\boldsymbol{x}^{*})} \mu_{j} g_{j}(\boldsymbol{x}^{*}) = 0 \\
+    & \forall j \notin J(\boldsymbol{x}^{*}), g_{j}(\boldsymbol{x}^{*}) < 0 \\
+    & \Rightarrow \forall j \notin J(\boldsymbol{x}^{*}) , \mu_{j} = 0
 \end{align*}
 $$
 
 ---
 
+几何解释
+
+![images/Pasted image 20220611111107.png|500](images/Pasted%20image%2020220611111107.png)
+
+$$
+\begin{align*}
+    & \nabla f(\boldsymbol{x}^{*}) = - (\mu_{1} \nabla g_{1}(\boldsymbol{x}^{*}) + \mu_{2} \nabla g_{2}(\boldsymbol{x}^{*})) \\
+    & \mu_{1}, \mu_{2} > 0
+\end{align*}
+$$
+
+具体证明过程省略。
+
+---
+
+当问题转化为：
+
+- 求解目标函数的最大值
+- 不等式约束为 $\geq$
+
+只需要改变为：
+
+$$
+\mu^{*} \leq 0
+$$
+
+当上面两种转化同时发生，则 $\mu^{*} \geq 0$
+
+---
+
+在求解问题的最优解时，可以将条件一并列写如下：
+
+$$
+\begin{align*}
+    & 1. && \boldsymbol{\mu}^{*} \geq (\leq) \boldsymbol{0} \\
+    & 2. && D \boldsymbol{f}(\boldsymbol{x}^{*}) + \boldsymbol{\lambda}^{*T} D \boldsymbol{h}(\boldsymbol{x}^{*}) + \boldsymbol{\mu}^{*T} D \boldsymbol{g}(\boldsymbol{x}^{*}) = \boldsymbol{0}^{T} \\
+    & 3. && \boldsymbol{\mu}^{*T} g(\boldsymbol{x}^{*}) = 0 \\
+    & 4. && \boldsymbol{h}(\boldsymbol{x}^{*}) = \boldsymbol{0} \\
+    & 5. && \boldsymbol{g}(\boldsymbol{x}^{*}) \leq (\geq) \boldsymbol{0}
+\end{align*}
+$$
+
+---
+
+如果 $\boldsymbol{g}(\boldsymbol{x}) = \boldsymbol{x} \geq 0$，不存在等式约束 $\boldsymbol{h}(\boldsymbol{x})$，求目标函数极小值。
+
+$$
+\begin{align*}
+    & 1. && \boldsymbol{\mu}^{*} \leq 0 \\
+    & 2. && D \boldsymbol{f}(\boldsymbol{x}^{*}) + \boldsymbol{\mu}^{*T} = \boldsymbol{0}^{T} \\
+    & 3. && \boldsymbol{\mu}^{*T} \boldsymbol{x} = 0 \\
+    & 4. && \boldsymbol{x}^{*} \geq 0 \\
+\end{align*}
+$$
+
+可以消去中间变量 $\boldsymbol{\mu}^{*}$
+
+$$
+\begin{align*}
+    & 1. && \nabla \boldsymbol{f}(\boldsymbol{x}^{*}) \geq \boldsymbol{0}  \\
+    & 2. && \boldsymbol{x}^{*T} D \boldsymbol{f}(\boldsymbol{x}^{*}) = 0 \\
+    & 3. && \boldsymbol{x}^{*} \geq \boldsymbol{0} \\
+\end{align*}
+$$
+
+---
+
+### 21.2
+
+二阶条件
+
+---
+
+同样定义 Lagrange 矩阵
+
+$$
+\begin{align*}
+    & \boldsymbol{L}(\boldsymbol{x}, \boldsymbol{\lambda}, \boldsymbol{\mu}) = \boldsymbol{F}(\boldsymbol{x}) + \sum_{i=1}^{m} \lambda_{i} \boldsymbol{H}(\boldsymbol{x}) + \sum_{i=1}^{p} \mu_{i} \boldsymbol{G}(\boldsymbol{x})
+\end{align*}
+$$
+
+切线空间
+
+$$
+\begin{align*}
+    & T(\boldsymbol{x}^{*}) = \{\boldsymbol{y} \in \mathbb{R}^{n}: D \boldsymbol{h}(\boldsymbol{x}^{*}) \boldsymbol{y} = \boldsymbol{0}, D g_{j}(\boldsymbol{x}^{*}) \boldsymbol{y} = 0, j \in J(\boldsymbol{x}^{*}) \}
+\end{align*}
+$$
+
+参与线性组合的起作用约束的下标集
+
+$$
+\tilde{J}(\boldsymbol{x}^{*}, \boldsymbol{\mu}^{*}) = \{ j: g_{j}(\boldsymbol{x}^{*}) = 0, \mu_{j} \geq 0 \}
+$$
+
+新的切线空间
+
+$$
+\tilde{T}(\boldsymbol{x}^{*}, \boldsymbol{\mu}^{*}) = \{ \boldsymbol{y} \in \mathbb{R}^{n}: D \boldsymbol{h}(\boldsymbol{x}^{*}) \boldsymbol{y} = \boldsymbol{0}, \boldsymbol{g}_{j}(\boldsymbol{x}^{*}) \boldsymbol{y} = 0, j \in \tilde{J}(\boldsymbol{x}^{*}, \mu^{*}) \}
+$$
+
+---
+
+二阶必要条件和仅含等式约束的二阶条件形式一致
+
+前提：
+
+- 满足一阶必要条件
+- $f, \boldsymbol{h}, \boldsymbol{g} \in C^{2}$
+- $\boldsymbol{x}^{*}$ 是正则点
+
+结论：
+
+$$
+\exists \lambda^{*} \in \boldsymbol{R}^{m}, \mu^{*} \in \mathbb{R}^{p},  \forall \boldsymbol{y} \in T(\boldsymbol{x}^{*}), \boldsymbol{y}^{T} \boldsymbol{L}(\boldsymbol{x}^{*}, \boldsymbol{\lambda}^{*}, \boldsymbol{\mu}^{*}) \boldsymbol{y} \geq 0
+$$
+
+---
+
+二阶充分条件
+
+Condition:
+
+- $\boldsymbol{x}^{*}$ 是正则点
+- $f, \boldsymbol{h}, \boldsymbol{g} \in C^{2}$
+- 满足一阶必要条件，而且：
+
+$$
+\exists \boldsymbol{\lambda}^{*} \in \mathbb{R}^{m}, \exists \boldsymbol{\mu}^{*} \in \mathbb{R}^{p}, \forall \boldsymbol{y} \in \tilde{T}(\boldsymbol{x}^{*}, \boldsymbol{\mu}^{*}), \boldsymbol{y}^{T} \boldsymbol{L}(\boldsymbol{x}^{*}, \boldsymbol{\lambda}^{*}, \boldsymbol{\mu}^{*}) \boldsymbol{y} > 0
+$$
+
+Conclusion:
+
+$\boldsymbol{x}^{*}$ 是严格局部极小点。
+
+---
+
+## 凸优化问题
+
+---
+
+### 22.1
+
+introduction
+
+---
+
+### 22.2
+
+凸函数
+
+---
+
+实值函数图像
+
+$$
+\begin{align*}
+    & f: \Omega \rightarrow \mathbb{R}, \Omega \subset \mathbb{R}^{n} \\
+    & \text{graph: } \left\{ \begin{bmatrix} \boldsymbol{x} \\ f(\boldsymbol{x}) \end{bmatrix}: \boldsymbol{x} \in \Omega \right\}
+\end{align*}
+$$
+
+实值函数上图
+
+$$
+\begin{align*}
+    & \mathrm{epi}(f) = \left\{ \begin{bmatrix} \boldsymbol{x} \\ \beta \end{bmatrix}: \boldsymbol{x} \in \Omega, \beta \geq f(\boldsymbol{x}) \right\}
+\end{align*}
+$$
+
+凸函数：上图是凸集
+
+$$
+\begin{align*}
+    & \forall \boldsymbol{x}_{1}, \boldsymbol{x}_{2} \in \mathrm{epi}(f), \forall \alpha \in [0, 1], \alpha \boldsymbol{x}_{1} + (1 - \alpha) \boldsymbol{x}_{2} \in \mathrm{epi}(f)
+\end{align*}
+$$
+
+定理：凸函数的定义域是凸集
+
+---
+
+凸函数的另外定义（等价条件）
+
+$$
+\begin{align*}
+    & f: \Omega \rightarrow \mathbb{R}, \Omega \subset \mathbb{R}^{n} \\
+    & \forall \boldsymbol{x}, \boldsymbol{y} \in \Omega, \forall \alpha \in (0, 1)\\
+    & f(\alpha \boldsymbol{x} + ( 1 - \alpha ) \boldsymbol{y}) \leq \alpha f(\boldsymbol{x}) + (1 - \alpha) f(\boldsymbol{y})
+\end{align*}
+$$
+
+凸函数具有
+
+- 可加性：两个凸函数相加仍然是凸函数
+- 倍乘性：一个凸函数乘任意一个非负数仍然是凸函数
+- 线性组合：一组凸函数以一组非负实数为权线性组合的结果仍然是凸函数
+- 取最大值：一组凸函数取最大值得到的函数仍然是凸函数
+
+---
+
+严格凸函数
+
+$$
+\begin{align*}
+    & f: \Omega \rightarrow \mathbb{R}, \Omega \subset \mathbb{R}^{n} \\
+    & \forall \boldsymbol{x}, \boldsymbol{y} \in \Omega, \forall \alpha \in (0, 1)\\
+    & f(\alpha \boldsymbol{x} + ( 1 - \alpha ) \boldsymbol{y}) < \alpha f(\boldsymbol{x}) + (1 - \alpha) f(\boldsymbol{y})
+\end{align*}
+$$
+
+当 $-f$ 是严格凸函数的时候，$f$ 是严格凹函数。
+
+这一点和凹凸的汉字象形是相反的。
+
+---
+
+判断一个二次型函数是否为凸函数？
+
+对于二次型函数
+
+$$
+\begin{align*}
+    & f(\boldsymbol{x}) = \boldsymbol{x}^{T} \boldsymbol{Q} \boldsymbol{x}, \boldsymbol{Q}^{T} = \boldsymbol{Q}, \boldsymbol{x} \in \Omega \subset \mathbb{R}^{n}
+\end{align*}
+$$
+
+它是凸函数的等价条件为
+
+$$
+\begin{align*}
+    & \forall \boldsymbol{x}, \boldsymbol{y} \in \Omega \\
+    & (\boldsymbol{x} - \boldsymbol{y})^{T} \boldsymbol{Q} (\boldsymbol{x} - \boldsymbol{y}) \geq 0
+\end{align*}
+$$
+
+证明需要利用计算结果
+
+$$
+\begin{align*}
+    & \alpha \boldsymbol{x}^{T} \boldsymbol{Q} \boldsymbol{x} +(1 - \alpha) \boldsymbol{y}^{T} \boldsymbol{Q} \boldsymbol{y} - [\alpha \boldsymbol{x} + ( 1 - \alpha) \boldsymbol{y}]^{T} \boldsymbol{Q} [\alpha \boldsymbol{x} + (1 - \alpha) \boldsymbol{y}] \\
+    = & \alpha( 1 - \alpha ) (\boldsymbol{x} - \boldsymbol{y})^{T} \boldsymbol{Q} (\boldsymbol{x} - \boldsymbol{y})
+\end{align*}
+$$
+
+---
+
+凸函数与多元 Lagrange 终值定理
+
+Condition:
+
+1. $f: \Omega \rightarrow \mathbb{R}, f \in C^{1}$
+2. 凸集 $\Omega \subset \mathbb{R}^{n}$
+
+Conclusion:
+
+$$
+\begin{align*}
+    & f(\boldsymbol{y}) \geq f(\boldsymbol{x}) + D f(\boldsymbol{x}) (\boldsymbol{y} - \boldsymbol{x})
+\end{align*}
+$$
+
+等价于 $f$ 是凸函数。
+
+---
+
+二阶条件
+
+Condition:
+
+1. $f: \Omega \rightarrow \mathbb{R}, f \in C^{2}$
+2. 凸集 $\Omega \subset \mathbb{R}^{n}$
+
+凸函数的等价条件是
+
+$$
+\begin{align*}
+    & \forall \boldsymbol{x} \in  \Omega, \\
+    & \boldsymbol{F}(\boldsymbol{x}) \geq 0
+\end{align*}
+$$
+
+证明方法：利用 Taylor 定理将它转化成一阶条件，证明充分性时利用反证法。
+
+$$
+\begin{align*}
+    & f(\boldsymbol{y}) = f(\boldsymbol{x}) + Df(x) (\boldsymbol{y} - \boldsymbol{x}) + \frac{1}{2} (\boldsymbol{y} - \boldsymbol{x})^{T} \boldsymbol{F}(\boldsymbol{x} + \alpha(\boldsymbol{y} - \boldsymbol{x})) (\boldsymbol{y} - \boldsymbol{x}) \\
+    & \boldsymbol{x}, \boldsymbol{y} \in \Omega \Rightarrow \boldsymbol{x} + \alpha(\boldsymbol{y} - \boldsymbol{x}) \in \Omega \Rightarrow \boldsymbol{F}(\boldsymbol{x} + \alpha (\boldsymbol{y} - \boldsymbol{x})) \geq 0
+\end{align*}
+$$
+
+---
+
+### 22.3
+
+凸优化问题
+
+目标函数是凸函数，约束集是凸集的规划问题
+
+---
+
+凸优化问题中的局部极小值就是全局极小值
+
+不严谨的说明：如果不是的话，那么从局部极小值到全局极小值的直线路径上任何一点都比局部极小值要小，这就不再是局部极小值了。
+
+---
+
+全局极值点的集合也是凸集。
+
+证明路径：
+
+- 对于凸集 $\Omega$ 上的单值函数 $g$，$\Gamma_{c} = \{ \boldsymbol{x} \in \Omega: g(\boldsymbol{x}) \leq c \}$ 也是凸集（证明直接套用定义，利用两个不等式传递）
+- $g$ 在 $\Omega$ 上的全局极小点构成的集合是凸集（令 $c = \ \mathrm{min}_{\boldsymbol{x} \in \Omega} f(\boldsymbol{x})$）
+
+---
+
+凸优化问题的特殊性
+
+- 对于连续可微的凸函数在无约束条件下的优化问题，一阶必要条件是充分条件；
+- 对于凸函数在等式约束下的优化问题，如果约束集是凸集，那么 Lagrange 条件就是充分条件；
+- 对于凸函数在等式和不等式约束下的优化问题，如果约束集是凸集，那么 KKT 条件就是充分条件。
