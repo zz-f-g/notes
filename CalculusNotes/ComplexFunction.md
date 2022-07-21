@@ -2,48 +2,21 @@
 
 崔宰珪；宁静楼 313；jaycjk@tongji.edu.cn；微信 jaycjk
 
-微信群
-
-| 上课内容                                                                                                                    |
-|:--------------------------------------------------------------------------------------------------------------------------- |
-| 1. 复数，函数     1.1. 复数，复平面     1.2. 三角形式，乘方，方根                                                           |
-| 1.3. 导数，解析函数     1.4. Cauchy-Riemann 方程，Laplace 方程                                                              |
-| 1.5. 指数函数     1.6. 三角函数和双曲函数                                                                                   |
-| 1.7. 对数，幂函数                                                                                                           |
-| 2. 复积分     2.1. 复平面上的线积分     2.2. Cauchy 积分定理     注意！由于 10 月 7 日为十一假期，该课程与 10 月 9 日对调。 |
-| 2.3. Cauchy 积分公式     2.4. 解析函数的导数                                                                                |
-| 3. Taylor 级数，Laurent 级数     3.1. 序列，级数     3.2. 幂级数                                                            |
-| 3.2. 幂级数（继续）     3.3. 幂级数的和函数                                                                                 |
-| 3.4. Taylor 级数，Macluarin 级数     3.5. Laurent 级数                                                                      |
-| 3.5. Laurent 级数（继续）     3.6. 奇点，零点，无穷远点                                                                     |
-| 3.7. 留数积分法     3.8. 实积分中的应用                                                                                     |
-| 3.8. 实积分中的应用（继续）     （时间允许的话）习题选讲                                                                    |
-| 4. 积分变换     4.1. Fourier 变换：Fourier 变换                                                                             |
-| Fourier 逆变换，Dirac delta                                                                                                 |
-| 离散革命 (The discrete revolution)                                                                                          |
-| 离散 Fourier 变换，快速 Fourier 变换                                                                                        |
-| 4.2. Laplace 变换                                                                                                           |
-| Laplace 变换（继续），Laplace 逆变换（浅谈）                                                                                |
-| 4.3. 微分方程中的应用：常微分方程中的 Laplace 变换                                                                          |
-| 常微分方程中的 Laplace 变换 （继续）                                                                                        |
-| 偏微分方程中的 Fourier 变换                                                                                                 |
-| 时间遇到了频率（Time meets frequency）：浅谈信号时频分析                                                                    |
-| 总复习及答疑                                                                                                                |
-| 总复习及答疑                                                                                                                |
-| 期末考查                                                                                                                    |
-
 ## Complex Numbers
 
 ### Conjugate Complex Numbers
 
 $\text{For }z = x + i y,\ \text{the conjugate } \overline{z} = x - i y$.
+
 $$
-Re \ z = 1/2(z + \overline{z})\\
-Im \ z = 1/2(z - \overline{z})\\
-|z| = \sqrt{z \cdot \overline{z}}\\
-\overline{z_1 + z_2} = \overline{z_1} + \overline{z_2}\\
-\overline{z_1 z_2} = \overline{z_1} \overline{z_2}\\
-\overline{(\frac{z_1}{z_2})}=\frac{\overline{z_1}}{\overline{z_2}}
+\begin{align*}
+    & \mathrm{Re} z = \frac{1}{2} (z + \overline{z})\\
+    & \mathrm{Im} z = \frac{1}{2} (z - \overline{z})\\
+    & |z| = \sqrt{z \cdot \overline{z}}\\
+    & \overline{z_{1} + z_{2}} = \overline{z_{1}} + \overline{z_{2}}\\
+    & \overline{z_{1} z_{2}} = \overline{z_{1}} \overline{z_{2}}\\
+    & \overline{\left(\frac{z_{1}}{z_{2}}\right)}=\frac{\overline{z_{1}}}{\overline{z_{2}}}
+\end{align*}
 $$
 
 ### Argument of Complex Numbers
@@ -53,9 +26,12 @@ $\theta = \arg z = \arctan {\frac{y}{x}}$
 Principle value of argument（辐角主值）
 
 $\theta = \text{Arg } z = \arctan \frac{y}{x}$
+
 $$
--\pi < \text{Arg} \leq \pi\\
-\arg z = \text{Arg } z + 2n\pi
+\begin{align*}
+    & -\pi < \text{Arg} \leq \pi\\
+    & \arg z = \text{Arg } z + 2n\pi
+\end{align*}
 $$
 
 ### Triangle Inequation
@@ -65,7 +41,7 @@ $|z_1| + |z_2| \geq |z_1 + z_2|$
 By induction,
 
 $$
-\sum_{i=1}^n |z_n| \geq |\sum_{i=1}^n z_n|
+\sum_{i=1}^n |z_{n}| \geq \left|\sum_{i=1}^{n z_{n}}\right|
 $$
 
 ### De Moivre's Formula
@@ -77,13 +53,15 @@ $$
 ### Root
 
 $$
-\omega ^n = z = r e ^{i \theta}\\
-\omega = \sqrt[n]{r} e ^{i \varphi}\\
-\text{where } n \varphi = \theta +2k\pi,\ k = 0,1,\cdots,n-1\\
-\text{suppose } w_1= \sqrt[n]{r} e ^{\frac{\theta}{n}} ,\ \omega = e ^{\frac{2\pi}{n}}
+\begin{align*}
+    & \omega ^{n} = z = r e ^{i \theta}\\
+    & \omega = \sqrt[n]{r} e ^{i \varphi}\\
+    & \text{where } n \varphi = \theta +2k\pi,\ k = 0,1,\cdots,n-1\\
+    & \text{suppose } w_{1}= \sqrt[n]{r} e ^{\frac{\theta}{n}} ,\ \omega = e ^{\frac{2\pi}{n}}
+\end{align*}
 $$
 
-Then the nth roots can be written as $w_1 \omega ^k$, where $k = 0,1,\cdots,n-1$, where $\omega$ is one of the nth roots of unity.
+Then the nth roots can be written as $w_{1} \omega ^{k}$, where $k = 0,1,\cdots,n-1$, where $\omega$ is one of the nth roots of unity.
 
 $$
 \sqrt[n]{1}=e ^{i \cdot \frac{2\pi}{n}}
@@ -98,8 +76,13 @@ $w = f(z)$
 where domain and codomain / range are both complex set.
 
 ***z*** is called a **complex variable**.
+
 $$
-w=u+iv \\ z=x+iy \\ \text{then } w=u(x,y)+iv(x,y)
+\begin{align*}
+    & w=u+iv \\
+    & z=x+iy \\
+    & \text{then } w=u(x,y)+iv(x,y)
+\end{align*}
 $$
 
 Thus we transform complex function to real function.

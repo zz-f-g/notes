@@ -234,8 +234,10 @@ CPU：好几套组合逻辑
 例如：
 
 1000 0000 和 1000 1000 如果是浮点数中相邻的两个数，1000 0001 就无法用这种浮点数表示。
+
 ```cpp
-    a + 1 == a
+float a = 1e10;
+a + 1 == a; // return 1
 ```
 
 ---
@@ -320,9 +322,10 @@ int main()
 ---
 
 ```cpp
-struct XX{
+struct XX
+{
     ...;
-}
+};
 
 int main()
 {
@@ -622,7 +625,7 @@ CPU 和内存之间有两种角色的总线：
 
 - AD15 - AD0: Address & Data
 - RD: CPU 等待内存写入数据
-- DT/R: Data Transmit and Receive
+- DT/R': Data Transmit or Receive
 - READY: 反馈信号，内存（外设）给 CPU 的信号
 - ALE: 输入地址有效
 - DEN: 输入数据有效
@@ -633,7 +636,7 @@ CPU 和内存之间有两种角色的总线：
 
 CPU 读取数据的过程（MOV 指令）
 
-1. DT/R = 0，表示开始进行数据交换。
+1. DT/R' = 0，表示开始进行数据交换。
 2. ALE = 1，表示地址总线有效，CPU 向总线发送地址数据。
 3. 发送完毕以后，RD = 0，表示 CPU 准备好读数据，等待速度较慢的外设。
 4. 外设发送反馈信号 READY = 1，CPU 发送 DEN = 0 信号，读入内存发送到总线的数据。
@@ -756,7 +759,6 @@ GPIO 连接 APB2 再连接 AHB 总线到 CPU。
 
 时钟使能是独立的控制方式，和设备地址（之前讲过的）没有关系。
 
-
 通过时钟控制寄存器来控制芯片内部各个时钟单元的状态。
 
 ---
@@ -825,7 +827,7 @@ GPIO
 - 配置寄存器
 - 数据寄存器
     - GPIOx_IDR
-    - GPIOx-ODR
+    - GPIOx_ODR
 - 置位、复位寄存器
 
 要让 PC0 输出低电平，就是让 GPIOC_ODR0 寄存器存 0.
@@ -853,12 +855,12 @@ ODR0 为第 0bit, 如图所示
 ---
 
 ```c
-#define PERIPH_BASE           ((uint32_t)0x40000000) /*!< Peripheral base address in the alias region */ 
-#define APB2PERIPH_BASE       (PERIPH_BASE + 0x10000)
-#define GPIOC_BASE            (APB2PERIPH_BASE + 0x1000)
-#define GPIOC_ODR_Addr    (GPIOC_BASE+12) //0x4001100C 
-#define PCout(n)   BIT_ADDR(GPIOC_ODR_Addr,n) // BIT_ADDR 用到了位段的概念
-#define LED0 PCout(0)	// PC0
+#define PERIPH_BASE     ((uint32_t)0x40000000) /*!< Peripheral base address in the alias region */ 
+#define APB2PERIPH_BASE (PERIPH_BASE + 0x10000)
+#define GPIOC_BASE      (APB2PERIPH_BASE + 0x1000)
+#define GPIOC_ODR_Addr  (GPIOC_BASE+12) //0x4001100C 
+#define PCout(n)        BIT_ADDR(GPIOC_ODR_Addr,n) // BIT_ADDR 用到了位段的概念
+#define LED0            PCout(0) // PC0
 LED0 = 0; // led0 lighted
 ```
 
@@ -867,7 +869,7 @@ Peripheral adj. 外围的
 或者可以通过更加直接的方式
 
 ```c
-*GPIOC_ODR_ADDR &= !1; // 0xFFFE
+*GPIOC_ODR_ADDR &= ~1; // 0xFFFE
 ```
 
 直接将 0bit 设置为 0.
