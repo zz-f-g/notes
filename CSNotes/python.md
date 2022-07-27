@@ -1,10 +1,14 @@
-# python 装饰器
+# python tips
+
+[TOC]
+
+## 装饰器
 
 以下内容来自[恶补了 Python 装饰器的八种写法，你随便问~ - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/269012332)
 
 装饰器放在一个函数开始定义的地方，它就像一顶帽子一样戴在这个函数的头上。和这个函数绑定在一起。在我们调用这个函数的时候，第一件事并不是执行这个函数，而是将这个函数做为参数传入它头顶上这顶帽子，这顶帽子我们称之为**装饰器**。
 
-## 1. hello，装饰器
+### 1. hello，装饰器
 
 装饰器的使用方法很固定
 
@@ -32,7 +36,7 @@ def function():
 
 接下来，我将以实例讲解，如何编写出各种简单及复杂的装饰器。
 
-## 2. 入门：日志打印器
+### 2. 入门：日志打印器
 
 首先是**日志打印器**。 实现的功能：
 
@@ -74,7 +78,7 @@ add(200, 50)
 主人，我执行完啦。
 ```
 
-## 3. 入门：时间计时器
+### 3. 入门：时间计时器
 
 再来看看 **时间计时器** 实现功能：顾名思义，就是计算一个函数的执行时长。
 
@@ -111,7 +115,7 @@ want_sleep(10)
 花费时间：10.0073800086975098秒
 ```
 
-## 4. 进阶：带参数的函数装饰器
+### 4. 进阶：带参数的函数装饰器
 
 通过上面两个简单的入门示例，你应该能体会到装饰器的工作原理了。
 
@@ -186,7 +190,7 @@ jack()
 hello.
 ```
 
-## 5. 高阶：不带参数的类装饰器
+### 5. 高阶：不带参数的类装饰器
 
 以上都是基于函数实现的装饰器，在阅读别人代码时，还可以时常发现还有基于类实现的装饰器。
 
@@ -218,7 +222,7 @@ say("hello")
 say hello!
 ```
 
-## 6. 高阶：带参数的类装饰器
+### 6. 高阶：带参数的类装饰器
 
 上面不带参数的例子，你发现没有，只能打印`INFO`级别的日志，正常情况下，我们还需要打印`DEBUG` `WARNING`等级别的日志。 这就需要给类装饰器传入参数，给这个函数指定级别了。
 
@@ -252,7 +256,7 @@ say("hello")
 say hello!
 ```
 
-## 7. 使用偏函数与类实现装饰器
+### 7. 使用偏函数与类实现装饰器
 
 绝大多数装饰器都是基于函数和闭包实现的，但这并非制造装饰器的唯一方式。
 
@@ -318,7 +322,7 @@ Wait for 2 seconds...
 <function add at 0x107bef1e0>
 ```
 
-## 8. 如何写能装饰类的装饰器？
+### 8. 如何写能装饰类的装饰器？
 
 用 Python 写单例模式的时候，常用的有三种写法。其中一种，是用装饰器来实现的。
 
@@ -357,7 +361,7 @@ class User:
 
 
 
-## 9. wraps 装饰器有啥用？
+### 9. wraps 装饰器有啥用？
 
 在 functools 标准库中有提供一个 wraps 装饰器，你应该也经常见过，那他有啥用呢？
 
@@ -445,7 +449,7 @@ def wrapped():
 print(wrapped.__name__)
 ```
 
-## 10. 内置装饰器：property
+### 10. 内置装饰器：property
 
 以上，我们介绍的都是自定义的装饰器。
 
@@ -672,7 +676,7 @@ in __get__
 
 如对上面代码的运行原理，有疑问的同学，请务必结合上面两点说明加以理解，那两点相当关键。
 
-## 11. 其他装饰器：装饰器实战
+### 11. 其他装饰器：装饰器实战
 
 读完并理解了上面的内容，你可以说是Python高手了。别怀疑，自信点，因为很多人都不知道装饰器有这么多用法呢。
 
@@ -709,9 +713,9 @@ def timeout_limit(timeout_time):
     return wraps
 ```
 
-# sympy
+## sympy
 
-## Basic Operation
+### Basic Operation
 
 ``sympify()``: transform str_expression to expression in sympy
 
@@ -744,7 +748,7 @@ array([ 0,  1,  4,  9, 16, 25, 36, 49, 64, 81], dtype=int32)
 
 
 
-## Print Method
+### Print Method
 
 - ``srepr()``: show the exact form of an expression.（理解内部的建立方式）
 - ``pprint()``: ACSII pretty printer.
@@ -780,7 +784,7 @@ array([ 0,  1,  4,  9, 16, 25, 36, 49, 64, 81], dtype=int32)
 
 
 
-## Polynomial and Rational Simplification
+### Polynomial and Rational Simplification
 
 - ``expand(expr)``: 展开
 - ``factor(expr)``: 因式分解
@@ -791,7 +795,439 @@ array([ 0,  1,  4,  9, 16, 25, 36, 49, 64, 81], dtype=int32)
 
 
 
-## Trigonometric Simplification
+### Trigonometric Simplification
 
 - ``trigsimp(expr)``: （双曲）三角函数化简
 - ``expand_trig(expr)``: （双曲）三角函数展开
+
+## 解包
+
+以下内容来自 [python 有趣的解包用法](https://zhuanlan.zhihu.com/p/33896402)
+
+python 中的解包可以这样理解：一个 list 是一个整体，想把list中每个元素当成一个个个体剥离出来，这个过程就是解包，我们来看下面这些例子（分为 12 个部分）。
+
+### 1. 将 list 中每个元素赋值给一个变量
+
+```python3
+>>> name, age, date = ['Bob', 20, '2018-1-1']
+>>> name
+'Bob'
+>>> age
+20
+>>> date
+'2018-1-1'
+```
+
+### 2. 可迭代对象都可以这样做
+
+```python3
+# 列表
+>>> a,b,c = ['a', 'b', 'c']
+>>> a
+'a'
+
+>>> a,b,c = enumerate(['a', 'b', 'c'])
+>>> a
+(0, 'a')
+
+
+# 元组
+>>> a,b,c = ('a', 'b', 'c')
+>>> a
+'a'
+
+# 字典
+>>> a,b,c = {'a':1, 'b':2, 'c':3}
+>>> a
+'a'
+
+>>> a,b,c = {'a':1, 'b':2, 'c':3}.items()
+>>> a
+('a', 1)
+
+
+# 字符串
+>>> a,b,c = 'abc'
+>>> a
+'a'
+
+# 生成器
+>>> a,b,c = (x + 1 for x in range(3))
+>>> a
+1
+```
+
+如果可迭代对象包含的元素和前面待赋值变量数量不一致，则会报错。但是可以通过 `*` 来表示多个元素
+
+### 3. 星号的使用
+
+比如我们要计算平均分，去除最高分和最低分，除了用切片，还可以用解包的方式获得中间的数值
+
+```python3
+>>> first, *new, last = [94, 85, 73, 46]
+>>> new
+[85, 73]
+```
+
+用 `*` 来表示多个数值
+
+### 4. 压包过程
+
+压包是解包的逆过程，用 `zip` 函数实现，下面例子可以对压包有一个直观的感受
+
+```python3
+>>> a = ['a', 'b', 'c']
+>>> b = [1, 2, 3]
+>>> for i in zip(a, b):
+...     print(i)
+...
+('a', 1)
+('b', 2)
+('c', 3)
+```
+
+### 5. 压包与解包混合的例子
+
+下面例子实现：两个列表对应数值相加
+
+```python3
+>>> a = [0, 1, 2]
+>>> b = [1, 2, 3]
+>>> for i, j in zip(a, b):
+...     print(i+j)
+...
+1
+3
+5
+```
+
+细细拆解上面过程，可以看出步骤是这样的
+
+- 先是 `zip` 函数将 `a b` 压包成为一个可迭代对象
+- 对可迭代对象的每一个元素 `('a', 1)` 进行解包 `i, j = ('a', 1)`
+- 此时就可以分别调用 `i j` 变量进行计算
+
+下面我们加入星号
+
+```python3
+>>> l = [('Bob', '1990-1-1', 60),
+...     ('Mary', '1996-1-4', 50),
+...     ('Nancy', '1993-3-1', 55),]
+>>> for name, *args in l:
+...     print(name, args)
+...
+Bob ['1990-1-1', 60]
+Mary ['1996-1-4', 50]
+Nancy ['1993-3-1', 55]
+```
+
+解包与压包结合可以实现类似矩阵转置的操作
+
+```python3
+a = [[1, 2, 3], [4, 5, 6]]
+for x, y in zip(*a):
+    print(x, y)
+
+# 1 4
+# 2 5
+# 3 6
+```
+
+### 6. `_` 的用法
+
+当一些元素不用时，用 `_` 表示是更好的写法，可以让读代码的人知道这个元素是不要的
+
+```python3
+>>> person = ('Bob', 20, 50, (11, 20, 2000))
+>>> name, *_, (*_, year) = person
+>>> name
+'Bob'
+>>> year
+2000
+```
+
+### 7.多变量同时赋值
+
+之前赋值符号右侧都是可迭代对象，其实右侧也可以是多个变量
+
+```python3
+>>> a, b = 1, 2
+>>> a
+1
+>>> b
+2
+>>> a = 1, 2
+>>> a
+(1, 2)
+```
+
+下面用法都会报错
+
+```python3
+*a = 1, 2
+a, b, c = 1, 2
+```
+
+**但是可以这样**
+
+```python3
+*a, = 1, 2
+```
+
+### 8. `*` 之可变参数
+
+函数定义时，我们使用 `*` 的可变参数，其实也是压包解包过程
+
+```python3
+>>> def myfun(*num):
+...     print(num)
+...
+>>> myfun(1,2,5,6)
+(1, 2, 5, 6)
+```
+
+参数用 `*num` 表示，`num` 变量就可以当成元组调用了。
+
+其实这个过程相当于 `*num, = 1,2,5,6`
+
+### 9. `*` 之关键字参数
+
+```python3
+>>> def myfun(**kw):
+...     print(kw)
+...
+>>> myfun(name = "Bob", age = 20, weight = 50)
+{'weight': 50, 'name': 'Bob', 'age': 20}
+```
+
+键值对传入 `**kw`，`kw` 就可以表示相应字典。
+
+`**` 的用法只在函数定义中使用，不能这样使用
+
+```python3
+a, **b = {'weight': 50, 'name': 'Bob', 'age': 20}
+```
+
+### 10. 可变参数与关键字参数的细节问题
+
+(1) 函数传入实参时，可变参数（`*`）之前的参数不能指定参数名
+
+```python3
+>>> def myfun(a, *b):
+...     print(a)
+...     print(b)
+...
+>>> myfun(a=1, 2,3,4)
+  File "<stdin>", line 1
+SyntaxError: positional argument follows keyword argument
+
+>>> myfun(1, 2,3,4)
+1
+(2, 3, 4)
+```
+
+(2) 函数传入实参时，可变参数（`*`）之后的参数必须指定参数名，否则就会被归到可变参数之中
+
+```python3
+>>> def myfun(a, *b, c=None):
+...     print(a)
+...     print(b)
+...     print(c)
+...
+>>> myfun(1, 2,3,4)
+1
+(2, 3, 4)
+None
+>>> myfun(1, 2,3,c=4)
+1
+(2, 3)
+4
+```
+
+如果一个函数想要使用时必须明确指定参数名，可以将所有参数都放在可变参数之后，而可变参数不用管它就可以，也不用命名，如下
+
+```python3
+>>> def myfun(*, a, b):
+...     print(a)
+...     print(b)
+...
+>>> myfun(a = 1,b = 2)
+1
+2
+```
+
+可变参数的这两条特性，可以用于将只需要按照位置赋值的参数和需要明确指定参数名的参数区分开来
+
+(3) 关键字参数都只能作为最后一个参数，前面的参数按照位置赋值还是名称赋值都可以
+
+下面展示一个既用可变参数有用关键字参数的例子
+
+```python3
+>>> def myfun(a, *b, c, **d):
+...     print(a)
+...     print(b)
+...     print(c)
+...     print(d)
+...
+>>> myfun(1, 2, 3, c= 4, m = 5, n = 6)
+1
+(2, 3)
+4
+{'n': 6, 'm': 5}
+```
+
+(4) 可变参数与关键词参数共同使用以表示任意参数
+
+下面是这一点在装饰器当中的使用
+
+```python3
+>>> def mydecorator(func):
+...     def wrapper(*args, **kw):
+...         print('I am using a decorator.')
+...         return func(*args, **kw)
+...     return wrapper
+...
+>>> @mydecorator
+... def myfun(a, b):
+...     print(a)
+...     print(b)
+...
+>>> myfun(1, b = 2)
+I am using a decorator.
+1
+2
+```
+
+如果有的读者不熟悉装饰器，只需要知道，使用 `@` 定义 `myfun` 相当于 `myfun = mydecorator(myfun)`，定义出来的 `myfun` 其实是返回结果 `wrapper` 函数
+
+`wrapper` 函数使用 `*args, **kw` 作为参数，则被修饰的 `myfun` 函数需要的参数无论是什么样的，传入 `wrapper` 都不会报错，这保证了装饰器可以修饰各种各样函数的灵活性。毕竟我们一般在函数中传入参数时，要么所有参数名都写，要么前面几个不写，后面的会写，这样使用 `*args, **kw` 完全没有问题。
+
+### 11. 解包作为参数传入函数中
+
+首先定义一个函数
+
+```python3
+def myfun(a, b):
+    print(a + b)
+```
+
+列表元组的解包
+
+```python3
+>>> n = [1, 2]
+>>> myfun(*n)
+3
+>>> m = (1, 2)
+>>> myfun(*m)
+3
+```
+
+字典的解包
+
+```python3
+>>> mydict = {'a':1, 'b': 2}
+>>> myfun(**mydict)
+3
+>>> myfun(*mydict)
+ba
+```
+
+一个应用
+
+```python3
+>>> bob = {'name': 'Bob', 'age': 30}
+>>> "{name}'s age is {age}".format(**bob)
+"Bob's age is 30"
+```
+
+### 12. 多返回值函数
+
+下面过程也涉及到了解包
+
+```python3
+def myfun(a, b):
+    return a + 1, b + 2
+>>> m, n = myfun(1, 2)
+>>> m
+2
+>>> n
+4
+```
+
+其实本身是一个元组
+
+```python3
+>>> p = myfun(1, 2)
+>>> p
+(2, 4)
+```
+
+## function parameter
+
+以下内容来自 [def func(a, /, b, *, c) 你知道在python里什么意思吗_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV17R4y1g77a)
+
+对于最普遍的函数传参方式，有两种方法：
+
+```python3
+>>> def test(a, b):
+...     print(a)
+...     print(b)
+...
+>>> test(1, 2)
+1
+2
+>>> test(b = 2, a = 1)
+1
+2
+```
+
+使用符号 `\, *` 可以避免某一种传参方式
+
+```python3
+>>> def test(a, /, b, *, c):
+...     print(a)
+...     print(b)
+...     print(c)
+...
+>>> test(1, b = 2, c = 3)
+1
+2
+3
+>>> test(1, 2, c = 3)
+1
+2
+3
+```
+
+以上面为例，``a`` 只能以位置传入，``c`` 只能以形参方式传入，``b`` 都可以。
+
+也可以在 ``*`` 的位置加入 ``*args``，表示解包，在之前提到过。
+
+```python3
+>>> def test(a, /, b, *args, c, **kwlist):
+...     print(a)
+...     print(b)
+...     print(args)
+...     print(c)
+...     print(kwlist)
+...
+>>> test(1, 2, 3, 4, 5, c = 6, d = 7, e = 8)
+1
+2
+(3, 4, 5)
+6
+{'d': 7, 'e': 8}
+>>> test(1, b = 2, 3, 4, 5, c = 6, d = 7, e = 8)
+  File "<stdin>", line 1
+    test(1, b = 2, 3, 4, 5, c = 6, d = 7, e = 8)
+                                               ^
+SyntaxError: positional argument follows keyword argument
+>>> test(1, b = 2, c = 6, d = 7, e = 8)
+1
+2
+()
+6
+{'d': 7, 'e': 8}
+```
+
+如果要传入 ``args``，那么 ``b`` 就不能再用键值对的方式传参。
