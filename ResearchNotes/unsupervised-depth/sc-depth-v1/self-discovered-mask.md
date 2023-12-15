@@ -2,7 +2,7 @@
 
 来自 [Unsupervised Scale-consistent Depth and Ego-motion Learning from Monocular Video](https://arxiv.org/pdf/1908.10553.pdf) Contributions 2.
 
-它利用了 [Contributions 1](geometry-consistence-loss.md) 的 $D_{diff}$. 掩码 $M$ 和 $D_{diff}$ 负相关，所以直接：
+它利用了 [Contributions 1](./geometry-consistence-loss.md) 的 $D_{diff}$. 掩码 $M$ 和 $D_{diff}$ 负相关，所以直接：
 
 $$
 M = 1 - D_{diff}

@@ -102,40 +102,30 @@ $$
 \begin{aligned}
 \boldsymbol{y} &= \Im q_{y} \\
 &= \cos^{2} \frac{\theta}{2} \boldsymbol{x} + \cos \frac{\theta}{2} \sin \frac{\theta}{2} \boldsymbol{v} \times \boldsymbol{x} + \sin^{2} \frac{\theta}{2} (\boldsymbol{v} \cdot \boldsymbol{x}) \boldsymbol{v} \\
-&- \cos \frac{\theta}{2} \sin \frac{\theta}{2} \boldsymbol{x} \times \boldsymbol{v} - \sin^{2} \frac{\theta}{2} (\boldsymbol{v} \times \boldsymbol{x}) \times \boldsymbol{v}
+&- \cos \frac{\theta}{2} \sin \frac{\theta}{2} \boldsymbol{x} \times \boldsymbol{v} - \sin^{2} \frac{\theta}{2} (\boldsymbol{v} \times \boldsymbol{x}) \times \boldsymbol{v} \\
+&= \sin^{2} \frac{\theta}{2} (\boldsymbol{v} \cdot \boldsymbol{x}) \boldsymbol{v} + \cos^{2} \frac{\theta}{2} \boldsymbol{x} + \sin \theta (\boldsymbol{v} \times \boldsymbol{x}) + \sin^{2} \frac{\theta}{2} \boldsymbol{v} \times (\boldsymbol{v} \times \boldsymbol{x})
 \end{aligned}
 $$
 
-利用矢量三重积：
-
-$$
-\boldsymbol{a} \times (\boldsymbol{b} \times \boldsymbol{c}) = (\boldsymbol{a} \cdot \boldsymbol{c}) \boldsymbol{b} - (\boldsymbol{a} \cdot \boldsymbol{b}) \boldsymbol{c}
-$$
+其中
 
 $$
 \begin{aligned}
-\boldsymbol{y} &= \cos^{2} \frac{\theta}{2} \boldsymbol{x} + 2 \sin \frac{\theta}{2} \cos \frac{\theta}{2} \boldsymbol{v} \times \boldsymbol{x}+ 2 \sin^{2} \frac{\theta}{2} (\boldsymbol{v} \cdot \boldsymbol{x}) \boldsymbol{v} - \sin^{2} \frac{\theta}{2} (\boldsymbol{v} \cdot \boldsymbol{v}) \boldsymbol{x} \\
-&= \left(\cos^{2} \frac{\theta}{2} - \left| v \right|^{2} \sin^{2} \frac{\theta}{2}\right) \boldsymbol{x} + (1 - \cos \theta) (\boldsymbol{v} \cdot \boldsymbol{x}) \boldsymbol{v} + \sin \theta (\boldsymbol{v} \times \boldsymbol{x})
+\cos^{2} \frac{\theta}{2} \boldsymbol{x} &= \cos^{2} \frac{\theta}{2} \left[ (\boldsymbol{v} \cdot \boldsymbol{x})\boldsymbol{v} - \boldsymbol{v} \times (\boldsymbol{v} \times \boldsymbol{x}) \right]
 \end{aligned}
 $$
 
-转化成正交基
-
-$$
-\boldsymbol{A} = \begin{bmatrix} \boldsymbol{a}_{1} & \boldsymbol{a}_{2} & \boldsymbol{a}_{3} \end{bmatrix} = \begin{bmatrix} \boldsymbol{x} - \dfrac{\boldsymbol{x} \cdot \boldsymbol{v}}{\boldsymbol{v} \cdot \boldsymbol{v}}\boldsymbol{v} & \boldsymbol{v} & \boldsymbol{v} \times \boldsymbol{x} \end{bmatrix}
-$$
-
-的线性组合。
+因此
 
 $$
 \begin{aligned}
-\boldsymbol{y} &= \left( \cos^{2} \frac{\theta}{2} - \boldsymbol{v} \cdot \boldsymbol{v} \sin^{2} \frac{\theta}{2} \right) \left( \boldsymbol{a}_{1} + \frac{\boldsymbol{x} \cdot \boldsymbol{v}}{\boldsymbol{v} \cdot \boldsymbol{v}} \boldsymbol{a}_{2} \right) + (1 - \cos \theta) (\boldsymbol{v} \cdot \boldsymbol{x}) \boldsymbol{a}_{2} + \sin \theta \boldsymbol{a}_{3} \\
-&= \boldsymbol{A} \cdot \begin{bmatrix} \cos^{2} \dfrac{\theta}{2} - \boldsymbol{v} \cdot \boldsymbol{v} \sin^{2} \dfrac{\theta}{2} \\ (1 - \cos \theta)(\boldsymbol{v} \cdot \boldsymbol{x}) + \cos^{2} \dfrac{\theta}{2} \dfrac{\boldsymbol{x} \cdot \boldsymbol{v}}{\boldsymbol{v} \cdot \boldsymbol{v}} - \sin^{2} \dfrac{\theta}{2} \boldsymbol{x} \cdot \boldsymbol{v} \\ \sin \theta \end{bmatrix} \\
-&= \boldsymbol{A} \cdot \begin{bmatrix} \cos^{2} \dfrac{\theta}{2} - \boldsymbol{v} \cdot \boldsymbol{v} \sin^{2} \dfrac{\theta}{2} \\ \cos^{2} \dfrac{\theta}{2} \dfrac{\boldsymbol{x} \cdot \boldsymbol{v}}{\boldsymbol{v} \cdot \boldsymbol{v}} + \sin^{2} \dfrac{\theta}{2} \boldsymbol{x} \cdot \boldsymbol{v} \\ \sin \theta \end{bmatrix} \\
-&= \boldsymbol{A} \begin{bmatrix}
-\cos^{2} \dfrac{\theta}{2} - \left| \boldsymbol{v} \right|^{2} \sin^{2} \dfrac{\theta}{2} \\
-\dfrac{\boldsymbol{x} \cdot \boldsymbol{v}}{\left| \boldsymbol{v} \right|^{2}} \left( \cos^{2} \dfrac{\theta}{2} + \left| \boldsymbol{v} \right|^{2} \sin^{2} \dfrac{\theta}{2} \right) \\
-\sin \theta
+\boldsymbol{y} &= \left( \sin^{2} \frac{\theta}{2} + \cos^{2} \frac{\theta}{2} \right) (\boldsymbol{v} \cdot \boldsymbol{x}) \boldsymbol{v} + \sin \theta (\boldsymbol{v} \times \boldsymbol{x}) + \left( \cos^{2} \frac{\theta}{2} - \sin^{2} \frac{\theta}{2} \right) \left[ - \boldsymbol{v} \times (\boldsymbol{v} \times \boldsymbol{x}) \right]\\
+&= \begin{bmatrix}
+\boldsymbol{x}_{\perp}\cos \theta \\
+\boldsymbol{x}_{\perp} \sin \theta \\
+\boldsymbol{x}_{\parallel}
 \end{bmatrix}
-\end{aligned} 
+\end{aligned}
 $$
+
+其中第一个坐标和 $\boldsymbol{v}$ 垂直，第二个坐标同时和 $\boldsymbol{v}, \boldsymbol{x}$ 垂直。证明完毕。

@@ -244,6 +244,10 @@ $$
 
 如果不加正则项，会导致过拟合问题（参数和已有数据一致，导致泛化性能过低）；如果正则项太大，会导致欠拟合问题。
 
+一般来说使用 L1 正则化（Lasso），容易得到稀疏解，即解中存在较多 0. 见下图：
+
+![](images/ML-L1-sparse-solution.png)
+
 ---
 
 数据较少时避免过拟合的方法：
@@ -646,6 +650,15 @@ Nonlinear fire function:
 ---
 
 ### BP 算法
+
+$$
+\begin{aligned}
+\hat{y} &= f(\boldsymbol{x}, \boldsymbol{W}^{i})\\
+\Delta \boldsymbol{W}^{i} &= \frac{\partial L(y, \hat{y})}{\partial \boldsymbol{W}^{i}}\\
+&= \frac{\partial \boldsymbol{z}^{i}}{\partial \boldsymbol{W}^{i}} \frac{\partial \boldsymbol{z}^{i+1}}{\partial \boldsymbol{z}^{i}} \cdots \frac{\partial \boldsymbol{z}^{n}}{\partial \boldsymbol{z}^{n-1}} \frac{\partial \hat{\boldsymbol{y}}}{\partial \boldsymbol{z}^{n}} \frac{\partial L(\boldsymbol{y}, \hat{\boldsymbol{y}})}{\partial \hat{\boldsymbol{y}}}\\
+\boldsymbol{z}^{i+1} &= f(\boldsymbol{W}^{i} \boldsymbol{z}^{i})
+\end{aligned}
+$$
 
 ```python
 class Layer:

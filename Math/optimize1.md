@@ -535,7 +535,7 @@ $$
 \end{align*}
 $$
 
-![](CalculusNotes/images/image20220228210928.png)
+![](./images/image20220228210928.png)
 
 ---
 

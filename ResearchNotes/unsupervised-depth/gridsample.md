@@ -10,9 +10,11 @@ In the spatial (4-D) case, for `input` with shape $(N,C,H_{in}​,W_{in}​)$
 
 grid 参数表示采样的方式，注意到它的 H, W 和输出一致。`grid[N, H, W]` 是一个二维向量，存储了输入图像的像素坐标 `[x, y]`，意义是输出图像在 `[H, W]` 处的值由输入图像在 `[x, y]` 的值决定。注意到 `[x, y]` 不一定刚好对应一个像素，计算输入图像在 `[x, y]` 处的值需要通过指定的采样模式来实现。`[x, y]` 的数据格式是归一化的，`[-1, -1]` 表示左上角，`[1, -1]` 表示右上角。
 
+`grid_sample` 函数同样存在 ``align_corners`` 参数默认 False. 其作用详见 [align-corners](../tools/align-corners.md). 这个参数在早期版本默认为 True，改代码时一定注意！
+
 具体的采样模式默认是双线性插值 bilinear.
 
-Grid sample 的目的是实现诸如光流和重投影任务中图像的重建过程。通过光流和重投影的公式可以得到 `grid` 参数，这样就能从上一帧图片（reference）重建下一帧（target），从而计算损失函数等。当然除了 RGB 的重建还可以作深度的重建，但是忽略相机的位移直接用上一帧的深度多少不太合理。
+Grid sample 的目的是实现诸如光流和重投影任务中图像的重建过程。通过光流和重投影的公式可以得到 `grid` 参数，这样就能从上一帧图片（reference）[重建](./warp.md)下一帧（target），从而计算损失函数等。当然除了 RGB 的重建还可以作深度的重建，但是忽略相机的位移直接用上一帧的深度多少不太合理。
 
 我认为可以在 grid sample 的基础上进一步根据位姿变化信息 $[\boldsymbol{R}, \boldsymbol{t}]$ （在 reference 看来 target 相机坐标轴的坐标）作进一步微调。
 
